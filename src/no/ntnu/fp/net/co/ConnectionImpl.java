@@ -13,8 +13,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
-
 import no.ntnu.fp.net.admin.Log;
 import no.ntnu.fp.net.cl.ClException;
 import no.ntnu.fp.net.cl.ClSocket;
@@ -42,11 +40,10 @@ public class ConnectionImpl extends AbstractConnection {
     /**
      * Initialise initial sequence number and setup state machine.
      * 
-     * @param myPort
-     *            - the local port to associate with this connection
+     * @param myPort the local port to associate with this connection
      */
     public ConnectionImpl(int myPort) {
-        throw new NotImplementedException();
+        
     }
 
     private String getIPv4Address() {
@@ -71,9 +68,21 @@ public class ConnectionImpl extends AbstractConnection {
      *             If timeout expires before connection is completed.
      * @see Connection#connect(InetAddress, int)
      */
-    public void connect(InetAddress remoteAddress, int remotePort) throws IOException,
-            SocketTimeoutException {
-        throw new NotImplementedException();
+    public void connect(InetAddress remoteAddress, int remotePort) throws IOException, SocketTimeoutException {
+    	KtnDatagram packet = new KtnDatagram();
+    	packet.setDest_addr(remoteAddress.toString());
+    	packet.setDest_port(remotePort);
+    	packet.setFlag(Flag.SYN);
+    	
+    	packet.setSrc_addr(myAddress);
+    	packet.setSrc_port(myPort);
+    	try {
+			simplySendPacket(packet);
+			receiveAck();
+    	} catch (ClException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }
 
     /**
@@ -83,23 +92,20 @@ public class ConnectionImpl extends AbstractConnection {
      * @see Connection#accept()
      */
     public Connection accept() throws IOException, SocketTimeoutException {
-        throw new NotImplementedException();
+		return this;
     }
 
     /**
      * Send a message from the application.
      * 
-     * @param msg
-     *            - the String to be sent.
-     * @throws ConnectException
-     *             If no connection exists.
-     * @throws IOException
-     *             If no ACK was received.
+     * @param msg the String to be sent.
+     * @throws ConnectException If no connection exists.
+     * @throws IOException If no ACK was received.
      * @see AbstractConnection#sendDataPacketWithRetransmit(KtnDatagram)
      * @see no.ntnu.fp.net.co.Connection#send(String)
      */
     public void send(String msg) throws ConnectException, IOException {
-        throw new NotImplementedException();
+        
     }
 
     /**
@@ -111,7 +117,8 @@ public class ConnectionImpl extends AbstractConnection {
      * @see AbstractConnection#sendAck(KtnDatagram, boolean)
      */
     public String receive() throws ConnectException, IOException {
-        throw new NotImplementedException();
+    	// if is FIN, throw EOFException.
+    	return "";
     }
 
     /**
@@ -120,18 +127,19 @@ public class ConnectionImpl extends AbstractConnection {
      * @see Connection#close()
      */
     public void close() throws IOException {
-        throw new NotImplementedException();
+    	
+    	
     }
 
     /**
      * Test a packet for transmission errors. This function should only called
      * with data or ACK packets in the ESTABLISHED state.
      * 
-     * @param packet
-     *            Packet to test.
+     * @param packet - Packet to test.
      * @return true if packet is free of errors, false otherwise.
      */
     protected boolean isValid(KtnDatagram packet) {
-        throw new NotImplementedException();
+    	
+    	return true;
     }
 }

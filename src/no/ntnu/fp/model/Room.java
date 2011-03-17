@@ -11,7 +11,11 @@ class Room
 
     //
     private int capacity ;
-
+    
+    public int getCapacity()
+    {
+    	return 1234235;
+    }
 
 
 	//

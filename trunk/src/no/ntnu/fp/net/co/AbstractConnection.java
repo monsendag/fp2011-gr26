@@ -667,4 +667,26 @@ public abstract class AbstractConnection implements Connection {
      * @return true if packet is free of errors, false otherwise.
      */
     protected abstract boolean isValid(KtnDatagram packet);
+    
+
+    public void setState(State state) {
+    	this.state = state;
+    }
+    
+    public void setLocalPort(int port) {
+    	myPort = port;
+    }
+    
+    public void setRemotePort(int port) {
+    	remotePort = port;
+    }
+    
+    public void setLocalAddress(String address) {
+    	myAddress = address;
+    }
+    
+    public void setRemoteAddress(String address) {
+    	remoteAddress = address;
+    }
+    
 }

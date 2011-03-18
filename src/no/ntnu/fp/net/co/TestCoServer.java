@@ -31,34 +31,31 @@ public class TestCoServer {
    */
   public static void main (String args[]){
 
-    // Create log
-    Log log = new Log();
-    log.setLogName("Server");
-
-    // server connection instance, listen on port 5555
-    Connection server = new ConnectionImpl(5555);
-    // each new connection lives in its own instance
-    Connection conn;
-    try {
-      conn = server.accept();
-
-      try {
-	while (true) {
-	  String msg = conn.receive();
-	  Log.writeToLog("Message got through to server: " + msg,
-			 "TestServer");
+	// Create log
+	Log log = new Log();
+	log.setLogName("Server");
+	
+	// server connection instance, listen on port 5555
+	Connection server = new ConnectionImpl(5555);
+	// each new connection lives in its own instance
+	Connection conn;
+	try {
+		conn = server.accept();
+		try {
+			while(true) {
+				String msg = conn.receive();
+				Log.writeToLog("Message got through to server: " + msg, "TestServer");
+			}
+		}
+		catch(EOFException e){
+			Log.writeToLog("Got close request (EOFException), closing.", "TestServer");
+			conn.close();
+		}
+		System.out.println("SERVER TEST FINISHED");
+		Log.writeToLog("TEST SERVER FINISHED","TestServer");
 	}
-      } catch (EOFException e){
-	Log.writeToLog("Got close request (EOFException), closing.",
-		       "TestServer");
-	conn.close();
-      }
-
-      System.out.println("SERVER TEST FINISHED");
-      Log.writeToLog("TEST SERVER FINISHED","TestServer");
-    }
-    catch (IOException e){
-      e.printStackTrace();
+    catch(IOException e){
+    	e.printStackTrace();
     }
   }
 }

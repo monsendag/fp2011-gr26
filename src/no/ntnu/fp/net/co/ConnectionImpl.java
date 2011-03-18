@@ -37,13 +37,20 @@ public class ConnectionImpl extends AbstractConnection {
     /** Keeps track of the used ports for each server port. */
     private static Map<Integer, Boolean> usedPorts = Collections.synchronizedMap(new HashMap<Integer, Boolean>());
 
+    
+    private static int getRandomPort() {
+    	int random = (int)Math.random()*10000 + 60000;
+    	return !usedPorts.containsKey(random) ? random : getRandomPort();
+    }
     /**
      * Initialise initial sequence number and setup state machine.
      * 
      * @param myPort the local port to associate with this connection
      */
     public ConnectionImpl(int myPort) {
-        
+    	super();
+        this.myPort = myPort;
+        myAddress = getIPv4Address();
     }
 
     private String getIPv4Address() {
@@ -68,18 +75,18 @@ public class ConnectionImpl extends AbstractConnection {
      *             If timeout expires before connection is completed.
      * @see Connection#connect(InetAddress, int)
      */
-    public void connect(InetAddress remoteAddress, int remotePort) throws IOException, SocketTimeoutException {
-    	KtnDatagram packet = new KtnDatagram();
-    	packet.setDest_addr(remoteAddress.toString());
-    	packet.setDest_port(remotePort);
-    	packet.setFlag(Flag.SYN);
-    	
-    	packet.setSrc_addr(myAddress);
-    	packet.setSrc_port(myPort);
+    public void connect(InetAddress remoteAddress, int remotePort) throws IOException, SocketTimeoutException {	
+    	this.remoteAddress = remoteAddress.getHostAddress();
+    	this.remotePort = remotePort;
+    	KtnDatagram synAck, Ack, synPacket = constructInternalPacket(Flag.SYN);
     	try {
-			simplySendPacket(packet);
-			receiveAck();
-    	} catch (ClException e) {
+			simplySendPacket(synPacket);
+			state = State.SYN_SENT;
+			synAck = receiveAck();
+			remotePort = synAck.getSrc_port();
+			sendAck(synAck, false);
+			state = State.ESTABLISHED;
+		} catch (ClException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -92,7 +99,32 @@ public class ConnectionImpl extends AbstractConnection {
      * @see Connection#accept()
      */
     public Connection accept() throws IOException, SocketTimeoutException {
-		return this;
+		state = State.LISTEN;
+		KtnDatagram syn = null;
+		
+		while(syn == null) {
+			syn = receivePacket(true);
+		}
+		if(syn.getFlag() != Flag.SYN) return accept();
+		
+		state = State.SYN_RCVD;
+		remoteAddress = syn.getSrc_addr();
+		remotePort = syn.getSrc_port();
+		
+		int newPort = getRandomPort();
+		
+		syn.setDest_port(newPort);
+		
+		sendAck(syn, true);
+		
+		receiveAck();
+		
+		state = State.ESTABLISHED;
+		
+		Connection newConn = new ConnectionImpl(newPort);
+		
+		
+		return this; //new ConnectionImpl(newPort);
     }
 
     /**
@@ -105,7 +137,8 @@ public class ConnectionImpl extends AbstractConnection {
      * @see no.ntnu.fp.net.co.Connection#send(String)
      */
     public void send(String msg) throws ConnectException, IOException {
-        
+        KtnDatagram dataPacket = constructDataPacket(msg);
+    	sendDataPacketWithRetransmit(dataPacket);
     }
 
     /**
@@ -117,8 +150,9 @@ public class ConnectionImpl extends AbstractConnection {
      * @see AbstractConnection#sendAck(KtnDatagram, boolean)
      */
     public String receive() throws ConnectException, IOException {
-    	// if is FIN, throw EOFException.
-    	return "";
+    	KtnDatagram packet = receivePacket(false);
+    	sendAck(packet, false);
+    	return packet.getPayload().toString();
     }
 
     /**
@@ -128,9 +162,24 @@ public class ConnectionImpl extends AbstractConnection {
      */
     public void close() throws IOException {
     	
+    //	KtnDatagram ack1, ack2, fin2, fin1 = constructInternalPacket(Flag.FIN);
+    //	sendDataPacketWithRetransmit(fin1);
+    //	ack1 = receiveAck();
+    	
+    //	fin2 = receivePacket(true);
+    //	sendAck(fin2, false);
+    	
+    	switch(state) {
+    	case ESTABLISHED: break;
+    	case FIN_WAIT_1: break;
+    	case FIN_WAIT_2: break;
+    	case CLOSE_WAIT: break;
+    	case LAST_ACK: break;
+    	}
     	
     }
 
+    
     /**
      * Test a packet for transmission errors. This function should only called
      * with data or ACK packets in the ESTABLISHED state.
@@ -139,7 +188,6 @@ public class ConnectionImpl extends AbstractConnection {
      * @return true if packet is free of errors, false otherwise.
      */
     protected boolean isValid(KtnDatagram packet) {
-    	
     	return true;
     }
 }

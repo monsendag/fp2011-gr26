@@ -44,5 +44,6 @@ CREATE TABLE activity (
 
 CREATE TABLE room (
     roomID INT NOT NULL PRIMARY KEY,
-    name VARCHAR(30)
+    name VARCHAR(30),
+    capacity INT
 );

@@ -10,11 +10,11 @@ import com.thoughtworks.xstream.io.xml.DomDriver;
 
 public class XmlSerializer {
 	private static XmlSerializer instance;
-	private 
+//	private 
 	
-	private XmlSerializer() {
+	//private XmlSerializer() {
 		
-	}
+	//}
 	
 	public static XmlSerializer getInstance() {
 		if(instance == null) instance = new XmlSerializer();

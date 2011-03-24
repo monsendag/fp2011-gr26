@@ -673,6 +673,10 @@ public abstract class AbstractConnection implements Connection {
     	this.state = state;
     }
     
+	public State getState() {
+		return state;
+	}
+    
     public void setLocalPort(int port) {
     	myPort = port;
     }
@@ -688,5 +692,35 @@ public abstract class AbstractConnection implements Connection {
     public void setRemoteAddress(String address) {
     	remoteAddress = address;
     }
+
+	public KtnDatagram getLastValidPacketReceived() {
+		return lastValidPacketReceived;
+	}
+
+	public void setLastValidPacketReceived(KtnDatagram packet) {
+		this.lastValidPacketReceived = packet;
+	}
+
+	public KtnDatagram getLastDataPacketSent() {
+		return lastDataPacketSent;
+	}
+
+	public void setLastDataPacketSent(KtnDatagram packet) {
+		this.lastDataPacketSent = packet;
+	}
+
+	public int getNextSequenceNo() {
+		return nextSequenceNo;
+	}
+
+	public void setNextSequenceNo(int nr) {
+		this.nextSequenceNo = nr;
+	}
+
+
+	
+	
+    
+    
     
 }

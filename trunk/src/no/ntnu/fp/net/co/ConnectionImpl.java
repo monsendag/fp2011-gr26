@@ -104,41 +104,29 @@ public class ConnectionImpl extends AbstractConnection {
      * @see Connection#accept()
      */
     public Connection accept() throws IOException, SocketTimeoutException {
-		
+    	// set internal state
     	state = State.LISTEN;
+    	// allocate syn packet
 		KtnDatagram syn = null;
-		
 		// listen for a packet until a SYN is received
 		do syn = receivePacket(true);
 		while(syn == null || syn.getFlag() != Flag.SYN);
 		
+		// ---> SYN received! Create a new connection, return it and continue listening
 		
-		
-		// create a new connection, return it and continue listening.
 		ConnectionImpl newConn = new ConnectionImpl(getRandomPort());
-        /* Setting up a new connection */
-		newConn.setRemoteAddress(syn.getSrc_addr());
-		
-		newConn.setRemotePort(syn.getSrc_port());
-		newConn.setLastValidPacketReceived(syn);
-		newConn.setState(State.SYN_RCVD);
-		this.lastValidPacketReceived = syn;
-          
 		// set internal state and store remote address
-		remoteAddress = syn.getSrc_addr();
-		remotePort = syn.getSrc_port();
-		
-		int oldPort = myPort;
-		// create a random port for the server and store it locally
-		myPort = getRandomPort();
-		
-		syn.setDest_port(myPort);
+		newConn.setState(State.SYN_RCVD);
+		newConn.setRemoteAddress(syn.getSrc_addr());
+		newConn.setRemotePort(syn.getSrc_port());
+		// set last valid packet
+		newConn.setLastValidPacketReceived(syn);          
 		// send ACK
-		sendAck(syn, true);
+		newConn.sendAck(syn, true);
 		// receive ACK
-		receiveAck();
+		newConn.receiveAck();
 		// set internal state
-		state = State.ESTABLISHED;
+		newConn.setState(State.ESTABLISHED);
 		
 		return newConn;
     }
@@ -167,22 +155,12 @@ public class ConnectionImpl extends AbstractConnection {
      * @see AbstractConnection#receivePacket(boolean)
      * @see AbstractConnection#sendAck(KtnDatagram, boolean)
      */
-    public String receive() throws IOException {
-    	KtnDatagram packet;
-		try {
-			packet = receivePacket(false);
-	    	
-			//System.out.println(packet.getPayload().toString());
-	    	// send ACK for payload packet
-	    	sendAck(packet, false);
-	    	// return the packets content
-	    	return packet.getPayload().toString();
-		} catch (EOFException e) {
-			// received FIN
-			state = State.CLOSE_WAIT;
-			close();
-		}
-		return null;
+    public String receive() throws EOFException, IOException   {
+    	KtnDatagram dataPacket = receivePacket(false);
+    	// send ACK for payload packet
+    	sendAck(dataPacket, false);
+    	// return the packets content as string
+    	return dataPacket.getPayload().toString();
     }
 
     /**
@@ -191,34 +169,42 @@ public class ConnectionImpl extends AbstractConnection {
      * @see Connection#close()
      */
     public void close() throws IOException {
+    	if(true) return;
     	
-    	KtnDatagram ack1, ack2, fin2, fin1 = constructInternalPacket(Flag.FIN);
-    //	sendDataPacketWithRetransmit(fin1);
-    //	ack1 = receiveAck();
-    	
-    //	fin2 = receivePacket(true);
-    //	sendAck(fin2, false);
-    	
+    	KtnDatagram ack1, ack2, ackPacket, finPacket = constructInternalPacket(Flag.FIN);
+    	// state machine
     	switch(state) {
-			case ESTABLISHED: { // 
-				
+			case ESTABLISHED: { // initial close
+				finPacket = constructInternalPacket(Flag.FIN);
+				try {
+					Thread.sleep(100);
+					this.simplySendPacket(finPacket);
+				} catch (Exception e) {
+					throw new IOException("Error sending FIN");
+				}
+				setState(State.FIN_WAIT_1);
 			} break;
-	    	case FIN_WAIT_1:  { // client
-				// receive ack
-				
+			
+	    	case FIN_WAIT_1:  { // wait for ack
+	    		ackPacket = receiveAck();
+	    		setState(State.FIN_WAIT_2);
 			} break;
-	    	case FIN_WAIT_2:  { // client
+	    	case FIN_WAIT_2:  { // wait for fin
 				// receive fin
 				
 			} break;
-	    	case CLOSE_WAIT:  { // server
+	    	case CLOSE_WAIT:  { // wait for ack
 				
 				
 			} break;
-	    	case LAST_ACK: { // server
+	    	case LAST_ACK: { // acked
 				
-				
+			
 			} break;
+			
+	    	case TIME_WAIT: {
+	    		
+	    	}
     	}
     	
     }

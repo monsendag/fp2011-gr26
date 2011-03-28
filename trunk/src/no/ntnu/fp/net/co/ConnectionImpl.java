@@ -13,9 +13,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.derby.tools.sysinfo;
-
-import no.ntnu.fp.net.admin.Log;
 import no.ntnu.fp.net.cl.ClException;
 import no.ntnu.fp.net.cl.ClSocket;
 import no.ntnu.fp.net.cl.KtnDatagram;
@@ -44,9 +41,9 @@ public class ConnectionImpl extends AbstractConnection {
      * The port Is stored in usedPorts by the abstract class
      */
     private static int getRandomPort() {
-    	// assign a port between 60 000 and 65 000
-    	int random = 60000 + (int)(Math.random() * 5000);
-    	return !usedPorts.containsKey(random) ? random : getRandomPort();
+        // assign a port between 60 000 and 65 000
+        int random = 60000 + (int)(Math.random() * 5000);
+        return !usedPorts.containsKey(random) ? random : getRandomPort();
     }
     /**
      * Initialize initial sequence number and setup state machine.
@@ -54,7 +51,7 @@ public class ConnectionImpl extends AbstractConnection {
      * @param myPort the local port to associate with this connection
      */
     public ConnectionImpl(int myPort) {
-    	super();
+        super();
         this.myPort = myPort;
         myAddress = getIPv4Address();
     }
@@ -77,28 +74,28 @@ public class ConnectionImpl extends AbstractConnection {
      * @throws java.net.SocketTimeoutException If timeout expires before connection is completed.
      * @see Connection#connect(InetAddress, int)
      */
-    public void connect(InetAddress remoteAddress, int remotePort) throws IOException, SocketTimeoutException {	    	
-    	this.remoteAddress = remoteAddress.getHostAddress();
-    	this.remotePort = remotePort;
-    	
-    	KtnDatagram synAck, synPacket = constructInternalPacket(Flag.SYN);
-    	
-    	try {
-			simplySendPacket(synPacket);  // send SYN packet
-			state = State.SYN_SENT; // set internal state
-			synAck = receiveAck();  // receive SYNACK
-			Thread.sleep(100);		// must wait for server to create a new connection
-			this.remotePort = synAck.getSrc_port(); // store new remotePort internally
-			System.out.println(this.remotePort);
-			sendAck(synAck, false); // ACKnowledge SYNACK
-			state = State.ESTABLISHED; // set internal state to established
-	 	}
-    	catch(ClException e) {
-			System.out.println("[Connection] Could not connect to remote server.");
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+    public void connect(InetAddress remoteAddress, int remotePort) throws IOException, SocketTimeoutException {            
+        this.remoteAddress = remoteAddress.getHostAddress();
+        this.remotePort = remotePort;
+        
+        KtnDatagram synAck, synPacket = constructInternalPacket(Flag.SYN);
+        
+        try {
+            simplySendPacket(synPacket);  // send SYN packet
+            state = State.SYN_SENT; // set internal state
+            synAck = receiveAck();  // receive SYNACK
+            Thread.sleep(100);        // must wait for server to create a new connection
+            this.remotePort = synAck.getSrc_port(); // store new remotePort internally
+            System.out.println(this.remotePort);
+            sendAck(synAck, false); // ACKnowledge SYNACK
+            state = State.ESTABLISHED; // set internal state to established
+         }
+        catch(ClException e) {
+            System.out.println("[Connection] Could not connect to remote server.");
+        } catch (InterruptedException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -108,31 +105,31 @@ public class ConnectionImpl extends AbstractConnection {
      * @see Connection#accept()
      */
     public Connection accept() throws IOException, SocketTimeoutException {
-    	// set internal state
-    	state = State.LISTEN;
-    	// allocate syn packet
-		KtnDatagram syn = null;
-		// listen for a packet until a SYN is received
-		do syn = receivePacket(true);
-		while(syn == null || syn.getFlag() != Flag.SYN);
-		
-		// ---> SYN received! Create a new connection, return it and continue listening
-		
-		ConnectionImpl newConn = new ConnectionImpl(getRandomPort());
-		// set internal state and store remote address
-		newConn.setState(State.SYN_RCVD);
-		newConn.setRemoteAddress(syn.getSrc_addr());
-		newConn.setRemotePort(syn.getSrc_port());
-		// set last valid packet
-		newConn.setLastValidPacketReceived(syn);          
-		// send ACK
-		newConn.sendAck(syn, true);
-		// receive ACK
-		newConn.receiveAck();
-		// set internal state
-		newConn.setState(State.ESTABLISHED);
-		
-		return newConn;
+        // set internal state
+        state = State.LISTEN;
+        // allocate syn packet
+        KtnDatagram syn = null;
+        // listen for a packet until a SYN is received
+        do syn = receivePacket(true);
+        while(syn == null || syn.getFlag() != Flag.SYN);
+        
+        // ---> SYN received! Create a new connection, return it and continue listening
+        
+        ConnectionImpl newConn = new ConnectionImpl(getRandomPort());
+        // set internal state and store remote address
+        newConn.setState(State.SYN_RCVD);
+        newConn.setRemoteAddress(syn.getSrc_addr());
+        newConn.setRemotePort(syn.getSrc_port());
+        // set last valid packet
+        newConn.setLastValidPacketReceived(syn);          
+        // send ACK
+        newConn.sendAck(syn, true);
+        // receive ACK
+        newConn.receiveAck();
+        // set internal state
+        newConn.setState(State.ESTABLISHED);
+        
+        return newConn;
     }
 
     /**
@@ -146,13 +143,13 @@ public class ConnectionImpl extends AbstractConnection {
      */
     public void send(String msg) throws ConnectException, IOException {
         KtnDatagram ackPacket, dataPacket = constructDataPacket(msg);
-    	try {
-			Thread.sleep(100); // must wait for server to send ACK
-			ackPacket = sendDataPacketWithRetransmit(dataPacket);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+        try {
+            Thread.sleep(100); // must wait for server to send ACK
+            ackPacket = sendDataPacketWithRetransmit(dataPacket);
+        } catch (InterruptedException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -166,11 +163,11 @@ public class ConnectionImpl extends AbstractConnection {
      * @see AbstractConnection#sendAck(KtnDatagram, boolean)
      */
     public String receive() throws EOFException, IOException   {
-    	KtnDatagram dataPacket = receivePacket(false);
-    	// send ACK for payload packet
-    	sendAck(dataPacket, false);
-    	// return the packets content as string
-    	return dataPacket.getPayload().toString();
+        KtnDatagram dataPacket = receivePacket(false);
+        // send ACK for payload packet
+        sendAck(dataPacket, false);
+        // return the packets content as string
+        return dataPacket.getPayload().toString();
     }
 
     /**
@@ -179,44 +176,60 @@ public class ConnectionImpl extends AbstractConnection {
      * @see Connection#close()
      */
     public void close() throws IOException {
-    	if(true) return;
-    	
-    	KtnDatagram ack1, ack2, ackPacket, finPacket = constructInternalPacket(Flag.FIN);
-    	// state machine
-    	switch(state) {
-			case ESTABLISHED: { // initial close
-				finPacket = constructInternalPacket(Flag.FIN);
-				try {
-					Thread.sleep(100);
-					this.simplySendPacket(finPacket);
-				} catch (Exception e) {
-					throw new IOException("Error sending FIN");
-				}
-				setState(State.FIN_WAIT_1);
-			} break;
-			
-	    	case FIN_WAIT_1:  { // wait for ack
-	    		ackPacket = receiveAck();
-	    		setState(State.FIN_WAIT_2);
-			} break;
-	    	case FIN_WAIT_2:  { // wait for fin
-				// receive fin
-				
-			} break;
-	    	case CLOSE_WAIT:  { // wait for ack
-				
-				
-			} break;
-	    	case LAST_ACK: { // acked
-				
-			
-			} break;
-			
-	    	case TIME_WAIT: {
-	    		
-	    	}
-    	}
-    	
+        KtnDatagram ackPacket, ackPacket2, finPacket, finpacket2;
+        // state machine
+        while(getState() != State.CLOSED) {
+            switch(state) {
+                case ESTABLISHED: { // initial close
+                    if(disconnectRequest == null){ // Client initiates Close()
+                        finPacket = constructInternalPacket(Flag.FIN);
+                        try {
+                            Thread.sleep(200);
+                            this.simplySendPacket(finPacket);
+                        } catch (Exception e) {
+                            throw new IOException("Error sending FIN");
+                        }                    
+                        setState(State.FIN_WAIT_1); 
+                    }
+                    else { // server receives FIN, sends ACK
+                        sendAck(disconnectRequest, false);
+                        setState(State.CLOSE_WAIT);
+                    }
+            
+                } break;
+                
+                case FIN_WAIT_1:  { // client receives ACK
+                    ackPacket = receiveAck();
+                    setState(State.FIN_WAIT_2);
+                } break;
+                
+                case CLOSE_WAIT:  { // server sends FIN
+                    finPacket = constructInternalPacket(Flag.FIN);
+                    try {
+                        Thread.sleep(200);
+                        simplySendPacket(finPacket);
+                    } catch (ClException e) {
+                        throw new IOException("Error sending FIN2");
+                    } catch (InterruptedException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    }
+                    setState(State.LAST_ACK);
+                } break;
+                
+                case FIN_WAIT_2:  { // client receives FIN, sends ACK
+                    // receive fin
+                    finpacket2 = receiveAck();
+                    sendAck(finpacket2, false);
+                    setState(State.CLOSED);
+                } break;
+                
+                case LAST_ACK: { // server receives ACK
+                    ackPacket2 = receiveAck();
+                    setState(State.CLOSED);
+                } break;
+            }
+        }
     }
 
     
@@ -226,17 +239,18 @@ public class ConnectionImpl extends AbstractConnection {
      * 
      * @param packet - Packet to test.
      * @return true if packet is free of errors, false otherwise. 
-	*/
+    */
     protected boolean isValid(KtnDatagram packet) {
-		// checksum must be valid
-    	if(packet.calculateChecksum() == packet.getChecksum()) {
-			// if there is a previous packet, validate sequence number
-    		if(lastValidPacketReceived != null && packet.getSeq_nr() != lastValidPacketReceived.getSeq_nr() + 1) {
-				return false;
-			}
-			return true;
+        // checksum must be valid
+        if(packet.calculateChecksum() == packet.getChecksum()) {
+            // if there is a previous packet, validate sequence number
+            if(lastValidPacketReceived != null && packet.getSeq_nr() != lastValidPacketReceived.getSeq_nr() + 1) {
+                return false;
+            }
+            return true;
        }
        return false;
     }
 
 }
+

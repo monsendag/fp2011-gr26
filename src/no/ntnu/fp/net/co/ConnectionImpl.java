@@ -87,13 +87,17 @@ public class ConnectionImpl extends AbstractConnection {
 			simplySendPacket(synPacket);  // send SYN packet
 			state = State.SYN_SENT; // set internal state
 			synAck = receiveAck();  // receive SYNACK
+			Thread.sleep(100);		// must wait for server to create a new connection
 			this.remotePort = synAck.getSrc_port(); // store new remotePort internally
 			System.out.println(this.remotePort);
 			sendAck(synAck, false); // ACKnowledge SYNACK
 			state = State.ESTABLISHED; // set internal state to established
-		}
+	 	}
     	catch(ClException e) {
 			System.out.println("[Connection] Could not connect to remote server.");
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
     }
 
@@ -141,8 +145,14 @@ public class ConnectionImpl extends AbstractConnection {
      * @see no.ntnu.fp.net.co.Connection#send(String)
      */
     public void send(String msg) throws ConnectException, IOException {
-        KtnDatagram dataPacket = constructDataPacket(msg);
-    	KtnDatagram ack = sendDataPacketWithRetransmit(dataPacket);
+        KtnDatagram ackPacket, dataPacket = constructDataPacket(msg);
+    	try {
+			Thread.sleep(100); // must wait for server to send ACK
+			ackPacket = sendDataPacketWithRetransmit(dataPacket);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }
 
     /**

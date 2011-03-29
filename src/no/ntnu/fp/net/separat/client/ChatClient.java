@@ -34,7 +34,7 @@ public class ChatClient {
 
     private String addressServer = "localhost";
 
-    private int thisPort = 5555;
+    private int thisPort = randomPort();
 
     private RecieveThread recieveThread;
 
@@ -56,6 +56,10 @@ public class ChatClient {
         this.login(username);
 
         gui.setDefaultCloseOperation(Gui.EXIT_ON_CLOSE);
+    }
+    
+    public int randomPort()  {
+    	return (int) (Math.random() * 50000);
     }
 
     private class RecieveThread extends Thread {

@@ -88,13 +88,15 @@ public class ConnectionImpl extends AbstractConnection {
             this.remotePort = synAck.getSrc_port(); // store new remotePort internally
             System.out.println(this.remotePort);
             sendAck(synAck, false); // ACKnowledge SYNACK
+            lastValidPacketReceived = synAck; // set last valid packet
             state = State.ESTABLISHED; // set internal state to established
-         }
+        }
         catch(ClException e) {
             System.out.println("[Connection] Could not connect to remote server.");
-        } catch (InterruptedException e) {
+        }
+        catch (InterruptedException e) {
             // TODO Auto-generated catch block
-            e.printStackTrace();
+    		e.printStackTrace();
         }
     }
 
@@ -105,10 +107,8 @@ public class ConnectionImpl extends AbstractConnection {
      * @see Connection#accept()
      */
     public Connection accept() throws IOException, SocketTimeoutException {
-        // set internal state
-        state = State.LISTEN;
-        // allocate syn packet
-        KtnDatagram syn = null;
+        state = State.LISTEN; // set internal state
+        KtnDatagram syn = null, ack; // allocate syn packet
         // listen for a packet until a SYN is received
         do syn = receivePacket(true);
         while(syn == null || syn.getFlag() != Flag.SYN);
@@ -120,15 +120,12 @@ public class ConnectionImpl extends AbstractConnection {
         newConn.setState(State.SYN_RCVD);
         newConn.setRemoteAddress(syn.getSrc_addr());
         newConn.setRemotePort(syn.getSrc_port());
-        // set last valid packet
-        newConn.setLastValidPacketReceived(syn);          
-        // send ACK
-        newConn.sendAck(syn, true);
-        // receive ACK
-        newConn.receiveAck();
-        // set internal state
-        newConn.setState(State.ESTABLISHED);
         
+        newConn.setLastValidPacketReceived(syn);  // set last valid packet
+        newConn.sendAck(syn, true); // send ACK
+        ack = newConn.receiveAck(); // receive ACK
+        newConn.lastValidPacketReceived = ack; // set last valid packet (for sequenceNumbering)
+        newConn.setState(State.ESTABLISHED); // set internal state
         return newConn;
     }
 
@@ -142,13 +139,12 @@ public class ConnectionImpl extends AbstractConnection {
      * @see no.ntnu.fp.net.co.Connection#send(String)
      */
     public void send(String msg) throws ConnectException, IOException {
-        KtnDatagram ackPacket, dataPacket = constructDataPacket(msg);
+        KtnDatagram dataPacket = constructDataPacket(msg);
         try {
             Thread.sleep(100); // must wait for server to send ACK
-            ackPacket = sendDataPacketWithRetransmit(dataPacket);
+             sendDataPacketWithRetransmit(dataPacket);
         } catch (InterruptedException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+        	System.out.println("Failed sleep(100)");
         }
     }
 
@@ -163,11 +159,14 @@ public class ConnectionImpl extends AbstractConnection {
      * @see AbstractConnection#sendAck(KtnDatagram, boolean)
      */
     public String receive() throws EOFException, IOException   {
-        KtnDatagram dataPacket = receivePacket(false);
-        // send ACK for payload packet
-        sendAck(dataPacket, false);
-        // return the packets content as string
-        return dataPacket.getPayload().toString();
+        KtnDatagram dataPacket = null; 
+        // wait for valid dataPacket
+        do { dataPacket = receivePacket(false); }
+        while(dataPacket == null || !isValid(dataPacket));
+        
+        lastValidPacketReceived = dataPacket; // set LAst valid packet (sequence numbers)
+        sendAck(dataPacket, false); // send ACK for payload packet
+        return dataPacket.getPayload().toString(); // return the packets content as string
     }
 
     /**
@@ -176,7 +175,7 @@ public class ConnectionImpl extends AbstractConnection {
      * @see Connection#close()
      */
     public void close() throws IOException {
-        KtnDatagram ackPacket, ackPacket2, finPacket, finpacket2;
+        KtnDatagram finPacket, finpacket2;
         // state machine
         while(getState() != State.CLOSED) {
             switch(state) {
@@ -199,7 +198,7 @@ public class ConnectionImpl extends AbstractConnection {
                 } break;
                 
                 case FIN_WAIT_1:  { // client receives ACK
-                    ackPacket = receiveAck();
+                    receiveAck();
                     setState(State.FIN_WAIT_2);
                 } break;
                 
@@ -211,8 +210,7 @@ public class ConnectionImpl extends AbstractConnection {
                     } catch (ClException e) {
                         throw new IOException("Error sending FIN2");
                     } catch (InterruptedException e) {
-                        // TODO Auto-generated catch block
-                        e.printStackTrace();
+                    	
                     }
                     setState(State.LAST_ACK);
                 } break;
@@ -225,7 +223,7 @@ public class ConnectionImpl extends AbstractConnection {
                 } break;
                 
                 case LAST_ACK: { // server receives ACK
-                    ackPacket2 = receiveAck();
+                    receiveAck();
                     setState(State.CLOSED);
                 } break;
             }
@@ -241,6 +239,8 @@ public class ConnectionImpl extends AbstractConnection {
      * @return true if packet is free of errors, false otherwise. 
     */
     protected boolean isValid(KtnDatagram packet) {
+    	// check headers to prevent ghost packets
+    	if(!packet.getSrc_addr().equals(remoteAddress) || packet.getSrc_port() != remotePort) return false;
         // checksum must be valid
         if(packet.calculateChecksum() == packet.getChecksum()) {
             // if there is a previous packet, validate sequence number
@@ -251,6 +251,4 @@ public class ConnectionImpl extends AbstractConnection {
        }
        return false;
     }
-
 }
-

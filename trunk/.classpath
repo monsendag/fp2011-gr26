@@ -11,5 +11,10 @@
 	<classpathentry kind="lib" path="lib/xpp3_min-1.1.4c.jar"/>
 	<classpathentry kind="lib" path="lib/derby.jar"/>
 	<classpathentry kind="lib" path="lib/derbytools.jar"/>
+	<classpathentry kind="lib" path="lib/jgoodies-common-1.1.1.jar"/>
+	<classpathentry kind="lib" path="lib/jgoodies-forms-1.4.0.jar"/>
+	<classpathentry kind="lib" path="lib/joda-time-1.6.2.jar"/>
+	<classpathentry kind="lib" path="lib/joda-time-1.6.2-javadoc.jar"/>
+	<classpathentry kind="lib" path="lib/FixedDateChooser.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

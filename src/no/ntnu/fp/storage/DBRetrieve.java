@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import no.ntnu.fp.model.Activity;
 import no.ntnu.fp.model.Employee;
 import no.ntnu.fp.model.Meeting;
+import no.ntnu.fp.model.Message;
 import no.ntnu.fp.model.Participant;
 import no.ntnu.fp.model.Room;
 
@@ -69,6 +70,36 @@ public class DBRetrieve extends DBConnection {
 		}
 		
 		return employees;
+	}
+	
+	/**
+	 * Returns an {@link #ArrayList} with every unread alert from the database as
+	 * {@link Message} objects.
+	 * @return ArrayList with {@link Message}s.
+	 */
+	public ArrayList<Message> getAllAlerts() {
+		ArrayList<Message> alerts = new ArrayList<Message>();
+		try {
+			Statement s = conn.createStatement();
+			ResultSet rs = s.executeQuery("SELECT * FROM alert " +
+					"WHERE (isread = false OR isread IS NULL)");
+			
+			Message m;
+			while(rs.next()) {
+				m = new Message();
+				m.setCreatedOn(rs.getTimestamp("time"));
+				m.setDescription(rs.getString("message"));
+				m.setEmployee(getEmployee(rs.getString("username")));
+				m.setMeeting(getMeeting(rs.getInt("activityID")));
+				alerts.add(m);
+			}
+			s.close();
+		} catch (SQLException e1) {
+			System.err.println("Error fetching alerts.");
+			e1.printStackTrace();
+		}
+		
+		return alerts;
 	}
 	
 	/**
@@ -154,7 +185,8 @@ public class DBRetrieve extends DBConnection {
 		ArrayList<Activity> activities = new ArrayList<Activity>();
 		try {
 			Statement s = conn.createStatement();
-			ResultSet rs = s.executeQuery("SELECT * FROM activity WHERE ismeeting = false");
+			ResultSet rs = s.executeQuery("SELECT * FROM activity WHERE ismeeting = false " +
+					"AND (cancelled = false OR cancelled IS NULL)");
 			
 			Activity a;
 			while(rs.next()) {
@@ -177,6 +209,37 @@ public class DBRetrieve extends DBConnection {
 	}
 	
 	/**
+	 * Returns a meeting based on the meeting's ID.
+	 * @return The meeting
+	 */
+	public Meeting getMeeting(int meetingID) {
+		try {
+			Statement s = conn.createStatement();
+			ResultSet rs = s.executeQuery("SELECT * FROM activity " +
+					"WHERE activityID = " + meetingID);
+			
+			Meeting m;
+			while(rs.next()) {
+				m = new Meeting();
+				m.setOwner(getEmployee(rs.getString("username")));
+				m.setDescription(rs.getString("description"));
+				m.setLocation(rs.getString("location"));
+				m.setId(rs.getInt("activityID"));
+				m.setStartTime(rs.getTimestamp("starttime"));
+				m.setEndTime(rs.getTimestamp("endtime"));
+				m.setParticipants(getParticipantsByMeetingID(m.getId()));
+				return m;
+			}
+			s.close();
+		} catch (SQLException e) {
+			System.err.println("Could not get meetings.");
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
+	
+	/**
 	 * Returns all meetings (multiple user activities) in the database
 	 * as an {@link ArrayList} with {@link Meeting} objects.
 	 * @return ArrayList with all the meetings.
@@ -185,7 +248,8 @@ public class DBRetrieve extends DBConnection {
 		ArrayList<Meeting> meetings = new ArrayList<Meeting>();
 		try {
 			Statement s = conn.createStatement();
-			ResultSet rs = s.executeQuery("SELECT * FROM activity WHERE ismeeting = true");
+			ResultSet rs = s.executeQuery("SELECT * FROM activity WHERE ismeeting = true " +
+					"AND (cancelled = false OR cancelled IS NULL)");
 			
 			Meeting m;
 			while(rs.next()) {
@@ -233,7 +297,8 @@ public class DBRetrieve extends DBConnection {
 			 * Personal activities can't reserve a room.
 			 */
 			ResultSet rs = s.executeQuery("SELECT * FROM activity WHERE username ='"
-					+ username + "' AND ismeeting = false");
+					+ username + "' AND ismeeting = false " +
+					"AND (cancelled = false OR cancelled IS NULL)");
 			
 			Activity a;
 			while(rs.next()) {
@@ -282,7 +347,7 @@ public class DBRetrieve extends DBConnection {
 					"a.activityID, a.starttime, a.endtime " +
 					"FROM activity a, participant p " +
 					"WHERE a.activityID = p.activityID AND p.username ='" + username + "' " +
-					"AND ismeeting = true");
+					"AND ismeeting = true AND (cancelled = false OR cancelled IS NULL)");
 			
 			Meeting m;
 			while(rs.next()) {
@@ -301,7 +366,8 @@ public class DBRetrieve extends DBConnection {
 			 * Fetches every meeting that the employee has created
 			 */
 			rs = s.executeQuery("SELECT * FROM activity " +
-					"WHERE username ='" + username + "' AND ismeeting = true");
+					"WHERE username ='" + username + "' AND ismeeting = true " +
+					"AND (cancelled = false OR cancelled IS NULL)");
 			
 			while(rs.next()) {
 				m = new Meeting();
@@ -321,5 +387,50 @@ public class DBRetrieve extends DBConnection {
 		}
 		
 		return meetings;
+	}
+	
+	/**
+	 * Returns an {@link ArrayList} with an employee's alerts(messages),
+	 * based on an {@link Employee} object.
+	 * @param emp The employee
+	 * @return The ArrayList with alerts.
+	 */
+	public ArrayList<Message> getEmpAlerts(Employee emp) {
+		return getEmpAlertsByUsername(emp.getUsername());
+	}
+	
+	/**
+	 * Returns an {@link ArrayList} with an employee's alerts(messages),
+	 * based on username.
+	 * @param username The username
+	 * @return The ArrayList with alerts.
+	 */
+	public ArrayList<Message> getEmpAlertsByUsername(String username) {
+		ArrayList<Message> alerts = new ArrayList<Message>();
+		try {
+			Statement s = conn.createStatement();
+			
+			/*
+			 * Personal activities can't reserve a room.
+			 */
+			ResultSet rs = s.executeQuery("SELECT * FROM alert WHERE username ='"
+					+ username + "' AND isread = false OR isread IS NULL");
+			
+			Message m;
+			while(rs.next()) {
+				m = new Message();
+				m.setCreatedOn(rs.getTimestamp("time"));
+				m.setDescription(rs.getString("message"));
+				m.setEmployee(getEmployee(username));
+				m.setMeeting(getMeeting(rs.getInt("activityID")));
+				alerts.add(m);
+			}
+			s.close();
+		} catch (SQLException e) {
+			System.err.println("Could not get employee's activities.");
+			e.printStackTrace();
+		}
+		
+		return alerts;
 	}
 }

@@ -30,6 +30,9 @@ public class DBTest {
 		//dbs.changeInviteStatusByIDs(3, "oleak", 2);
 		//dbs.changeInviteStatusByIDs(3, "Johni", 2);
 		
+		// Cancels the meeting with id = 6
+		//dbs.cancelMeetingByID(6);
+		
 		// All employees
 		System.out.println("All emlpoyees: (getAllEmployees())");
 		for (Employee e : dbr.getAllEmployees()) {

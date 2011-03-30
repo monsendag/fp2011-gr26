@@ -13,6 +13,10 @@ public class Room
     	this.capacity = capacity;
     }
     
+    public Room() {
+    	
+    }
+    
     public void reserve () 
     {
 

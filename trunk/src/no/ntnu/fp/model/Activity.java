@@ -1,14 +1,13 @@
-﻿
-
-package no.ntnu.fp.model;
+﻿package no.ntnu.fp.model;
 
 import java.util.Date;
 
-//
 public class Activity 
 {
+	private int id;
 	private Date startTime, endTime;
-	private String  description, location;
+	private String description, location;
+	private Employee owner;
 	
 	public Activity()
 	{
@@ -16,16 +15,16 @@ public class Activity
 		endTime = null;
 		description = "";
 		location = "";
-		
+		setOwner(null);
 	}
 	
-	
-	public Activity(Date startTime, Date endTime, String description, String location)
+	public Activity(Employee owner, Date startTime, Date endTime, String description, String location)
 	{
 		this.startTime = startTime;
 		this.endTime = endTime;
 		this.description = description;
 		this.location = location;
+		this.setOwner(owner);
 	}
 	
 	public Date getStartTime()
@@ -68,6 +67,24 @@ public class Activity
 	public void cancelActivity()
 	{
 		// DESTROOYY
+	}
+
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+
+	public int getId() {
+		return id;
+	}
+
+	public void setOwner(Employee owner) {
+		this.owner = owner;
+	}
+
+	public Employee getOwner() {
+		return owner;
 	}
 	
 	

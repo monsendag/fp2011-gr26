@@ -3,14 +3,12 @@
 package no.ntnu.fp.model;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
-//
 public class Meeting extends Activity {
 	
-	
-	private Employee admin;
-	private ArrayList<Employee> participants;
+	private ArrayList<Participant> participants;
 	private Room room;
 	
 	public Meeting()
@@ -18,28 +16,19 @@ public class Meeting extends Activity {
 		super();
 	}
 	
-	public Meeting(Employee admin, ArrayList<Employee> participants, Room room, Date startTime, Date endTime, String description, String location)
+	public Meeting(Employee owner, ArrayList<Participant> participants, Room room, Date startTime, Date endTime, String description, String location)
 	{
-		super(startTime, endTime, description, location);
-		this.admin = admin;
+		super(owner, startTime, endTime, description, location);
 		this.room = room;
 		this.participants = participants;
 	}
 	
-	public void setAdmin(Employee admin)
-	{
-		this.admin = admin;
-	}
-	public Employee getAdmin()
-	{
-		return admin;
-	}
-	
-	public void setParticipants(ArrayList<Employee> participants)
+	public void setParticipants(ArrayList<Participant> participants)
 	{
 		this.participants = participants;
 	}
-	public ArrayList<Employee> getParticipants()
+	
+	public ArrayList<Participant> getParticipants()
 	{
 		return participants;
 	}
@@ -60,7 +49,7 @@ public class Meeting extends Activity {
 			System.out.println("ERROR ERROR ERRORR ALERT ALERT");
 	}
 	
-	public void addParticipant(Employee participant)
+	public void addParticipant(Participant participant)
 	{
 		if (!(participants.contains(participant)))
 			participants.add(participant);
@@ -79,7 +68,4 @@ public class Meeting extends Activity {
 		else
 			System.out.println("ERROR ERROR ERROR");
 	}
-	
-	
-
 }

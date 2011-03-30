@@ -102,6 +102,9 @@ public class DBStore extends DBConnection {
 			}
 			ps.close();
 			
+			/*
+			 * Fetches the auto generated activity ID and adds it to the activity object
+			 */
 			act.setId(activityID);
 		} catch (SQLException e) {
 			System.err.println("Could not add activity.");
@@ -112,9 +115,11 @@ public class DBStore extends DBConnection {
 	}
 	
 	/**
-	 * Adds a meeting to the database from a {@link Meeting} object.
-	 * Alse adds participants to the participant table through the participant
-	 * list in the {@link Meeting} object.
+	 * <p>Adds a meeting to the database from a {@link Meeting} object.</p>
+	 * <p>Also adds participants to the participant table through the participant
+	 * list in the {@link Meeting} object.</p>
+	 * <p>An invited employee's status is set to {@link Participant.Status#AWAITING_REPLY}
+	 * by default.</p>
 	 * @param m The meeting to be added.
 	 */
 	public void addMeeting(Meeting m) {
@@ -170,7 +175,20 @@ public class DBStore extends DBConnection {
 	}
 	
 	/**
+	 * Adds a participant to a meeting, by a {@link Meeting} and an {@link Employee} object.
+	 * An invited employee's status is set to {@link Participant.Status#AWAITING_REPLY}
+	 * by default.
+	 * @param meeting The meeting
+	 * @param emp The employee
+	 */
+	public void addPartcipant(Meeting meeting, Employee emp) {
+		addPartcipantByIDs(meeting.getId(), emp.getUsername());
+	}
+	
+	/**
 	 * Adds a participant to a meeting, by a meeting's ID and an employee's username.
+	 * An invited employee's status is set to {@link Participant.Status#AWAITING_REPLY}
+	 * by default.
 	 * @param meetingID The meeting's id
 	 * @param username The participants username
 	 */
@@ -214,6 +232,62 @@ public class DBStore extends DBConnection {
 			ps.close();
 		} catch (SQLException e) {
 			System.err.println("Could not change participants status.");
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * Marks a meeting, by a {@link Meeting} object,
+	 * in the database as canceled (meetings should not be deleted).
+	 * @param meeting The meeting to be canceled
+	 */
+	public void cancelMeeting(Meeting meeting) {
+		cancelMeetingByID(meeting.getId());
+	}
+	
+	/**
+	 * Marks a meeting, by the meeting's ID,
+	 * in the database as canceled (meetings should not be deleted).
+	 * @param meetingID The meeting's ID
+	 */
+	public void cancelMeetingByID(int meetingID) {
+		try {
+			PreparedStatement ps = conn.prepareStatement("UPDATE activity SET cancelled = ? " +
+					"WHERE activityID = " + meetingID);
+			ps.setBoolean(1,true);
+			ps.executeUpdate();
+			ps.close();
+		} catch (SQLException e) {
+			System.err.println("Could not cancel meeting.");
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * Marks an alert(message), by a {@link Meeting} and a {@link Employee} object,
+	 * in the database as read.
+	 * @param meeting The meeting
+	 * @param emp The employee
+	 */
+	public void markAlertAsRead(Meeting meeting,Employee emp) {
+		markAlertAsReadByIDs(meeting.getId(), emp.getUsername());
+	}
+	
+	/**
+	 * Marks an alert(message), by the meeting's ID and the employee's username,
+	 * in the database as read.
+	 * @param meetingID The meeting's ID
+	 * @param username The employee's username
+	 */
+	public void markAlertAsReadByIDs(int meetingID,String username) {
+		try {
+			PreparedStatement ps = conn.prepareStatement("UPDATE alert SET read = ? " +
+					"WHERE activityID = " + meetingID + " AND username = '" + username + "'");
+			ps.setBoolean(1,true);
+			ps.executeUpdate();
+			ps.close();
+		} catch (SQLException e) {
+			System.err.println("Could not mark alert as read.");
 			e.printStackTrace();
 		}
 	}

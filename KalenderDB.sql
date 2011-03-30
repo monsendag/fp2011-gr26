@@ -1,20 +1,18 @@
 CREATE TABLE employee (
     username VARCHAR(16) NOT NULL PRIMARY KEY,
     name VARCHAR(30),
-    password VARCHAR(16) NOT NULL,
+    password VARCHAR(32) NOT NULL,
 );
 
 CREATE TABLE alert (
     read BOOLEAN,
-    time DATE,
+    time TIMESTAMP,
     message VARCHAR(255),
     username VARCHAR(16) NOT NULL,
     activityID INT NOT NULL,
     PRIMARY KEY (username, activityID),
-    FOREIGN KEY (username) REFERENCES employee(username)
-        ON UPDATE CASCADE,
+    FOREIGN KEY (username) REFERENCES employee(username),
     FOREIGN KEY (activityID) REFERENCES activity(activityID)
-        ON UPDATE CASCADE
 );
 
 CREATE TABLE participant (
@@ -22,24 +20,22 @@ CREATE TABLE participant (
     username VARCHAR(16) NOT NULL,
     activityID INT NOT NULL,
     PRIMARY KEY (username, activityID),
-    FOREIGN KEY (username) REFERENCES employee(username)
-        ON UPDATE CASCADE,
+    FOREIGN KEY (username) REFERENCES employee(username),
     FOREIGN KEY (activityID) REFRENCES activity(activityID)
-        ON UPDATE CASCADE
 );
 
 CREATE TABLE activity (
-    activityID INT NOT NULL PRIMARY KEY,
-    starttime DATE,
-    endtime DATE,
+    activityID INT NOT NULL PRIMARY KEY GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
+    starttime TIMESTAMP,
+    endtime TIMESTAMP,
     description VARCHAR(255),
     cancelled BOOLEAN,
     username VARCHAR(16) NOT NULL,
     roomID INT,
-    FOREIGN KEY (username) REFERENCES employee(username)
-        ON UPDATE CASCADE,
+    location VARCHAR(30),
+    ismeeting BOOLEAN,
+    FOREIGN KEY (username) REFERENCES employee(username),
     FOREIGN KEY (roomID) REFERENCES room(roomID)
-        ON UPDATE CASCADE
 );
 
 CREATE TABLE room (

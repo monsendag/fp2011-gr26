@@ -4,6 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import no.ntnu.fp.model.Activity;
 import no.ntnu.fp.model.Employee;
@@ -17,7 +18,7 @@ import no.ntnu.fp.model.Room;
  * @author fp2011-gr26
  */
 public class DBRetrieve extends DBConnection {
-
+	
 	/**
 	 * Returns an employee with the specified username from the database
 	 * as an {@link Employee} object.
@@ -25,6 +26,11 @@ public class DBRetrieve extends DBConnection {
 	 * @return The {@link Employee} or null if no employee was found.
 	 */
 	public Employee getEmployee(String username) {
+		// Check cache
+		if(empCache.containsKey(username)) {
+			System.out.println("Getting " + username + " from cache.");
+			return empCache.get(username);
+		}
 		try {
 			Statement s = conn.createStatement();
 			ResultSet rs = s.executeQuery("SELECT * FROM employee WHERE username ='" + username + "'");
@@ -34,6 +40,9 @@ public class DBRetrieve extends DBConnection {
 				e.setUsername(rs.getString("username"));
 				e.setName(rs.getString("name"));
 				e.setPassword(rs.getString("password"));
+				// Add to cache
+				empCache.put(e.getUsername(), e);
+				System.out.println("Adding " + e.getUsername() + " to cache.");
 				return e;
 			}
 			s.close();
@@ -57,10 +66,18 @@ public class DBRetrieve extends DBConnection {
 			ResultSet rs = s.executeQuery("SELECT * FROM employee");
 			Employee e;
 			while(rs.next()) {
-				e = new Employee();
-				e.setUsername(rs.getString("username"));
-				e.setName(rs.getString("name"));
-				e.setPassword(rs.getString("password"));
+				String username = rs.getString("username");
+				if(empCache.containsKey(username)) {
+					e = empCache.get(username);
+					System.out.println("Getting " + username + " from cache.");
+				} else {
+					e = new Employee();
+					e.setUsername(username);
+					e.setName(rs.getString("name"));
+					e.setPassword(rs.getString("password"));
+					System.out.println("Adding " + e.getUsername() + " to cache.");
+					empCache.put(username, e);
+				}
 				employees.add(e);
 			}
 			s.close();
@@ -110,7 +127,7 @@ public class DBRetrieve extends DBConnection {
 	 * @param meeting The meeting
 	 * @return ArrayList with {@link employee}s or an empty ArrayList if no employees where found.
 	 */
-	public ArrayList<Participant> getParticipants(Meeting meeting) {
+	private ArrayList<Participant> getParticipants(Meeting meeting) {
 		return getParticipantsByMeetingID(meeting.getId());
 	}
 	
@@ -122,7 +139,7 @@ public class DBRetrieve extends DBConnection {
 	 * @param activityID The meeting's ID
 	 * @return ArrayList with {@link employee}s or an empty ArrayList if no employees where found.
 	 */
-	public ArrayList<Participant> getParticipantsByMeetingID(int activityID) {
+	private ArrayList<Participant> getParticipantsByMeetingID(int activityID) {
 		ArrayList<Participant> participants = new ArrayList<Participant>();
 		try {
 			Statement s = conn.createStatement();
@@ -133,10 +150,18 @@ public class DBRetrieve extends DBConnection {
 			Employee e;
 			Participant p;
 			while(rs.next()) {
-				e = new Employee();
-				e.setUsername(rs.getString("username"));
-				e.setName(rs.getString("name"));
-				e.setPassword(rs.getString("password"));
+				String username = rs.getString("username");
+				if(empCache.containsKey(username)) {
+					System.out.println("Getting " + username + " from cache.");
+					e = empCache.get(username);
+				} else {
+					e = new Employee();
+					e.setUsername(username);
+					e.setName(rs.getString("name"));
+					e.setPassword(rs.getString("password"));
+					empCache.put(username, e);
+					System.out.println("Adding " + username + " to cache.");
+				}
 				p = new Participant(e,Participant.intToEnum(rs.getInt("status")));
 				participants.add(p);
 			}
@@ -161,10 +186,20 @@ public class DBRetrieve extends DBConnection {
 			
 			Room r;
 			while(rs.next()) {
-				r = new Room();
-				r.setName(rs.getString("name"));
-				r.setCapacity(rs.getInt("capacity"));
-				r.setRoomID(rs.getInt("roomID"));
+				int id = rs.getInt("roomID");
+				// Checking cache
+				if(roomCache.containsKey(id)) {
+					r = roomCache.get(id);
+					System.out.println("Getting room " + id + " from cache.");
+				} else {
+					r = new Room();
+					r.setName(rs.getString("name"));
+					r.setCapacity(rs.getInt("capacity"));
+					r.setRoomID(id);
+					// Adding to cache
+					System.out.println("Adding room " + id + " to cache.");
+					roomCache.put(id, r);
+				}
 				rooms.add(r);
 			}
 			s.close();
@@ -190,13 +225,23 @@ public class DBRetrieve extends DBConnection {
 			
 			Activity a;
 			while(rs.next()) {
-				a = new Activity();
-				a.setOwner(getEmployee(rs.getString("username")));
-				a.setDescription(rs.getString("description"));
-				a.setLocation(rs.getString("location"));
-				a.setId(rs.getInt("activityID"));
-				a.setStartTime(rs.getTimestamp("starttime"));
-				a.setEndTime(rs.getTimestamp("endtime"));
+				int id = rs.getInt("activityID");
+				// Checking cache
+				if(actCache.containsKey(id)) {
+					a = actCache.get(id);
+					System.out.println("Getting activity " + a.getId() + ", owned by " + a.getOwner() + " from cache.");
+				} else {
+					a = new Activity();
+					a.setOwner(getEmployee(rs.getString("username")));
+					a.setDescription(rs.getString("description"));
+					a.setLocation(rs.getString("location"));
+					a.setId(id);
+					a.setStartTime(rs.getTimestamp("starttime"));
+					a.setEndTime(rs.getTimestamp("endtime"));
+					// Add to cache
+					actCache.put(id, a);
+					System.out.println("Adding activity " + a.getId() + ", owned by " + a.getOwner() + " to cache.");
+				}
 				activities.add(a);
 			}
 			s.close();
@@ -213,6 +258,11 @@ public class DBRetrieve extends DBConnection {
 	 * @return The meeting
 	 */
 	public Meeting getMeeting(int meetingID) {
+		if(mtngCache.containsKey(meetingID)) {
+			Meeting m1 = mtngCache.get(meetingID); // EDIT
+			System.out.println("Getting meeting " + m1.getId() + ", owned by " + m1.getOwner() + " from cache.");
+			return m1;
+		}
 		try {
 			Statement s = conn.createStatement();
 			ResultSet rs = s.executeQuery("SELECT * FROM activity " +
@@ -228,6 +278,8 @@ public class DBRetrieve extends DBConnection {
 				m.setStartTime(rs.getTimestamp("starttime"));
 				m.setEndTime(rs.getTimestamp("endtime"));
 				m.setParticipants(getParticipantsByMeetingID(m.getId()));
+				System.out.println("Adding meeting " + m.getId() + ", owned by " + m.getOwner() + " to cache.");
+				mtngCache.put(m.getId(), m);
 				return m;
 			}
 			s.close();
@@ -253,14 +305,24 @@ public class DBRetrieve extends DBConnection {
 			
 			Meeting m;
 			while(rs.next()) {
-				m = new Meeting();
-				m.setOwner(getEmployee(rs.getString("username")));
-				m.setDescription(rs.getString("description"));
-				m.setLocation(rs.getString("location"));
-				m.setId(rs.getInt("activityID"));
-				m.setStartTime(rs.getTimestamp("starttime"));
-				m.setEndTime(rs.getTimestamp("endtime"));
-				m.setParticipants(getParticipantsByMeetingID(m.getId()));
+				int id = rs.getInt("activityID");
+				// Check cache
+				if(mtngCache.containsKey(id)) {
+					m = mtngCache.get(id);
+					System.out.println("Getting meeting " + m.getId() + ", owned by " + m.getOwner() + " from cache.");
+				} else {
+					m = new Meeting();
+					m.setOwner(getEmployee(rs.getString("username")));
+					m.setDescription(rs.getString("description"));
+					m.setLocation(rs.getString("location"));
+					m.setId(id);
+					m.setStartTime(rs.getTimestamp("starttime"));
+					m.setEndTime(rs.getTimestamp("endtime"));
+					m.setParticipants(getParticipantsByMeetingID(id));
+					// Add to cache
+					mtngCache.put(id, m);
+					System.out.println("Adding meeting " + m.getId() + ", owned by " + m.getOwner() + " to cache.");
+				}
 				meetings.add(m);
 			}
 			s.close();
@@ -302,13 +364,23 @@ public class DBRetrieve extends DBConnection {
 			
 			Activity a;
 			while(rs.next()) {
-				a = new Activity();
-				a.setOwner(getEmployee(username));
-				a.setDescription(rs.getString("description"));
-				a.setLocation(rs.getString("location"));
-				a.setId(rs.getInt("activityID"));
-				a.setStartTime(rs.getTimestamp("starttime"));
-				a.setEndTime(rs.getTimestamp("endtime"));
+				int id = rs.getInt("activityID");
+				// Check cache
+				if(actCache.containsKey(id)) {
+					a = actCache.get(id);
+					System.out.println("Getting activity " + a.getId() + ", owned by " + a.getOwner() + " from cache.");
+				} else {
+					a = new Activity();
+					a.setOwner(getEmployee(username));
+					a.setDescription(rs.getString("description"));
+					a.setLocation(rs.getString("location"));
+					a.setId(id);
+					a.setStartTime(rs.getTimestamp("starttime"));
+					a.setEndTime(rs.getTimestamp("endtime"));
+					// Add to cache
+					actCache.put(id, a);
+					System.out.println("Adding activity " + a.getId() + ", owned by " + a.getOwner() + " to cache.");
+				}
 				activities.add(a);
 			}
 			s.close();
@@ -351,14 +423,24 @@ public class DBRetrieve extends DBConnection {
 			
 			Meeting m;
 			while(rs.next()) {
-				m = new Meeting();
-				m.setOwner(getEmployee(rs.getString("username")));
-				m.setDescription(rs.getString("description"));
-				m.setLocation(rs.getString("location"));
-				m.setId(rs.getInt("activityID"));
-				m.setStartTime(rs.getTimestamp("starttime"));
-				m.setEndTime(rs.getTimestamp("endtime"));
-				m.setParticipants(getParticipantsByMeetingID(m.getId()));
+				int id = rs.getInt("activityID");
+				// Check cache
+				if(mtngCache.containsKey(id)) {
+					m = mtngCache.get(id);
+					System.out.println("Getting meeting " + m.getId() + ", owned by " + m.getOwner() + " from cache.");
+				} else {
+					m = new Meeting();
+					m.setOwner(getEmployee(rs.getString("username")));
+					m.setDescription(rs.getString("description"));
+					m.setLocation(rs.getString("location"));
+					m.setId(id);
+					m.setStartTime(rs.getTimestamp("starttime"));
+					m.setEndTime(rs.getTimestamp("endtime"));
+					m.setParticipants(getParticipantsByMeetingID(id));
+					// Add to cache
+					mtngCache.put(id, m);
+					System.out.println("Adding meeting " + m.getId() + ", owned by " + m.getOwner() + " to cache.");
+				}
 				meetings.add(m);
 			}
 			
@@ -370,14 +452,24 @@ public class DBRetrieve extends DBConnection {
 					"AND (cancelled = false OR cancelled IS NULL)");
 			
 			while(rs.next()) {
-				m = new Meeting();
-				m.setOwner(getEmployee(rs.getString("username")));
-				m.setDescription(rs.getString("description"));
-				m.setLocation(rs.getString("location"));
-				m.setId(rs.getInt("activityID"));
-				m.setStartTime(rs.getTimestamp("starttime"));
-				m.setEndTime(rs.getTimestamp("endtime"));
-				m.setParticipants(getParticipantsByMeetingID(m.getId()));
+				int id = rs.getInt("activityID");
+				// Check cache
+				if(mtngCache.containsKey(id)) {
+					m = mtngCache.get(id);
+					System.out.println("Getting meeting " + m.getId() + ", owned by " + m.getOwner() + " from cache.");
+				} else {
+					m = new Meeting();
+					m.setOwner(getEmployee(rs.getString("username")));
+					m.setDescription(rs.getString("description"));
+					m.setLocation(rs.getString("location"));
+					m.setId(id);
+					m.setStartTime(rs.getTimestamp("starttime"));
+					m.setEndTime(rs.getTimestamp("endtime"));
+					m.setParticipants(getParticipantsByMeetingID(id));
+					// Add to cache
+					mtngCache.put(id, m);
+					System.out.println("Adding meeting " + m.getId() + ", owned by " + m.getOwner() + " to cache.");
+				}
 				meetings.add(m);
 			}
 			s.close();

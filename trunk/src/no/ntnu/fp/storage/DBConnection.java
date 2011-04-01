@@ -2,6 +2,12 @@ package no.ntnu.fp.storage;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.util.HashMap;
+
+import no.ntnu.fp.model.Activity;
+import no.ntnu.fp.model.Employee;
+import no.ntnu.fp.model.Meeting;
+import no.ntnu.fp.model.Room;
 
 /**
  * <p>Database communication class.</p>
@@ -14,7 +20,11 @@ public class DBConnection {
 	/**
 	 * The database connection object.
 	 */
-	public Connection conn;
+	protected Connection conn;
+	protected HashMap<String,Employee> empCache;
+	protected HashMap<Integer,Room> roomCache;
+	protected HashMap<Integer,Activity> actCache;
+	protected HashMap<Integer,Meeting> mtngCache;
 	
 	/**
 	 * Default constructor. Connects to the database through {@link #connect()}.
@@ -26,6 +36,10 @@ public class DBConnection {
 			System.err.println("Unable to connect");
 			e.printStackTrace();
 		}
+		empCache = new HashMap<String, Employee>();
+		roomCache = new HashMap<Integer, Room>();
+		actCache = new HashMap<Integer, Activity>();
+		mtngCache = new HashMap<Integer, Meeting>();
 	}
 	
 	/**

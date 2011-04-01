@@ -9,11 +9,13 @@
  * Created on 21.mar.2011, 13:33:19
  */
 
-package gui;
+package fp.client.gui;
 
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.util.Date;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.UIManager;
 
 
@@ -45,10 +47,10 @@ public class Gui extends javax.swing.JFrame {
 
         loginDialog = new javax.swing.JDialog();
         loginPanel = new javax.swing.JPanel();
-        usernameTextField = new javax.swing.JTextField();
-        passwordTextField = new javax.swing.JTextField();
+        loginUsernameTextField = new javax.swing.JTextField();
         rememberMeCheckBox = new javax.swing.JCheckBox();
-        jButton3 = new javax.swing.JButton();
+        loginButton = new javax.swing.JButton();
+        loginPasswordField = new javax.swing.JPasswordField();
         wrongUsernameDialog = new javax.swing.JDialog();
         wrongUsernameLabel = new javax.swing.JLabel();
         wrongUsernameButton = new javax.swing.JButton();
@@ -64,6 +66,7 @@ public class Gui extends javax.swing.JFrame {
         calendarChooserTable = new javax.swing.JTable();
         calendarChooserOkButton = new javax.swing.JButton();
         calendarChooserCancelButton = new javax.swing.JButton();
+        calendarChooserSearchPanel = new javax.swing.JPanel();
         calendarChooserSearchField = new javax.swing.JTextField();
         calendarChooserSearchIcon = new javax.swing.JLabel();
         messageOverviewDialog = new javax.swing.JDialog();
@@ -136,8 +139,9 @@ public class Gui extends javax.swing.JFrame {
         participantChooserTable = new javax.swing.JTable();
         participantChooserOkButton = new javax.swing.JButton();
         participantChooserCancelButton = new javax.swing.JButton();
-        participantChooserSearchField = new javax.swing.JTextField();
+        participantChooserSearchPanel = new javax.swing.JPanel();
         participantChooserSearchIcon = new javax.swing.JLabel();
+        participantChooserSearchField = new javax.swing.JTextField();
         fromDateDateChooserDialog = new javax.swing.JDialog();
         fromDateDateChooserOkButton = new javax.swing.JButton();
         fromDateDateChooserCancelButton = new javax.swing.JButton();
@@ -174,20 +178,35 @@ public class Gui extends javax.swing.JFrame {
             public void windowOpened(WindowEvent arg0) {}
         });
 
-        usernameTextField.setFont(new java.awt.Font("Tahoma", 0, 12));
-        usernameTextField.setText("brukernavn");
+        loginUsernameTextField.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        loginUsernameTextField.setText("brukernavn");
+        loginUsernameTextField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                loginUsernameTextFieldFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                loginUsernameTextFieldFocusLost(evt);
+            }
+        });
 
-        passwordTextField.setFont(new java.awt.Font("Tahoma", 0, 12));
-        passwordTextField.setText("passord");
-
-        rememberMeCheckBox.setFont(new java.awt.Font("Tahoma", 0, 12));
+        rememberMeCheckBox.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         rememberMeCheckBox.setText("Husk meg");
 
-        jButton3.setFont(new java.awt.Font("Tahoma", 0, 12));
-        jButton3.setText("Logg inn");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        loginButton.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        loginButton.setText("Logg inn");
+        loginButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                loginButtonActionPerformed(evt);
+            }
+        });
+
+        loginPasswordField.setText("passord");
+        loginPasswordField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                loginPasswordFieldFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                loginPasswordFieldFocusLost(evt);
             }
         });
 
@@ -197,28 +216,26 @@ public class Gui extends javax.swing.JFrame {
             loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(loginPanelLayout.createSequentialGroup()
                 .addContainerGap()
+                .addGroup(loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(loginPasswordField, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(loginUsernameTextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 154, Short.MAX_VALUE))
+                .addGap(10, 10, 10)
                 .addGroup(loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(loginPanelLayout.createSequentialGroup()
-                        .addComponent(usernameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(rememberMeCheckBox))
-                    .addGroup(loginPanelLayout.createSequentialGroup()
-                        .addComponent(passwordTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton3)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(loginButton)
+                    .addComponent(rememberMeCheckBox))
+                .addContainerGap(10, Short.MAX_VALUE))
         );
         loginPanelLayout.setVerticalGroup(
             loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(loginPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(usernameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(loginUsernameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(rememberMeCheckBox))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(passwordTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3))
+                    .addComponent(loginButton)
+                    .addComponent(loginPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -384,27 +401,44 @@ public class Gui extends javax.swing.JFrame {
             }
         });
 
+        calendarChooserSearchPanel.setBackground(new java.awt.Color(255, 255, 255));
+        calendarChooserSearchPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
+
+        calendarChooserSearchField.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         calendarChooserSearchField.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
 
-        calendarChooserSearchIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ico/Search-icon 30x30 v2.png"))); // NOI18N
+        calendarChooserSearchIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ico/Search-icon 30x30 v4.png"))); // NOI18N
+
+        javax.swing.GroupLayout calendarChooserSearchPanelLayout = new javax.swing.GroupLayout(calendarChooserSearchPanel);
+        calendarChooserSearchPanel.setLayout(calendarChooserSearchPanelLayout);
+        calendarChooserSearchPanelLayout.setHorizontalGroup(
+            calendarChooserSearchPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(calendarChooserSearchPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(calendarChooserSearchField, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(calendarChooserSearchIcon))
+        );
+        calendarChooserSearchPanelLayout.setVerticalGroup(
+            calendarChooserSearchPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(calendarChooserSearchIcon)
+            .addComponent(calendarChooserSearchField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
 
         javax.swing.GroupLayout calendarChooserDialogLayout = new javax.swing.GroupLayout(calendarChooserDialog.getContentPane());
         calendarChooserDialog.getContentPane().setLayout(calendarChooserDialogLayout);
         calendarChooserDialogLayout.setHorizontalGroup(
             calendarChooserDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(calendarChooserDialogLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, calendarChooserDialogLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(calendarChooserDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(calendarChooserSC, javax.swing.GroupLayout.DEFAULT_SIZE, 172, Short.MAX_VALUE)
-                    .addGroup(calendarChooserDialogLayout.createSequentialGroup()
+                .addGroup(calendarChooserDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(calendarChooserSC, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 192, Short.MAX_VALUE)
+                    .addComponent(calendarChooserSearchPanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, calendarChooserDialogLayout.createSequentialGroup()
                         .addComponent(calendarChooserOkButton, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(calendarChooserCancelButton, javax.swing.GroupLayout.DEFAULT_SIZE, 91, Short.MAX_VALUE))
-                    .addGroup(calendarChooserDialogLayout.createSequentialGroup()
-                        .addComponent(calendarChooserSearchField, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(calendarChooserSearchIcon)))
-                .addGap(10, 10, 10))
+                        .addComponent(calendarChooserCancelButton, javax.swing.GroupLayout.DEFAULT_SIZE, 93, Short.MAX_VALUE)))
+                .addContainerGap())
         );
 
         calendarChooserDialogLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {calendarChooserCancelButton, calendarChooserOkButton});
@@ -413,12 +447,10 @@ public class Gui extends javax.swing.JFrame {
             calendarChooserDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(calendarChooserDialogLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(calendarChooserDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(calendarChooserSearchField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(calendarChooserSearchIcon))
+                .addComponent(calendarChooserSearchPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(calendarChooserSC, javax.swing.GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(calendarChooserSC, javax.swing.GroupLayout.DEFAULT_SIZE, 203, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(calendarChooserDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(calendarChooserOkButton)
                     .addComponent(calendarChooserCancelButton))
@@ -667,7 +699,7 @@ public class Gui extends javax.swing.JFrame {
         appointmentDialog.setModal(true);
         appointmentDialog.setResizable(false);
 
-        appointmentFromDateButton.setText("LÃ¸rdag 24. Desember - 2012");
+        appointmentFromDateButton.setText("Lørdag 24. Desember - 2012");
         appointmentFromDateButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 appointmentFromDateButtonActionPerformed(evt);
@@ -676,7 +708,7 @@ public class Gui extends javax.swing.JFrame {
 
         appointmentStartTimeCB.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00:00", "00:15", "00:30", "00:45", "01:00", "01:15", "01:30", "01:45", "02:00", "02:15", "02:30", "02:45", "03:00", "03:15", "03:30", "03:45", "04:00", "04:15", "04:30", "04:45", "05:00", "05:15", "05:30", "05:45", "06:00", "06:15", "06:30", "06:45", "07:00", "07:15", "07:30", "07:45", "08:00", "08:15", "08:30", "08:45", "09:00", "09:15", "09:30", "09:45", "10:00", "10:15", "10:30", "10:45", "11:00", "11:15", "11:30", "11:45", "12:00", "12:15", "12:30", "12:45", "13:00", "13:15", "13:30", "13:45", "14:00", "14:15", "14:30", "14:45", "15:00", "15:15", "15:30", "15:45", "16:00", "16:15", "16:30", "16:45", "17:00", "17:15", "17:30", "17:45", "18:00", "18:15", "18:30", "18:45", "19:00", "19:15", "19:30", "19:45", "20:00", "20:15", "20:30", "20:45", "21:00", "21:15", "21:30", "21:45", "22:00", "22:15", "22:30", "22:45", "23:00", "23:15", "23:30", "23:45" }));
 
-        appointmentToDateButton.setText("LÃ¸rdag 24. Desember - 2012");
+        appointmentToDateButton.setText("Lørdag 24. Desember - 2012");
         appointmentToDateButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 appointmentToDateButtonActionPerformed(evt);
@@ -854,7 +886,7 @@ public class Gui extends javax.swing.JFrame {
         newAppointmentDialog.setModal(true);
         newAppointmentDialog.setResizable(false);
 
-        newAppointmentFromDateButton.setText("LÃ¸rdag 24. Desember - 2012");
+        newAppointmentFromDateButton.setText("Lørdag 24. Desember - 2012");
         newAppointmentFromDateButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 newAppointmentFromDateButtonActionPerformed(evt);
@@ -863,7 +895,7 @@ public class Gui extends javax.swing.JFrame {
 
         newAppointmentStartTimeCB.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00:00", "00:15", "00:30", "00:45", "01:00", "01:15", "01:30", "01:45", "02:00", "02:15", "02:30", "02:45", "03:00", "03:15", "03:30", "03:45", "04:00", "04:15", "04:30", "04:45", "05:00", "05:15", "05:30", "05:45", "06:00", "06:15", "06:30", "06:45", "07:00", "07:15", "07:30", "07:45", "08:00", "08:15", "08:30", "08:45", "09:00", "09:15", "09:30", "09:45", "10:00", "10:15", "10:30", "10:45", "11:00", "11:15", "11:30", "11:45", "12:00", "12:15", "12:30", "12:45", "13:00", "13:15", "13:30", "13:45", "14:00", "14:15", "14:30", "14:45", "15:00", "15:15", "15:30", "15:45", "16:00", "16:15", "16:30", "16:45", "17:00", "17:15", "17:30", "17:45", "18:00", "18:15", "18:30", "18:45", "19:00", "19:15", "19:30", "19:45", "20:00", "20:15", "20:30", "20:45", "21:00", "21:15", "21:30", "21:45", "22:00", "22:15", "22:30", "22:45", "23:00", "23:15", "23:30", "23:45" }));
 
-        newAppointmentToDateButton.setText("LÃ¸rdag 24. Desember - 2012");
+        newAppointmentToDateButton.setText("Lørdag 24. Desember - 2012");
         newAppointmentToDateButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 newAppointmentToDateButtonActionPerformed(evt);
@@ -1089,27 +1121,44 @@ public class Gui extends javax.swing.JFrame {
             }
         });
 
+        participantChooserSearchPanel.setBackground(new java.awt.Color(255, 255, 255));
+        participantChooserSearchPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
+
+        participantChooserSearchIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ico/Search-icon 30x30 v4.png"))); // NOI18N
+
+        participantChooserSearchField.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         participantChooserSearchField.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
 
-        participantChooserSearchIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ico/Search-icon 30x30 v2.png"))); // NOI18N
+        javax.swing.GroupLayout participantChooserSearchPanelLayout = new javax.swing.GroupLayout(participantChooserSearchPanel);
+        participantChooserSearchPanel.setLayout(participantChooserSearchPanelLayout);
+        participantChooserSearchPanelLayout.setHorizontalGroup(
+            participantChooserSearchPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(participantChooserSearchPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(participantChooserSearchField, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(participantChooserSearchIcon))
+        );
+        participantChooserSearchPanelLayout.setVerticalGroup(
+            participantChooserSearchPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(participantChooserSearchIcon)
+            .addComponent(participantChooserSearchField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
 
         javax.swing.GroupLayout participantChooserDialogLayout = new javax.swing.GroupLayout(participantChooserDialog.getContentPane());
         participantChooserDialog.getContentPane().setLayout(participantChooserDialogLayout);
         participantChooserDialogLayout.setHorizontalGroup(
             participantChooserDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(participantChooserDialogLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, participantChooserDialogLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(participantChooserDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(participantChooserSP, javax.swing.GroupLayout.DEFAULT_SIZE, 172, Short.MAX_VALUE)
-                    .addGroup(participantChooserDialogLayout.createSequentialGroup()
+                .addGroup(participantChooserDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(participantChooserSP, javax.swing.GroupLayout.Alignment.LEADING, 0, 0, Short.MAX_VALUE)
+                    .addComponent(participantChooserSearchPanel, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, participantChooserDialogLayout.createSequentialGroup()
                         .addComponent(participantChooserOkButton, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(participantChooserCancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(participantChooserDialogLayout.createSequentialGroup()
-                        .addComponent(participantChooserSearchField, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(participantChooserSearchIcon)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(participantChooserCancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
 
         participantChooserDialogLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {participantChooserCancelButton, participantChooserOkButton});
@@ -1118,12 +1167,10 @@ public class Gui extends javax.swing.JFrame {
             participantChooserDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(participantChooserDialogLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(participantChooserDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(participantChooserSearchField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(participantChooserSearchIcon))
+                .addComponent(participantChooserSearchPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(participantChooserSP, javax.swing.GroupLayout.DEFAULT_SIZE, 209, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(participantChooserSP, javax.swing.GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE)
+                .addGap(12, 12, 12)
                 .addGroup(participantChooserDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(participantChooserOkButton)
                     .addComponent(participantChooserCancelButton))
@@ -1255,14 +1302,30 @@ public class Gui extends javax.swing.JFrame {
             }
         });
 
-        weekLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        weekLabel.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
         weekLabel.setText("Uke 12 - 2011");
 
-        nextWeekLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ico/RightFillTriangleIcon 20x20.png"))); // NOI18N
+        nextWeekLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ico/nextWeek.png"))); // NOI18N
         nextWeekLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        nextWeekLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                nextWeekLabelMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                nextWeekLabelMouseExited(evt);
+            }
+        });
 
-        previousWeekLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ico/LeftFillTriangleIcon 20x20.png"))); // NOI18N
+        previousWeekLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ico/prevWeek.png"))); // NOI18N
         previousWeekLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        previousWeekLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                previousWeekLabelMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                previousWeekLabelMouseExited(evt);
+            }
+        });
 
         weekViewTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -1289,34 +1352,10 @@ public class Gui extends javax.swing.JFrame {
                 {null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Tid", "Mandag", "Tirsdag", "Onsdag", "Torsdag", "Fredag", "LÃ¸rdag", "SÃ¸ndag"
+                "Tid", "Mandag", "Tirsdag", "Onsdag", "Torsdag", "Fredag", "Lørdag", "Søndag"
             }
         ) {
             Class[] types = new Class [] {
@@ -1328,6 +1367,7 @@ public class Gui extends javax.swing.JFrame {
             }
         });
         weekViewTable.setColumnSelectionAllowed(true);
+        weekViewTable.setRowHeight(32);
         weekViewSP.setViewportView(weekViewTable);
         weekViewTable.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         weekViewTable.getColumnModel().getColumn(0).setMinWidth(33);
@@ -1344,19 +1384,19 @@ public class Gui extends javax.swing.JFrame {
                         .addComponent(calendarShowingLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(shownCalendars, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(142, 142, 142)
+                        .addGap(138, 138, 138)
                         .addComponent(previousWeekLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(weekLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(nextWeekLabel))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addComponent(weekViewSP, javax.swing.GroupLayout.PREFERRED_SIZE, 914, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
                         .addComponent(logOutButton, javax.swing.GroupLayout.DEFAULT_SIZE, 79, Short.MAX_VALUE)
                         .addGap(667, 667, 667)
                         .addComponent(newAppointmentButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(messageViewButton))
-                    .addComponent(weekViewSP, javax.swing.GroupLayout.PREFERRED_SIZE, 914, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(messageViewButton)))
                 .addContainerGap())
         );
 
@@ -1367,13 +1407,17 @@ public class Gui extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(calendarShowingLabel)
-                        .addComponent(shownCalendars, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(weekLabel)
-                    .addComponent(nextWeekLabel)
-                    .addComponent(previousWeekLabel))
-                .addGap(18, 18, 18)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(nextWeekLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(previousWeekLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(weekLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(11, 11, 11))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(calendarShowingLabel)
+                            .addComponent(shownCalendars, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)))
                 .addComponent(weekViewSP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -1414,10 +1458,12 @@ public class Gui extends javax.swing.JFrame {
 
     private void logOutButtonActionPerformed(java.awt.event.ActionEvent evt) {                                             
         setVisible(false);
+        loginPasswordField.setText("passord");
+        loginUsernameTextField.setText("brukernavn");
         loginDialog.setVisible(true);
     }                                            
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+    private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {                                         
         loginDialog.setVisible(false);
         setVisible(true);
 }                                        
@@ -1527,6 +1573,42 @@ public class Gui extends javax.swing.JFrame {
         // TODO add your handling code here:
     }                                                                
 
+    private void nextWeekLabelMouseEntered(java.awt.event.MouseEvent evt) {
+        nextWeekLabel.setIcon(nextMO);
+    }
+
+    private void nextWeekLabelMouseExited(java.awt.event.MouseEvent evt) {
+        nextWeekLabel.setIcon(next);
+    }
+
+    private void previousWeekLabelMouseEntered(java.awt.event.MouseEvent evt) {
+        previousWeekLabel.setIcon(prevMO);
+    }
+
+    private void previousWeekLabelMouseExited(java.awt.event.MouseEvent evt) {
+        previousWeekLabel.setIcon(prev);
+    }
+
+    private void loginUsernameTextFieldFocusGained(java.awt.event.FocusEvent evt) {
+        if (loginUsernameTextField.getText().equals("brukernavn"))
+            loginUsernameTextField.setText("");
+    }
+
+    private void loginUsernameTextFieldFocusLost(java.awt.event.FocusEvent evt) {
+        if (loginUsernameTextField.getText().equals(""))
+            loginUsernameTextField.setText("brukernavn");
+    }
+
+    private void loginPasswordFieldFocusGained(java.awt.event.FocusEvent evt) {
+         if (loginPasswordField.getText().equals("passord"))
+            loginPasswordField.setText("");
+    }
+
+    private void loginPasswordFieldFocusLost(java.awt.event.FocusEvent evt) {
+         if (loginPasswordField.getText().equals(""))
+            loginPasswordField.setText("passord");
+    }
+
     /**
     * @param args the command line arguments
     */
@@ -1565,6 +1647,7 @@ public class Gui extends javax.swing.JFrame {
     private javax.swing.JScrollPane calendarChooserSC;
     private javax.swing.JTextField calendarChooserSearchField;
     private javax.swing.JLabel calendarChooserSearchIcon;
+    private javax.swing.JPanel calendarChooserSearchPanel;
     private javax.swing.JTable calendarChooserTable;
     private javax.swing.JLabel calendarShowingLabel;
     private javax.swing.JDialog errorDialog;
@@ -1584,11 +1667,13 @@ public class Gui extends javax.swing.JFrame {
     private javax.swing.JButton invitationPanelNotAttendinButton;
     private javax.swing.JScrollPane invitationPanelTextSP;
     private javax.swing.JLabel invitationPanelTimeRoomAvailability;
-    private javax.swing.JButton jButton3;
     private javax.swing.JTextArea jTextArea3;
     private javax.swing.JButton logOutButton;
+    private javax.swing.JButton loginButton;
     private javax.swing.JDialog loginDialog;
     private javax.swing.JPanel loginPanel;
+    private javax.swing.JPasswordField loginPasswordField;
+    private javax.swing.JTextField loginUsernameTextField;
     private javax.swing.JList messageList;
     private javax.swing.JDialog messageOverviewDialog;
     private javax.swing.JTabbedPane messageOverviewTabbedPane;
@@ -1628,13 +1713,13 @@ public class Gui extends javax.swing.JFrame {
     private javax.swing.JScrollPane participantChooserSP;
     private javax.swing.JTextField participantChooserSearchField;
     private javax.swing.JLabel participantChooserSearchIcon;
+    private javax.swing.JPanel participantChooserSearchPanel;
     private javax.swing.JTable participantChooserTable;
     private javax.swing.JButton participantOverviewChangeButton;
     private javax.swing.JButton participantOverviewCloseButton;
     private javax.swing.JDialog participantOverviewDialog;
     private javax.swing.JList participantOverviewList;
     private javax.swing.JScrollPane participantOverviewSP;
-    private javax.swing.JTextField passwordTextField;
     private javax.swing.JLabel previousWeekLabel;
     private javax.swing.JCheckBox rememberMeCheckBox;
     private javax.swing.JButton shownCalendars;
@@ -1642,7 +1727,6 @@ public class Gui extends javax.swing.JFrame {
     private javax.swing.JButton toDateDateChooserCancelButton;
     private javax.swing.JDialog toDateDateChooserDialog;
     private javax.swing.JButton toDateDateChooserOkButton;
-    private javax.swing.JTextField usernameTextField;
     private javax.swing.JLabel weekLabel;
     private javax.swing.JScrollPane weekViewSP;
     private javax.swing.JTable weekViewTable;
@@ -1660,13 +1744,13 @@ public class Gui extends javax.swing.JFrame {
         String day ="";
 
         switch(date.getDay()){
-            case 0: day = "SÃ¸ndag"; break;
+            case 0: day = "Søndag"; break;
             case 1: day = "Mandag"; break;
             case 2: day = "Tirsdag"; break;
             case 3: day = "Onsdag"; break;
             case 4: day = "Torsdag"; break;
             case 5: day = "Fredag"; break;
-            case 6: day = "LÃ¸rdag"; break;
+            case 6: day = "Lørdag"; break;
         }
 
         switch(date.getMonth()){
@@ -1688,4 +1772,20 @@ public class Gui extends javax.swing.JFrame {
 
         return dateString;
     }
+        //lololololol
+    ImageIcon next, prev,nextMO, prevMO;
+    {try{
+                next            = new ImageIcon(ImageIO.read(Gui.class.getResource("/ico/nextWeek.png")));
+                prev            = new ImageIcon(ImageIO.read(Gui.class.getResource("/ico/prevWeek.png")));
+                nextMO          = new ImageIcon(ImageIO.read(Gui.class.getResource("/ico/nextWeekMO.png")));
+                prevMO          = new ImageIcon(ImageIO.read(Gui.class.getResource("/ico/prevWeekMO.png")));
+
+        }catch (Exception e){e.printStackTrace();}
+
+        Thread.setDefaultUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler() {
+        public void uncaughtException(Thread t, Throwable e) {
+            //throw new UnsupportedOperationException("Not supported yet.");
+        }}); 
+    }
+
 }

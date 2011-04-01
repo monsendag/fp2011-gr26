@@ -20,5 +20,9 @@ public class Week
 		this.days = days;
 		this.weekNumber = weekNumber;
 	}
+	
+	private Day[] getDays(){
+		return days;
+	}
 }
 	

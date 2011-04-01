@@ -28,113 +28,9 @@ public class DBTest {
 	
 	/**
 	 * Used for testing database output.
+	 * @param dbgm
 	 */
-	public static void testPrint(DBRetrieve dbr,DBStore dbs) {
-		// Change a participants status to a meeting through id's and username
-		//dbs.changeInviteStatusByIDs(3, "oleak", 2);
-		//dbs.changeInviteStatusByIDs(3, "Johni", 2);
-		
-		// Cancels the meeting with id = 6
-		//dbs.cancelMeetingByID(6);
-		
-		// All employees
-		System.out.println("All emlpoyees: (getAllEmployees())");
-		for (Employee e : dbr.getAllEmployees()) {
-			System.out.println(e.getName() + " " + e.getUsername() + " " + e.getPassword());
-		}
-		
-		System.out.println();
-		
-		// All rooms
-		System.out.println("All rooms: (getAllRooms())");
-		for (Room r : dbr.getAllRooms()) {
-			System.out.println(r.getRoomID() + " " + r.getName() + " " + r.getCapacity());
-		}
-		
-		System.out.println();
-		
-		// All activities
-		System.out.println("All activities: (getAllActivities())");
-		for (Activity a : dbr.getAllActivities()) {
-			System.out.println(a.getId() + " " + a.getOwner().getName() + " " + a.getDescription());
-		}
-		
-		System.out.println();
-		
-		// All meetings
-		Meeting meeting = null;
-		System.out.println("All meetings: (getAllMeetings())");
-		for (Meeting m : dbr.getAllMeetings()) {
-			meeting = m;
-			System.out.println(m.getId() + " " + m.getOwner().getName() + " " + m.getDescription());
-		}
-		
-		// Change a participants status to a meeting through a meeting and it's participant list
-		// Changing big carls status in the meeting object
-		meeting.getParticipants().get(0).setStatus(Participant.Status.NOT_ATTENDING);
-		// bigcarl in meeting with id 6
-		dbs.changeInviteStatus(meeting, meeting.getParticipants().get(0));
-		
-		System.out.println();
-		
-		// All participants for selected meeting through ID
-		System.out.println("All participants for meeting with ID = 6: (getParticipantsByMeetingID(6))");
-		for (Participant p : dbr.getParticipantsByMeetingID(5)) {
-			Employee e = p.getEmployee();
-			System.out.println(p.getStatus() + "\t" + e.getUsername() + "\t" + e.getPassword() + " " + e.getName());
-		}
-		
-		System.out.println();
-		
-		// All participants for selected meeting through a meeting object
-		System.out.println("All participants for a meeting object: (getParticipants(Meeting))");
-		for (Participant p : dbr.getParticipants(dbr.getAllMeetings().get(1))) {
-			Employee e = p.getEmployee();
-			System.out.println(p.getStatus() + "\t" + e.getUsername() + "\t" + e.getPassword() + " " + e.getName());
-		}
-		
-		System.out.println();
-		
-		// All meetings for a specified user (oletobs), and all participants to those meetings
-		System.out.println("All meetings for a specified user (oletobs)(" + dbr.getEmpMeetingsByUsername("oletobs").size() +
-				" meeting(s)), and all participants to those meetings:" +
-				"(getEmpMeetingsByUsername(\"oletobs\") and meeting.getParticipants()\n");
-		for (Meeting m : dbr.getEmpMeetingsByUsername("oletobs")) {
-			System.out.println("Meeting with id " + m.getId() +
-					". Owner " + m.getOwner().getName() + ". Participants:");
-			for (Participant p : m.getParticipants()) {
-				Employee e = p.getEmployee();
-				System.out.println(p.getStatus() + "\t" + e.getUsername() + "\t" + e.getPassword() + " " + e.getName());
-			}
-			System.out.println();
-		}
-	
-		System.out.println();
-		
-		// All participants of a meeting through the meetings participants list
-		System.out.println("All participants of a meeting through the meetings participants list: (getAllMeetings().get(0).getParticipants()");
-		for (Participant p : dbr.getAllMeetings().get(0).getParticipants()) {
-			Employee e = p.getEmployee();
-			System.out.println(p.getStatus() + "\t" + e.getUsername() + "\t" + e.getPassword() + " " + e.getName());
-		}
-		
-		System.out.println();
-		
-		// All activities of a employee
-		System.out.println("All activities of a selected employee: (getEmpActivitiesByUsername(\"oletobs\")");
-		for (Activity a : dbr.getEmpActivitiesByUsername("oletobs")) {
-			System.out.println(a.getId() + " " + a.getOwner().getName() + " " + a.getDescription());
-		}
-		
-		System.out.println();
-	}
-	
-	public static void main(String[] args) {
-		
-		DBRetrieve dbr = new DBRetrieve();
-		DBStore dbs = new DBStore();
-		DBGetModels dbgm = new DBGetModels();
-		
+	public static void testPrint2(DBGetModels dbgm) {
 		ArrayList<Employee> allEmployees = new ArrayList<Employee>();
 		ArrayList<Room>	allRooms = new ArrayList<Room>();
 		ArrayList<Meeting> allMeetings = new ArrayList<Meeting>();
@@ -168,6 +64,107 @@ public class DBTest {
 			}
 			System.out.println();
 		}
-		//testPrint(dbr,dbs);
+	}
+	
+	/**
+	 * Used for testing database output.
+	 */
+	public static void testPrint(DBRetrieve dbr,DBStore dbs) {
+		// Change a participants status to a meeting through id's and username
+		//dbs.changeInviteStatusByIDs(3, "oleak", 2);
+		//dbs.changeInviteStatusByIDs(3, "Johni", 2);
+		
+		// Cancels the meeting with id = 6
+		//dbs.cancelMeetingByID(6);
+		
+		// All employees
+		System.out.println("All emlpoyees: (getAllEmployees())");
+		for (Employee e : dbr.getAllEmployees()) {
+			System.out.println(e.getName() + " " + e.getUsername() + " " + e);
+		}
+		System.out.println();
+		// All rooms
+		System.out.println("All rooms: (getAllRooms())");
+		for (Room r : dbr.getAllRooms()) {
+			System.out.println(r.getRoomID() + " " + r.getName() + " " + r.getCapacity());
+		}
+		System.out.println();
+		// All activities
+		System.out.println("All activities: (getAllActivities())");
+		for (Activity a : dbr.getAllActivities()) {
+			System.out.println(a.getId() + " " + a.getOwner().getName() + " " + a.getOwner());
+		}
+		System.out.println();
+		// All meetings with every participant
+		Meeting meeting = null;
+		System.out.println("All meetings: (getAllMeetings())");
+		for (Meeting m : dbr.getAllMeetings()) {
+			meeting = m;
+			System.out.println("Meeting nr. " + m.getId() + ". Owned by " + m.getOwner().getName() + ". Participants:");
+			for (Participant p : m.getParticipants()) {
+				System.out.println(p.getStatus() + " - " + p.getEmployee().getUsername() + "\t" + p.getEmployee());
+			}
+			System.out.println();
+		}
+		
+		// Change a participants status to a meeting through a meeting and it's participant list
+		// Changing big carls status in the meeting object
+		meeting.getParticipants().get(0).setStatus(Participant.Status.NOT_ATTENDING);
+		// bigcarl in meeting with id 6
+		dbs.changeInviteStatus(meeting, meeting.getParticipants().get(0));
+		
+		System.out.println();
+		
+		// All participants for selected meeting through a meeting object
+		System.out.println("All participants for meeting with ID = 6:");
+		for (Participant p : dbr.getMeeting(6).getParticipants()) {
+			Employee e = p.getEmployee();
+			System.out.println(p.getStatus() + "\t" + e.getUsername() + " - " + e);
+		}
+		
+		System.out.println();
+		
+		// All meetings for a specified user (oletobs), and all participants to those meetings
+		System.out.println("All meetings for a specified user (oletobs)(" + dbr.getEmpMeetingsByUsername("oletobs").size() +
+				" meeting(s)), and all participants to those meetings:" +
+				"(getEmpMeetingsByUsername(\"oletobs\") and meeting.getParticipants()\n");
+		for (Meeting m : dbr.getEmpMeetingsByUsername("oletobs")) {
+			System.out.println("Meeting with id " + m.getId() +
+					". Owner " + m.getOwner().getName() + ". Participants:");
+			for (Participant p : m.getParticipants()) {
+				Employee e = p.getEmployee();
+				System.out.println(p.getStatus() + "\t" + e.getUsername() + " - " + e);
+			}
+			System.out.println();
+		}
+	
+		System.out.println();
+		
+		// All participants of a meeting through the meetings participants list
+		System.out.println("All participants of a meeting through the meetings participants list: (getAllMeetings().get(0).getParticipants()");
+		for (Participant p : dbr.getAllMeetings().get(0).getParticipants()) {
+			Employee e = p.getEmployee();
+			System.out.println(p.getStatus() + "\t" + e.getUsername() + " - " + e);
+		}
+		
+		System.out.println();
+		
+		// All activities of a employee
+		System.out.println("All activities of a selected employee: (getEmpActivitiesByUsername(\"oletobs\")");
+		for (Activity a : dbr.getEmpActivitiesByUsername("oletobs")) {
+			System.out.println(a.getId() + " " + a.getOwner().getName() + " " + a.getDescription());
+		}
+		
+		System.out.println();
+	}
+	
+	public static void main(String[] args) {
+		
+		DBRetrieve dbr = new DBRetrieve();
+		DBStore dbs = new DBStore();
+		DBGetModels dbgm = new DBGetModels();
+		
+		
+		testPrint(dbr,dbs);
 	}	
 }

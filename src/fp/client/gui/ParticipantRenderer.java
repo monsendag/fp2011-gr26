@@ -11,13 +11,12 @@ public class ParticipantRenderer extends DefaultListCellRenderer implements List
 	public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
 		// get label from superclass
 		JLabel label = (JLabel) super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
-		// cast value to Person
-		Person person = (Person) value;
-		// get image path based on gender (default to female)
+		// get image path
 		String iconName;
 		if(participant.getStatus() == attending){ iconName = "attending"; }
 		if(participant.getStatus() == notAttending){ iconName = "notAttending"; }
-		if(participant.getStatus() == awaitingReply){ iconName = "awatingReply"; }
+		else 
+			iconName = "awatingReply";
 		
 		URL path = getClass().getResource("ico/"+iconName+"-icon.png");
 		// set icon and text

@@ -1,8 +1,12 @@
 package no.ntnu.fp.storage;
 
+import java.util.ArrayList;
+import java.util.concurrent.ArrayBlockingQueue;
+
 import no.ntnu.fp.model.Activity;
 import no.ntnu.fp.model.Employee;
 import no.ntnu.fp.model.Meeting;
+import no.ntnu.fp.model.Message;
 import no.ntnu.fp.model.Participant;
 import no.ntnu.fp.model.Room;
 
@@ -75,7 +79,7 @@ public class DBTest {
 		
 		// All participants for selected meeting through ID
 		System.out.println("All participants for meeting with ID = 6: (getParticipantsByMeetingID(6))");
-		for (Participant p : dbr.getParticipantsByMeetingID(6)) {
+		for (Participant p : dbr.getParticipantsByMeetingID(5)) {
 			Employee e = p.getEmployee();
 			System.out.println(p.getStatus() + "\t" + e.getUsername() + "\t" + e.getPassword() + " " + e.getName());
 		}
@@ -129,7 +133,41 @@ public class DBTest {
 		
 		DBRetrieve dbr = new DBRetrieve();
 		DBStore dbs = new DBStore();
+		DBGetModels dbgm = new DBGetModels();
 		
-		testPrint(dbr,dbs);
+		ArrayList<Employee> allEmployees = new ArrayList<Employee>();
+		ArrayList<Room>	allRooms = new ArrayList<Room>();
+		ArrayList<Meeting> allMeetings = new ArrayList<Meeting>();
+		ArrayList<Activity> allActivities = new ArrayList<Activity>();
+		ArrayList<Message> allAlerts = new ArrayList<Message>();
+		
+		allEmployees = dbgm.getAllEmployees();
+		allRooms = dbgm.getAllRooms();
+		allActivities = dbgm.getAllActivities(allEmployees);
+		allMeetings = dbgm.getAllMeetings(allEmployees);
+		allAlerts = dbgm.getAllAlerts(allMeetings);
+		
+		for (Employee e : allEmployees) {
+			//System.out.println(e.getUsername());
+			System.out.println(e + " - " + e.getUsername());
+		}
+		System.out.println();
+		for (Room r : allRooms) {
+			System.out.println(r.getName());
+		}
+		System.out.println();
+		for (Activity a : allActivities) {
+			System.out.println("Activity " + a.getId() + " owned by " + a.getOwner().getUsername());
+		}
+		System.out.println();
+		for (Meeting m : allMeetings) {
+			System.out.println("Meeting " + m.getId() + " owned by " + m.getOwner().getUsername() + ". Participants:");
+			for (Participant p : m.getParticipants()) {
+				//System.out.println(p.getStatus() + " - " + p.getEmployee().getUsername());
+				System.out.println(p.getEmployee() + " - " + p.getEmployee().getUsername());
+			}
+			System.out.println();
+		}
+		//testPrint(dbr,dbs);
 	}	
 }

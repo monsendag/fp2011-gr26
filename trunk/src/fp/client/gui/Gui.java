@@ -178,7 +178,6 @@ public class Gui extends javax.swing.JFrame {
             public void windowOpened(WindowEvent arg0) {}
         });
 
-        loginUsernameTextField.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         loginUsernameTextField.setText("brukernavn");
         loginUsernameTextField.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -209,6 +208,7 @@ public class Gui extends javax.swing.JFrame {
                 loginPasswordFieldFocusLost(evt);
             }
         });
+        loginPasswordField.setEchoChar('\u0000');
 
         javax.swing.GroupLayout loginPanelLayout = new javax.swing.GroupLayout(loginPanel);
         loginPanel.setLayout(loginPanelLayout);
@@ -1267,6 +1267,7 @@ public class Gui extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Avtalebok 1.0");
+        setResizable(false);
 
         messageViewButton.setText("Meldinger");
         messageViewButton.addActionListener(new java.awt.event.ActionListener() {
@@ -1460,6 +1461,7 @@ public class Gui extends javax.swing.JFrame {
         setVisible(false);
         loginPasswordField.setText("passord");
         loginUsernameTextField.setText("brukernavn");
+        loginPasswordField.setEchoChar('\u0000');
         loginDialog.setVisible(true);
     }                                            
 
@@ -1600,13 +1602,17 @@ public class Gui extends javax.swing.JFrame {
     }
 
     private void loginPasswordFieldFocusGained(java.awt.event.FocusEvent evt) {
-         if (loginPasswordField.getText().equals("passord"))
+         if (loginPasswordField.getText().equals("passord")){
             loginPasswordField.setText("");
+            loginPasswordField.setEchoChar('\u25cf');
+        }
     }
 
     private void loginPasswordFieldFocusLost(java.awt.event.FocusEvent evt) {
-         if (loginPasswordField.getText().equals(""))
+         if (loginPasswordField.getText().equals("")){
             loginPasswordField.setText("passord");
+            loginPasswordField.setEchoChar('\u0000');
+        }
     }
 
     /**

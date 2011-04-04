@@ -19,6 +19,7 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.UIManager;
 
+import fp.client.gui.calendar.*;
 
 
 /**
@@ -1388,7 +1389,12 @@ public class Gui extends javax.swing.JFrame {
         });
         weekViewTable.setColumnSelectionAllowed(true);
         weekViewTable.setRowHeight(32);
-        weekViewSP.setViewportView(weekViewTable);
+        /////////////////////////////////////////////////////////////
+        
+        weekViewSP.setViewportView(new fp.client.gui.calendar.CalendarPanel());
+        
+        
+        //////////////////////////////////////////////////////
         weekViewTable.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         weekViewTable.getColumnModel().getColumn(0).setMinWidth(33);
         weekViewTable.getColumnModel().getColumn(0).setMaxWidth(33);

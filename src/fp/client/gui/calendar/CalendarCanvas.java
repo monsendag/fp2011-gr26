@@ -58,7 +58,7 @@ public class CalendarCanvas extends JPanel implements PropertyChangeListener {
 	
 		addMouseListener();
 		
-		activities.add(new Activity(null, new DateTime(), new DateTime().plusHours(1), "Arne bjarne", "her"));
+		activities.add(new Activity(null, new DateTime().minusHours(5), new DateTime().minusHours(1), "Arne bjarne", "her"));
 	}
 
 	/**

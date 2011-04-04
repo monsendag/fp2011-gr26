@@ -51,7 +51,7 @@ public class CalendarPanel extends JPanel {
 		buttonPanel.add(new CalendarMonthChanger(calendar));
 		buttonPanel.add(new CalendarValueChanger("År", Calendar.YEAR, calendar));
 
-		add(buttonPanel);
+	//	add(buttonPanel);
 
 		scrollPane = new JScrollPane();
 		scrollPane.getVerticalScrollBar().setUnitIncrement(16);

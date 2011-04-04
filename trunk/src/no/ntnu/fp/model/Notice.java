@@ -1,27 +1,18 @@
-﻿
-
-package no.ntnu.fp.model;
+﻿package no.ntnu.fp.model;
 
 //
 class Notice extends Message
 {
-
     //
-    private Status answerStatus ;
-
-
+    private Status answerStatus;
 
 	//
-    public void accept () 
-    {
+    public void accept () {
 
     }
 
 	//
-    public void decline () 
-    {
+    public void decline () {
 
     }
-
-
 }

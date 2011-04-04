@@ -1,10 +1,7 @@
-﻿
-
-package no.ntnu.fp.model;
+﻿package no.ntnu.fp.model;
 
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import org.joda.time.DateTime;
 
 public class Meeting extends Activity {
 	
@@ -16,7 +13,7 @@ public class Meeting extends Activity {
 		super();
 	}
 	
-	public Meeting(Employee owner, ArrayList<Participant> participants, Room room, Date startTime, Date endTime, String description, String location)
+	public Meeting(Employee owner, ArrayList<Participant> participants, Room room, DateTime startTime, DateTime endTime, String description, String location)
 	{
 		super(owner, startTime, endTime, description, location);
 		this.room = room;

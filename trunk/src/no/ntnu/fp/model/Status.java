@@ -6,10 +6,4 @@ enum Status
 {
 	attending, notAttending, awaitingReply;
 	private Status status;
-    
-
-
-
-
-
 }

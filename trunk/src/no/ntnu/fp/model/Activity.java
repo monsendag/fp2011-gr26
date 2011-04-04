@@ -1,16 +1,15 @@
 ﻿package no.ntnu.fp.model;
 
-import java.util.Date;
+import org.joda.time.DateTime;
 
 public class Activity 
 {
 	private int id;
-	private Date startTime, endTime;
+	private DateTime startTime, endTime;
 	private String description, location;
 	private Employee owner;
 	
-	public Activity()
-	{
+	public Activity() {
 		startTime = null;
 		endTime = null;
 		description = "";
@@ -18,8 +17,7 @@ public class Activity
 		setOwner(null);
 	}
 	
-	public Activity(Employee owner, Date startTime, Date endTime, String description, String location)
-	{
+	public Activity(Employee owner, DateTime startTime, DateTime endTime, String description, String location) {
 		this.startTime = startTime;
 		this.endTime = endTime;
 		this.description = description;
@@ -27,53 +25,41 @@ public class Activity
 		this.setOwner(owner);
 	}
 	
-	public Date getStartTime()
-	{
+	public DateTime getStartTime() {
 		return startTime;
 	}
-	public void setStartTime(Date startTime)
-	{
+	public void setStartTime(DateTime startTime) {
 		this.startTime = startTime;
 	}
 	
-	public Date getEndTime()
-	{
+	public DateTime getEndTime() {
 		return endTime;
 	}
-	public void setEndTime(Date endTime)
-	{
+	public void setEndTime(DateTime endTime) {
 		this.endTime = endTime;
 	}
 	
-	public String getDescription()
-	{
+	public String getDescription() {
 		return description;
 	}
-	public void setDescription(String description)
-	{
+	public void setDescription(String description) {
 		this.description = description;
 	}
 	
-	public String getLocation()
-	{
+	public String getLocation() {
 		return location;
 	}
-	public void setLocation(String location)
-	{
+	public void setLocation(String location) {
 		this.location = location;
 	}
 	
-	
-	public void cancelActivity()
-	{
+	public void cancelActivity() {
 		// DESTROOYY
 	}
-
 
 	public void setId(int id) {
 		this.id = id;
 	}
-
 
 	public int getId() {
 		return id;
@@ -86,6 +72,4 @@ public class Activity
 	public Employee getOwner() {
 		return owner;
 	}
-	
-	
 }

@@ -4,10 +4,10 @@ public class Room
 {
 	
 	private int roomID;
-    private String name ;
-    private int capacity ;
+    private String name;
+    private int capacity;
     
-    public Room(int roomID,String name,int capacity) {
+    public Room(int roomID, String name, int capacity) {
     	this.roomID = roomID;
     	this.name = name;
     	this.capacity = capacity;

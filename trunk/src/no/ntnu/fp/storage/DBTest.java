@@ -1,6 +1,7 @@
 package no.ntnu.fp.storage;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.concurrent.ArrayBlockingQueue;
 
 import no.ntnu.fp.model.Activity;
@@ -163,6 +164,15 @@ public class DBTest {
 		DBRetrieve dbr = new DBRetrieve();
 		DBStore dbs = new DBStore();
 		DBGetModels dbgm = new DBGetModels();
+		
+		// Cache
+		HashMap<String,Employee> empCache = new HashMap<String, Employee>();
+		HashMap<Integer, Room> roomCache = new HashMap<Integer, Room>();
+		HashMap<Integer, Activity> actCache = new HashMap<Integer, Activity>();
+		HashMap<Integer, Meeting> mtngCache = new HashMap<Integer, Meeting>();
+		dbr.setCache(empCache, roomCache, actCache, mtngCache);
+		dbs.setCache(empCache, roomCache, actCache, mtngCache);
+		
 		
 		
 		testPrint(dbr,dbs);

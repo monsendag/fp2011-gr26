@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
+import java.util.HashMap;
 
 import no.ntnu.fp.model.Activity;
 import no.ntnu.fp.model.Employee;
@@ -31,6 +32,9 @@ public class DBStore extends DBConnection {
 			ps.setString(3,emp.getPassword());
 			ps.executeUpdate();
 			ps.close();
+			
+			// Add to cache
+			empCache.put(emp.getUsername(), emp);
 		} catch (SQLException e) {
 			System.err.println("Could not add employee.");
 			e.printStackTrace();
@@ -49,6 +53,9 @@ public class DBStore extends DBConnection {
 			ps.setInt(2,room.getCapacity());
 			ps.executeUpdate();
 			ps.close();
+			
+			// Add to cache
+			roomCache.put(room.getRoomID(), room);
 		} catch (SQLException e) {
 			System.err.println("Could not add room.");
 			e.printStackTrace();
@@ -56,21 +63,25 @@ public class DBStore extends DBConnection {
 	}
 	
 	/**
-	 * Adds an alert/message to the database from a {@link Message} object.
+	 * Adds one or multiple alerts/messages to the database from a {@link Message} object.
 	 * @param message The message/alert to be added.
 	 */
-	public void addAlert(Message message) {
+	public void addAlerts(Message message) {
 		try {
 			PreparedStatement ps = conn.prepareStatement("INSERT INTO alert VALUES (?,?,?,?,?)");
-			ps.setBoolean(1,message.getRead());
-			ps.setTimestamp(2,new Timestamp(message.getCreatedOn().getTime()));
-			ps.setString(3,message.getDescription());
-			ps.setString(4,message.getEmployee().getUsername());
-			ps.setInt(5,message.getMeeting().getId());
-			ps.executeUpdate();
+			
+			for (Participant p : message.getMeeting().getParticipants()) {
+				ps.setBoolean(1,false);
+				ps.setTimestamp(2,new Timestamp(message.getCreatedOn().getTime()));
+				ps.setString(3,message.getDescription());
+				ps.setString(4,p.getEmployee().getUsername());
+				ps.setInt(5,message.getMeeting().getId());
+				ps.addBatch();
+			}
+			ps.executeBatch();
 			ps.close();
 		} catch (SQLException e) {
-			System.err.println("Could not add alert.");
+			System.err.println("Could not add alert(s).");
 			e.printStackTrace();
 		}
 	}
@@ -106,6 +117,9 @@ public class DBStore extends DBConnection {
 			 * Fetches the auto generated activity ID and adds it to the activity object
 			 */
 			act.setId(activityID);
+			
+			// Add to cache
+			actCache.put(act.getId(), act);
 		} catch (SQLException e) {
 			System.err.println("Could not add activity.");
 			e.printStackTrace();
@@ -147,6 +161,9 @@ public class DBStore extends DBConnection {
 			while(rs.next() && rs != null) {
 				m.setId(rs.getInt(1));
 			}
+			
+			// Add to cache
+			mtngCache.put(m.getId(), m);
 			
 			ps.close();
 		} catch (SQLException e) {
@@ -257,6 +274,9 @@ public class DBStore extends DBConnection {
 			ps.setBoolean(1,true);
 			ps.executeUpdate();
 			ps.close();
+			
+			// Remove from cache
+			mtngCache.remove(meetingID);
 		} catch (SQLException e) {
 			System.err.println("Could not cancel meeting.");
 			e.printStackTrace();
@@ -290,5 +310,12 @@ public class DBStore extends DBConnection {
 			System.err.println("Could not mark alert as read.");
 			e.printStackTrace();
 		}
+	}
+	
+	public void setCache(HashMap emp,HashMap room,HashMap act,HashMap meet){
+		empCache = emp;
+		roomCache = room;
+		actCache = act;
+		mtngCache = meet;
 	}
 }

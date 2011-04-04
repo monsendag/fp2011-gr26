@@ -35,7 +35,6 @@ public class PropertyChangeCalendar extends GregorianCalendar {
 		changeSupport.firePropertyChange("add"+field, null, amount);
 	}
 
-
 	/**
 	* Adds a listener to this object
 	* @param listener Object that will listen.

@@ -11,42 +11,31 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
-import no.ntnu.fp.model.Person;
-
-
 /**
 * The panel in which the calendar is drawn
 *
 */
 public class CalendarPanel extends JPanel {
 
-	private CalendarCanvas calendarCanvas;      // this canvas draws the calendar's appointments in a grid
-	private JPanel topLabelPanel;          // this panel holds the labels indicating day of week/month
+	private CalendarCanvas calendarCanvas;	// this canvas draws the calendar's appointments in a grid
+	private JPanel topLabelPanel;			// this panel holds the labels indicating day of week/month
 	private JPanel leftLabelPanel;          // this panel holds the labels indicating time of day
 	private int leftLabelWidth = 50;        // the width of the leftLabelPanel
 	private int topLabelHeight = 30;        // the height of the topLabelPanel
-	private JScrollPane scrollPane;          // allows the canvas to scroll, also has topLabelPanel and leftLabelPanel
+	private JScrollPane scrollPane;         // allows the canvas to scroll, also has topLabelPanel and leftLabelPanel
 
-	private PropertyChangeCalendar calendar;    // sets the week the calendar displays
+	private PropertyChangeCalendar calendar;// sets the week the calendar displays
 
 	private int columnWidth = 120;          // the width of each column
-	private int rowHeight = 32;            // the height of each row
+	private int rowHeight = 32;            	// the height of each row
 
-	private int beginHour = 7;            // the hour of day the calendar begins. 6 == 06:00
+	private int beginHour = 7;              // the hour of day the calendar begins. 6 == 06:00
 
-	private JPanel buttonPanel;            // the panel holding the buttons
+	private JPanel buttonPanel;             // the panel holding the buttons
 
 	/**
 	* Create the CalendarPane
 	*/
-	
-	public static void main(String[] args) {
-		JFrame frame = new JFrame();
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.add(new CalendarPanel());
-		frame.pack();
-		frame.setVisible(true);
-	}
 	
 	public CalendarPanel() {
 
@@ -76,15 +65,17 @@ public class CalendarPanel extends JPanel {
 		scrollPane.setRowHeaderView(leftLabelPanel);
 		leftLabelPanel.setLayout(new BoxLayout(leftLabelPanel, BoxLayout.Y_AXIS));
 
-		calendarCanvas = new CalendarCanvas(columnWidth, rowHeight, 3600, beginHour, calendar);    
+		calendarCanvas = new CalendarCanvas(columnWidth, rowHeight, 3600, beginHour);    
 		calendarCanvas.setBackground(Color.WHITE);
 		calendarCanvas.setBorder(null);
 		scrollPane.setViewportView(calendarCanvas);
 		calendarCanvas.setLayout(null);
 
 		calendarCanvas.setPreferredSize(new Dimension(columnWidth*7,rowHeight*(24-beginHour)));
-		scrollPane.setMaximumSize(new Dimension(columnWidth*7+leftLabelWidth+20,rowHeight*(24-beginHour)+topLabelHeight+20));
+		//scrollPane.setMaximumSize(new Dimension(columnWidth*7+leftLabelWidth+20,rowHeight*(24-beginHour)+topLabelHeight+20));
 
+		scrollPane.getVerticalScrollBar().setValue(226);
+		
 		placeLabels();
 
 		add(scrollPane);

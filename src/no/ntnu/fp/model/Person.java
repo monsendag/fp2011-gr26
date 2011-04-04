@@ -5,6 +5,8 @@ import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.util.Date;
 
+import org.joda.time.DateTime;
+
 /**
  * The <code>Person</code> class stores information about a single person.
  * 
@@ -27,7 +29,7 @@ public class Person {
 	/**
 	 * This member variable holds the person's date of birth.
 	 */
-	private Date dateOfBirth;
+	private DateTime dateOfBirth;
 	
 	/**
 	 * This member variable holds a unique identifier for this object.
@@ -79,7 +81,7 @@ public class Person {
 	public Person() {
 		name = "";
 		email = "";
-		dateOfBirth = new Date();
+		dateOfBirth = new DateTime();
 		id = System.currentTimeMillis();
 		propChangeSupp = new PropertyChangeSupport(this);
 	}
@@ -92,7 +94,7 @@ public class Person {
 	 * @param email The person's e-mail address
 	 * @param dateOfBirth The person's date of birth.
 	 */
-	public Person(String name, String email, Date dateOfBirth) {
+	public Person(String name, String email, DateTime dateOfBirth) {
 		this();
 		this.name = name;
 		this.email = email;
@@ -192,8 +194,8 @@ public class Person {
 	 * @see java.beans.PropertyChangeListener <a href="http://java.sun.com/j2se/1.4.2/docs/api/java/beans/PropertyChangeListener.html">java.beans.PropertyChangeListener</a>
 	 * @see java.beans.PropertyChangeEvent <a href="http://java.sun.com/j2se/1.4.2/docs/api/java/beans/PropertyChangeEvent.html">java.beans.PropertyChangeEvent</a>
 	 */	
-	public void setDateOfBirth(Date dateOfBirth) {
-		Date oldDateOfBirth = this.dateOfBirth;
+	public void setDateOfBirth(DateTime dateOfBirth) {
+		DateTime oldDateOfBirth = this.dateOfBirth;
 		this.dateOfBirth = dateOfBirth;
 		PropertyChangeEvent event = new PropertyChangeEvent(this, DATEOFBIRTH_PROPERTY_NAME, oldDateOfBirth, this.dateOfBirth);
 		propChangeSupp.firePropertyChange(event);
@@ -222,7 +224,7 @@ public class Person {
 	 * 
 	 * @return The person's date of birth.
 	 */
-	public Date getDateOfBirth() {
+	public DateTime getDateOfBirth() {
 		return dateOfBirth;
 	}
 	

@@ -1,23 +1,20 @@
-﻿
+﻿package no.ntnu.fp.model;
 
-package no.ntnu.fp.model;
-
-import java.util.Date;
+import org.joda.time.DateTime;
 
 public class Message
 {
+    //
+    private String description;
 
     //
-    private String description ;
+    private Boolean read;
 
     //
-    private Boolean read ;
+    private DateTime createdOn;
 
     //
-    private Date createdOn ;
-
-    //
-    private Meeting meeting ;
+    private Meeting meeting;
     
     // Beskjeden meldingen skal til(mulig denne er unødvendig, klarer ikke tenke logisk - tobias)
     private Employee employee;
@@ -38,11 +35,11 @@ public class Message
 		this.read = read;
 	}
 
-	public Date getCreatedOn() {
+	public DateTime getCreatedOn() {
 		return createdOn;
 	}
 
-	public void setCreatedOn(Date createdOn) {
+	public void setCreatedOn(DateTime createdOn) {
 		this.createdOn = createdOn;
 	}
 
@@ -61,8 +58,4 @@ public class Message
 	public Employee getEmployee() {
 		return employee;
 	}
-
-
-
-
 }

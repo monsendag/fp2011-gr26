@@ -36,10 +36,6 @@ public class DBConnection {
 			System.err.println("Unable to connect");
 			e.printStackTrace();
 		}
-		empCache = new HashMap<String, Employee>();
-		roomCache = new HashMap<Integer, Room>();
-		actCache = new HashMap<Integer, Activity>();
-		mtngCache = new HashMap<Integer, Meeting>();
 	}
 	
 	/**

@@ -175,6 +175,40 @@ public class DBRetrieve extends DBConnection {
 	}
 	
 	/**
+	 * Returns a room as a {@link Room} object.
+	 * @param roomId The room's id
+	 * @return The room
+	 */
+	public Room getRoom(int roomId) {
+		// Check cache
+		if(roomCache.containsKey(roomId)) {
+			System.out.println("Getting room " + roomId + " from cache.");
+			return roomCache.get(roomId);
+		}
+		try {
+			Statement s = conn.createStatement();
+			ResultSet rs = s.executeQuery("SELECT * FROM room WHERE roomID =" + roomId);
+			
+			while(rs.next()) {
+				Room r = new Room();
+				r.setRoomID(rs.getInt("roomID"));
+				r.setName(rs.getString("name"));
+				r.setCapacity(rs.getInt("capacity"));
+				// Add to cache
+				roomCache.put(r.getRoomID(), r);
+				System.out.println("Adding room " + r.getRoomID() + " to cache.");
+				return r;
+			}
+			s.close();
+		} catch (SQLException e) {
+			System.err.println("Could not get room.");
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
+	
+	/**
 	 * Returns every room in the database as an {@link ArrayList} with {@link Room} objects.
 	 * @return ArrayList with all the rooms.
 	 */
@@ -274,6 +308,7 @@ public class DBRetrieve extends DBConnection {
 				m.setOwner(getEmployee(rs.getString("username")));
 				m.setDescription(rs.getString("description"));
 				m.setLocation(rs.getString("location"));
+				m.setRoom(getRoom(rs.getInt("roomID")));
 				m.setId(rs.getInt("activityID"));
 				m.setStartTime(rs.getTimestamp("starttime"));
 				m.setEndTime(rs.getTimestamp("endtime"));
@@ -315,6 +350,7 @@ public class DBRetrieve extends DBConnection {
 					m.setOwner(getEmployee(rs.getString("username")));
 					m.setDescription(rs.getString("description"));
 					m.setLocation(rs.getString("location"));
+					m.setRoom(getRoom(rs.getInt("roomID")));
 					m.setId(id);
 					m.setStartTime(rs.getTimestamp("starttime"));
 					m.setEndTime(rs.getTimestamp("endtime"));
@@ -433,6 +469,7 @@ public class DBRetrieve extends DBConnection {
 					m.setOwner(getEmployee(rs.getString("username")));
 					m.setDescription(rs.getString("description"));
 					m.setLocation(rs.getString("location"));
+					m.setRoom(getRoom(rs.getInt("roomID")));
 					m.setId(id);
 					m.setStartTime(rs.getTimestamp("starttime"));
 					m.setEndTime(rs.getTimestamp("endtime"));
@@ -515,6 +552,7 @@ public class DBRetrieve extends DBConnection {
 				m.setDescription(rs.getString("message"));
 				m.setEmployee(getEmployee(username));
 				m.setMeeting(getMeeting(rs.getInt("activityID")));
+				m.setRead(false);
 				alerts.add(m);
 			}
 			s.close();
@@ -524,5 +562,12 @@ public class DBRetrieve extends DBConnection {
 		}
 		
 		return alerts;
+	}
+	
+	public void setCache(HashMap emp,HashMap room,HashMap act,HashMap meet){
+		empCache = emp;
+		roomCache = room;
+		actCache = act;
+		mtngCache = meet;
 	}
 }

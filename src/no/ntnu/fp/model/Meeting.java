@@ -38,8 +38,10 @@ public class Meeting extends Activity {
 		return room;
 	}
 	
-	
-	
+	public void setRoom(Room room)
+	{
+		this.room = room;
+	}
 	
 	public void removeParticipant(Employee participant)
 	{

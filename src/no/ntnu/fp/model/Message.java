@@ -19,7 +19,7 @@ public class Message
     //
     private Meeting meeting ;
     
-    // Beskjeden meldingen skal til
+    // Beskjeden meldingen skal til(mulig denne er unødvendig, klarer ikke tenke logisk - tobias)
     private Employee employee;
 
 	public String getDescription() {

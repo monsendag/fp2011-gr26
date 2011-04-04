@@ -1,17 +1,22 @@
 package fp.client.gui.calendar;
 
+import java.awt.Dimension;
 import java.beans.PropertyChangeEvent;
-import java.util.Calendar;
+import java.beans.PropertyChangeListener;
+
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 /**
  * Extends CalendarLabel to display day of week correctly. Day of week is displayed as a string, and day of month as int
  *
  */
-public class CalendarDayLabel extends CalendarLabel {
-
+public class CalendarDayLabel extends JPanel implements PropertyChangeListener {
 	private String[] days = {"Mandag","Tirsdag","Onsdag","Torsdag","Fredag","Lørdag","Søndag"};
-	private int beginDay = Calendar.MONDAY;
-
+	private int offset;
+	private JLabel label;
+	private CalendarModel model;
+	
 	/**
 	* Constructor to display day of week and day of month according to offset.
 	* The supplied offset is added to the fields value when it is displayed.
@@ -22,25 +27,24 @@ public class CalendarDayLabel extends CalendarLabel {
 	* @param field The field to display
 	* @param offset An offset to the field's value
 	*/
-	public CalendarDayLabel(int width, int height, PropertyChangeCalendar calendar, int offset) {
-		super("", width, height, calendar, Calendar.DAY_OF_MONTH);
+	public CalendarDayLabel(int width, int height, CalendarModel model, int offset) {
+		Dimension size = new Dimension(width, height);
+		setPreferredSize(size);
+		setMaximumSize(size);
+		//this.setBorder(new BevelBorder(BevelBorder.RAISED));
 		this.offset = offset;
-		label.setText(days[getDayIndex()] + " " + getFieldValue());
+		this.model = model;
+		label = new JLabel(getValue());
+		add(label);
+		model.addPropertyChangeListener(this);
 	}
-
-	private int getDayIndex() {
-		int dayOfWeek = (cal.get(Calendar.DAY_OF_WEEK)+offset - beginDay) % 7;
-		if(dayOfWeek < 0) {
-			dayOfWeek += 7;
-		}
-
-		return dayOfWeek;
+	
+	public String getValue() {
+		return days[offset] + " "+model.getMonday().plusDays(offset).getDayOfMonth()+ "."+model.getMonday().plusDays(offset).getMonthOfYear();
 	}
-
-
+	
 	@Override
-	public void propertyChange(PropertyChangeEvent evt) {
-		label.setText(days[getDayIndex()] + " " + getFieldValue());
+	public void propertyChange(PropertyChangeEvent e) {
+		label.setText(getValue());
 	}
-
 }

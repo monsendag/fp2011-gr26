@@ -1,5 +1,8 @@
 package fp.client.gui.calendar;
 
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
+import java.util.ArrayList;
 import java.util.List;
 
 import no.ntnu.fp.model.Activity;
@@ -10,12 +13,14 @@ public class CalendarModel {
 	
 	private DateTime monday;
 	private List<Activity> activities;
-	
+	private PropertyChangeSupport changeSupport;
 	
 	public CalendarModel() {
 		setCurrentWeek();
+		changeSupport = new PropertyChangeSupport(this);
+		activities = new ArrayList<Activity>();
+		activities.add(new Activity(null, new DateTime().minusHours(5), new DateTime().minusHours(1), "Arne bjarne", "her"));
 	}
-	
 
 	public int getWeekNumber() {
 		return monday.getWeekOfWeekyear();
@@ -23,7 +28,7 @@ public class CalendarModel {
 
 	public void setCurrentWeek() {
 		DateTime now = new DateTime();
-		monday = now.minusDays((now.getDayOfWeek()-1));  // monday == 1
+		monday = now.minusDays((now.getDayOfWeek()-1)).minusMillis(now.getMillisOfDay());  // Monday@00:00.000 
 	}
 	
 	public DateTime getMonday() {
@@ -44,17 +49,42 @@ public class CalendarModel {
 	public void setActivities(List<Activity> activities) {
 		this.activities = activities;
 	}
+	
+	public void addActivity(Activity activity) {
+		if(!activities.contains(activity)) activities.add(activity);
+		changeSupport.firePropertyChange("addActivity", null, activity);
+	}
 
 
 	public void setNextWeek() {
-		
+		DateTime newTime = monday.plusWeeks(1);
+		changeSupport.firePropertyChange("week", monday, newTime);
+		monday = monday.plusWeeks(1);
 	}
 	
 	public void setPreviousWeek() {
-		
+		DateTime newTime = monday.minusWeeks(1);
+		changeSupport.firePropertyChange("week", monday, newTime);
+		monday = monday.minusWeeks(1);
 	}
 	
 	public boolean inWeek(DateTime time) {
 		return time.getYear() == getMonday().getYear() && time.getWeekOfWeekyear() == getMonday().getWeekOfWeekyear();
+	}
+	
+	/**
+	* Adds a listener to this object
+	* @param listener Object that will listen.
+	*/
+	public void addPropertyChangeListener(PropertyChangeListener listener) {
+		changeSupport.addPropertyChangeListener(listener);
+	}
+
+	/**
+	* Removes a listener from this object
+	* @param listener Object that will stop listening.
+	*/
+	public void removePropertyChangeListener(PropertyChangeListener listener) {
+		changeSupport.removePropertyChangeListener(listener);
 	}
 }

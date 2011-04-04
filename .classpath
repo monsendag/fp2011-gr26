@@ -13,8 +13,11 @@
 	<classpathentry kind="lib" path="lib/derbytools.jar"/>
 	<classpathentry kind="lib" path="lib/jgoodies-common-1.1.1.jar"/>
 	<classpathentry kind="lib" path="lib/jgoodies-forms-1.4.0.jar"/>
-	<classpathentry kind="lib" path="lib/joda-time-1.6.2.jar"/>
-	<classpathentry kind="lib" path="lib/joda-time-1.6.2-javadoc.jar"/>
+	<classpathentry kind="lib" path="lib/joda-time-1.6.2.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:platform:/resource/fellesprosjektet2011/lib/joda-time-1.6.2-javadoc.jar!/"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="lib" path="lib/FixedDateChooser.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

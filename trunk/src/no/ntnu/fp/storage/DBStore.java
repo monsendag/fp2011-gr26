@@ -72,7 +72,7 @@ public class DBStore extends DBConnection {
 			
 			for (Participant p : message.getMeeting().getParticipants()) {
 				ps.setBoolean(1,false);
-				ps.setTimestamp(2,new Timestamp(message.getCreatedOn().getTime()));
+				ps.setTimestamp(2,new Timestamp(message.getCreatedOn().getMillis()));
 				ps.setString(3,message.getDescription());
 				ps.setString(4,p.getEmployee().getUsername());
 				ps.setInt(5,message.getMeeting().getId());
@@ -98,8 +98,8 @@ public class DBStore extends DBConnection {
 					"(starttime,endtime,description,username,location,ismeeting) " +
 					"VALUES(?,?,?,?,?,?)",Statement.RETURN_GENERATED_KEYS);
 			
-			ps.setTimestamp(1, new Timestamp(act.getStartTime().getTime()));
-			ps.setTimestamp(2, new Timestamp(act.getEndTime().getTime()));
+			ps.setTimestamp(1, new Timestamp(act.getStartTime().getMillis()));
+			ps.setTimestamp(2, new Timestamp(act.getEndTime().getMillis()));
 			ps.setString(3, act.getDescription());
 			ps.setString(4, act.getOwner().getUsername());
 			ps.setString(5, act.getLocation());
@@ -146,8 +146,8 @@ public class DBStore extends DBConnection {
 					"(starttime,endtime,description,username,roomID,ismeeting) " +
 					"VALUES(?,?,?,?,?,?)",Statement.RETURN_GENERATED_KEYS);
 			
-			ps.setTimestamp(1, new Timestamp(m.getStartTime().getTime()));
-			ps.setTimestamp(2, new Timestamp(m.getEndTime().getTime()));
+			ps.setTimestamp(1, new Timestamp(m.getStartTime().getMillis()));
+			ps.setTimestamp(2, new Timestamp(m.getEndTime().getMillis()));
 			ps.setString(3, m.getDescription());
 			ps.setString(4, m.getOwner().getUsername());
 			ps.setInt(5, m.getRoom().getRoomID());
@@ -284,6 +284,93 @@ public class DBStore extends DBConnection {
 	}
 	
 	/**
+	 * Change a specified meeting.
+	 * @param meeting The meeting
+	 */
+	public void changeMeeting(Meeting meeting) {
+		try {
+			PreparedStatement ps = conn.prepareStatement("UPDATE activity " +
+					"SET starttime = ?, endtime = ?, description = ?, location = ?, " +
+					"roomID = ? WHERE activityID = " + meeting.getId());
+			ps.setTimestamp(1, new Timestamp(meeting.getStartTime().getMillis()));
+			ps.setTimestamp(2, new Timestamp(meeting.getEndTime().getMillis()));
+			ps.setString(3, meeting.getDescription());
+			ps.setString(4, meeting.getLocation());
+			ps.setInt(5, meeting.getRoom().getRoomID());
+			ps.executeUpdate();
+			ps.close();
+			
+			// Update in cache
+			Meeting m = mtngCache.get(meeting.getId());
+			m.setStartTime(meeting.getStartTime());
+			m.setEndTime(meeting.getEndTime());
+			m.setDescription(meeting.getDescription());
+			m.setLocation(meeting.getLocation());
+			m.setRoom(meeting.getRoom());
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * Marks an activity, by a {@link Activity} object,
+	 * in the database as canceled (activities should not be deleted).
+	 * @param act The activity to be canceled
+	 */
+	public void cancelActivity(Activity act) {
+		cancelActivityByID(act.getId());
+	}
+	
+	/**
+	 * Marks an activity, by the ID,
+	 * in the database as canceled (activities should not be deleted).
+	 * @param actID The ID
+	 */
+	public void cancelActivityByID(int actID) {
+		try {
+			PreparedStatement ps = conn.prepareStatement("UPDATE activity SET cancelled = ? " +
+					"WHERE activityID = " + actID);
+			ps.setBoolean(1,true);
+			ps.executeUpdate();
+			ps.close();
+			
+			// Remove from cache
+			actCache.remove(actID);
+		} catch (SQLException e) {
+			System.err.println("Could not cancel meeting.");
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * Change a specified activity.
+	 * @param act The activity.
+	 */
+	public void changeActivity(Activity act) {
+		try {
+			PreparedStatement ps = conn.prepareStatement("UPDATE activity " +
+					"SET starttime = ?, endtime = ?, description = ?, location = ? " +
+					"WHERE activityID = " + act.getId());
+			ps.setTimestamp(1, new Timestamp(act.getStartTime().getMillis()));
+			ps.setTimestamp(2, new Timestamp(act.getEndTime().getMillis()));
+			ps.setString(3, act.getDescription());
+			ps.setString(4, act.getLocation());
+			ps.executeUpdate();
+			ps.close();
+			
+			// Update in cache
+			Activity a = actCache.get(act.getId());
+			a.setStartTime(act.getStartTime());
+			a.setEndTime(act.getEndTime());
+			a.setDescription(act.getDescription());
+			a.setLocation(act.getLocation());
+		} catch (SQLException e) {
+			System.err.println("Could not change activity.");
+			e.printStackTrace();
+		}
+	}
+	
+	/**
 	 * Marks an alert(message), by a {@link Meeting} and a {@link Employee} object,
 	 * in the database as read.
 	 * @param meeting The meeting
@@ -312,10 +399,12 @@ public class DBStore extends DBConnection {
 		}
 	}
 	
-	public void setCache(HashMap emp,HashMap room,HashMap act,HashMap meet){
+	public void setCache(HashMap emp,HashMap room,HashMap act,HashMap meet,DBStore write,DBRetrieve read){
 		empCache = emp;
 		roomCache = room;
 		actCache = act;
 		mtngCache = meet;
+		this.write = write;
+		this.read = read;
 	}
 }

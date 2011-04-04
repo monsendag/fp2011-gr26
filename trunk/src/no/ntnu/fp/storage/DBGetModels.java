@@ -5,6 +5,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import org.joda.time.DateTime;
+
 import no.ntnu.fp.model.Activity;
 import no.ntnu.fp.model.Employee;
 import no.ntnu.fp.model.Meeting;
@@ -61,7 +63,7 @@ public class DBGetModels extends DBConnection {
 			Message m;
 			while(rs.next()) {
 				m = new Message();
-				m.setCreatedOn(rs.getTimestamp("time"));
+				m.setCreatedOn(new DateTime(rs.getTimestamp("time")));
 				m.setDescription(rs.getString("message"));
 				for (Meeting meeting : meetings) {
 					if(meeting.getId() == rs.getInt("activityID")) {
@@ -130,8 +132,8 @@ public class DBGetModels extends DBConnection {
 				a.setDescription(rs.getString("description"));
 				a.setLocation(rs.getString("location"));
 				a.setId(rs.getInt("activityID"));
-				a.setStartTime(rs.getTimestamp("starttime"));
-				a.setEndTime(rs.getTimestamp("endtime"));
+				a.setStartTime(new DateTime(rs.getTimestamp("starttime")));
+				a.setEndTime(new DateTime(rs.getTimestamp("endtime")));
 				activities.add(a);
 			}
 			s.close();
@@ -167,8 +169,8 @@ public class DBGetModels extends DBConnection {
 				m.setDescription(rs.getString("description"));
 				m.setLocation(rs.getString("location"));
 				m.setId(rs.getInt("activityID"));
-				m.setStartTime(rs.getTimestamp("starttime"));
-				m.setEndTime(rs.getTimestamp("endtime"));
+				m.setStartTime(new DateTime(rs.getTimestamp("starttime")));
+				m.setEndTime(new DateTime(rs.getTimestamp("endtime")));
 				m.setParticipants(getParticipantsByMeetingID(emps,m.getId()));
 				meetings.add(m);
 			}

@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import no.ntnu.fp.model.Activity;
+import no.ntnu.fp.model.Person;
 
 import org.joda.time.DateTime;
 
@@ -19,7 +20,7 @@ public class CalendarModel {
 		setCurrentWeek();
 		changeSupport = new PropertyChangeSupport(this);
 		activities = new ArrayList<Activity>();
-		activities.add(new Activity(null, new DateTime().minusHours(5), new DateTime().minusHours(1), "Arne bjarne", "her"));
+		activities.add(new Activity(null, new DateTime(), new DateTime().minusHours(1), "Arne bjarne", "her"));
 	}
 
 	public int getWeekNumber() {
@@ -53,6 +54,12 @@ public class CalendarModel {
 	public void addActivity(Activity activity) {
 		if(!activities.contains(activity)) activities.add(activity);
 		changeSupport.firePropertyChange("addActivity", null, activity);
+	}
+	
+	public void addPersonActivities(Person p) {
+		for(Activity a : p.getActivities()) {
+			activities.add(a);
+		}
 	}
 
 

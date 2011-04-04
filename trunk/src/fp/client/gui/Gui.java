@@ -1497,6 +1497,7 @@ public class Gui extends javax.swing.JFrame {
 
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {                                            
         loginDialog.setVisible(false);
+        setVisible(true);
 }                                           
 
     private void fromDateDateChooserCancelButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                                

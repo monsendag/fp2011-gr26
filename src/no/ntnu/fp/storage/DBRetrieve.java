@@ -6,6 +6,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import org.joda.time.DateTime;
+
 import no.ntnu.fp.model.Activity;
 import no.ntnu.fp.model.Employee;
 import no.ntnu.fp.model.Meeting;
@@ -104,7 +106,7 @@ public class DBRetrieve extends DBConnection {
 			Message m;
 			while(rs.next()) {
 				m = new Message();
-				m.setCreatedOn(rs.getTimestamp("time"));
+				m.setCreatedOn(new DateTime(rs.getTimestamp("time")));
 				m.setDescription(rs.getString("message"));
 				m.setEmployee(getEmployee(rs.getString("username")));
 				m.setMeeting(getMeeting(rs.getInt("activityID")));
@@ -270,8 +272,8 @@ public class DBRetrieve extends DBConnection {
 					a.setDescription(rs.getString("description"));
 					a.setLocation(rs.getString("location"));
 					a.setId(id);
-					a.setStartTime(rs.getTimestamp("starttime"));
-					a.setEndTime(rs.getTimestamp("endtime"));
+					a.setStartTime(new DateTime(rs.getTimestamp("starttime")));
+					a.setEndTime(new DateTime(rs.getTimestamp("endtime")));
 					// Add to cache
 					actCache.put(id, a);
 					System.out.println("Adding activity " + a.getId() + ", owned by " + a.getOwner() + " to cache.");
@@ -310,8 +312,8 @@ public class DBRetrieve extends DBConnection {
 				m.setLocation(rs.getString("location"));
 				m.setRoom(getRoom(rs.getInt("roomID")));
 				m.setId(rs.getInt("activityID"));
-				m.setStartTime(rs.getTimestamp("starttime"));
-				m.setEndTime(rs.getTimestamp("endtime"));
+				m.setStartTime(new DateTime(rs.getTimestamp("starttime")));
+				m.setEndTime(new DateTime(rs.getTimestamp("endtime")));
 				m.setParticipants(getParticipantsByMeetingID(m.getId()));
 				System.out.println("Adding meeting " + m.getId() + ", owned by " + m.getOwner() + " to cache.");
 				mtngCache.put(m.getId(), m);
@@ -352,8 +354,8 @@ public class DBRetrieve extends DBConnection {
 					m.setLocation(rs.getString("location"));
 					m.setRoom(getRoom(rs.getInt("roomID")));
 					m.setId(id);
-					m.setStartTime(rs.getTimestamp("starttime"));
-					m.setEndTime(rs.getTimestamp("endtime"));
+					m.setStartTime(new DateTime(rs.getTimestamp("starttime")));
+					m.setEndTime(new DateTime(rs.getTimestamp("endtime")));
 					m.setParticipants(getParticipantsByMeetingID(id));
 					// Add to cache
 					mtngCache.put(id, m);
@@ -411,8 +413,8 @@ public class DBRetrieve extends DBConnection {
 					a.setDescription(rs.getString("description"));
 					a.setLocation(rs.getString("location"));
 					a.setId(id);
-					a.setStartTime(rs.getTimestamp("starttime"));
-					a.setEndTime(rs.getTimestamp("endtime"));
+					a.setStartTime(new DateTime(rs.getTimestamp("starttime")));
+					a.setEndTime(new DateTime(rs.getTimestamp("endtime")));
 					// Add to cache
 					actCache.put(id, a);
 					System.out.println("Adding activity " + a.getId() + ", owned by " + a.getOwner() + " to cache.");
@@ -471,8 +473,8 @@ public class DBRetrieve extends DBConnection {
 					m.setLocation(rs.getString("location"));
 					m.setRoom(getRoom(rs.getInt("roomID")));
 					m.setId(id);
-					m.setStartTime(rs.getTimestamp("starttime"));
-					m.setEndTime(rs.getTimestamp("endtime"));
+					m.setStartTime(new DateTime(rs.getTimestamp("starttime")));
+					m.setEndTime(new DateTime(rs.getTimestamp("endtime")));
 					m.setParticipants(getParticipantsByMeetingID(id));
 					// Add to cache
 					mtngCache.put(id, m);
@@ -500,8 +502,8 @@ public class DBRetrieve extends DBConnection {
 					m.setDescription(rs.getString("description"));
 					m.setLocation(rs.getString("location"));
 					m.setId(id);
-					m.setStartTime(rs.getTimestamp("starttime"));
-					m.setEndTime(rs.getTimestamp("endtime"));
+					m.setStartTime(new DateTime(rs.getTimestamp("starttime")));
+					m.setEndTime(new DateTime(rs.getTimestamp("endtime")));
 					m.setParticipants(getParticipantsByMeetingID(id));
 					// Add to cache
 					mtngCache.put(id, m);
@@ -548,7 +550,7 @@ public class DBRetrieve extends DBConnection {
 			Message m;
 			while(rs.next()) {
 				m = new Message();
-				m.setCreatedOn(rs.getTimestamp("time"));
+				m.setCreatedOn(new DateTime(rs.getTimestamp("time")));
 				m.setDescription(rs.getString("message"));
 				m.setEmployee(getEmployee(username));
 				m.setMeeting(getMeeting(rs.getInt("activityID")));
@@ -564,10 +566,12 @@ public class DBRetrieve extends DBConnection {
 		return alerts;
 	}
 	
-	public void setCache(HashMap emp,HashMap room,HashMap act,HashMap meet){
+	public void setCache(HashMap emp,HashMap room,HashMap act,HashMap meet,DBStore write,DBRetrieve read){
 		empCache = emp;
 		roomCache = room;
 		actCache = act;
 		mtngCache = meet;
+		this.write = write;
+		this.read = read;
 	}
 }

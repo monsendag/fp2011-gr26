@@ -170,8 +170,8 @@ public class DBTest {
 		HashMap<Integer, Room> roomCache = new HashMap<Integer, Room>();
 		HashMap<Integer, Activity> actCache = new HashMap<Integer, Activity>();
 		HashMap<Integer, Meeting> mtngCache = new HashMap<Integer, Meeting>();
-		dbr.setCache(empCache, roomCache, actCache, mtngCache);
-		dbs.setCache(empCache, roomCache, actCache, mtngCache);
+		dbr.setCache(empCache, roomCache, actCache, mtngCache,dbs,dbr);
+		dbs.setCache(empCache, roomCache, actCache, mtngCache,dbs,dbr);
 		
 		
 		

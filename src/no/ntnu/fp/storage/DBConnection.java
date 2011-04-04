@@ -25,6 +25,8 @@ public class DBConnection {
 	protected HashMap<Integer,Room> roomCache;
 	protected HashMap<Integer,Activity> actCache;
 	protected HashMap<Integer,Meeting> mtngCache;
+	protected DBStore write;
+	protected DBRetrieve read;
 	
 	/**
 	 * Default constructor. Connects to the database through {@link #connect()}.

@@ -15,6 +15,8 @@ import javax.swing.JPanel;
 import org.joda.time.DateTime;
 import org.joda.time.Duration;
 
+import fp.client.gui.Gui;
+
 import no.ntnu.fp.model.Activity;
 
 /**
@@ -196,25 +198,7 @@ public class CalendarCanvas extends JPanel implements PropertyChangeListener {
 		DateTime startTime = day.plusMillis(calculateTimeFromYCoordinate(start.y));
 		DateTime endTime = day.plusMillis(calculateTimeFromYCoordinate(end.y));
 		
-		
-		System.out.println("new activity: from "+startTime.toString("HH:mm")+" to "+endTime.toString("HH:mm"));
-		
-		/*
-			Calendar startCal = new GregorianCalendar();
-			//startCal.setTimeInMillis(calendar.getTimeInMillis());
-			startCal.set(Calendar.DAY_OF_MONTH, day);
-			startCal.set(Calendar.HOUR_OF_DAY, 0);
-			startCal.set(Calendar.MINUTE, 0);
-			startCal.add(Calendar.MILLISECOND, startMillis);
-		
-			Calendar endCal = new GregorianCalendar();
-			endCal.setTimeInMillis(calendar.getTimeInMillis());
-			endCal.set(Calendar.DAY_OF_WEEK, day);
-			endCal.set(Calendar.HOUR_OF_DAY, 0);
-			endCal.set(Calendar.MINUTE, 0);
-			endCal.add(Calendar.MILLISECOND, endMillis);
-		*/
-		//	gui.fireNewActivityDialog();
+		Gui.gui.dragNewActivity(new Activity(null, startTime, endTime, "", ""));
 	}
 
 	/**
@@ -335,7 +319,7 @@ public class CalendarCanvas extends JPanel implements PropertyChangeListener {
 			public void mouseClicked(MouseEvent e) {
 				Activity activity = getActivityByPosition(e.getX(), e.getY());
 				if(activity != null) {
-					System.out.println("edit activity: "+activity.getDescription());
+					Gui.gui.editActivity(activity);
 				}
 				pressedPoint = null; 
 				releasedPoint = null;

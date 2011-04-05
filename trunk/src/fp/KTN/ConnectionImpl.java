@@ -1,7 +1,7 @@
 /*
  * Created on Oct 27, 2004
  */
-package no.ntnu.fp.net.co;
+package fp.KTN;
 
 import java.io.EOFException;
 import java.io.IOException;
@@ -28,7 +28,7 @@ import no.ntnu.fp.net.cl.KtnDatagram.Flag;
  * implementation.
  * 
  * @author Dag Einar Monsen
- * @see no.ntnu.fp.net.co.Connection
+ * @see fp.KTN.Connection
  * @see no.ntnu.fp.net.cl.ClSocket
  */
 public class ConnectionImpl extends AbstractConnection {
@@ -136,7 +136,7 @@ public class ConnectionImpl extends AbstractConnection {
      * @throws ConnectException If no connection exists.
      * @throws IOException If no ACK was received.
      * @see AbstractConnection#sendDataPacketWithRetransmit(KtnDatagram)
-     * @see no.ntnu.fp.net.co.Connection#send(String)
+     * @see fp.KTN.Connection#send(String)
      */
     public void send(String msg) throws ConnectException, IOException {
         KtnDatagram dataPacket = constructDataPacket(msg);

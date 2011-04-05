@@ -1,7 +1,7 @@
 /*
  * Created on 11. september 2008
  */
-package no.ntnu.fp.net.co;
+package fp.KTN;
 
 import java.io.EOFException;
 import java.io.IOException;
@@ -11,13 +11,14 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Timer;
 
+import fp.KTN.ClSocketReceiver;
+import fp.KTN.Connection;
+
 import no.ntnu.fp.net.admin.Log;
 import no.ntnu.fp.net.cl.ClException;
 import no.ntnu.fp.net.cl.ClSocket;
 import no.ntnu.fp.net.cl.KtnDatagram;
 import no.ntnu.fp.net.cl.KtnDatagram.Flag;
-import no.ntnu.fp.net.co.ClSocketReceiver;
-import no.ntnu.fp.net.co.Connection;
 
 /**
  * @author mariubje A partial implementation of the Connection-interface. It

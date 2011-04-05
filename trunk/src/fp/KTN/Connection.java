@@ -1,4 +1,4 @@
-package no.ntnu.fp.net.co;
+package fp.KTN;
 
 import java.net.InetAddress;
 

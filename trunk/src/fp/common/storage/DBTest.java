@@ -86,9 +86,9 @@ public class DBTest {
 		}
 		
 		XmlSerializer.getInstance();
-		String xml = XmlSerializer.serialize(dbr.getMeeting(6));
+		String xml = XmlSerializer.getInstance().serialize(dbr.getMeeting(6));
 		System.out.println(xml);
-		Meeting m2 = (Meeting)XmlSerializer.unSerialize(xml);
+		Meeting m2 = (Meeting)XmlSerializer.getInstance().unSerialize(xml);
 		
 		System.out.println(m2.getParticipants().get(0).getStatus());
 		

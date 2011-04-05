@@ -1,5 +1,6 @@
 package no.ntnu.fp.storage;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -18,7 +19,28 @@ import no.ntnu.fp.model.Room;
  * <p>Stores and alters data in the database through {@link DBConnection}.</p>
  * @author fp2011-gr26
  */
-public class DBStore extends DBConnection {
+public class DBStore {
+	
+	private static DBStore instance;
+	private Connection conn;
+	private HashMap<String,Employee> empCache;
+	private HashMap<Integer,Room> roomCache;
+	private HashMap<Integer,Activity> actCache;
+	private HashMap<Integer,Meeting> mtngCache;
+	
+	public DBStore() {
+		Storage s = Storage.getInstance();
+		conn = s.getConn();
+		empCache = s.empCache;
+		roomCache = s.roomCache;
+		actCache = s.actCache;
+		mtngCache = s.mtngCache;
+	}
+	
+	public static DBStore getInstance() {
+		if(instance == null) instance = new DBStore();
+		return instance;
+	}
 
 	/**
 	 * Adds an employee to the database from an employee object.
@@ -397,14 +419,5 @@ public class DBStore extends DBConnection {
 			System.err.println("Could not mark alert as read.");
 			e.printStackTrace();
 		}
-	}
-	
-	public void setCache(HashMap emp,HashMap room,HashMap act,HashMap meet,DBStore write,DBRetrieve read){
-		empCache = emp;
-		roomCache = room;
-		actCache = act;
-		mtngCache = meet;
-		this.write = write;
-		this.read = read;
 	}
 }

@@ -1523,7 +1523,6 @@ public class Gui extends javax.swing.JFrame {
 
     private void newAppointmentMakeButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                         
         newAppointmentDialog.setVisible(false);
-        newAppointment();
     }                                                        
 
     private void newAppointmentCancelButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                           
@@ -1897,14 +1896,14 @@ public class Gui extends javax.swing.JFrame {
     }
     
     public void dragNewactivity(Activity act){
-    	 appointmentTitleLabel.setText("");
-         appointmentDescriptionTextArea.setText("");
-         appointmentStartTimeCB.setSelectedItem(act.getStartTime().toString("hh:mm"));
-         appointmentEndTimeCB.setSelectedItem(act.getEndTime().toString("hh:mm"));
+    	 newAppointmentTitleLabel.setText("");
+    	 newAppointmentDescriptionTextArea.setText("");
+    	 newAppointmentStartTimeCB.setSelectedItem(act.getStartTime().toString("hh:mm"));
+    	 newAppointmentEndTimeCB.setSelectedItem(act.getEndTime().toString("hh:mm"));
          fromDateChooserPanel.setDate(act.getStartTime().toDate());
          toDateChooserPanel.setDate(act.getEndTime().toDate());
-         appointmentFromDateButton.setText(dateToString(act.getStartTime().toDate()));
-         appointmentToDateButton.setText(dateToString(act.getEndTime().toDate()));
+         newAppointmentFromDateButton.setText(dateToString(act.getStartTime().toDate()));
+         newAppointmentToDateButton.setText(dateToString(act.getEndTime().toDate()));
          newAppointmentDialog.pack();
          newAppointmentDialog.setLocationRelativeTo(this);
          newAppointmentDialog.setVisible(true);

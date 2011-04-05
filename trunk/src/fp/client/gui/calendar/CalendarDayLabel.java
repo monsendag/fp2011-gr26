@@ -1,9 +1,11 @@
 package fp.client.gui.calendar;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
+import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.BevelBorder;
@@ -34,6 +36,7 @@ public class CalendarDayLabel extends JPanel implements PropertyChangeListener {
 		setMaximumSize(size);
 	//	this.setBorder(new BevelBorder(BevelBorder.RAISED));
 //		this.setBorder(new BevelBorder(BevelBorder.RAISED));
+		this.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(108, 108, 108)));
 		this.offset = offset;
 		this.model = model;
 		label = new JLabel(getValue());

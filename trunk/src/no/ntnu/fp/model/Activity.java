@@ -6,7 +6,7 @@ public class Activity
 {
 	private int id;
 	private DateTime startTime, endTime;
-	private String description, location;
+	private String description, location, title;
 	private Employee owner;
 	
 	public Activity() {
@@ -51,6 +51,13 @@ public class Activity
 	}
 	public void setLocation(String location) {
 		this.location = location;
+	}
+	
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
 	}
 	
 	public void cancelActivity() {

@@ -51,7 +51,7 @@ public class CalendarPanel extends JPanel {
 		
 		calendarCanvas = new CalendarCanvas(columnWidth, rowHeight, 3600, beginHour, model);  
 		calendarCanvas.setBackground(Color.WHITE);
-//		scrollPane.setBackground(new Color(240,240,240));
+		scrollPane.setBackground(new Color(240,240,240));
 		calendarCanvas.setBorder(null);
 		scrollPane.setBorder(null);
 		calendarCanvas.setLayout(null);
@@ -86,6 +86,7 @@ public class CalendarPanel extends JPanel {
 		topLabelPanel.add(Box.createHorizontalStrut(1));
 		for(int offset=0; offset<7; offset++) {
 			label = new CalendarDayLabel(columnWidth, topLabelHeight, model, offset);
+			label.setBackground(new Color(240,240,240));
 			topLabelPanel.add(label);
 		}
 	}

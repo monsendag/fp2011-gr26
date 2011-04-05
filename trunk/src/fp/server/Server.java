@@ -1,18 +1,16 @@
 package fp.server;
 import java.awt.Dimension;
-import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JList;
-import javax.swing.JTable;
-import javax.swing.ListModel;
+import javax.swing.JPanel;
 
 import fp.common.network.ServerConnection;
-
 
 public class Server {
 	static ArrayList<ServerConnection> clients;
@@ -29,23 +27,25 @@ public class Server {
 		
 		
 		JFrame frame = new JFrame("Calendar SERVER");
-		
+		JPanel panel = new JPanel();
 
 		DefaultListModel listModel = new DefaultListModel();
 		
 		JList list = new JList(listModel);
-		
-		frame.add(list);
+		panel.add(new JLabel("Tilkoblede klienter: "));
+		panel.add(list);
 		frame.setPreferredSize(new Dimension(600,400));
+		frame.setContentPane(panel);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setLocationRelativeTo(null);
+		frame.pack();
 		frame.setVisible(true);
-		int i=0;
 		while(true) {
-			System.out.println(i++);
 			// Listen for a TCP connection request.
 			Socket socket = srvr.accept();
 			// Construct an object to process the request
 			ServerConnection client = new ServerConnection(socket);
+			listModel.addElement(client);
 			// Create a new thread to process the request.
 			Thread thread = new Thread(client);
 			// Start the thread.

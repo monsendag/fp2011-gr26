@@ -1,4 +1,4 @@
-package fp.client.storage;
+package fp.server;
 import java.awt.Dimension;
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -11,7 +11,7 @@ import javax.swing.JList;
 import javax.swing.JTable;
 import javax.swing.ListModel;
 
-import fp.network.ServerConnection;
+import fp.common.network.ServerConnection;
 
 
 public class Server {

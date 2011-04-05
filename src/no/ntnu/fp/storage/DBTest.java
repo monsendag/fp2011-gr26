@@ -4,13 +4,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.concurrent.ArrayBlockingQueue;
 
-import no.ntnu.fp.model.Activity;
-import no.ntnu.fp.model.Employee;
-import no.ntnu.fp.model.Meeting;
-import no.ntnu.fp.model.Message;
-import no.ntnu.fp.model.Participant;
-import no.ntnu.fp.model.Room;
-import no.ntnu.fp.model.XmlSerializer;
+import fp.common.models.Activity;
+import fp.common.models.Employee;
+import fp.common.models.Meeting;
+import fp.common.models.Message;
+import fp.common.models.Participant;
+import fp.common.models.Room;
+import fp.common.models.XmlSerializer;
+
 
 /**
  * <p>Class for testing database input and output.</p>

@@ -14,9 +14,10 @@ import java.text.ParseException;
 import java.util.Date;
 import java.util.StringTokenizer;
 
-import no.ntnu.fp.model.Project;
-import no.ntnu.fp.model.Person;
-import no.ntnu.fp.model.XmlSerializer;
+import fp.common.models.Person;
+import fp.common.models.Project;
+import fp.common.models.XmlSerializer;
+
 import no.ntnu.fp.swingutil.FPFileFilter;
 import nu.xom.Builder;
 import nu.xom.Document;

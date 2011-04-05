@@ -1,4 +1,4 @@
-﻿package no.ntnu.fp.model;
+﻿package fp.common.models;
 
 import org.joda.time.DateTime;
 

@@ -6,11 +6,12 @@ import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.KeyStroke;
 
-import no.ntnu.fp.model.Project;
-import no.ntnu.fp.model.Person;
+import fp.common.models.Person;
+import fp.common.models.Project;
+
 
 /**
- * Implements the command for adding new {@link no.ntnu.fp.model.Person} objects.
+ * Implements the command for adding new {@link fp.common.models.Person} objects.
  * 
  * @author Thomas &Oslash;sterlie
  *

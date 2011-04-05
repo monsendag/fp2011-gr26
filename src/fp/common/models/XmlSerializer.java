@@ -1,4 +1,4 @@
-package no.ntnu.fp.model;
+package fp.common.models;
 
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;

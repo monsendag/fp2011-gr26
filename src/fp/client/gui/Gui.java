@@ -20,13 +20,13 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.UIManager;
 
-import no.ntnu.fp.model.Activity;
-import no.ntnu.fp.model.Employee;
-import no.ntnu.fp.model.Meeting;
-import no.ntnu.fp.model.Room;
 
 import fp.client.gui.calendar.*;
-import fp.client.storage.ActivityStorage;
+import fp.common.models.Activity;
+import fp.common.models.Employee;
+import fp.common.models.Meeting;
+import fp.common.models.Room;
+import fp.common.storage.ActivityStorage;
 
 
 /**

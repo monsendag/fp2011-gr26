@@ -1,10 +1,11 @@
-package fp.network;
+package fp.common.network;
 
 import java.io.* ;
 import java.net.* ;
 
-import no.ntnu.fp.model.Employee;
-import no.ntnu.fp.model.XmlSerializer;
+import fp.common.models.Employee;
+import fp.common.models.XmlSerializer;
+
 
 public class ServerConnection extends Connection implements Runnable {
 

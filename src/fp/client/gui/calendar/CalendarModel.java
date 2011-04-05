@@ -5,10 +5,11 @@ import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
 import java.util.List;
 
-import no.ntnu.fp.model.Activity;
-import no.ntnu.fp.model.Person;
 
 import org.joda.time.DateTime;
+
+import fp.common.models.Activity;
+import fp.common.models.Person;
 
 public class CalendarModel {
 	

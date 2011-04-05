@@ -1,5 +1,5 @@
 ﻿
-package no.ntnu.fp.model;
+package fp.common.models;
 
 //
 enum Status

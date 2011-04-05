@@ -15,7 +15,8 @@ import javax.swing.JLabel;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.text.DateFormatter;
 
-import no.ntnu.fp.model.Person;
+import fp.common.models.Person;
+
 
 public class PersonCellRenderer extends DefaultListCellRenderer
 {

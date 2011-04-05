@@ -16,8 +16,8 @@ import org.joda.time.DateTime;
 import org.joda.time.Duration;
 
 import fp.client.gui.Gui;
+import fp.common.models.Activity;
 
-import no.ntnu.fp.model.Activity;
 
 /**
 * Draws activities corresponding to the current week of the supplied calendar.

@@ -1865,7 +1865,7 @@ public class Gui extends javax.swing.JFrame {
 
     }
 
-    private void newAppointment() {
+    private void createAppointment() {
         //kast dette inn i en konstruktør
         fromDateChooserPanel.getDate();
         toDateChooserPanel.getDate();
@@ -1894,5 +1894,19 @@ public class Gui extends javax.swing.JFrame {
         appointmentDialog.pack();
         appointmentDialog.setLocationRelativeTo(this);
         appointmentDialog.setVisible(true);
+    }
+    
+    public void dragNewactivity(Activity act){
+    	 appointmentTitleLabel.setText("");
+         appointmentDescriptionTextArea.setText("");
+         appointmentStartTimeCB.setSelectedItem(act.getStartTime().toString("hh:mm"));
+         appointmentEndTimeCB.setSelectedItem(act.getEndTime().toString("hh:mm"));
+         fromDateChooserPanel.setDate(act.getStartTime().toDate());
+         toDateChooserPanel.setDate(act.getEndTime().toDate());
+         appointmentFromDateButton.setText(dateToString(act.getStartTime().toDate()));
+         appointmentToDateButton.setText(dateToString(act.getEndTime().toDate()));
+         newAppointmentDialog.pack();
+         newAppointmentDialog.setLocationRelativeTo(this);
+         newAppointmentDialog.setVisible(true);
     }
 }

@@ -1408,7 +1408,7 @@ public class Gui extends javax.swing.JFrame {
         weekViewTable.setColumnSelectionAllowed(true);
         weekViewTable.setRowHeight(32);
         /////////////////////////////////////////////////////////////
-        
+        weekViewSP.setBorder(null);
         weekViewSP.setViewportView(new fp.client.gui.calendar.CalendarPanel());
         
         

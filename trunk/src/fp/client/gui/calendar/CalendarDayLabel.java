@@ -6,6 +6,7 @@ import java.beans.PropertyChangeListener;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.border.BevelBorder;
 
 /**
  * Extends CalendarLabel to display day of week correctly. Day of week is displayed as a string, and day of month as int
@@ -31,7 +32,7 @@ public class CalendarDayLabel extends JPanel implements PropertyChangeListener {
 		Dimension size = new Dimension(width, height);
 		setPreferredSize(size);
 		setMaximumSize(size);
-		//this.setBorder(new BevelBorder(BevelBorder.RAISED));
+		this.setBorder(new BevelBorder(BevelBorder.RAISED));
 		this.offset = offset;
 		this.model = model;
 		label = new JLabel(getValue());

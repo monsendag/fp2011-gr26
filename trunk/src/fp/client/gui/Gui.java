@@ -19,6 +19,9 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.UIManager;
 
+import no.ntnu.fp.model.Activity;
+import no.ntnu.fp.model.Meeting;
+
 import fp.client.gui.calendar.*;
 
 
@@ -28,6 +31,8 @@ import fp.client.gui.calendar.*;
  */
 public class Gui extends javax.swing.JFrame {
     
+	AppointmentModel am;
+	
     /** Creates new form Gui */
     public Gui() {
        try {UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());} catch (Exception exp) {}
@@ -1875,5 +1880,16 @@ public class Gui extends javax.swing.JFrame {
     private void changeCalendarView(){
 
     }
-
+    
+    public void editActivity(Activity act) {
+    	if(act instanceof Meeting) appointmentRoomCB.setSelectedItem(((Meeting) act).getRoom());
+        appointmentTitleLabel.setText(act.getTitle());
+        appointmentDescriptionTextArea.setText(act.getDescription());
+        appointmentStartTimeCB.setSelectedItem(act.getStartTime());
+        appointmentEndTimeCB.setSelectedItem(act.getEndTime());
+        fromDateChooserPanel.setDate(act.getStartTime().toDate());
+        toDateChooserPanel.setDate(act.getEndTime().toDate());
+        appointmentFromDateButton.setText(dateToString(act.getStartTime().toDate()));
+        appointmentToDateButton.setText(dateToString(act.getEndTime().toDate()));
+    }
 }

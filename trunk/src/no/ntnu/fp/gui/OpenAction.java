@@ -9,7 +9,8 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
 
-import no.ntnu.fp.storage.FileStorage;
+import fp.common.storage.FileStorage;
+
 import no.ntnu.fp.swingutil.FPFileFilter;
 
 /**

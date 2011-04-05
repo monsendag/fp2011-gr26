@@ -1,4 +1,4 @@
-package no.ntnu.fp.storage;
+package fp.common.storage;
 
 import java.util.ArrayList;
 import java.util.HashMap;

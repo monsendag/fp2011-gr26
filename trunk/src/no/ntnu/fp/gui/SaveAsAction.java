@@ -7,7 +7,8 @@ import java.io.IOException;
 import javax.swing.AbstractAction;
 import javax.swing.JFileChooser;
 
-import no.ntnu.fp.storage.FileStorage;
+import fp.common.storage.FileStorage;
+
 import no.ntnu.fp.swingutil.FPFileFilter;
 
 /**

@@ -1,28 +1,24 @@
-package fp.server.network;
+package fp.network;
 
 import java.io.* ;
 import java.net.* ;
 
-public class ClientConnection implements Runnable {
-	// define the EOL character
-	final static String EOL = "\n";
-	Socket socket;
+import no.ntnu.fp.model.Employee;
+import no.ntnu.fp.model.XmlSerializer;
+
+public class ServerConnection extends Connection implements Runnable {
 
 	// Constructor
-	public ClientConnection(Socket socket) throws Exception {
+	public ServerConnection(Socket socket) throws Exception {
 		this.socket = socket;
 	}
 
 	public void run() {
-		try { 
+		try {
 			processRequest();
 		} catch (Exception e) {
-			System.err.println("Could not process request");
+			System.err.println("Could not process request ("+e.getMessage()+")");
 		}
-	}
-	
-	public void parseHeader(String headerLine) {
-		
 	}
 
 	private void processRequest() throws Exception {
@@ -34,19 +30,24 @@ public class ClientConnection implements Runnable {
 		InputStreamReader isr = new InputStreamReader(is);
 		BufferedReader in = new BufferedReader(isr);
 		OutputStreamWriter out = new OutputStreamWriter(os);
-		
+
 		String line, xml = "";
 		while((line = in.readLine()) != null) {
+			if(line.equals("EN")) break;
 			xml += line;
-			out.write("You sent me: "+xml);
-			out.flush();
 		}
 		
-		out.write("Hello. This is server!");
+		Employee arne = (Employee) XmlSerializer.getInstance().unSerialize(xml);
 		
+		System.out.println("Got employee: "+arne.getName());
+		
+		out.write("Hello. This is server!"+EOL);
+		out.write("goodnight"+EOL);
 		out.flush();
-		os.flush();
-		
+	}
+	
+	public String toString() {
+		return socket.getRemoteSocketAddress().toString();
 	}
 	
 	private static void sendBytes(FileInputStream fis, OutputStream os) throws Exception {

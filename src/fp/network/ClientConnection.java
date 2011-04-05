@@ -1,4 +1,4 @@
-package fp.client.network;
+package fp.network;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -11,42 +11,40 @@ import java.net.InetAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
-public class ServerConnection extends Socket {
+import no.ntnu.fp.model.Employee;
+import no.ntnu.fp.model.XmlSerializer;
+
+public class ClientConnection extends Connection {
 	
-	public final static int port = 6789;
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) throws Exception {
-		new ServerConnection();
-	}
+	protected InetAddress hostname;
 	
-	public ServerConnection() throws UnknownHostException, IOException {
-		super(InetAddress.getLocalHost(), port);
-		
+	public ClientConnection() throws IOException {
+		hostname = InetAddress.getLocalHost();
+		socket = new Socket(hostname, serverPort);
 		// get the IO streams
-		InputStream is = getInputStream();
-		OutputStream os = getOutputStream();
+		InputStream is = socket.getInputStream();
+		OutputStream os = socket.getOutputStream();
 
 		// Set up input stream readers
 		InputStreamReader isr = new InputStreamReader(is);
 		BufferedReader in = new BufferedReader(isr);
 		OutputStreamWriter out = new OutputStreamWriter(os);
+
 		
-		out.write("hallais server. This is client. Whats up?");
+		Employee arne = new Employee("Arne bjarne", "arne@bjarne.no", "shubidubidu");
+		String xml = XmlSerializer.getInstance().serialize(arne);
+		out.write(xml+EOL);
 		out.flush();
 		
-		String line, xml = "";
-		
+		String line;
+		xml = "";
 		while((line = in.readLine()) != null) {
 			xml += line;
+			if(line.equals("goodnight")) break;
 		}
 		System.out.println(xml);
-		
-		
 		// Close streams and socket.
 		out.close();
 		in.close();
-		close();
 	}
 }

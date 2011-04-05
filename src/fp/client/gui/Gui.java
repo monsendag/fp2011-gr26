@@ -1882,14 +1882,17 @@ public class Gui extends javax.swing.JFrame {
     }
     
     public void editActivity(Activity act) {
-    	if(act instanceof Meeting) appointmentRoomCB.setSelectedItem(((Meeting) act).getRoom());
+    	if(act instanceof Meeting){appointmentRoomCB.setSelectedItem(((Meeting) act).getRoom());}
         appointmentTitleLabel.setText(act.getTitle());
         appointmentDescriptionTextArea.setText(act.getDescription());
-        appointmentStartTimeCB.setSelectedItem(act.getStartTime());
-        appointmentEndTimeCB.setSelectedItem(act.getEndTime());
+        appointmentStartTimeCB.setSelectedItem(act.getStartTime().toString("hh:mm"));
+        appointmentEndTimeCB.setSelectedItem(act.getEndTime().toString("hh:mm"));
         fromDateChooserPanel.setDate(act.getStartTime().toDate());
         toDateChooserPanel.setDate(act.getEndTime().toDate());
         appointmentFromDateButton.setText(dateToString(act.getStartTime().toDate()));
         appointmentToDateButton.setText(dateToString(act.getEndTime().toDate()));
+        appointmentDialog.pack();
+        appointmentDialog.setLocationRelativeTo(this);
+        appointmentDialog.setVisible(true);
     }
 }

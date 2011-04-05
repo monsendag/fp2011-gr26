@@ -19,7 +19,7 @@ public class CalendarPanel extends JPanel {
 	private JPanel topLabelPanel;			// this panel holds the labels indicating day of week/month
 	private JPanel leftLabelPanel;          // this panel holds the labels indicating time of day
 	private int leftLabelWidth = 50;        // the width of the leftLabelPanel
-	private int topLabelHeight = 20;        // the height of the topLabelPanel
+	private int topLabelHeight = 22;        // the height of the topLabelPanel
 	private JScrollPane scrollPane;         // allows the canvas to scroll, also has topLabelPanel and leftLabelPanel
 
 	private int columnWidth = 120;          // the width of each column
@@ -51,7 +51,7 @@ public class CalendarPanel extends JPanel {
 		
 		calendarCanvas = new CalendarCanvas(columnWidth, rowHeight, 3600, beginHour, model);  
 		calendarCanvas.setBackground(Color.WHITE);
-		scrollPane.setBackground(new Color(240,240,240));
+//		scrollPane.setBackground(new Color(240,240,240));
 		calendarCanvas.setBorder(null);
 		scrollPane.setBorder(null);
 		calendarCanvas.setLayout(null);

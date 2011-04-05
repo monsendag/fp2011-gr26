@@ -20,7 +20,8 @@ public class CalendarModel {
 		setCurrentWeek();
 		changeSupport = new PropertyChangeSupport(this);
 		activities = new ArrayList<Activity>();
-		activities.add(new Activity(null, new DateTime().minusHours(4), new DateTime().minusHours(1), "Arne bjarne", "her"));
+		DateTime t = new DateTime(2011, 4, 6, 10, 0, 0, 0);
+		activities.add(new Activity(null, t, t.plusHours(2).plusMinutes(15), "Arne bjarne", "her"));
 	}
 
 	public int getWeekNumber() {

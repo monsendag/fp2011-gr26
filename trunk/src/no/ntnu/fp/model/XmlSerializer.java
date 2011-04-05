@@ -5,11 +5,11 @@ import com.thoughtworks.xstream.io.xml.DomDriver;
 
 public class XmlSerializer {
 	private static XmlSerializer instance;
-	private static XStream xStream;
+	private XStream xStream;
 	
 	
 	private XmlSerializer() {
-		XmlSerializer.xStream = new XStream(new DomDriver());
+		xStream = new XStream(new DomDriver());
 	}
 	
 	public static XmlSerializer getInstance() {
@@ -20,7 +20,7 @@ public class XmlSerializer {
 	 * @param obj - Object to serialize into xml
 	 * @return (xml) Object serialized in xml
 	 */
-	public static String serialize(Object obj) {
+	public String serialize(Object obj) {
 		return xStream.toXML(obj);
 	}
 	
@@ -28,11 +28,11 @@ public class XmlSerializer {
 	 * @param xml - XML to unserialize
 	 * @return unserialized object
 	 */
-	public static Object unSerialize(String xml) {
+	public Object unSerialize(String xml) {
 		return xStream.fromXML(xml);
 	}
 	
-	public static XStream getXStream() {
+	public XStream getXStream() {
 		return xStream;
 	}
 }

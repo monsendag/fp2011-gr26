@@ -49,7 +49,6 @@ public class Gui extends javax.swing.JFrame {
     }
 	
 	Employee userLoggedIn;
-	
     /** Creates new form Gui */
     public Gui() {
        try {UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());} catch (Exception exp) {}

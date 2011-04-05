@@ -30,8 +30,21 @@ import fp.client.gui.calendar.*;
  * @author David
  */
 public class Gui extends javax.swing.JFrame {
-    
-	AppointmentModel am;
+	public static Gui gui;
+	
+   /**
+    * @param args the command line arguments
+    */
+    public static void main(String args[]) {
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                gui = new Gui();
+                gui.setVisible(true);
+            }
+        });
+    }
+	
+	
 	
     /** Creates new form Gui */
     public Gui() {
@@ -1666,16 +1679,7 @@ public class Gui extends javax.swing.JFrame {
         loginPasswordField.requestFocus();
     }                                               
 
-    /**
-    * @param args the command line arguments
-    */
-    public static void main(String args[]) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Gui().setVisible(true);
-            }
-        });
-    }
+ 
 
     // Variables declaration - do not modify
     private javax.swing.JPanel appointmentButtonPanel;

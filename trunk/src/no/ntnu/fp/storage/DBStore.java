@@ -8,12 +8,13 @@ import java.sql.Statement;
 import java.sql.Timestamp;
 import java.util.HashMap;
 
-import no.ntnu.fp.model.Activity;
-import no.ntnu.fp.model.Employee;
-import no.ntnu.fp.model.Meeting;
-import no.ntnu.fp.model.Message;
-import no.ntnu.fp.model.Participant;
-import no.ntnu.fp.model.Room;
+import fp.common.models.Activity;
+import fp.common.models.Employee;
+import fp.common.models.Meeting;
+import fp.common.models.Message;
+import fp.common.models.Participant;
+import fp.common.models.Room;
+
 
 /**
  * <p>Stores and alters data in the database through {@link DBConnection}.</p>

@@ -4,10 +4,11 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.util.HashMap;
 
-import no.ntnu.fp.model.Activity;
-import no.ntnu.fp.model.Employee;
-import no.ntnu.fp.model.Meeting;
-import no.ntnu.fp.model.Room;
+import fp.common.models.Activity;
+import fp.common.models.Employee;
+import fp.common.models.Meeting;
+import fp.common.models.Room;
+
 
 public class Storage {
 	

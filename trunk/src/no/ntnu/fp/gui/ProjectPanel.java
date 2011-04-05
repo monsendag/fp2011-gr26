@@ -2,10 +2,12 @@ package no.ntnu.fp.gui;
 
 import javax.swing.*;
 import javax.swing.event.*;
+
+import fp.common.models.Person;
+import fp.common.models.Project;
+
 import java.awt.*;
 
-import no.ntnu.fp.model.Person;
-import no.ntnu.fp.model.Project;
 
 import no.ntnu.fp.storage.FileStorage;
 
@@ -92,7 +94,7 @@ public class ProjectPanel extends JPanel implements ListSelectionListener, ListD
     /**
      * Called when a Person is selected in (one of) the list(s).
      * 
-     * @param p The selected {@link no.ntnu.fp.model.Person} object.
+     * @param p The selected {@link fp.common.models.Person} object.
      */
     private void listElementSelected(Person p) {
         personPanel.setModel(p);

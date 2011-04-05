@@ -1,4 +1,4 @@
-package fp.client.storage;
+package fp.client;
 import java.net.InetAddress;
 
 import fp.network.ClientConnection;

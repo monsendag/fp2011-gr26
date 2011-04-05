@@ -1,4 +1,4 @@
-package fp.client.gui;
+wpackage fp.client.gui;
 
 import java.awt.Component;
 import java.net.URL;

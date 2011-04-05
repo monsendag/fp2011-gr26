@@ -1,4 +1,4 @@
-package fp.network;
+package fp.common.network;
 
 import java.util.ArrayList;
 import java.util.List;

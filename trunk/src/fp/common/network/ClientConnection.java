@@ -1,4 +1,4 @@
-package fp.network;
+package fp.common.network;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -11,8 +11,9 @@ import java.net.InetAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
-import no.ntnu.fp.model.Employee;
-import no.ntnu.fp.model.XmlSerializer;
+import fp.common.models.Employee;
+import fp.common.models.XmlSerializer;
+
 
 public class ClientConnection extends Connection {
 	

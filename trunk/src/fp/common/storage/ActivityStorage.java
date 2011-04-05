@@ -1,6 +1,6 @@
-package fp.client.storage;
+package fp.common.storage;
 
-import no.ntnu.fp.model.Activity;
+import fp.common.models.Activity;
 
 public class ActivityStorage {
 	

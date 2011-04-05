@@ -7,8 +7,9 @@ import java.net.URL;
 
 import javax.swing.AbstractListModel;
 
-import no.ntnu.fp.model.Person;
-import no.ntnu.fp.model.Project;
+import fp.common.models.Person;
+import fp.common.models.Project;
+
 
 /**
  * A ListModel implementation that wraps a Project object.

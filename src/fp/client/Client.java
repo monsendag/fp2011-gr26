@@ -1,18 +1,19 @@
 package fp.client;
-import java.net.InetAddress;
 
-import fp.network.ClientConnection;
-import fp.network.Connection;
+import fp.client.gui.Gui;
 
 
 public class Client {
-
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args){
-		Connection conn = new ClientConnection();
-		conn.con
-	}
-
+	public static Gui gui;
+   /**
+    * @param args the command line arguments
+    */
+    public static void main(String args[]) {
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                gui = new Gui();
+                gui.setVisible(true);
+            }
+        });
+    }
 }

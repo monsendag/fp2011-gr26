@@ -5,7 +5,8 @@ import java.net.URL;
 
 import javax.swing.AbstractAction;
 
-import no.ntnu.fp.storage.FileStorage;
+import fp.common.storage.FileStorage;
+
 
 /**
  * Implements the command for saving the {@link fp.common.models.Project}.

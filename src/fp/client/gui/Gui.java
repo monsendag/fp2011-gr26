@@ -36,18 +36,6 @@ import fp.common.storage.ActivityStorage;
 public class Gui extends javax.swing.JFrame {
 	public static Gui gui;
 	
-   /**
-    * @param args the command line arguments
-    */
-    public static void main(String args[]) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                gui = new Gui();
-                gui.setVisible(true);
-            }
-        });
-    }
-	
 	Employee userLoggedIn;
     /** Creates new form Gui */
     public Gui() {
@@ -447,7 +435,7 @@ public class Gui extends javax.swing.JFrame {
         calendarChooserSearchField.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         calendarChooserSearchField.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
 
-        calendarChooserSearchIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ico/Search-icon 30x30 v4.png"))); // NOI18N
+        calendarChooserSearchIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("graphics/Search-icon 30x30 v4.png"))); // NOI18N
 
         javax.swing.GroupLayout calendarChooserSearchPanelLayout = new javax.swing.GroupLayout(calendarChooserSearchPanel);
         calendarChooserSearchPanel.setLayout(calendarChooserSearchPanelLayout);
@@ -1168,7 +1156,7 @@ public class Gui extends javax.swing.JFrame {
         participantChooserSearchPanel.setBackground(new java.awt.Color(255, 255, 255));
         participantChooserSearchPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
 
-        participantChooserSearchIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ico/Search-icon 30x30 v4.png"))); // NOI18N
+        participantChooserSearchIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("graphics/Search-icon 30x30 v4.png"))); // NOI18N
 
         participantChooserSearchField.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         participantChooserSearchField.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
@@ -1347,7 +1335,7 @@ public class Gui extends javax.swing.JFrame {
             }
         });
 
-        nextWeekLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ico/nextWeek.png"))); // NOI18N
+        nextWeekLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("graphics/nextWeek.png"))); // NOI18N
         nextWeekLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         nextWeekLabel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -1358,7 +1346,7 @@ public class Gui extends javax.swing.JFrame {
             }
         });
 
-        previousWeekLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ico/prevWeek.png"))); // NOI18N
+        previousWeekLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("graphics/prevWeek.png"))); // NOI18N
         previousWeekLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         previousWeekLabel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -1839,11 +1827,11 @@ public class Gui extends javax.swing.JFrame {
         //lololololol
     ImageIcon next, prev,nextMO, prevMO, appIcon;
     {try{
-                next            = new ImageIcon(ImageIO.read(Gui.class.getResource("/ico/nextWeek.png")));
-                prev            = new ImageIcon(ImageIO.read(Gui.class.getResource("/ico/prevWeek.png")));
-                nextMO          = new ImageIcon(ImageIO.read(Gui.class.getResource("/ico/nextWeekMO.png")));
-                prevMO          = new ImageIcon(ImageIO.read(Gui.class.getResource("/ico/prevWeekMO.png")));
-                appIcon         = new ImageIcon(ImageIO.read(Gui.class.getResource("/ico/appIcon.png")));
+                next            = new ImageIcon(ImageIO.read(Gui.class.getResource("graphics/nextWeek.png")));
+                prev            = new ImageIcon(ImageIO.read(Gui.class.getResource("graphics/prevWeek.png")));
+                nextMO          = new ImageIcon(ImageIO.read(Gui.class.getResource("graphics/nextWeekMO.png")));
+                prevMO          = new ImageIcon(ImageIO.read(Gui.class.getResource("graphics/prevWeekMO.png")));
+                appIcon         = new ImageIcon(ImageIO.read(Gui.class.getResource("graphics/appIcon.png")));
 
         }catch (Exception e){System.out.print(e);}
 

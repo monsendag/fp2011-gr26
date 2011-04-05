@@ -5,11 +5,11 @@ import javax.swing.event.*;
 
 import fp.common.models.Person;
 import fp.common.models.Project;
+import fp.common.storage.FileStorage;
 
 import java.awt.*;
 
 
-import no.ntnu.fp.storage.FileStorage;
 
 /**
  * GroupPanel is JPanel for presenting the hierarhical Group structure and editing its contents.

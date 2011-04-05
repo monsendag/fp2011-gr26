@@ -14,15 +14,19 @@ package fp.client.gui;
 
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.util.ArrayList;
 import java.util.Date;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.UIManager;
 
 import no.ntnu.fp.model.Activity;
+import no.ntnu.fp.model.Employee;
 import no.ntnu.fp.model.Meeting;
+import no.ntnu.fp.model.Room;
 
 import fp.client.gui.calendar.*;
+import fp.client.storage.ActivityStorage;
 
 
 /**
@@ -44,7 +48,7 @@ public class Gui extends javax.swing.JFrame {
         });
     }
 	
-	
+	Employee userLoggedIn;
 	
     /** Creates new form Gui */
     public Gui() {
@@ -1868,24 +1872,29 @@ public class Gui extends javax.swing.JFrame {
 
     }
 
-    private void createAppointment() {
-        //kast dette inn i en konstruktør
-        fromDateChooserPanel.getDate();
-        toDateChooserPanel.getDate();
-        newAppointmentRoomCB.getSelectedItem();
-        newAppointmentTitleLabel.getText();
-        newAppointmentDescriptionTextArea.getText();
-        newAppointmentStartTimeCB.getSelectedIndex();
-        newAppointmentEndTimeCB.getSelectedIndex();
-        participantChooserTable.getSelectedRows();
-    }
+//    private void createActivity() {
+//    	Employee owner = userLoggedIn;
+//    	Room room = newAppointmentRoomCB.getSelectedItem();
+//    	Date startTime = toDateChooserPanel.getDate();
+//    	Date endTime = fromDateChooserPanel.getDate();
+//    	startTime.setMinutes(newAppointmentStartTimeCB.getSelectedIndex());
+//    	endTime.setMinutes(newAppointmentEndTimeCB.getSelectedIndex());
+//    	String description = newAppointmentDescriptionTextArea.getText();
+//    	String title = newAppointmentTitleLabel.getText();
+//    	
+//        ArrayList<Employee> participants = participantChooserTable.getSelectedRows();
+//    	
+//    	if(participantChooserTable.getSelectedRows().length > 0)
+//    		ActivityStorage.createActivity(new Meeting(owner, participants, room, startTime, endTime, description, location, title));
+//		ActivityStorage.createActivity(new Activity(owner, room, startTime, endTime, description, location, title));
+//    }
 
     private void changeCalendarView(){
 
     }
     
     public void editActivity(Activity act){
-    	if(act instanceof Meeting){appointmentRoomCB.setSelectedItem(((Meeting) act).getRoom());}
+    	if(act instanceof Meeting){appointmentRoomCB.setSelectedItem(((Meeting) act).getRoom());}else{}
         appointmentTitleLabel.setText(act.getTitle());
         appointmentDescriptionTextArea.setText(act.getDescription());
         appointmentStartTimeCB.setSelectedItem(act.getStartTime().toString("HH:mm"));

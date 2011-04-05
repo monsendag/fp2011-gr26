@@ -1,9 +1,8 @@
 package fp.common.network;
 
-import java.net.* ;
+import java.net.*;
 
 import fp.common.models.Employee;
-import fp.common.models.XmlSerializer;
 
 
 public class ServerConnection extends Connection implements Runnable {
@@ -22,19 +21,16 @@ public class ServerConnection extends Connection implements Runnable {
 	}
 
 	private void processRequest() throws Exception {
-		String line, xml = "";
-		while((line = in.readLine()) != null) {
-			if(line.equals("EN")) break;
-			xml += line;
+		NetworkObject request = retrieve();
+		
+		NetworkObject response = new NetworkObject();
+		
+		if(request.getCommand() == NetworkCommand.getEmployees) {
+			response.setCommand(NetworkCommand.returnEmployees);
+			Employee arne = new Employee("Arne bjarne", "arne@bjarne.no", "shubidubidu");
+			response.addObject(arne);
+			send(response);
 		}
-		
-		Employee arne = (Employee) XmlSerializer.getInstance().unSerialize(xml);
-		
-		System.out.println("Got employee: "+arne.getName());
-		
-		out.write("Hello. This is server!"+EOL);
-		out.write("goodnight"+EOL);
-		out.flush();
 	}
 	
 	public String toString() {

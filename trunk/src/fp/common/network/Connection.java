@@ -10,6 +10,8 @@ import java.io.Writer;
 import java.net.InetAddress;
 import java.net.Socket;
 
+import fp.common.models.XmlSerializer;
+
 public abstract class Connection {
 	public static int serverPort = 6789;
 	final static String EOL = "\n";
@@ -36,6 +38,27 @@ public abstract class Connection {
 	
 	protected void writeLn(String line) throws IOException {
 		out.write(line+EOL);
+		out.flush();
+	}
+	
+	protected void send(NetworkObject o) throws IOException {
+		System.out.println("sending command: "+o.getCommand());
+		String xml = XmlSerializer.getInstance().serialize(o);
+		out.write(xml+EOL);
+		writeLn(EOF);
+		out.flush();
+	}
+	
+	protected NetworkObject retrieve() throws IOException {
+		System.out.println("retrieving..");
+		String line, xml = "";
+		while((line = in.readLine()) != null) {
+			if(line.equals(EOF)) break;
+			xml += line;
+		}
+		NetworkObject o = (NetworkObject) XmlSerializer.getInstance().unSerialize(xml);
+		System.out.println("retrieved command: "+o.getCommand());
+		return o;
 	}
 	
 }

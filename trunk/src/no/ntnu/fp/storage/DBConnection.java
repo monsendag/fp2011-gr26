@@ -21,10 +21,7 @@ public class DBConnection {
 	 * The database connection object.
 	 */
 	protected Connection conn;
-	protected HashMap<String,Employee> empCache;
-	protected HashMap<Integer,Room> roomCache;
-	protected HashMap<Integer,Activity> actCache;
-	protected HashMap<Integer,Meeting> mtngCache;
+
 	protected DBStore write;
 	protected DBRetrieve read;
 	

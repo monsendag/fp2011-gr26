@@ -2,8 +2,6 @@ package fp.KTN;
 
 import java.net.InetAddress;
 
-import no.ntnu.fp.net.cl.KtnDatagram;
-
 /**
  * Interface that defines the methods a Connection implementation must support.
  * 
@@ -68,12 +66,4 @@ public interface Connection {
      *             if an I/O error occurs when closing this connection
      */
     public void close() throws java.io.IOException;
-
-	public void setRemoteAddress(String src_addr);
-
-	public void setRemotePort(int src_port);
-
-	public void setLastValidPacketReceived(KtnDatagram syn);
-
-
 }

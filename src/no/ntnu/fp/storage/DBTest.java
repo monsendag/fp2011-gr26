@@ -159,6 +159,12 @@ public class DBTest {
 		System.out.println();
 	}
 	
+	static volatile HashMap<String,Employee> empCache = new HashMap<String, Employee>();
+	static volatile HashMap<Integer, Room> roomCache = new HashMap<Integer, Room>();
+	static volatile HashMap<Integer, Activity> actCache = new HashMap<Integer, Activity>();
+	static volatile HashMap<Integer, Meeting> mtngCache = new HashMap<Integer, Meeting>();
+	
+	
 	public static void main(String[] args) {
 		
 		DBRetrieve dbr = new DBRetrieve();
@@ -166,10 +172,8 @@ public class DBTest {
 		DBGetModels dbgm = new DBGetModels();
 		
 		// Cache
-		HashMap<String,Employee> empCache = new HashMap<String, Employee>();
-		HashMap<Integer, Room> roomCache = new HashMap<Integer, Room>();
-		HashMap<Integer, Activity> actCache = new HashMap<Integer, Activity>();
-		HashMap<Integer, Meeting> mtngCache = new HashMap<Integer, Meeting>();
+
+		
 		dbr.setCache(empCache, roomCache, actCache, mtngCache,dbs,dbr);
 		dbs.setCache(empCache, roomCache, actCache, mtngCache,dbs,dbr);
 		

@@ -126,7 +126,6 @@ public class CalendarCanvas extends JPanel implements PropertyChangeListener {
 		
 		outline = Color.BLACK;
 		fill = new Color(Integer.parseInt("7489b6", 16));
-		
 		int arcRadius = 5;
 		
 		// fill activity 

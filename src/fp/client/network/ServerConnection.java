@@ -30,18 +30,23 @@ public class ServerConnection extends Socket {
 
 		// Set up input stream readers
 		InputStreamReader isr = new InputStreamReader(is);
-		BufferedReader br = new BufferedReader(isr);
-		OutputStreamWriter osw = new OutputStreamWriter(os);
+		BufferedReader in = new BufferedReader(isr);
+		OutputStreamWriter out = new OutputStreamWriter(os);
 		
-		osw.write("hallais server. This is client. Whats up?");
-		osw.flush();
+		out.write("hallais server. This is client. Whats up?");
+		out.flush();
 		
-		System.out.println(br.readLine());
+		String line, xml = "";
 		
-		os.flush();
+		while((line = in.readLine()) != null) {
+			xml += line;
+		}
+		System.out.println(xml);
+		
+		
 		// Close streams and socket.
-		osw.close();
-		br.close();
+		out.close();
+		in.close();
 		close();
 	}
 }

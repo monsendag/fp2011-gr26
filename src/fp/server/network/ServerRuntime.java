@@ -28,5 +28,20 @@ public class ServerRuntime {
 			// Start the thread.
 			thread.start();
 		}
+		
+		
+		/**
+		 * 					CLIENT															SERVER
+		 * 							få alle aktiviteter						send 				hent fra db
+		 * 							få en aktivitet (id)						----""----		
+		 * 							få alle meldinger						----""----				
+		 * 							få uleste meldinger						----""----
+		 * 							få alle employees
+		 * 							
+		 * 							opprett aktivitet
+		 * 							endre aktivitet
+		 * 							merk melding som lest
+		 * 							
+		 */
 	}
 }

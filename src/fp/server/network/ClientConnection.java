@@ -32,21 +32,20 @@ public class ClientConnection implements Runnable {
 
 		// Set up input stream readers
 		InputStreamReader isr = new InputStreamReader(is);
-		BufferedReader br = new BufferedReader(isr);
-		OutputStreamWriter osw = new OutputStreamWriter(os);
+		BufferedReader in = new BufferedReader(isr);
+		OutputStreamWriter out = new OutputStreamWriter(os);
 		
-		while(isr.)
+		String line, xml = "";
+		while((line = in.readLine()) != null) {
+			xml += line;
+			out.write("You sent me: "+xml);
+			out.flush();
+		}
 		
-		String request = br.readLine();
+		out.write("Hello. This is server!");
 		
-		osw.write("Hello. This is server!");
-		
-		osw.write("You sent me: "+request);
-		
-		osw.flush();
+		out.flush();
 		os.flush();
-		
-		
 		
 	}
 	

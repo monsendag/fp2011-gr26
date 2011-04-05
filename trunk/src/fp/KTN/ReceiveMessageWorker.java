@@ -8,8 +8,6 @@ import java.util.List;
 
 import fp.KTN.Connection;
 
-import no.ntnu.fp.net.admin.Log;
-
 /**
  * Helper class implementing asynchronous handling of incoming messages. Objects
  * that want to receive incoming messages register themselves as MessageListener
@@ -64,7 +62,6 @@ public class ReceiveMessageWorker extends Thread {
      */
     public void run() {
         isRunning = true;
-        int counter = 0;
         try {
             while (isRunning) {
                 String message = aConnection.receive();

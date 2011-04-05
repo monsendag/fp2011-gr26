@@ -1880,7 +1880,7 @@ public class Gui extends javax.swing.JFrame {
 
     }
     
-    public void editActivity(Activity act) {
+    public void editActivity(Activity act){
     	if(act instanceof Meeting){appointmentRoomCB.setSelectedItem(((Meeting) act).getRoom());}
         appointmentTitleLabel.setText(act.getTitle());
         appointmentDescriptionTextArea.setText(act.getDescription());
@@ -1896,16 +1896,16 @@ public class Gui extends javax.swing.JFrame {
     }
     
     public void dragNewactivity(Activity act){
-    	 newAppointmentTitleLabel.setText("");
-    	 newAppointmentDescriptionTextArea.setText("");
-    	 newAppointmentStartTimeCB.setSelectedItem(act.getStartTime().toString("hh:mm"));
-    	 newAppointmentEndTimeCB.setSelectedItem(act.getEndTime().toString("hh:mm"));
-         fromDateChooserPanel.setDate(act.getStartTime().toDate());
-         toDateChooserPanel.setDate(act.getEndTime().toDate());
-         newAppointmentFromDateButton.setText(dateToString(act.getStartTime().toDate()));
-         newAppointmentToDateButton.setText(dateToString(act.getEndTime().toDate()));
-         newAppointmentDialog.pack();
-         newAppointmentDialog.setLocationRelativeTo(this);
-         newAppointmentDialog.setVisible(true);
-    }
+		newAppointmentTitleLabel.setText("");
+		newAppointmentDescriptionTextArea.setText("");
+		newAppointmentStartTimeCB.setSelectedItem(act.getStartTime().toString("hh:mm"));
+		newAppointmentEndTimeCB.setSelectedItem(act.getEndTime().toString("hh:mm"));
+	    fromDateChooserPanel.setDate(act.getStartTime().toDate());
+	    toDateChooserPanel.setDate(act.getEndTime().toDate());
+	    newAppointmentFromDateButton.setText(dateToString(act.getStartTime().toDate()));
+	    newAppointmentToDateButton.setText(dateToString(act.getEndTime().toDate()));
+	    newAppointmentDialog.pack();
+	    newAppointmentDialog.setLocationRelativeTo(this);
+	    newAppointmentDialog.setVisible(true);
+	}
 }

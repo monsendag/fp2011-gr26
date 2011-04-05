@@ -4,7 +4,7 @@
  * TODO To change the template for this generated file go to
  * Window - Preferences - Java - Code Style - Code Templates
  */
-package no.ntnu.fp.net.co;
+package fp.KTN;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -16,7 +16,8 @@ import java.net.Socket;
 import java.net.SocketTimeoutException;
 import java.net.UnknownHostException;
 
-import no.ntnu.fp.net.co.Connection;
+import fp.KTN.Connection;
+
 
 /**
  * @author sebjorns

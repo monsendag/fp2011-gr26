@@ -1,4 +1,4 @@
-package no.ntnu.fp.net.co;
+package fp.KTN;
 
 import java.io.EOFException;
 import java.io.IOException;
@@ -6,8 +6,9 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import fp.KTN.Connection;
+
 import no.ntnu.fp.net.admin.Log;
-import no.ntnu.fp.net.co.Connection;
 
 /**
  * Helper class implementing asynchronous handling of incoming messages. Objects

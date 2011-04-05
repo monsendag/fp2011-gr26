@@ -34,8 +34,6 @@ import fp.common.storage.ActivityStorage;
  * @author David
  */
 public class Gui extends javax.swing.JFrame {
-	public static Gui gui;
-	
 	Employee userLoggedIn;
     /** Creates new form Gui */
     public Gui() {

@@ -39,6 +39,8 @@ public class Gui extends javax.swing.JFrame {
     public Gui() {
        try {UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());} catch (Exception exp) {}
        initComponents();
+       weekViewSP.setBorder(null);
+       weekViewSP.setViewportView(new fp.client.gui.calendar.CalendarPanel());
        setVisible(true);
        setLocationRelativeTo(null);
        setIconImage(appIcon.getImage());

@@ -56,9 +56,15 @@ public abstract class Connection {
 			if(line.equals(EOF)) break;
 			xml += line;
 		}
-		NetworkObject o = (NetworkObject) XmlSerializer.getInstance().unSerialize(xml);
-		System.out.println("retrieved command: "+o.getCommand());
+		NetworkObject o = null;
+		if(xml.length() > 0) {
+			o = (NetworkObject) XmlSerializer.getInstance().unSerialize(xml);
+			System.out.println("retrieved command: "+o.getCommand());
+		}
 		return o;
 	}
 	
+	protected void close() throws IOException {
+		socket.close();
+	}
 }

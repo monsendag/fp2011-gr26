@@ -21,16 +21,24 @@ public class ServerConnection extends Connection implements Runnable {
 	}
 
 	private void processRequest() throws Exception {
-		NetworkObject request = retrieve();
-		
-		NetworkObject response = new NetworkObject();
-		
-		if(request.getCommand() == NetworkCommand.getEmployees) {
-			response.setCommand(NetworkCommand.returnEmployees);
-			Employee arne = new Employee("Arne bjarne", "arne@bjarne.no", "shubidubidu");
-			response.addObject(arne);
-			send(response);
+		NetworkObject request;
+		do {
+			request = retrieve();
+			send(getResponse(request));
 		}
+		while(request != null);
+		close();
+	}
+	
+	private NetworkObject getResponse(NetworkObject request) {
+		NetworkObject response = new NetworkObject();
+		switch(request.getCommand()) {
+			case getEmployees: {
+				response.setCommand(NetworkCommand.returnEmployees);
+			} break;
+			
+		}
+		return response;
 	}
 	
 	public String toString() {

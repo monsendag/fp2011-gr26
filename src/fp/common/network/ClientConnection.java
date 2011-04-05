@@ -18,12 +18,11 @@ public class ClientConnection extends Connection {
 					}
                 }
 	        });
-	    }
+	  }
 	public ClientConnection() throws IOException {
 		super(InetAddress.getLocalHost());
 		
 		NetworkObject n = new NetworkObject();
-		
 		
 		n.setCommand(NetworkCommand.getEmployees);
 		
@@ -34,8 +33,13 @@ public class ClientConnection extends Connection {
 			System.out.println(((Employee) o).getName());
 		}
 		
-		// Close streams and socket.
-		out.close();
-		in.close();
+		send(n);
+		back = retrieve();
+		
+		for(Object o : back.getObjects()) {
+			System.out.println(((Employee) o).getName());
+		}
+		
+		close();
 	}
 }

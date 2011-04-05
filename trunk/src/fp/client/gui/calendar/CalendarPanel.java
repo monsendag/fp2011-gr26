@@ -50,7 +50,9 @@ public class CalendarPanel extends JPanel {
 		
 		calendarCanvas = new CalendarCanvas(columnWidth, rowHeight, 3600, beginHour, model);  
 		calendarCanvas.setBackground(Color.WHITE);
+		scrollPane.setBackground(new Color(240,240,240));
 		calendarCanvas.setBorder(null);
+		scrollPane.setBorder(null);
 		calendarCanvas.setLayout(null);
 		calendarCanvas.setPreferredSize(new Dimension(columnWidth*7,rowHeight*(24-beginHour)));
 		scrollPane.setViewportView(calendarCanvas);

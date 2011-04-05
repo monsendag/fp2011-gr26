@@ -10,6 +10,7 @@ import no.ntnu.fp.model.Meeting;
 import no.ntnu.fp.model.Message;
 import no.ntnu.fp.model.Participant;
 import no.ntnu.fp.model.Room;
+import no.ntnu.fp.model.XmlSerializer;
 
 /**
  * <p>Class for testing database input and output.</p>
@@ -26,46 +27,6 @@ public class DBTest {
 	public final String CREATE_ACTIVITY 	= "CREATE TABLE activity (activityID INT NOT NULL PRIMARY KEY GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),starttime TIMESTAMP,endtime TIMESTAMP,description VARCHAR(255),cancelled BOOLEAN,username VARCHAR(16) NOT NULL,roomID INT, location VARCHAR(30), ismeeting BOOLEAN, FOREIGN KEY (username) REFERENCES employee(username),FOREIGN KEY (roomID) REFERENCES room(roomID))";
 	public final String CREATE_PARTICIPANT 	= "CREATE TABLE alert (isread BOOLEAN,time TIMESTAMP,message VARCHAR(255),username VARCHAR(16) NOT NULL,activityID INT NOT NULL,PRIMARY KEY (username, activityID),FOREIGN KEY (username) REFERENCES employee(username),FOREIGN KEY (activityID) REFERENCES activity(activityID))";
 	public final String CREATE_ALERT 		= "CREATE TABLE participant (status INT,username VARCHAR(16) NOT NULL,activityID INT NOT NULL,PRIMARY KEY (username, activityID),FOREIGN KEY (username) REFERENCES employee(username),FOREIGN KEY (activityID) REFERENCES activity(activityID))";
-	
-	/**
-	 * Used for testing database output.
-	 * @param dbgm
-	 */
-	public static void testPrint2(DBGetModels dbgm) {
-		ArrayList<Employee> allEmployees = new ArrayList<Employee>();
-		ArrayList<Room>	allRooms = new ArrayList<Room>();
-		ArrayList<Meeting> allMeetings = new ArrayList<Meeting>();
-		ArrayList<Activity> allActivities = new ArrayList<Activity>();
-		ArrayList<Message> allAlerts = new ArrayList<Message>();
-		
-		allEmployees = dbgm.getAllEmployees();
-		allRooms = dbgm.getAllRooms();
-		allActivities = dbgm.getAllActivities(allEmployees);
-		allMeetings = dbgm.getAllMeetings(allEmployees);
-		allAlerts = dbgm.getAllAlerts(allMeetings);
-		
-		for (Employee e : allEmployees) {
-			//System.out.println(e.getUsername());
-			System.out.println(e + " - " + e.getUsername());
-		}
-		System.out.println();
-		for (Room r : allRooms) {
-			System.out.println(r.getName());
-		}
-		System.out.println();
-		for (Activity a : allActivities) {
-			System.out.println("Activity " + a.getId() + " owned by " + a.getOwner().getUsername());
-		}
-		System.out.println();
-		for (Meeting m : allMeetings) {
-			System.out.println("Meeting " + m.getId() + " owned by " + m.getOwner().getUsername() + ". Participants:");
-			for (Participant p : m.getParticipants()) {
-				//System.out.println(p.getStatus() + " - " + p.getEmployee().getUsername());
-				System.out.println(p.getEmployee() + " - " + p.getEmployee().getUsername());
-			}
-			System.out.println();
-		}
-	}
 	
 	/**
 	 * Used for testing database output.
@@ -123,6 +84,14 @@ public class DBTest {
 			System.out.println(p.getStatus() + "\t" + e.getUsername() + " - " + e);
 		}
 		
+		XmlSerializer.getInstance();
+		String xml = XmlSerializer.serialize(dbr.getMeeting(6));
+		System.out.println(xml);
+		Meeting m2 = (Meeting)XmlSerializer.unSerialize(xml);
+		
+		System.out.println(m2.getParticipants().get(0).getStatus());
+		
+		
 		System.out.println();
 		
 		// All meetings for a specified user (oletobs), and all participants to those meetings
@@ -169,7 +138,6 @@ public class DBTest {
 		
 		DBRetrieve dbr = new DBRetrieve();
 		DBStore dbs = new DBStore();
-		DBGetModels dbgm = new DBGetModels();
 		
 		// Cache
 

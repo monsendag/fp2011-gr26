@@ -73,16 +73,16 @@ public class CalendarCanvas extends JPanel implements PropertyChangeListener {
 		}
 		
 		g.setColor(Color.GRAY);
+		
 		// horizontal lines
-		for (int i = 1; i < 24 - beginHour; i++) {
+		g.drawLine(0, (24 * rowHeight)-1, getWidth(), (24 * rowHeight)-1);
+		for (int i = 0; i < 24 - beginHour; i++) {
 			g.drawLine(0, i * rowHeight, getWidth(), i * rowHeight);
 		}
 	
 		// vertical lines
-		g.drawLine(0, 0, 0, getHeight());
-		for(int i = 1; i < 7; i++) {
+		for(int i = 0; i < 7; i++) {
 			g.drawLine(i * columnWidth, 0, i * columnWidth, getHeight());
-			
 		}
 		
 		// draw activities

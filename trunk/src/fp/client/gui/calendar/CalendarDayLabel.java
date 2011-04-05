@@ -41,7 +41,7 @@ public class CalendarDayLabel extends JPanel implements PropertyChangeListener {
 	}
 	
 	public String getValue() {
-		return days[offset] + " "+model.getMonday().plusDays(offset).getDayOfMonth()+ "." + monthToString(model);
+		return days[offset] + " "+model.getMonday().plusDays(offset).getDayOfMonth()+ ". " + monthToString(model);
 	}
 	
 	@Override
@@ -62,7 +62,7 @@ public class CalendarDayLabel extends JPanel implements PropertyChangeListener {
 		case 9: return "September";
 		case 10: return "Oktober";
 		case 11: return "November";
-		case 12: return "Desermber";
+		case 12: return "Desember";
 		default: return "fail";
 		}
 		

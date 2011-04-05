@@ -6,13 +6,7 @@ import java.util.List;
 public class NetworkObject {
 	List objects;
 	
-	public Command command;
-	
-	public static enum Command {
-		getActivities, getActivity, markRead, markUnread, createActivity,
-		setActivities
-	}
-	
+	public NetworkCommand command;
 	
 	public NetworkObject() {
 		objects = new ArrayList<Object>();
@@ -34,11 +28,11 @@ public class NetworkObject {
 		this.objects = objects;
 	}
 
-	public Command getCommand() {
+	public NetworkCommand getCommand() {
 		return command;
 	}
 
-	public void setCommand(Command command) {
+	public void setCommand(NetworkCommand command) {
 		this.command = command;
 	}
 }

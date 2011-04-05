@@ -4,26 +4,36 @@ import java.io.IOException;
 import java.net.InetAddress;
 
 import fp.common.models.Employee;
-import fp.common.models.XmlSerializer;
-
 
 public class ClientConnection extends Connection {
+	
+	  public static void main(String args[]) {
+	        java.awt.EventQueue.invokeLater(new Runnable() {
+	            public void run() {
+	                try {
+						new ClientConnection();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+                }
+	        });
+	    }
 	public ClientConnection() throws IOException {
 		super(InetAddress.getLocalHost());
 		
-		Employee arne = new Employee("Arne bjarne", "arne@bjarne.no", "shubidubidu");
-		String xml = XmlSerializer.getInstance().serialize(arne);
+		NetworkObject n = new NetworkObject();
 		
-		out.write(xml+EOL);
-		out.flush();
 		
-		String line;
-		xml = "";
-		while((line = in.readLine()) != null) {
-			xml += line;
-			if(line.equals("goodnight")) break;
+		n.setCommand(NetworkCommand.getEmployees);
+		
+		send(n);
+		NetworkObject back = retrieve();
+		
+		for(Object o : back.getObjects()) {
+			System.out.println(((Employee) o).getName());
 		}
-		System.out.println(xml);
+		
 		// Close streams and socket.
 		out.close();
 		in.close();

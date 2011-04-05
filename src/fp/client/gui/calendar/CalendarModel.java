@@ -9,7 +9,7 @@ import java.util.List;
 import org.joda.time.DateTime;
 
 import fp.common.models.Activity;
-import fp.common.models.Person;
+import fp.common.models.Employee;
 
 public class CalendarModel {
 	
@@ -58,8 +58,8 @@ public class CalendarModel {
 		changeSupport.firePropertyChange("addActivity", null, activity);
 	}
 	
-	public void addPersonActivities(Person p) {
-		for(Activity a : p.getActivities()) {
+	public void addEmployeeActivities(Employee e) {
+		for(Activity a : e.getActivities()) {
 			activities.add(a);
 		}
 	}

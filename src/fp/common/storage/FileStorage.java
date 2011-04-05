@@ -18,7 +18,7 @@ import fp.common.models.Person;
 import fp.common.models.Project;
 import fp.common.models.XmlSerializer;
 
-import no.ntnu.fp.swingutil.FPFileFilter;
+import no.ntnu.fp.swingutil.FPFileFilter;ka 
 import nu.xom.Builder;
 import nu.xom.Document;
 import nu.xom.ParsingException;
@@ -34,7 +34,7 @@ import nu.xom.Serializer;
  */
 public class FileStorage implements Storage {
 
-    private XmlSerializer serializer = new XmlSerializer();
+    private XmlSerializer serializer = XmlSerializer().getInstance();
     private static String XML_FILE_EXTENSION = "xml";
     private static String DATA_FILE_EXTENSION = "data";
     

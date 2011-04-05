@@ -54,12 +54,11 @@ public class Gui extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">
-    private void initComponents() {
+           private void initComponents() {
 
         loginDialog = new javax.swing.JDialog();
         loginPanel = new javax.swing.JPanel();
         loginUsernameTextField = new javax.swing.JTextField();
-        rememberMeCheckBox = new javax.swing.JCheckBox();
         loginButton = new javax.swing.JButton();
         loginPasswordField = new javax.swing.JPasswordField();
         wrongUsernameDialog = new javax.swing.JDialog();
@@ -190,11 +189,6 @@ public class Gui extends javax.swing.JFrame {
         });
 
         loginUsernameTextField.setText("brukernavn");
-        loginUsernameTextField.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                loginUsernameTextFieldMouseClicked(evt);
-            }
-        });
         loginUsernameTextField.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 loginUsernameTextFieldFocusGained(evt);
@@ -204,10 +198,7 @@ public class Gui extends javax.swing.JFrame {
             }
         });
 
-        rememberMeCheckBox.setFont(new java.awt.Font("Tahoma", 0, 12));
-        rememberMeCheckBox.setText("Husk meg");
-
-        loginButton.setFont(new java.awt.Font("Tahoma", 0, 12));
+        loginButton.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         loginButton.setText("Logg inn");
         loginButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -216,9 +207,9 @@ public class Gui extends javax.swing.JFrame {
         });
 
         loginPasswordField.setText("passord");
-        loginPasswordField.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                loginPasswordFieldMouseClicked(evt);
+        loginPasswordField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                loginPasswordFieldActionPerformed(evt);
             }
         });
         loginPasswordField.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -229,7 +220,6 @@ public class Gui extends javax.swing.JFrame {
                 loginPasswordFieldFocusLost(evt);
             }
         });
-        loginPasswordField.setEchoChar('\u0000');
 
         javax.swing.GroupLayout loginPanelLayout = new javax.swing.GroupLayout(loginPanel);
         loginPanel.setLayout(loginPanelLayout);
@@ -238,32 +228,26 @@ public class Gui extends javax.swing.JFrame {
             .addGroup(loginPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(loginPasswordField, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(loginUsernameTextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 154, Short.MAX_VALUE))
-                .addGap(10, 10, 10)
-                .addGroup(loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(loginButton)
-                    .addComponent(rememberMeCheckBox))
-                .addContainerGap(10, Short.MAX_VALUE))
+                    .addComponent(loginPasswordField)
+                    .addComponent(loginUsernameTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(loginButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         loginPanelLayout.setVerticalGroup(
             loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(loginPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(loginUsernameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(rememberMeCheckBox))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(loginButton)
-                    .addComponent(loginPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(loginButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 62, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, loginPanelLayout.createSequentialGroup()
+                        .addComponent(loginUsernameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(loginPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        loginUsernameTextField.setEnabled(false);
-        loginUsernameTextField.setBackground(java.awt.Color.WHITE);
-        loginPasswordField.setEnabled(false);
-        loginPasswordField.setBackground(java.awt.Color.WHITE);
+        loginPasswordField.setEchoChar('\u0000');
 
         javax.swing.GroupLayout loginDialogLayout = new javax.swing.GroupLayout(loginDialog.getContentPane());
         loginDialog.getContentPane().setLayout(loginDialogLayout);
@@ -273,8 +257,13 @@ public class Gui extends javax.swing.JFrame {
         );
         loginDialogLayout.setVerticalGroup(
             loginDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(loginPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(loginPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
+
+        loginButton.requestDefaultFocus();
+        loginUsernameTextField.setNextFocusableComponent(loginPasswordField);
+        loginPasswordField.setNextFocusableComponent(loginButton);
+        loginButton.setNextFocusableComponent(loginUsernameTextField);
 
         wrongUsernameDialog.setModal(true);
         wrongUsernameDialog.setResizable(false);
@@ -433,7 +422,7 @@ public class Gui extends javax.swing.JFrame {
         calendarChooserSearchField.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         calendarChooserSearchField.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
 
-        calendarChooserSearchIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("graphics/Search-icon 30x30 v4.png"))); // NOI18N
+        calendarChooserSearchIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fp/client/gui/graphics/Search-icon 30x30 v4.png"))); // NOI18N
 
         javax.swing.GroupLayout calendarChooserSearchPanelLayout = new javax.swing.GroupLayout(calendarChooserSearchPanel);
         calendarChooserSearchPanel.setLayout(calendarChooserSearchPanelLayout);
@@ -1154,7 +1143,7 @@ public class Gui extends javax.swing.JFrame {
         participantChooserSearchPanel.setBackground(new java.awt.Color(255, 255, 255));
         participantChooserSearchPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
 
-        participantChooserSearchIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("graphics/Search-icon 30x30 v4.png"))); // NOI18N
+        participantChooserSearchIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fp/client/gui/graphics/Search-icon 30x30 v4.png"))); // NOI18N
 
         participantChooserSearchField.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         participantChooserSearchField.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
@@ -1323,7 +1312,7 @@ public class Gui extends javax.swing.JFrame {
         calendarShowingLabel.setFont(new java.awt.Font("Tahoma", 0, 12));
         calendarShowingLabel.setText("Viser:");
 
-        shownCalendars.setText("Rigmor Lotte Karlsens Kalender");
+        shownCalendars.setText("Ingen Kalender");
         shownCalendars.setFocusable(false);
         shownCalendars.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         shownCalendars.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
@@ -1333,7 +1322,7 @@ public class Gui extends javax.swing.JFrame {
             }
         });
 
-        nextWeekLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("graphics/nextWeek.png"))); // NOI18N
+        nextWeekLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fp/client/gui/graphics/nextWeek.png"))); // NOI18N
         nextWeekLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         nextWeekLabel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -1344,7 +1333,7 @@ public class Gui extends javax.swing.JFrame {
             }
         });
 
-        previousWeekLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("graphics/prevWeek.png"))); // NOI18N
+        previousWeekLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fp/client/gui/graphics/prevWeek.png"))); // NOI18N
         previousWeekLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         previousWeekLabel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -1357,33 +1346,10 @@ public class Gui extends javax.swing.JFrame {
 
         weekViewTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null}
+
             },
             new String [] {
-                "Tid", "Mandag", "Tirsdag", "Onsdag", "Torsdag", "Fredag", "Lørdag", "Søndag"
+                "Tid", "Mandag 20. September", "Tirsdag 21. September", "Onsdag 22. September", "Torsdag 23. September", "Fredag 24. September", "Lørdag 25. September", "Søndag 26. September"
             }
         ) {
             Class[] types = new Class [] {
@@ -1396,12 +1362,12 @@ public class Gui extends javax.swing.JFrame {
         });
         weekViewTable.setColumnSelectionAllowed(true);
         weekViewTable.setRowHeight(32);
-        /////////////////////////////////////////////////////////////
-        weekViewSP.setBorder(null);
-        weekViewSP.setViewportView(new fp.client.gui.calendar.CalendarPanel());
-        
-        
-        //////////////////////////////////////////////////////
+        weekViewTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                weekViewTableMouseClicked(evt);
+            }
+        });
+        weekViewSP.setViewportView(weekViewTable);
         weekViewTable.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         weekViewTable.getColumnModel().getColumn(0).setMinWidth(33);
         weekViewTable.getColumnModel().getColumn(0).setMaxWidth(33);
@@ -1451,7 +1417,7 @@ public class Gui extends javax.swing.JFrame {
                             .addComponent(previousWeekLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(calendarShowingLabel)
-                        .addComponent(shownCalendars, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(shownCalendars, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(17, 17, 17)
                 .addComponent(weekViewSP, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -1495,17 +1461,11 @@ public class Gui extends javax.swing.JFrame {
     }                                                              
 
     private void logOutButtonActionPerformed(java.awt.event.ActionEvent evt) {                                             
-        setVisible(false);
         loginPasswordField.setText("passord");
         loginUsernameTextField.setText("brukernavn");
         loginPasswordField.setEchoChar('\u0000');
         loginDialog.setVisible(true);
     }                                            
-
-    private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {                                            
-        loginDialog.setVisible(false);
-        setVisible(true);
-}                                           
 
     private void fromDateDateChooserCancelButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                                
         System.out.print(fromDateChooserPanel.getDate());
@@ -1635,9 +1595,7 @@ public class Gui extends javax.swing.JFrame {
     }                                                  
 
     private void loginUsernameTextFieldFocusLost(java.awt.event.FocusEvent evt) {                                                 
-        if (loginUsernameTextField.getText().equals("") || loginUsernameTextField.getText().equals("brukernavn") ){
-            loginUsernameTextField.setEnabled(false);
-            loginUsernameTextField.setBackground(java.awt.Color.WHITE);
+        if (loginUsernameTextField.getText().equals("")){
             loginUsernameTextField.setText("brukernavn");
         }
     }                                                
@@ -1650,25 +1608,27 @@ public class Gui extends javax.swing.JFrame {
     }                                              
 
     private void loginPasswordFieldFocusLost(java.awt.event.FocusEvent evt) {                                             
-         if (loginPasswordField.getText().equals("") || loginPasswordField.getText().equals("passord") ){
-            loginPasswordField.setEnabled(false);
-            loginPasswordField.setBackground(java.awt.Color.WHITE);
-            loginPasswordField.setEchoChar('\u0000');
+         if (loginPasswordField.getText().equals("")){
             loginPasswordField.setText("passord");
+            loginPasswordField.setEchoChar('\u0000');
         }
     }                                            
 
-    private void loginUsernameTextFieldMouseClicked(java.awt.event.MouseEvent evt) {                                                    
-        loginUsernameTextField.setEnabled(true);
-        loginUsernameTextField.requestFocus();
-    }                                                   
+    private void loginPasswordFieldActionPerformed(java.awt.event.ActionEvent evt) {
+        login();
+    }
 
-    private void loginPasswordFieldMouseClicked(java.awt.event.MouseEvent evt) {                                                
-        loginPasswordField.setEnabled(true);
-        loginPasswordField.requestFocus();
-    }                                               
+    private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {
+        login();
+}
 
- 
+    private void weekViewTableMouseClicked(java.awt.event.MouseEvent evt) {
+        System.out.println(weekViewTable.getSelectedRow() + ", " + weekViewTable.getSelectedColumn() );
+}
+
+    /**
+    * @param args the command line arguments
+    */
 
     // Variables declaration - do not modify
     private javax.swing.JPanel appointmentButtonPanel;
@@ -1771,7 +1731,6 @@ public class Gui extends javax.swing.JFrame {
     private javax.swing.JList participantOverviewList;
     private javax.swing.JScrollPane participantOverviewSP;
     private javax.swing.JLabel previousWeekLabel;
-    private javax.swing.JCheckBox rememberMeCheckBox;
     private javax.swing.JButton shownCalendars;
     private gui.FixedDateChooserPanel toDateChooserPanel;
     private javax.swing.JButton toDateDateChooserCancelButton;
@@ -1787,6 +1746,11 @@ public class Gui extends javax.swing.JFrame {
     private javax.swing.JDialog wrongUsernameDialog;
     private javax.swing.JLabel wrongUsernameLabel;
     // End of variables declaration
+    
+    private void login() {
+        loginDialog.setVisible(false);
+        //dostuff
+    }
 
     private String dateToString(Date date){
         String dateString = "";

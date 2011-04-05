@@ -3,6 +3,7 @@ package fp.client.gui.calendar;
 import java.awt.Color;
 import java.awt.Dimension;
 
+import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
@@ -79,6 +80,7 @@ public class CalendarPanel extends JPanel {
 		JPanel label;
 		for(int offset=beginHour; offset < 24; offset++) {
 			label = new CalendarLabel(leftLabelWidth, rowHeight, model, offset);
+			label.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 1, new Color(108, 108, 108)));
 			leftLabelPanel.add(label);
 		}
 

@@ -1,5 +1,6 @@
 package no.ntnu.fp.storage;
 
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -19,7 +20,28 @@ import no.ntnu.fp.model.Room;
  * <p>Retrieves data from the database through {@link DBConnection}.</p>
  * @author fp2011-gr26
  */
-public class DBRetrieve extends DBConnection {
+public class DBRetrieve {
+	
+	private static DBRetrieve instance;
+	private Connection conn;
+	private HashMap<String,Employee> empCache;
+	private HashMap<Integer,Room> roomCache;
+	private HashMap<Integer,Activity> actCache;
+	private HashMap<Integer,Meeting> mtngCache;
+	
+	public DBRetrieve() {
+		Storage s = Storage.getInstance();
+		conn = s.getConn();
+		empCache = s.empCache;
+		roomCache = s.roomCache;
+		actCache = s.actCache;
+		mtngCache = s.mtngCache;
+	}
+	
+	public static DBRetrieve getInstance() {
+		if(instance == null) instance = new DBRetrieve();
+		return instance;
+	}
 	
 	/**
 	 * Returns an employee with the specified username from the database
@@ -32,6 +54,7 @@ public class DBRetrieve extends DBConnection {
 		if(empCache.containsKey(username)) {
 			System.out.println("Getting " + username + " from cache.");
 			return empCache.get(username);
+			
 		}
 		try {
 			Statement s = conn.createStatement();
@@ -564,14 +587,5 @@ public class DBRetrieve extends DBConnection {
 		}
 		
 		return alerts;
-	}
-	
-	public void setCache(HashMap emp,HashMap room,HashMap act,HashMap meet,DBStore write,DBRetrieve read){
-		empCache = emp;
-		roomCache = room;
-		actCache = act;
-		mtngCache = meet;
-		this.write = write;
-		this.read = read;
 	}
 }

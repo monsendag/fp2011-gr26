@@ -136,16 +136,13 @@ public class DBTest {
 	
 	public static void main(String[] args) {
 		
-		DBRetrieve dbr = new DBRetrieve();
-		DBStore dbs = new DBStore();
+		DBRetrieve dbr = DBRetrieve.getInstance();
+		DBStore dbs = DBStore.getInstance();
+		
+		
+		
 		
 		// Cache
-
-		
-		dbr.setCache(empCache, roomCache, actCache, mtngCache,dbs,dbr);
-		dbs.setCache(empCache, roomCache, actCache, mtngCache,dbs,dbr);
-		
-		
 		
 		testPrint(dbr,dbs);
 	}	

@@ -36,7 +36,6 @@ public class CalendarDayLabel extends JPanel implements PropertyChangeListener {
 		setMaximumSize(size);
 	//	this.setBorder(new BevelBorder(BevelBorder.RAISED));
 //		this.setBorder(new BevelBorder(BevelBorder.RAISED));
-		this.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(108, 108, 108)));
 		this.offset = offset;
 		this.model = model;
 		label = new JLabel(getValue());

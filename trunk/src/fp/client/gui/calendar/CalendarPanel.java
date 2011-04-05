@@ -18,7 +18,7 @@ public class CalendarPanel extends JPanel {
 	private JPanel topLabelPanel;			// this panel holds the labels indicating day of week/month
 	private JPanel leftLabelPanel;          // this panel holds the labels indicating time of day
 	private int leftLabelWidth = 50;        // the width of the leftLabelPanel
-	private int topLabelHeight = 30;        // the height of the topLabelPanel
+	private int topLabelHeight = 20;        // the height of the topLabelPanel
 	private JScrollPane scrollPane;         // allows the canvas to scroll, also has topLabelPanel and leftLabelPanel
 
 	private int columnWidth = 120;          // the width of each column

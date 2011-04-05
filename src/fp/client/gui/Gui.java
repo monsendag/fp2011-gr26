@@ -1895,7 +1895,7 @@ public class Gui extends javax.swing.JFrame {
         appointmentDialog.setVisible(true);
     }
     
-    public void dragNewactivity(Activity act){
+    public void dragNewActivity(Activity act){
 		newAppointmentTitleLabel.setText("");
 		newAppointmentDescriptionTextArea.setText("");
 		newAppointmentStartTimeCB.setSelectedItem(act.getStartTime().toString("hh:mm"));

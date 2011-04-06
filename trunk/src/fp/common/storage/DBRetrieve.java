@@ -304,6 +304,53 @@ public class DBRetrieve {
 	}
 	
 	/**
+	 * Returns every available room, in the given time interval,
+	 * from database as an {@link ArrayList} with {@link Room} objects.
+	 * @return ArrayList with all the rooms.
+	 */
+	public ArrayList<Room> getAvailableRooms(DateTime startTime,DateTime endTime) {
+		ArrayList<Room> rooms = new ArrayList<Room>();
+		try {
+			Statement s = conn.createStatement();
+			ResultSet rs = s.executeQuery("SELECT * FROM room");
+			
+			Room r;
+			while(rs.next()) {
+				int id = rs.getInt("roomID");
+				// Checking cache
+				if(roomCache.containsKey(id)) {
+					r = roomCache.get(id);
+					System.out.println("#DB: Getting room " + id + " from cache.");
+				} else {
+					r = new Room();
+					r.setName(rs.getString("name"));
+					r.setCapacity(rs.getInt("capacity"));
+					r.setRoomID(id);
+					// Adding to cache
+					System.out.println("#DB: Adding room " + id + " to cache.");
+					roomCache.put(id, r);
+				}
+				rooms.add(r);
+			}
+			s.close();
+			
+			// Removes occupied rooms
+			for (Meeting m : getAllMeetings()) {
+				if((startTime.compareTo(m.getEndTime()) < 0) &&
+				(m.getStartTime().compareTo(endTime) < 0)) {
+					rooms.remove(m.getRoom());
+					System.out.println("#DB: Room "+m.getRoom().getRoomID()+" is occupied and cannot be chosen");
+				}
+			}
+		} catch (SQLException e) {
+			System.err.println("Could not get rooms.");
+			e.printStackTrace();
+		}
+		
+		return rooms;
+	}
+	
+	/**
 	 * Returns all activities (single user activities) in the database
 	 * as an {@link ArrayList} with {@link Activity} objects.
 	 * @return ArrayList with all the activities.

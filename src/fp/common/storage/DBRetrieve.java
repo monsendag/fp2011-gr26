@@ -52,8 +52,9 @@ public class DBRetrieve {
 			while(rs.next()) {
 				e.setName(rs.getString("name"));
 				e.setUsername(rs.getString("username"));
+				return e;
 			}
-			return e;
+			return null;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

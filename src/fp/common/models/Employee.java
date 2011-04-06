@@ -1,10 +1,13 @@
 ﻿package fp.common.models;
 
+import java.util.ArrayList;
+
 public class Employee
 {
     private String name;
     private String username;
     private String password;
+    
 
     public Employee(String name,String username,String password) {
     	this.name = name;
@@ -39,5 +42,5 @@ public class Employee
 	public void setPassword(String password) {
 		this.password = password;
 	}
-    
+	
 }

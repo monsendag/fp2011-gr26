@@ -21,8 +21,6 @@ public class CalendarModel {
 		setCurrentWeek();
 		changeSupport = new PropertyChangeSupport(this);
 		activities = new ArrayList<Activity>();
-		DateTime t = new DateTime(2011, 4, 6, 10, 0, 0, 0);
-		activities.add(new Activity(null, t, t.plusHours(2).plusMinutes(15), "Arne bjarne", "her"));
 	}
 
 	public int getWeekNumber() {
@@ -58,27 +56,24 @@ public class CalendarModel {
 		changeSupport.firePropertyChange("addActivity", null, activity);
 	}
 	
-	public void addEmployeeActivities(Employee e) {
-		for(Activity a : e.getActivities()) {
-			activities.add(a);
+	public void addActivities(ArrayList<Activity> a) {
+		for(Activity act : a) {
+			activities.add(act);
 		}
 	}
 
-
 	public void setNextWeek() {
-		DateTime newTime = monday.plusWeeks(1);
-		changeSupport.firePropertyChange("week", monday, newTime);
 		monday = monday.plusWeeks(1);
+		changeSupport.firePropertyChange("week", null, monday);
 	}
 	
 	public void setPreviousWeek() {
-		DateTime newTime = monday.minusWeeks(1);
-		changeSupport.firePropertyChange("week", monday, newTime);
 		monday = monday.minusWeeks(1);
+		changeSupport.firePropertyChange("week", null, monday);
 	}
 	
 	public boolean inWeek(DateTime time) {
-		return time.getYear() == getMonday().getYear() && time.getWeekOfWeekyear() == getMonday().getWeekOfWeekyear();
+		return time.getYear() == monday.getYear() && time.getWeekOfWeekyear() == monday.getWeekOfWeekyear();
 	}
 	
 	/**

@@ -9,6 +9,8 @@ import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
+import fp.client.Client;
+
 /**
 * The panel in which the calendar is drawn
 *
@@ -27,14 +29,11 @@ public class CalendarPanel extends JPanel {
 
 	private int beginHour = 0;				// the hour of day the calendar begins. 6 == 06:00
 
-	private CalendarModel model;
 
 	/**
 	* Create the CalendarPane
 	*/
 	public CalendarPanel() {
-		this.model = new CalendarModel();
-
 
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
@@ -49,7 +48,7 @@ public class CalendarPanel extends JPanel {
 		scrollPane.setRowHeaderView(leftLabelPanel);
 		leftLabelPanel.setLayout(new BoxLayout(leftLabelPanel, BoxLayout.Y_AXIS));
 		
-		calendarCanvas = new CalendarCanvas(columnWidth, rowHeight, 3600, beginHour, model);  
+		calendarCanvas = new CalendarCanvas(columnWidth, rowHeight, 3600, beginHour);  
 		calendarCanvas.setBackground(Color.WHITE);
 //		scrollPane.setBackground(new Color(240,240,240));
 		calendarCanvas.setBorder(null);
@@ -79,14 +78,14 @@ public class CalendarPanel extends JPanel {
 		leftLabelPanel.add(Box.createVerticalStrut(1));
 		JPanel label;
 		for(int offset=beginHour; offset < 24; offset++) {
-			label = new CalendarLabel(leftLabelWidth, rowHeight, model, offset);
+			label = new CalendarLabel(leftLabelWidth, rowHeight, offset);
 			leftLabelPanel.add(label);
 		}
 
 		topLabelPanel.add(Box.createHorizontalStrut(1));
 //		topLabelPanel.setBackground(new Color(240,240,240));
 		for(int offset=0; offset<7; offset++) {
-			label = new CalendarDayLabel(columnWidth, topLabelHeight, model, offset);
+			label = new CalendarDayLabel(columnWidth, topLabelHeight, offset);
 			topLabelPanel.add(label);
 		}
 	}

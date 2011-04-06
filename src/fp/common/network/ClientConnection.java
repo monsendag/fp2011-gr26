@@ -5,6 +5,8 @@ import java.net.InetAddress;
 import java.util.ArrayList;
 import java.util.List;
 
+import fp.client.Client;
+import fp.common.models.Activity;
 import fp.common.models.Employee;
 
 public class ClientConnection extends Connection implements Runnable {
@@ -22,7 +24,6 @@ public class ClientConnection extends Connection implements Runnable {
 		
 	}
 	
-	
 	public Employee login(String username, String password) throws IOException {
 		NetworkObject n = new NetworkObject();
 		
@@ -32,9 +33,16 @@ public class ClientConnection extends Connection implements Runnable {
 		n.put("password", password);
 		send(n);
 		NetworkObject back = retrieve();
-		System.out.println("returned value in map:" + back.get("employee"));
 		return back.get("employee") != null ? ((Employee) back.get("employee")) : null;
 	}
 	
+	public ArrayList<Activity> getEmpActivities() throws IOException {
+		NetworkObject n = new NetworkObject();
+		n.setCommand(NetworkCommand.getActivities);
+		n.put("currentUser", Client.get().getUser());
+		send(n);
+		NetworkObject back = retrieve();
+		return (ArrayList<Activity>) back.get("activities");
+	}
 }
 	

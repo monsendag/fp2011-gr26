@@ -15,6 +15,7 @@ import javax.swing.JPanel;
 import org.joda.time.DateTime;
 import org.joda.time.Duration;
 
+import fp.client.Client;
 import fp.client.gui.Gui;
 import fp.common.models.Activity;
 
@@ -45,13 +46,13 @@ public class CalendarCanvas extends JPanel implements PropertyChangeListener {
 	* @param beginDay - The first day in the week. Sunday = 0, Monday = 1...
 	* @param week - The week to be displayed
 	*/
-	public CalendarCanvas(int columnWidth, int rowHeight, int secondsPerRow, int beginHour, CalendarModel model) {
+	public CalendarCanvas(int columnWidth, int rowHeight, int secondsPerRow, int beginHour) {
 		this.rowHeight = rowHeight;
 		this.columnWidth = columnWidth;
 		this.secondsPerRow = secondsPerRow;
 		this.beginHour = beginHour;
-		this.model = model;
-	
+		this.model = Client.get().calendarModel;
+		this.model.addPropertyChangeListener(this);
 		addMouseListener();
 	}
 
@@ -163,7 +164,7 @@ public class CalendarCanvas extends JPanel implements PropertyChangeListener {
 	*/
 	public Activity getActivityByPosition(int x, int y) {
 		for(Activity a : model.getActivities()) {
-			if(x >= getCoordX(a) && x <= getCoordX(a) + getActivityWidth(a) && y >= getCoordY(a) && y <= getCoordY(a) + getActivityHeight(a)) {
+			if(model.inWeek(a.getStartTime()) && x >= getCoordX(a) && x <= getCoordX(a) + getActivityWidth(a) && y >= getCoordY(a) && y <= getCoordY(a) + getActivityHeight(a)) {
 				return a;
 			}
 		}
@@ -188,7 +189,7 @@ public class CalendarCanvas extends JPanel implements PropertyChangeListener {
 		for(Activity activity : model.getActivities()) {
 			int actY = getCoordY(activity);
 			int actX = getCoordX(activity);
-			if(start.y <= actY && actY <= end.y && actX / columnWidth == start.x / columnWidth)
+			if(model.inWeek(activity.getStartTime()) && start.y <= actY && actY <= end.y && actX / columnWidth == start.x / columnWidth)
 				// an Activity is in between the point
 				return;
 		}

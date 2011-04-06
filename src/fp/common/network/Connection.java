@@ -42,7 +42,7 @@ public abstract class Connection {
 	}
 	
 	protected void send(NetworkObject o) throws IOException {
-		System.out.println("sending command: "+o.getCommand());
+		System.out.println("#NET: sending command: "+o.getCommand());
 		String xml = XmlSerializer.getInstance().serialize(o);
 		out.write(xml+EOL);
 		writeLn(EOF);
@@ -58,7 +58,7 @@ public abstract class Connection {
 		NetworkObject o = null;
 		if(xml.length() > 0) {
 			o = (NetworkObject) XmlSerializer.getInstance().unSerialize(xml);
-			System.out.println("retrieved command: "+o.getCommand());
+			System.out.println("#NET: retrieved command: "+o.getCommand());
 		}
 		return o;
 	}

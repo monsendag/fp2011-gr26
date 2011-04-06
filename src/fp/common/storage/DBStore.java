@@ -93,7 +93,8 @@ public class DBStore {
 	 */
 	public void addAlerts(Message message) {
 		try {
-			PreparedStatement ps = conn.prepareStatement("INSERT INTO alert VALUES (?,?,?,?,?)");
+			PreparedStatement ps = conn.prepareStatement("INSERT INTO alert " +
+					"(isread,time,message,username,activityID) VALUES (?,?,?,?,?)");
 			
 			for (Participant p : message.getMeeting().getParticipants()) {
 				ps.setBoolean(1,false);
@@ -218,7 +219,8 @@ public class DBStore {
 		 * Adds invite messages
 		 */
 		try {
-			ps = conn.prepareStatement("INSERT INTO alert VALUES (?,?,?,?,?)");
+			ps = conn.prepareStatement("INSERT INTO alert " +
+			"(isread,time,message,username,activityID) VALUES (?,?,?,?,?)");
 			for (Participant p : m.getParticipants()) {
 				ps.setBoolean(1,false); // isRead = false
 				ps.setTimestamp(2,new Timestamp(new Date().getTime()));
@@ -263,23 +265,21 @@ public class DBStore {
 			ps.executeUpdate();
 			ps.close();
 			
-			/*
-			ps = conn.prepareStatement("INSERT INTO alert VALUES (?,?,?,?,?)");
+			// Create message
+			ps = conn.prepareStatement("INSERT INTO alert " +
+			"(isread,time,message,username,activity) VALUES (?,?,?,?,?)");
+			
 			Meeting m = dbr.getMeeting(meetingID);
-			Employee decliner = dbr.getEmployee(username);
-			for (Participant p : m.getParticipants()) {
-				ps.setBoolean(1,false); // isRead = false
-				ps.setTimestamp(2,new Timestamp(new Date().getTime()));
-				ps.setString(3,decliner.getName()+" har avslått " +
-						"invitasjon til møtet den "+m.getStartTime()+".");
-				ps.setString(4, p.getEmployee().getUsername());
-				System.out.println(p.getEmployee().getUsername());
-				ps.setInt(5, activityID);
-				ps.addBatch();
-			}
-			ps.executeBatch();
+			
+			ps.setBoolean(1,false); // isRead = false
+			ps.setTimestamp(2,new Timestamp(new Date().getTime()));
+			ps.setString(3,"Du er invitert til møtet den " +m.getStartTime()+
+						" satt opp av "+m.getOwner().getName()+".");
+			ps.setString(4, username);
+			ps.setInt(5, meetingID);
+			ps.executeUpdate();
 			ps.close();
-			*/
+			
 		} catch (SQLException e) {
 			System.err.println("Could not add participant.");
 			e.printStackTrace();
@@ -313,7 +313,8 @@ public class DBStore {
 			
 			// Create messages
 			if(Participant.intToEnum(status) == Participant.Status.NOT_ATTENDING) {
-				ps = conn.prepareStatement("INSERT INTO alert VALUES (?,?,?,?,?)");
+				ps = conn.prepareStatement("INSERT INTO alert " +
+				"(isread,time,message,username,activityID) VALUES (?,?,?,?,?)");
 				Meeting m = dbr.getMeeting(activityID);
 				Employee decliner = dbr.getEmployee(username);
 				for (Participant p : m.getParticipants()) {
@@ -357,7 +358,8 @@ public class DBStore {
 			ps.executeUpdate();
 			
 			// Create messages
-			ps = conn.prepareStatement("INSERT INTO alert VALUES (?,?,?,?,?)");
+			ps = conn.prepareStatement("INSERT INTO alert " +
+			"(isread,time,message,username,activityID) VALUES (?,?,?,?,?)");
 			Meeting m = dbr.getMeeting(meetingID);
 			for (Participant p : m.getParticipants()) {
 				String username = p.getEmployee().getUsername();
@@ -400,7 +402,8 @@ public class DBStore {
 			ps.close();
 			
 			// Create messages
-			ps = conn.prepareStatement("INSERT INTO alert VALUES (?,?,?,?,?)");
+			ps = conn.prepareStatement("INSERT INTO alert " +
+			"(isread,time,message,username,activityID) VALUES (?,?,?,?,?)");
 			for (Participant p : m.getParticipants()) {
 				String username = p.getEmployee().getUsername();
 				ps.setBoolean(1,false); // isRead = false

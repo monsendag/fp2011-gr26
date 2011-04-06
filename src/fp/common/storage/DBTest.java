@@ -25,11 +25,11 @@ public class DBTest {
 	/**
 	 * SQL-scripts for creating all the tables.
 	 */
-	public final String CREATE_EMPLOYEE 	= "CREATE TABLE employee (username VARCHAR(16) NOT NULL PRIMARY KEY,name VARCHAR(30),password VARCHAR(32) NOT NULL)";
-	public final String CREATE_ROOM 		= "CREATE TABLE room (roomID INT NOT NULL PRIMARY KEY GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),name VARCHAR(30),capacity INT)";
-	public final String CREATE_ACTIVITY 	= "CREATE TABLE activity (activityID INT NOT NULL PRIMARY KEY GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),starttime TIMESTAMP,endtime TIMESTAMP,description VARCHAR(255),cancelled BOOLEAN,username VARCHAR(16) NOT NULL,roomID INT, location VARCHAR(30), ismeeting BOOLEAN, FOREIGN KEY (username) REFERENCES employee(username),FOREIGN KEY (roomID) REFERENCES room(roomID))";
-	public final String CREATE_PARTICIPANT 	= "CREATE TABLE alert (isread BOOLEAN,time TIMESTAMP,message VARCHAR(255),username VARCHAR(16) NOT NULL,activityID INT NOT NULL,PRIMARY KEY (username, activityID),FOREIGN KEY (username) REFERENCES employee(username),FOREIGN KEY (activityID) REFERENCES activity(activityID))";
-	public final String CREATE_ALERT 		= "CREATE TABLE participant (status INT,username VARCHAR(16) NOT NULL,activityID INT NOT NULL,PRIMARY KEY (username, activityID),FOREIGN KEY (username) REFERENCES employee(username),FOREIGN KEY (activityID) REFERENCES activity(activityID))";
+	public final static String CREATE_EMPLOYEE 	= "CREATE TABLE employee (username VARCHAR(16) NOT NULL PRIMARY KEY,name VARCHAR(30),password VARCHAR(32) NOT NULL)";
+	public final static String CREATE_ROOM 		= "CREATE TABLE room (roomID INT NOT NULL PRIMARY KEY GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),name VARCHAR(30),capacity INT)";
+	public final static String CREATE_ACTIVITY 	= "CREATE TABLE activity (activityID INT NOT NULL PRIMARY KEY GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),starttime TIMESTAMP,endtime TIMESTAMP,description VARCHAR(255),cancelled BOOLEAN,username VARCHAR(16) NOT NULL,roomID INT, location VARCHAR(30), ismeeting BOOLEAN, FOREIGN KEY (username) REFERENCES employee(username),FOREIGN KEY (roomID) REFERENCES room(roomID))";
+	public final static String CREATE_ALERT 		= "CREATE TABLE alert (alertID INT NOT NULL PRIMARY KEY GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),isread BOOLEAN,time TIMESTAMP,message VARCHAR(255),username VARCHAR(16) NOT NULL,activityID INT NOT NULL,FOREIGN KEY (username) REFERENCES employee(username),FOREIGN KEY (activityID) REFERENCES activity(activityID))";
+	public final static String CREATE_PARTICIPANT	= "CREATE TABLE participant (status INT,username VARCHAR(16) NOT NULL,activityID INT NOT NULL,PRIMARY KEY (username, activityID),FOREIGN KEY (username) REFERENCES employee(username),FOREIGN KEY (activityID) REFERENCES activity(activityID))";
 	
 	/**
 	 * Used for testing database output.
@@ -40,7 +40,7 @@ public class DBTest {
 		//dbs.changeInviteStatusByIDs(3, "Johni", 2);
 		
 		// Cancels the meeting with id = 6
-		//dbs.cancelMeetingByID(6);
+		//dbs.changeMeeting(dbr.getMeeting(9));
 		
 		// All employees
 		System.out.println("All emlpoyees: (getAllEmployees())");
@@ -76,7 +76,7 @@ public class DBTest {
 		// Changing big carls status in the meeting object
 		meeting.getParticipants().get(0).setStatus(Participant.Status.NOT_ATTENDING);
 		// bigcarl in meeting with id 6
-		//dbs.changeInviteStatusByIDs(4, "superuser", Participant.Status.NOT_ATTENDING.ordinal());
+		//dbs.changeInviteStatusByIDs(10, "superuser", Participant.Status.NOT_ATTENDING.ordinal());
 		//dbs.cancelMeetingByID(6);
 		
 		System.out.println();
@@ -133,7 +133,7 @@ public class DBTest {
 		
 		
 		//dbs.addMeeting(new Meeting(dbr.getEmployee("Emo"), dbr.getMeeting(3).getParticipants(), dbr.getRoom(2), new DateTime(2001, 1, 1, 12, 0, 0, 0), new DateTime(2001, 1, 1, 14, 0, 0, 0), "Random", "Hjemme"));
-		for (Message m : dbr.getEmpAlertsByUsername("mmmm")) {
+		for (Message m : dbr.getAllAlerts()) {
 			System.out.println(m.getRead() + " " + m.getCreatedOn() + " " + m.getDescription()
 					+ " " + m.getEmployee().getUsername() + " " + m.getMeeting().getId());
 		}

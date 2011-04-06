@@ -143,7 +143,6 @@ public class DBTest {
 	
 	public static void main(String[] args) {
 		
-		
 		DBStore dbs = DBStore.getInstance();
 		DBRetrieve dbr = DBRetrieve.getInstance();
 		

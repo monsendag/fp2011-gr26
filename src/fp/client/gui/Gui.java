@@ -23,6 +23,7 @@ import javax.swing.UIManager;
 import org.joda.time.DateTime;
 
 
+import fp.client.Client;
 import fp.client.gui.calendar.*;
 import fp.common.models.Activity;
 import fp.common.models.Employee;
@@ -43,7 +44,7 @@ public class Gui extends javax.swing.JFrame {
        initComponents();
        weekViewSP.setBorder(null);
        weekViewSP.setViewportView(new fp.client.gui.calendar.CalendarPanel());
-       setVisible(true);
+       //setVisible(true);
        setLocationRelativeTo(null);
        setIconImage(appIcon.getImage());
        loginDialog.pack();
@@ -1438,6 +1439,130 @@ public class Gui extends javax.swing.JFrame {
         pack();
     }// </editor-fold>
 
+
+    /**
+    * @param args the command line arguments
+    */
+
+    // Variables declaration - do not modify
+    private javax.swing.JPanel appointmentButtonPanel;
+    private javax.swing.JButton appointmentCloseButton;
+    private javax.swing.JLabel appointmentDescriptionLabel;
+    private javax.swing.JTextArea appointmentDescriptionTextArea;
+    private javax.swing.JDialog appointmentDialog;
+    private javax.swing.JPanel appointmentEditPanel;
+    private javax.swing.JLabel appointmentEndLabel;
+    private javax.swing.JComboBox appointmentEndTimeCB;
+    private javax.swing.JButton appointmentFromDateButton;
+    private javax.swing.JPanel appointmentLabelPanel;
+    private javax.swing.JComboBox appointmentRoomCB;
+    private javax.swing.JLabel appointmentRoomLabel;
+    private javax.swing.JButton appointmentSayYoureNotCommingButton;
+    private javax.swing.JButton appointmentShowParticipantsButton;
+    private javax.swing.JLabel appointmentStartLabel;
+    private javax.swing.JComboBox appointmentStartTimeCB;
+    private javax.swing.JScrollPane appointmentTextSP;
+    private javax.swing.JLabel appointmentTitleLabel;
+    private javax.swing.JTextField appointmentTitleTextField;
+    private javax.swing.JButton appointmentToDateButton;
+    private javax.swing.JButton calendarChooserCancelButton;
+    private javax.swing.JDialog calendarChooserDialog;
+    private javax.swing.JButton calendarChooserOkButton;
+    private javax.swing.JScrollPane calendarChooserSC;
+    private javax.swing.JTextField calendarChooserSearchField;
+    private javax.swing.JLabel calendarChooserSearchIcon;
+    private javax.swing.JPanel calendarChooserSearchPanel;
+    private javax.swing.JTable calendarChooserTable;
+    private javax.swing.JLabel calendarShowingLabel;
+    private javax.swing.JDialog errorDialog;
+    private javax.swing.JButton errorDialogButton;
+    private javax.swing.JScrollPane errorDialogSP;
+    private javax.swing.JTextArea errorDialogTextArea;
+    private gui.FixedDateChooserPanel fromDateChooserPanel;
+    private javax.swing.JButton fromDateDateChooserCancelButton;
+    private javax.swing.JDialog fromDateDateChooserDialog;
+    private javax.swing.JButton fromDateDateChooserOkButton;
+    private javax.swing.JTextArea invitationDescription;
+    private javax.swing.JList invitationList;
+    private javax.swing.JPanel invitationPanel;
+    private javax.swing.JButton invitationPanelAttendingButton;
+    private javax.swing.JButton invitationPanelCloseButton;
+    private javax.swing.JScrollPane invitationPanelListSP;
+    private javax.swing.JButton invitationPanelNotAttendinButton;
+    private javax.swing.JPanel invitationPanelTab;
+    private javax.swing.JScrollPane invitationPanelTextSP;
+    private javax.swing.JLabel invitationPanelTimeRoomAvailability;
+    private javax.swing.JButton logOutButton;
+    private javax.swing.JButton loginButton;
+    private javax.swing.JDialog loginDialog;
+    private javax.swing.JPanel loginPanel;
+    private javax.swing.JPasswordField loginPasswordField;
+    private javax.swing.JTextField loginUsernameTextField;
+    private javax.swing.JTextArea messageDescription;
+    private javax.swing.JList messageList;
+    private javax.swing.JDialog messageOverviewDialog;
+    private javax.swing.JTabbedPane messageOverviewTabbedPane;
+    private javax.swing.JPanel messagePanel;
+    private javax.swing.JButton messagePanelCloseButton;
+    private javax.swing.JScrollPane messagePanelListSP;
+    private javax.swing.JPanel messagePanelTab;
+    private javax.swing.JScrollPane messagePanelTextSP;
+    private javax.swing.JLabel messagePanelTimeRoomAvailability;
+    private javax.swing.JButton messageViewButton;
+    private javax.swing.JButton newAppointmentButton;
+    private javax.swing.JPanel newAppointmentButtonpanel;
+    private javax.swing.JButton newAppointmentCancelButton;
+    private javax.swing.JButton newAppointmentChooseParticipantsButton;
+    private javax.swing.JLabel newAppointmentDescriptionLabel;
+    private javax.swing.JTextArea newAppointmentDescriptionTextArea;
+    private javax.swing.JDialog newAppointmentDialog;
+    private javax.swing.JPanel newAppointmentEditPanel;
+    private javax.swing.JLabel newAppointmentEndLabel;
+    private javax.swing.JComboBox newAppointmentEndTimeCB;
+    private javax.swing.JButton newAppointmentFromDateButton;
+    private javax.swing.JPanel newAppointmentLabelPanel;
+    private javax.swing.JButton newAppointmentMakeButton;
+    private javax.swing.JComboBox newAppointmentRoomCB;
+    private javax.swing.JLabel newAppointmentRoomLabel;
+    private javax.swing.JLabel newAppointmentStartLabel;
+    private javax.swing.JComboBox newAppointmentStartTimeCB;
+    private javax.swing.JScrollPane newAppointmentTextSP;
+    private javax.swing.JLabel newAppointmentTitleLabel;
+    private javax.swing.JTextField newAppointmentTitleTextField;
+    private javax.swing.JButton newAppointmentToDateButton;
+    private javax.swing.JLabel nextWeekLabel;
+    private javax.swing.JButton participantChooserCancelButton;
+    private javax.swing.JDialog participantChooserDialog;
+    private javax.swing.JButton participantChooserOkButton;
+    private javax.swing.JScrollPane participantChooserSP;
+    private javax.swing.JTextField participantChooserSearchField;
+    private javax.swing.JLabel participantChooserSearchIcon;
+    private javax.swing.JPanel participantChooserSearchPanel;
+    private javax.swing.JTable participantChooserTable;
+    private javax.swing.JButton participantOverviewChangeButton;
+    private javax.swing.JButton participantOverviewCloseButton;
+    private javax.swing.JDialog participantOverviewDialog;
+    private javax.swing.JList participantOverviewList;
+    private javax.swing.JScrollPane participantOverviewSP;
+    private javax.swing.JLabel previousWeekLabel;
+    private javax.swing.JButton shownCalendars;
+    private gui.FixedDateChooserPanel toDateChooserPanel;
+    private javax.swing.JButton toDateDateChooserCancelButton;
+    private javax.swing.JDialog toDateDateChooserDialog;
+    private javax.swing.JButton toDateDateChooserOkButton;
+    private javax.swing.JButton weekViewButton;
+    private javax.swing.JScrollPane weekViewSP;
+    private javax.swing.JTable weekViewTable;
+    private javax.swing.JButton wrongPasswordButton;
+    private javax.swing.JDialog wrongPasswordDialog;
+    private javax.swing.JLabel wrongPasswordLabel;
+    private javax.swing.JButton wrongUsernameButton;
+    private javax.swing.JDialog wrongUsernameDialog;
+    private javax.swing.JLabel wrongUsernameLabel;
+    // End of variables declaration
+    
+    
+
     private void messageViewButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                  
         messageOverviewDialog.pack();
         messageOverviewDialog.setLocationRelativeTo(this);
@@ -1629,131 +1754,19 @@ public class Gui extends javax.swing.JFrame {
     private void weekViewTableMouseClicked(java.awt.event.MouseEvent evt) {
         System.out.println(weekViewTable.getSelectedRow() + ", " + weekViewTable.getSelectedColumn() );
 }
-
-    /**
-    * @param args the command line arguments
-    */
-
-    // Variables declaration - do not modify
-    private javax.swing.JPanel appointmentButtonPanel;
-    private javax.swing.JButton appointmentCloseButton;
-    private javax.swing.JLabel appointmentDescriptionLabel;
-    private javax.swing.JTextArea appointmentDescriptionTextArea;
-    private javax.swing.JDialog appointmentDialog;
-    private javax.swing.JPanel appointmentEditPanel;
-    private javax.swing.JLabel appointmentEndLabel;
-    private javax.swing.JComboBox appointmentEndTimeCB;
-    private javax.swing.JButton appointmentFromDateButton;
-    private javax.swing.JPanel appointmentLabelPanel;
-    private javax.swing.JComboBox appointmentRoomCB;
-    private javax.swing.JLabel appointmentRoomLabel;
-    private javax.swing.JButton appointmentSayYoureNotCommingButton;
-    private javax.swing.JButton appointmentShowParticipantsButton;
-    private javax.swing.JLabel appointmentStartLabel;
-    private javax.swing.JComboBox appointmentStartTimeCB;
-    private javax.swing.JScrollPane appointmentTextSP;
-    private javax.swing.JLabel appointmentTitleLabel;
-    private javax.swing.JTextField appointmentTitleTextField;
-    private javax.swing.JButton appointmentToDateButton;
-    private javax.swing.JButton calendarChooserCancelButton;
-    private javax.swing.JDialog calendarChooserDialog;
-    private javax.swing.JButton calendarChooserOkButton;
-    private javax.swing.JScrollPane calendarChooserSC;
-    private javax.swing.JTextField calendarChooserSearchField;
-    private javax.swing.JLabel calendarChooserSearchIcon;
-    private javax.swing.JPanel calendarChooserSearchPanel;
-    private javax.swing.JTable calendarChooserTable;
-    private javax.swing.JLabel calendarShowingLabel;
-    private javax.swing.JDialog errorDialog;
-    private javax.swing.JButton errorDialogButton;
-    private javax.swing.JScrollPane errorDialogSP;
-    private javax.swing.JTextArea errorDialogTextArea;
-    private gui.FixedDateChooserPanel fromDateChooserPanel;
-    private javax.swing.JButton fromDateDateChooserCancelButton;
-    private javax.swing.JDialog fromDateDateChooserDialog;
-    private javax.swing.JButton fromDateDateChooserOkButton;
-    private javax.swing.JTextArea invitationDescription;
-    private javax.swing.JList invitationList;
-    private javax.swing.JPanel invitationPanel;
-    private javax.swing.JButton invitationPanelAttendingButton;
-    private javax.swing.JButton invitationPanelCloseButton;
-    private javax.swing.JScrollPane invitationPanelListSP;
-    private javax.swing.JButton invitationPanelNotAttendinButton;
-    private javax.swing.JPanel invitationPanelTab;
-    private javax.swing.JScrollPane invitationPanelTextSP;
-    private javax.swing.JLabel invitationPanelTimeRoomAvailability;
-    private javax.swing.JButton logOutButton;
-    private javax.swing.JButton loginButton;
-    private javax.swing.JDialog loginDialog;
-    private javax.swing.JPanel loginPanel;
-    private javax.swing.JPasswordField loginPasswordField;
-    private javax.swing.JTextField loginUsernameTextField;
-    private javax.swing.JTextArea messageDescription;
-    private javax.swing.JList messageList;
-    private javax.swing.JDialog messageOverviewDialog;
-    private javax.swing.JTabbedPane messageOverviewTabbedPane;
-    private javax.swing.JPanel messagePanel;
-    private javax.swing.JButton messagePanelCloseButton;
-    private javax.swing.JScrollPane messagePanelListSP;
-    private javax.swing.JPanel messagePanelTab;
-    private javax.swing.JScrollPane messagePanelTextSP;
-    private javax.swing.JLabel messagePanelTimeRoomAvailability;
-    private javax.swing.JButton messageViewButton;
-    private javax.swing.JButton newAppointmentButton;
-    private javax.swing.JPanel newAppointmentButtonpanel;
-    private javax.swing.JButton newAppointmentCancelButton;
-    private javax.swing.JButton newAppointmentChooseParticipantsButton;
-    private javax.swing.JLabel newAppointmentDescriptionLabel;
-    private javax.swing.JTextArea newAppointmentDescriptionTextArea;
-    private javax.swing.JDialog newAppointmentDialog;
-    private javax.swing.JPanel newAppointmentEditPanel;
-    private javax.swing.JLabel newAppointmentEndLabel;
-    private javax.swing.JComboBox newAppointmentEndTimeCB;
-    private javax.swing.JButton newAppointmentFromDateButton;
-    private javax.swing.JPanel newAppointmentLabelPanel;
-    private javax.swing.JButton newAppointmentMakeButton;
-    private javax.swing.JComboBox newAppointmentRoomCB;
-    private javax.swing.JLabel newAppointmentRoomLabel;
-    private javax.swing.JLabel newAppointmentStartLabel;
-    private javax.swing.JComboBox newAppointmentStartTimeCB;
-    private javax.swing.JScrollPane newAppointmentTextSP;
-    private javax.swing.JLabel newAppointmentTitleLabel;
-    private javax.swing.JTextField newAppointmentTitleTextField;
-    private javax.swing.JButton newAppointmentToDateButton;
-    private javax.swing.JLabel nextWeekLabel;
-    private javax.swing.JButton participantChooserCancelButton;
-    private javax.swing.JDialog participantChooserDialog;
-    private javax.swing.JButton participantChooserOkButton;
-    private javax.swing.JScrollPane participantChooserSP;
-    private javax.swing.JTextField participantChooserSearchField;
-    private javax.swing.JLabel participantChooserSearchIcon;
-    private javax.swing.JPanel participantChooserSearchPanel;
-    private javax.swing.JTable participantChooserTable;
-    private javax.swing.JButton participantOverviewChangeButton;
-    private javax.swing.JButton participantOverviewCloseButton;
-    private javax.swing.JDialog participantOverviewDialog;
-    private javax.swing.JList participantOverviewList;
-    private javax.swing.JScrollPane participantOverviewSP;
-    private javax.swing.JLabel previousWeekLabel;
-    private javax.swing.JButton shownCalendars;
-    private gui.FixedDateChooserPanel toDateChooserPanel;
-    private javax.swing.JButton toDateDateChooserCancelButton;
-    private javax.swing.JDialog toDateDateChooserDialog;
-    private javax.swing.JButton toDateDateChooserOkButton;
-    private javax.swing.JButton weekViewButton;
-    private javax.swing.JScrollPane weekViewSP;
-    private javax.swing.JTable weekViewTable;
-    private javax.swing.JButton wrongPasswordButton;
-    private javax.swing.JDialog wrongPasswordDialog;
-    private javax.swing.JLabel wrongPasswordLabel;
-    private javax.swing.JButton wrongUsernameButton;
-    private javax.swing.JDialog wrongUsernameDialog;
-    private javax.swing.JLabel wrongUsernameLabel;
-    // End of variables declaration
+    
     
     private void login() {
-        loginDialog.setVisible(false);
-        //dostuff
+    	String username = loginUsernameTextField.getText();
+    	String password = String.valueOf(loginPasswordField.getPassword());
+
+    	if(Client.get().loginAction(null, username, password)) {
+    		loginDialog.setVisible(false);
+    		setVisible(false);
+    	}
+    	else {
+    		errorDialog.setVisible(true);
+    	}
     }
 
     private String dateToString(Date date){

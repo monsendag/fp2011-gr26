@@ -76,16 +76,11 @@ public class Gui extends javax.swing.JFrame {
         loginButton = new javax.swing.JButton();
         loginPasswordField = new javax.swing.JPasswordField();
         hostIPField = new javax.swing.JFormattedTextField();
-        wrongUsernameDialog = new javax.swing.JDialog();
-        wrongUsernameLabel = new javax.swing.JLabel();
-        wrongUsernameButton = new javax.swing.JButton();
-        wrongPasswordDialog = new javax.swing.JDialog();
-        wrongPasswordLabel = new javax.swing.JLabel();
-        wrongPasswordButton = new javax.swing.JButton();
         errorDialog = new javax.swing.JDialog();
         errorDialogButton = new javax.swing.JButton();
         errorDialogSP = new javax.swing.JScrollPane();
         errorDialogTextArea = new javax.swing.JTextArea();
+        iWontStandForThisButton = new javax.swing.JButton();
         calendarChooserDialog = new javax.swing.JDialog();
         calendarChooserSC = new javax.swing.JScrollPane();
         calendarChooserTable = new javax.swing.JTable();
@@ -156,7 +151,7 @@ public class Gui extends javax.swing.JFrame {
         newAppointmentEndLabel = new javax.swing.JLabel();
         newAppointmentStartLabel = new javax.swing.JLabel();
         newAppointmentButtonpanel = new javax.swing.JPanel();
-        newAppointmentMakeButton = new javax.swing.JButton();
+        newAppointmentCreateButton = new javax.swing.JButton();
         newAppointmentCancelButton = new javax.swing.JButton();
         newAppointmentChooseParticipantsButton = new javax.swing.JButton();
         participantChooserDialog = new javax.swing.JDialog();
@@ -175,6 +170,10 @@ public class Gui extends javax.swing.JFrame {
         toDateDateChooserOkButton = new javax.swing.JButton();
         toDateDateChooserCancelButton = new javax.swing.JButton();
         toDateChooserPanel = new gui.FixedDateChooserPanel();
+        loadingDialog = new javax.swing.JDialog();
+        progressBar = new javax.swing.JProgressBar();
+        loadingLabel = new javax.swing.JLabel();
+        loadingCloseButton = new javax.swing.JButton();
         messageViewButton = new javax.swing.JButton();
         newAppointmentButton = new javax.swing.JButton();
         logOutButton = new javax.swing.JButton();
@@ -235,8 +234,8 @@ public class Gui extends javax.swing.JFrame {
                 loginPasswordFieldFocusLost(evt);
             }
         });
-
         try { hostIPField.setText(InetAddress.getLocalHost().getHostAddress());	} catch (UnknownHostException e) {}
+        hostIPField.setText("host ip");
         hostIPField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 hostIPFieldActionPerformed(evt);
@@ -299,65 +298,6 @@ public class Gui extends javax.swing.JFrame {
         hostIPField.setNextFocusableComponent(loginButton);
         loginButton.setNextFocusableComponent(loginUsernameTextField);
 
-        wrongUsernameDialog.setModal(true);
-        wrongUsernameDialog.setResizable(false);
-
-        wrongUsernameLabel.setText("Ugyldig brukernavn");
-
-        wrongUsernameButton.setText("Unnskyld");
-
-        javax.swing.GroupLayout wrongUsernameDialogLayout = new javax.swing.GroupLayout(wrongUsernameDialog.getContentPane());
-        wrongUsernameDialog.getContentPane().setLayout(wrongUsernameDialogLayout);
-        wrongUsernameDialogLayout.setHorizontalGroup(
-            wrongUsernameDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(wrongUsernameDialogLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(wrongUsernameDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(wrongUsernameButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(wrongUsernameLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        wrongUsernameDialogLayout.setVerticalGroup(
-            wrongUsernameDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(wrongUsernameDialogLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(wrongUsernameLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(wrongUsernameButton)
-                .addContainerGap())
-        );
-
-        wrongPasswordDialog.setModal(true);
-        wrongPasswordDialog.setResizable(false);
-
-        wrongPasswordLabel.setText("Feil passord");
-
-        wrongPasswordButton.setText("Unnskyld");
-
-        javax.swing.GroupLayout wrongPasswordDialogLayout = new javax.swing.GroupLayout(wrongPasswordDialog.getContentPane());
-        wrongPasswordDialog.getContentPane().setLayout(wrongPasswordDialogLayout);
-        wrongPasswordDialogLayout.setHorizontalGroup(
-            wrongPasswordDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(wrongPasswordDialogLayout.createSequentialGroup()
-                .addGroup(wrongPasswordDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(wrongPasswordDialogLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(wrongPasswordButton))
-                    .addGroup(wrongPasswordDialogLayout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(wrongPasswordLabel)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        wrongPasswordDialogLayout.setVerticalGroup(
-            wrongPasswordDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, wrongPasswordDialogLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(wrongPasswordLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(wrongPasswordButton)
-                .addContainerGap())
-        );
-
         errorDialog.setTitle("Sorry, det skjedde noe galt =(");
         errorDialog.setLocationByPlatform(true);
         errorDialog.setModal(true);
@@ -377,25 +317,37 @@ public class Gui extends javax.swing.JFrame {
         errorDialogTextArea.setWrapStyleWord(true);
         errorDialogSP.setViewportView(errorDialogTextArea);
 
+        iWontStandForThisButton.setText("Dette finner jeg meg ikke i..!");
+        iWontStandForThisButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                iWontStandForThisButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout errorDialogLayout = new javax.swing.GroupLayout(errorDialog.getContentPane());
         errorDialog.getContentPane().setLayout(errorDialogLayout);
         errorDialogLayout.setHorizontalGroup(
             errorDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(errorDialogLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(errorDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(errorDialogButton, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(errorDialogSP, javax.swing.GroupLayout.DEFAULT_SIZE, 380, Short.MAX_VALUE))
-                .addContainerGap())
+                .addGroup(errorDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(errorDialogSP, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, errorDialogLayout.createSequentialGroup()
+                        .addComponent(errorDialogButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(iWontStandForThisButton)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         errorDialogLayout.setVerticalGroup(
             errorDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, errorDialogLayout.createSequentialGroup()
+            .addGroup(errorDialogLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(errorDialogSP, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(errorDialogButton)
-                .addContainerGap())
+                .addComponent(errorDialogSP, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(errorDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(errorDialogButton)
+                    .addComponent(iWontStandForThisButton))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         calendarChooserDialog.setTitle("Velg Kalendere");
@@ -512,13 +464,13 @@ public class Gui extends javax.swing.JFrame {
         messageOverviewDialog.setResizable(false);
 
         messageList.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "09.04.2011 - Møte avlyst", "01.04.2011 - Sol i Trondheim" };
+            String[] strings = { "09.04.2011 - MÃ¸te avlyst", "01.04.2011 - Sol i Trondheim" };
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
         messagePanelListSP.setViewportView(messageList);
 
-        messagePanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Styremøte - 10. April 2011"));
+        messagePanel.setBorder(javax.swing.BorderFactory.createTitledBorder("StyremÃ¸te - 10. April 2011"));
 
         messagePanelCloseButton.setText("Lukk");
         messagePanelCloseButton.addActionListener(new java.awt.event.ActionListener() {
@@ -533,7 +485,7 @@ public class Gui extends javax.swing.JFrame {
         messageDescription.setEditable(false);
         messageDescription.setLineWrap(true);
         messageDescription.setRows(5);
-        messageDescription.setText("Møtet er avlyst grunnet potekreft i kattelabben. ");
+        messageDescription.setText("MÃ¸tet er avlyst grunnet potekreft i kattelabben. ");
         messageDescription.setWrapStyleWord(true);
         messagePanelTextSP.setViewportView(messageDescription);
 
@@ -588,13 +540,13 @@ public class Gui extends javax.swing.JFrame {
         messageOverviewTabbedPane.addTab("Meldinger", messagePanelTab);
 
         invitationList.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "03.03.2011 - Styremøte 10. April" };
+            String[] strings = { "03.03.2011 - StyremÃ¸te 10. April" };
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
         invitationPanelListSP.setViewportView(invitationList);
 
-        invitationPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Styremøte - 10. April 2011"));
+        invitationPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("StyremÃ¸te - 10. April 2011"));
 
         invitationPanelAttendingButton.setText("Jeg kommer");
 
@@ -618,7 +570,7 @@ public class Gui extends javax.swing.JFrame {
         invitationDescription.setEditable(false);
         invitationDescription.setLineWrap(true);
         invitationDescription.setRows(5);
-        invitationDescription.setText("Det blir et styremøte tiende april, husk å ta med druer og paraply.");
+        invitationDescription.setText("Det blir et styremÃ¸te tiende april, husk Ã¥ ta med druer og paraply.");
         invitationDescription.setWrapStyleWord(true);
         invitationPanelTextSP.setViewportView(invitationDescription);
 
@@ -752,7 +704,7 @@ public class Gui extends javax.swing.JFrame {
         appointmentDialog.setModal(true);
         appointmentDialog.setResizable(false);
 
-        appointmentFromDateButton.setText("Lørdag 24. Desember - 2012");
+        appointmentFromDateButton.setText("LÃ¸rdag 24. Desember - 2012");
         appointmentFromDateButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 appointmentFromDateButtonActionPerformed(evt);
@@ -761,7 +713,7 @@ public class Gui extends javax.swing.JFrame {
 
         appointmentStartTimeCB.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00:00", "00:15", "00:30", "00:45", "01:00", "01:15", "01:30", "01:45", "02:00", "02:15", "02:30", "02:45", "03:00", "03:15", "03:30", "03:45", "04:00", "04:15", "04:30", "04:45", "05:00", "05:15", "05:30", "05:45", "06:00", "06:15", "06:30", "06:45", "07:00", "07:15", "07:30", "07:45", "08:00", "08:15", "08:30", "08:45", "09:00", "09:15", "09:30", "09:45", "10:00", "10:15", "10:30", "10:45", "11:00", "11:15", "11:30", "11:45", "12:00", "12:15", "12:30", "12:45", "13:00", "13:15", "13:30", "13:45", "14:00", "14:15", "14:30", "14:45", "15:00", "15:15", "15:30", "15:45", "16:00", "16:15", "16:30", "16:45", "17:00", "17:15", "17:30", "17:45", "18:00", "18:15", "18:30", "18:45", "19:00", "19:15", "19:30", "19:45", "20:00", "20:15", "20:30", "20:45", "21:00", "21:15", "21:30", "21:45", "22:00", "22:15", "22:30", "22:45", "23:00", "23:15", "23:30", "23:45" }));
 
-        appointmentToDateButton.setText("Lørdag 24. Desember - 2012");
+        appointmentToDateButton.setText("LÃ¸rdag 24. Desember - 2012");
         appointmentToDateButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 appointmentToDateButtonActionPerformed(evt);
@@ -939,7 +891,7 @@ public class Gui extends javax.swing.JFrame {
         newAppointmentDialog.setModal(true);
         newAppointmentDialog.setResizable(false);
 
-        newAppointmentFromDateButton.setText("Lørdag 24. Desember - 2012");
+        newAppointmentFromDateButton.setText("LÃ¸rdag 24. Desember - 2012");
         newAppointmentFromDateButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 newAppointmentFromDateButtonActionPerformed(evt);
@@ -948,7 +900,7 @@ public class Gui extends javax.swing.JFrame {
 
         newAppointmentStartTimeCB.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "07:00", "07:15", "07:30", "07:45", "08:00", "08:15", "08:30", "08:45", "09:00", "09:15", "09:30", "09:45", "10:00", "10:15", "10:30", "10:45", "11:00", "11:15", "11:30", "11:45", "12:00", "12:15", "12:30", "12:45", "13:00", "13:15", "13:30", "13:45", "14:00", "14:15", "14:30", "14:45", "15:00", "15:15", "15:30", "15:45", "16:00", "16:15", "16:30", "16:45", "17:00", "17:15", "17:30", "17:45", "18:00", "18:15", "18:30", "18:45", "19:00", "19:15", "19:30", "19:45", "20:00", "20:15", "20:30", "20:45", "21:00", "21:15", "21:30", "21:45", "22:00", "22:15", "22:30", "22:45", "23:00", "23:15", "23:30", "23:45", "00:00", "00:15", "00:30", "00:45", "01:00", "01:15", "01:30", "01:45", "02:00", "02:15", "02:30", "02:45", "03:00", "03:15", "03:30", "03:45", "04:00", "04:15", "04:30", "04:45", "05:00", "05:15", "05:30", "05:45", "06:00", "06:15", "06:30", "06:45" }));
 
-        newAppointmentToDateButton.setText("Lørdag 24. Desember - 2012");
+        newAppointmentToDateButton.setText("LÃ¸rdag 24. Desember - 2012");
         newAppointmentToDateButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 newAppointmentToDateButtonActionPerformed(evt);
@@ -1050,10 +1002,10 @@ public class Gui extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        newAppointmentMakeButton.setText("Opprett Avtale");
-        newAppointmentMakeButton.addActionListener(new java.awt.event.ActionListener() {
+        newAppointmentCreateButton.setText("Opprett Avtale");
+        newAppointmentCreateButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                newAppointmentMakeButtonActionPerformed(evt);
+                newAppointmentCreateButtonActionPerformed(evt);
             }
         });
 
@@ -1079,19 +1031,19 @@ public class Gui extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(newAppointmentChooseParticipantsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(newAppointmentMakeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(newAppointmentCreateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(newAppointmentCancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        newAppointmentButtonpanelLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {newAppointmentCancelButton, newAppointmentChooseParticipantsButton, newAppointmentMakeButton});
+        newAppointmentButtonpanelLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {newAppointmentCancelButton, newAppointmentChooseParticipantsButton, newAppointmentCreateButton});
 
         newAppointmentButtonpanelLayout.setVerticalGroup(
             newAppointmentButtonpanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(newAppointmentButtonpanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE, false)
                 .addComponent(newAppointmentChooseParticipantsButton)
-                .addComponent(newAppointmentMakeButton)
+                .addComponent(newAppointmentCreateButton)
                 .addComponent(newAppointmentCancelButton))
         );
 
@@ -1318,6 +1270,45 @@ public class Gui extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        loadingDialog.setTitle("VÃ¦r tÃ¥lmodig plz..");
+        loadingDialog.setModal(true);
+        loadingDialog.setResizable(false);
+
+        loadingLabel.setText("Henter data fra databasen");
+
+        loadingCloseButton.setText("Lukk");
+        loadingCloseButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                loadingCloseButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout loadingDialogLayout = new javax.swing.GroupLayout(loadingDialog.getContentPane());
+        loadingDialog.getContentPane().setLayout(loadingDialogLayout);
+        loadingDialogLayout.setHorizontalGroup(
+            loadingDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(loadingDialogLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(loadingDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(progressBar, 0, 0, Short.MAX_VALUE)
+                    .addComponent(loadingLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(loadingCloseButton)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        loadingDialogLayout.setVerticalGroup(
+            loadingDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(loadingDialogLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(loadingDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(loadingCloseButton, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
+                    .addGroup(loadingDialogLayout.createSequentialGroup()
+                        .addComponent(loadingLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(progressBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Avtalebok 1.0");
         setResizable(false);
@@ -1390,7 +1381,7 @@ public class Gui extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Tid", "Mandag 20. September", "Tirsdag 21. September", "Onsdag 22. September", "Torsdag 23. September", "Fredag 24. September", "Lørdag 25. September", "Søndag 26. September"
+                "Tid", "Mandag 20. September", "Tirsdag 21. September", "Onsdag 22. September", "Torsdag 23. September", "Fredag 24. September", "LÃ¸rdag 25. September", "SÃ¸ndag 26. September"
             }
         ) {
             Class[] types = new Class [] {
@@ -1522,25 +1513,9 @@ public class Gui extends javax.swing.JFrame {
         participantChooserDialog.setVisible(true);
     }                                                                      
 
-    private void newAppointmentMakeButtonActionPerformed(java.awt.event.ActionEvent evt) {
-    	Activity newActivity = new Activity();
-    	newActivity.setTitle(newAppointmentTitleLabel.getText()); // title
-    	newActivity.setDescription(newAppointmentDescriptionTextArea.getText()); // description
-    	/*
-    	DateTime fromDate = new DateTime();
-    	DateTime toDate = new DateTime();
-    	newAppointmentStartTimeCB.setSelectedItem(act.getStartTime().toString("HH:mm"));
-    	newAppointmentEndTimeCB.setSelectedItem(act.getEndTime().toString("HH:mm"));
-    	fromDateChooserPanel.setDate(act.getStartTime().toDate());
-    	toDateChooserPanel.setDate(act.getEndTime().toDate());
-	    
-	    newAppointmentDialog.pack();
-	    newAppointmentDialog.setLocationRelativeTo(this);
-	    newAppointmentDialog.setVisible(true);
-    	
-    	Client.get().addActivity(newActivity);
-    	*/
+    private void newAppointmentCreateButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                         
         newAppointmentDialog.setVisible(false);
+        createAppointment();
     }                                                        
 
     private void newAppointmentCancelButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                           
@@ -1614,6 +1589,7 @@ public class Gui extends javax.swing.JFrame {
 
     private void appointmentSayYoureNotCommingButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                                    
         appointmentDialog.setVisible(false);
+        cancelActivity();
     }                                                                   
 
     private void appointmentCloseButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                       
@@ -1622,7 +1598,7 @@ public class Gui extends javax.swing.JFrame {
 
     private void appointmentShowParticipantsButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                                  
         participantOverviewDialog.pack();
-        participantOverviewDialog.setVisible(rootPaneCheckingEnabled);
+        participantOverviewDialog.setVisible(true);
     }                                                                 
 
     private void invitationPanelNotAttendinButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                                 
@@ -1701,6 +1677,14 @@ public class Gui extends javax.swing.JFrame {
         setPreviousWeek();
     }
 
+    private void loadingCloseButtonActionPerformed(java.awt.event.ActionEvent evt) {
+        loadingDialog.setVisible(false);
+    }
+
+    private void iWontStandForThisButtonActionPerformed(java.awt.event.ActionEvent evt) {
+        errorDialog.setVisible(false);
+    }
+
     // Variables declaration - do not modify
     private javax.swing.JPanel appointmentButtonPanel;
     private javax.swing.JButton appointmentCloseButton;
@@ -1740,6 +1724,7 @@ public class Gui extends javax.swing.JFrame {
     private javax.swing.JDialog fromDateDateChooserDialog;
     private javax.swing.JButton fromDateDateChooserOkButton;
     private javax.swing.JFormattedTextField hostIPField;
+    private javax.swing.JButton iWontStandForThisButton;
     private javax.swing.JTextArea invitationDescription;
     private javax.swing.JList invitationList;
     private javax.swing.JPanel invitationPanel;
@@ -1750,6 +1735,9 @@ public class Gui extends javax.swing.JFrame {
     private javax.swing.JPanel invitationPanelTab;
     private javax.swing.JScrollPane invitationPanelTextSP;
     private javax.swing.JLabel invitationPanelTimeRoomAvailability;
+    private javax.swing.JButton loadingCloseButton;
+    private javax.swing.JDialog loadingDialog;
+    private javax.swing.JLabel loadingLabel;
     private javax.swing.JButton logOutButton;
     private javax.swing.JButton loginButton;
     private javax.swing.JDialog loginDialog;
@@ -1771,6 +1759,7 @@ public class Gui extends javax.swing.JFrame {
     private javax.swing.JPanel newAppointmentButtonpanel;
     private javax.swing.JButton newAppointmentCancelButton;
     private javax.swing.JButton newAppointmentChooseParticipantsButton;
+    private javax.swing.JButton newAppointmentCreateButton;
     private javax.swing.JLabel newAppointmentDescriptionLabel;
     private javax.swing.JTextArea newAppointmentDescriptionTextArea;
     private javax.swing.JDialog newAppointmentDialog;
@@ -1779,7 +1768,6 @@ public class Gui extends javax.swing.JFrame {
     private javax.swing.JComboBox newAppointmentEndTimeCB;
     private javax.swing.JButton newAppointmentFromDateButton;
     private javax.swing.JPanel newAppointmentLabelPanel;
-    private javax.swing.JButton newAppointmentMakeButton;
     private javax.swing.JComboBox newAppointmentRoomCB;
     private javax.swing.JLabel newAppointmentRoomLabel;
     private javax.swing.JLabel newAppointmentStartLabel;
@@ -1803,6 +1791,7 @@ public class Gui extends javax.swing.JFrame {
     private javax.swing.JList participantOverviewList;
     private javax.swing.JScrollPane participantOverviewSP;
     private javax.swing.JLabel previousWeekLabel;
+    private javax.swing.JProgressBar progressBar;
     private javax.swing.JButton shownCalendars;
     private gui.FixedDateChooserPanel toDateChooserPanel;
     private javax.swing.JButton toDateDateChooserCancelButton;
@@ -1811,13 +1800,29 @@ public class Gui extends javax.swing.JFrame {
     private javax.swing.JButton weekViewButton;
     private javax.swing.JScrollPane weekViewSP;
     private javax.swing.JTable weekViewTable;
-    private javax.swing.JButton wrongPasswordButton;
-    private javax.swing.JDialog wrongPasswordDialog;
-    private javax.swing.JLabel wrongPasswordLabel;
-    private javax.swing.JButton wrongUsernameButton;
-    private javax.swing.JDialog wrongUsernameDialog;
-    private javax.swing.JLabel wrongUsernameLabel;
     // End of variables declaration
+
+    //copy here
+    
+    private void createActivity(){
+    	Activity newActivity = new Activity();
+    	newActivity.setTitle(newAppointmentTitleLabel.getText()); // title
+    	newActivity.setDescription(newAppointmentDescriptionTextArea.getText()); // description
+    	/*
+    	DateTime fromDate = new DateTime();
+    	DateTime toDate = new DateTime();
+    	newAppointmentStartTimeCB.setSelectedItem(act.getStartTime().toString("HH:mm"));
+    	newAppointmentEndTimeCB.setSelectedItem(act.getEndTime().toString("HH:mm"));
+    	fromDateChooserPanel.setDate(act.getStartTime().toDate());
+    	toDateChooserPanel.setDate(act.getEndTime().toDate());
+	    
+	    newAppointmentDialog.pack();
+	    newAppointmentDialog.setLocationRelativeTo(this);
+	    newAppointmentDialog.setVisible(true);
+    	
+    	Client.get().addActivity(newActivity);
+    	*/
+    }
     
     private void login() {
     	String username = loginUsernameTextField.getText();
@@ -1840,13 +1845,13 @@ public class Gui extends javax.swing.JFrame {
         String day ="";
 
         switch(date.getDay()){
-            case 0: day = "SÃ¸ndag"; break;
+            case 0: day = "SÃƒÂ¸ndag"; break;
             case 1: day = "Mandag"; break;
             case 2: day = "Tirsdag"; break;
             case 3: day = "Onsdag"; break;
             case 4: day = "Torsdag"; break;
             case 5: day = "Fredag"; break;
-            case 6: day = "LÃ¸rdag"; break;
+            case 6: day = "LÃƒÂ¸rdag"; break;
         }
 
         switch(date.getMonth()){
@@ -1885,7 +1890,7 @@ public class Gui extends javax.swing.JFrame {
         //}});
     }
 
-    public void buildMessage(){ //ta inn modell i stedet for Ã¥ ha en modell i gui?
+    public void buildMessage(){ //ta inn modell i stedet for ÃƒÂ¥ ha en modell i gui?
        // messagePanel.setBorder(javax.swing.BorderFactory.createTitledBorder(message.getTitle() + " - " + dateToString(message.getDate())));
        // messagePanelTimeRoomAvailability.setText(message.getTime() + " - " message.getRoom() + ", " + availabilityAndStatus(message));
        // messageDescription.setText(message.getDescription());

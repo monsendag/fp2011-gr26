@@ -73,7 +73,6 @@ public class Gui extends javax.swing.JFrame {
         loginUsernameTextField = new javax.swing.JTextField();
         loginButton = new javax.swing.JButton();
         loginPasswordField = new javax.swing.JPasswordField();
-        hostIPField = new javax.swing.JFormattedTextField();
         wrongUsernameDialog = new javax.swing.JDialog();
         wrongUsernameLabel = new javax.swing.JLabel();
         wrongUsernameButton = new javax.swing.JButton();
@@ -234,21 +233,6 @@ public class Gui extends javax.swing.JFrame {
             }
         });
 
-        hostIPField.setText("host ip");
-        hostIPField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                hostIPFieldActionPerformed(evt);
-            }
-        });
-        hostIPField.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                hostIPFieldFocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                hostIPFieldFocusLost(evt);
-            }
-        });
-
         javax.swing.GroupLayout loginPanelLayout = new javax.swing.GroupLayout(loginPanel);
         loginPanel.setLayout(loginPanelLayout);
         loginPanelLayout.setHorizontalGroup(
@@ -259,22 +243,19 @@ public class Gui extends javax.swing.JFrame {
                     .addComponent(loginPasswordField)
                     .addComponent(loginUsernameTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(loginButton, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
-                    .addComponent(hostIPField, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE))
+                .addComponent(loginButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         loginPanelLayout.setVerticalGroup(
             loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(loginPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(loginUsernameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(hostIPField, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(loginButton, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
-                    .addComponent(loginPasswordField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(loginButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 62, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, loginPanelLayout.createSequentialGroup()
+                        .addComponent(loginUsernameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(loginPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -293,8 +274,7 @@ public class Gui extends javax.swing.JFrame {
 
         loginButton.requestDefaultFocus();
         loginUsernameTextField.setNextFocusableComponent(loginPasswordField);
-        loginPasswordField.setNextFocusableComponent(hostIPField);
-        hostIPField.setNextFocusableComponent(loginButton);
+        loginPasswordField.setNextFocusableComponent(loginButton);
         loginButton.setNextFocusableComponent(loginUsernameTextField);
 
         wrongUsernameDialog.setModal(true);
@@ -1316,9 +1296,6 @@ public class Gui extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Avtalebok 1.0");
-        setResizable(false);
 
         messageViewButton.setText("Meldinger");
         messageViewButton.addActionListener(new java.awt.event.ActionListener() {
@@ -1357,32 +1334,32 @@ public class Gui extends javax.swing.JFrame {
         nextWeekLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fp/client/gui/graphics/nextWeek.png"))); // NOI18N
         nextWeekLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         nextWeekLabel.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                nextWeekLabelMouseClicked(evt);
-            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 nextWeekLabelMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 nextWeekLabelMouseExited(evt);
             }
+            
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+            	setNextWeek();
+            }
         });
 
         previousWeekLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fp/client/gui/graphics/prevWeek.png"))); // NOI18N
         previousWeekLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         previousWeekLabel.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                previousWeekLabelMouseClicked(evt);
-            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 previousWeekLabelMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 previousWeekLabelMouseExited(evt);
             }
+        	public void mouseClicked(java.awt.event.MouseEvent evt) {
+        		setPreviousWeek();
+            }
         });
 
-        weekViewTable.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         weekViewTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -1424,11 +1401,10 @@ public class Gui extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(weekViewSP, javax.swing.GroupLayout.PREFERRED_SIZE, 914, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(8, 8, 8)
                         .addComponent(calendarShowingLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(shownCalendars, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(124, 124, 124)
+                        .addGap(138, 138, 138)
                         .addComponent(previousWeekLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(weekViewButton, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1456,8 +1432,8 @@ public class Gui extends javax.swing.JFrame {
                             .addComponent(nextWeekLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(previousWeekLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(shownCalendars, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(calendarShowingLabel)))
+                        .addComponent(calendarShowingLabel)
+                        .addComponent(shownCalendars, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(17, 17, 17)
                 .addComponent(weekViewSP, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -1471,225 +1447,13 @@ public class Gui extends javax.swing.JFrame {
         java.util.Calendar today = java.util.Calendar.getInstance();
         weekViewButton.setText("Uke "+ today.get(java.util.Calendar.WEEK_OF_YEAR) + " - " + today.get(java.util.Calendar.YEAR) );
 
-        weekViewButton.setFocusable(false);
-
         pack();
     }// </editor-fold>
 
-    private void messageViewButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                  
-        messageOverviewDialog.pack();
-        messageOverviewDialog.setLocationRelativeTo(this);
-        messageOverviewDialog.setVisible(true);
-    }                                                 
 
-    private void newAppointmentButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                     
-        newAppointmentToDateButton.setText(dateToString(new Date()));
-        newAppointmentFromDateButton.setText(dateToString(new Date()));
-        newAppointmentDialog.pack();
-        newAppointmentDialog.setLocationRelativeTo(this);
-        newAppointmentDialog.setVisible(true);
-    }                                                    
-
-    private void errorDialogButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                  
-       errorDialog.setVisible(false);
-    }                                                 
-
-    private void participantOverviewChangeButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                                
-        participantOverviewDialog.setVisible(false);
-    }                                                               
-
-    private void participantOverviewCloseButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                               
-        participantOverviewDialog.setVisible(false);
-    }                                                              
-
-    private void logOutButtonActionPerformed(java.awt.event.ActionEvent evt) {                                             
-        loginPasswordField.setText("passord");
-        loginUsernameTextField.setText("brukernavn");
-        loginPasswordField.setEchoChar('\u0000');
-        loginDialog.setVisible(true);
-    }                                            
-
-    private void fromDateDateChooserCancelButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                                
-        System.out.print(fromDateChooserPanel.getDate());
-        fromDateDateChooserDialog.setVisible(false);
-    }                                                               
-
-    private void fromDateDateChooserOkButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                            
-        newAppointmentFromDateButton.setText(dateToString(fromDateChooserPanel.getDate()));
-        fromDateDateChooserDialog.setVisible(false);
-    }                                                           
-
-    private void newAppointmentChooseParticipantsButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                                       
-        participantChooserDialog.pack();
-        participantChooserDialog.setLocationRelativeTo(newAppointmentDialog);
-        participantChooserDialog.setVisible(true);
-    }                                                                      
-
-    private void newAppointmentMakeButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                         
-        newAppointmentDialog.setVisible(false);
-    }                                                        
-
-    private void newAppointmentCancelButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                           
-        newAppointmentDialog.setVisible(false);
-    }                                                          
-
-    private void newAppointmentToDateButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                           
-        toDateDateChooserDialog.pack();
-        java.awt.Point buttonLocation = ((javax.swing.JButton) evt.getSource()).getLocationOnScreen();
-        buttonLocation.translate(-20, 25);
-        toDateDateChooserDialog.setLocation(buttonLocation);
-        toDateDateChooserDialog.setVisible(true);
-    }                                                          
-
-    private void newAppointmentFromDateButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                             
-        fromDateDateChooserDialog.pack();
-        java.awt.Point buttonLocation = ((javax.swing.JButton) evt.getSource()).getLocationOnScreen();
-        buttonLocation.translate(-20, 25);
-        fromDateDateChooserDialog.setLocation(buttonLocation);
-        fromDateDateChooserDialog.setVisible(true);
-    }                                                            
-
-    private void toDateDateChooserOkButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                          
-        newAppointmentToDateButton.setText(dateToString(toDateChooserPanel.getDate()));
-        toDateDateChooserDialog.setVisible(false);
-    }                                                         
-
-    private void toDateDateChooserCancelButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                              
-        toDateDateChooserDialog.setVisible(false);
-    }                                                             
-
-    private void participantChooserOkButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                           
-        participantChooserDialog.setVisible(false);
-    }                                                          
-
-    private void participantChooserCancelButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                               
-        participantChooserDialog.setVisible(false);
-    }                                                              
-
-    private void calendarChooserOkButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                        
-        changeCalendarView();
-        calendarChooserDialog.setVisible(false);
-    }                                                       
-
-    private void calendarChooserCancelButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                            
-        calendarChooserDialog.setVisible(false);
-    }                                                           
-
-    private void shownCalendarsActionPerformed(java.awt.event.ActionEvent evt) {                                               
-        calendarChooserDialog.pack();
-        java.awt.Point buttonLocation = ((javax.swing.JButton) evt.getSource()).getLocationOnScreen();
-        calendarChooserDialog.setLocation(buttonLocation);
-        calendarChooserDialog.setVisible(true);
-    }                                              
-
-    private void invitationPanelCloseButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                           
-        messageOverviewDialog.setVisible(false);
-    }                                                          
-
-    private void messagePanelCloseButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                        
-        messageOverviewDialog.setVisible(false);
-    }                                                       
-
-    private void appointmentToDateButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                        
-        // TODO add your handling code here:
-    }                                                       
-
-    private void appointmentFromDateButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                          
-        // TODO add your handling code here:
-    }                                                         
-
-    private void appointmentSayYoureNotCommingButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                                    
-        appointmentDialog.setVisible(false);
-    }                                                                   
-
-    private void appointmentCloseButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                       
-        appointmentDialog.setVisible(false);
-    }                                                      
-
-    private void appointmentShowParticipantsButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                                  
-        participantOverviewDialog.pack();
-        participantOverviewDialog.setVisible(rootPaneCheckingEnabled);
-    }                                                                 
-
-    private void invitationPanelNotAttendinButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                                 
-        // TODO add your handling code here:
-    }                                                                
-
-    private void nextWeekLabelMouseEntered(java.awt.event.MouseEvent evt) {                                           
-        nextWeekLabel.setIcon(nextMO);
-    }                                          
-
-    private void nextWeekLabelMouseExited(java.awt.event.MouseEvent evt) {                                          
-        nextWeekLabel.setIcon(next);
-    }                                         
-
-    private void previousWeekLabelMouseEntered(java.awt.event.MouseEvent evt) {                                               
-        previousWeekLabel.setIcon(prevMO);
-    }                                              
-
-    private void previousWeekLabelMouseExited(java.awt.event.MouseEvent evt) {                                              
-        previousWeekLabel.setIcon(prev);
-    }                                             
-
-    private void loginUsernameTextFieldFocusGained(java.awt.event.FocusEvent evt) {                                                   
-        if (loginUsernameTextField.getText().equals("brukernavn"))
-            loginUsernameTextField.setText("");
-    }                                                  
-
-    private void loginUsernameTextFieldFocusLost(java.awt.event.FocusEvent evt) {                                                 
-        if (loginUsernameTextField.getText().equals("")){
-            loginUsernameTextField.setText("brukernavn");
-        }
-    }                                                
-
-    private void loginPasswordFieldFocusGained(java.awt.event.FocusEvent evt) {                                               
-         if (loginPasswordField.getText().equals("passord")){
-            loginPasswordField.setText("");
-            loginPasswordField.setEchoChar('\u25cf');
-        }
-    }                                              
-
-    private void loginPasswordFieldFocusLost(java.awt.event.FocusEvent evt) {                                             
-         if (loginPasswordField.getText().equals("")){
-            loginPasswordField.setText("passord");
-            loginPasswordField.setEchoChar('\u0000');
-        }
-    }                                            
-
-    private void loginPasswordFieldActionPerformed(java.awt.event.ActionEvent evt) {                                                   
-        login();
-    }                                                  
-
-    private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {                                            
-        login();
-}                                           
-
-    private void weekViewTableMouseClicked(java.awt.event.MouseEvent evt) {                                           
-        System.out.println(weekViewTable.getSelectedRow() + ", " + weekViewTable.getSelectedColumn() );
-}                                          
-
-    private void hostIPFieldFocusGained(java.awt.event.FocusEvent evt) {
-        if (hostIPField.getText().equals("host ip"))
-            hostIPField.setText("");
-    }
-
-    private void hostIPFieldFocusLost(java.awt.event.FocusEvent evt) {
-        if (hostIPField.getText().equals("")){
-            hostIPField.setText("host ip");
-        }
-    }
-
-    private void hostIPFieldActionPerformed(java.awt.event.ActionEvent evt) {
-        login();
-    }
-
-    private void nextWeekLabelMouseClicked(java.awt.event.MouseEvent evt) {
-        setNextWeek();
-    }
-
-    private void previousWeekLabelMouseClicked(java.awt.event.MouseEvent evt) {
-        setPrevWeek();
-    }
+    /**
+    * @param args the command line arguments
+    */
 
     // Variables declaration - do not modify
     private javax.swing.JPanel appointmentButtonPanel;
@@ -1729,7 +1493,6 @@ public class Gui extends javax.swing.JFrame {
     private javax.swing.JButton fromDateDateChooserCancelButton;
     private javax.swing.JDialog fromDateDateChooserDialog;
     private javax.swing.JButton fromDateDateChooserOkButton;
-    private javax.swing.JFormattedTextField hostIPField;
     private javax.swing.JTextArea invitationDescription;
     private javax.swing.JList invitationList;
     private javax.swing.JPanel invitationPanel;

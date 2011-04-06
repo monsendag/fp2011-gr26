@@ -272,11 +272,16 @@ public class DBStore {
 			ps.executeUpdate();
 			ps.close();
 			
+			// Updating cache
+			Meeting m = dbr.getMeeting(meetingID);
+			Employee e = dbr.getEmployee(username);
+			Participant p = new Participant(e, Participant.Status.AWAITING_REPLY);
+			m.addParticipant(p);
+			System.out.println("#DB: Adding "+e.getUsername()+" as a meeting "+m.getId()+" participant. In DB and cache");
+			
 			// Create message
 			ps = conn.prepareStatement("INSERT INTO alert " +
 			"(isread,time,message,username,activity) VALUES (?,?,?,?,?)");
-			
-			Meeting m = dbr.getMeeting(meetingID);
 			
 			ps.setBoolean(1,false); // isRead = false
 			ps.setTimestamp(2,new Timestamp(new Date().getTime()));
@@ -318,11 +323,19 @@ public class DBStore {
 			ps.executeUpdate();
 			ps.close();
 			
+			// Update cache
+			Meeting m = dbr.getMeeting(activityID);
+			for (Participant p : m.getParticipants()) {
+				if(p.getEmployee().getUsername() == username) {
+					p.setStatus(Participant.intToEnum(status));
+					System.out.println("#DB: Changed "+p.getEmployee().getUsername()+" participant status. In DB and cache");
+				}
+			}
+			
 			// Create messages
 			if(Participant.intToEnum(status) == Participant.Status.NOT_ATTENDING) {
 				ps = conn.prepareStatement("INSERT INTO alert " +
 				"(isread,time,message,username,activityID) VALUES (?,?,?,?,?)");
-				Meeting m = dbr.getMeeting(activityID);
 				Employee decliner = dbr.getEmployee(username);
 				for (Participant p : m.getParticipants()) {
 					ps.setBoolean(1,false); // isRead = false
@@ -430,6 +443,7 @@ public class DBStore {
 			m.setDescription(meeting.getDescription());
 			m.setLocation(meeting.getLocation());
 			m.setRoom(meeting.getRoom());
+			System.out.println("#DB: Updating meeting "+m.getId()+" in DB and cache");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -488,6 +502,7 @@ public class DBStore {
 			a.setEndTime(act.getEndTime());
 			a.setDescription(act.getDescription());
 			a.setLocation(act.getLocation());
+			System.out.println("#DB: Updated activity "+a.getId()+" in DB and cache");
 		} catch (SQLException e) {
 			System.err.println("Could not change activity.");
 			e.printStackTrace();
@@ -517,6 +532,7 @@ public class DBStore {
 			ps.setBoolean(1,true);
 			ps.executeUpdate();
 			ps.close();
+			System.out.println("#DB: Marked alert as read in DB");
 		} catch (SQLException e) {
 			System.err.println("Could not mark alert as read.");
 			e.printStackTrace();
@@ -537,7 +553,9 @@ public class DBStore {
 			
 			s.execute("UPDATE activity SET cancelled = true WHERE username ='" + username + "'");
 			s.close();
+			
 			System.out.println("#DB: Canceling " + username + "'s activities/meetings in DB");
+			System.out.println(" - for testing only, please restart to clear cache");
 		} catch (SQLException e) {
 			System.err.println("Could not cancel activities.");
 			e.printStackTrace();

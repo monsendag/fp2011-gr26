@@ -36,7 +36,7 @@ public class ClientConnection extends Connection implements Runnable {
 		n.put("username", username);
 		n.put("password", password);
 		send(n);
-		NetworkObject back = retrieve();
+		NetworkObject back = receive();
 		return back.get("employee") != null ? ((Employee) back.get("employee")) : null;
 	}
 	
@@ -50,7 +50,7 @@ public class ClientConnection extends Connection implements Runnable {
 		n.setCommand(NetworkCommand.getActivities);
 		n.put("currentUser", Client.get().getUser());
 		send(n);
-		NetworkObject back = retrieve();
+		NetworkObject back = receive();
 		return (ArrayList<Activity>) back.get("activities");
 	}
 }

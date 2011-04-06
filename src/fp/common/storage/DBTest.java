@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.concurrent.ArrayBlockingQueue;
 
+import org.joda.time.DateTime;
+
 import fp.common.models.Activity;
 import fp.common.models.Employee;
 import fp.common.models.Meeting;
@@ -74,7 +76,8 @@ public class DBTest {
 		// Changing big carls status in the meeting object
 		meeting.getParticipants().get(0).setStatus(Participant.Status.NOT_ATTENDING);
 		// bigcarl in meeting with id 6
-		dbs.changeInviteStatus(meeting, meeting.getParticipants().get(0));
+		//dbs.changeInviteStatusByIDs(4, "superuser", Participant.Status.NOT_ATTENDING.ordinal());
+		//dbs.cancelMeetingByID(6);
 		
 		System.out.println();
 		
@@ -127,18 +130,20 @@ public class DBTest {
 		}
 		
 		System.out.println();
+		
+		
+		//dbs.addMeeting(new Meeting(dbr.getEmployee("Emo"), dbr.getMeeting(3).getParticipants(), dbr.getRoom(2), new DateTime(2001, 1, 1, 12, 0, 0, 0), new DateTime(2001, 1, 1, 14, 0, 0, 0), "Random", "Hjemme"));
+		for (Message m : dbr.getEmpAlertsByUsername("mmmm")) {
+			System.out.println(m.getRead() + " " + m.getCreatedOn() + " " + m.getDescription()
+					+ " " + m.getEmployee().getUsername() + " " + m.getMeeting().getId());
+		}
 	}
-	
-	static volatile HashMap<String,Employee> empCache = new HashMap<String, Employee>();
-	static volatile HashMap<Integer, Room> roomCache = new HashMap<Integer, Room>();
-	static volatile HashMap<Integer, Activity> actCache = new HashMap<Integer, Activity>();
-	static volatile HashMap<Integer, Meeting> mtngCache = new HashMap<Integer, Meeting>();
-	
 	
 	public static void main(String[] args) {
 		
-		DBRetrieve dbr = DBRetrieve.getInstance();
+		
 		DBStore dbs = DBStore.getInstance();
+		DBRetrieve dbr = DBRetrieve.getInstance();
 		
 		
 		
@@ -146,5 +151,6 @@ public class DBTest {
 		// Cache
 		
 		testPrint(dbr,dbs);
+		//dbr.test();
 	}	
 }

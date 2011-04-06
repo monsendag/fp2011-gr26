@@ -29,6 +29,7 @@ public class DBRetrieve {
 	private HashMap<Integer,Room> roomCache;
 	private HashMap<Integer,Activity> actCache;
 	private HashMap<Integer,Meeting> mtngCache;
+	private DBStore dbs;
 	
 	public DBRetrieve() {
 		Storage s = Storage.getInstance();
@@ -37,6 +38,24 @@ public class DBRetrieve {
 		roomCache = s.roomCache;
 		actCache = s.actCache;
 		mtngCache = s.mtngCache;
+		dbs = DBStore.getInstance();
+		dbs.setDBR(this);
+	}
+	
+	public void test() {
+		try {
+			Statement s = conn.createStatement();
+			ResultSet rs = s.executeQuery("SELECT * FROM alert");
+			
+			
+			while(rs.next()) {
+				System.out.println(rs.getBoolean(1)+ " " + rs.getTimestamp(2).toString() + " " +
+							rs.getString(3) + " " + rs.getString(4) + " " + rs.getInt(5));
+			}
+			s.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public static DBRetrieve getInstance() {
@@ -130,7 +149,7 @@ public class DBRetrieve {
 			Message m;
 			while(rs.next()) {
 				m = new Message();
-				m.setCreatedOn(new DateTime(rs.getTimestamp("time")));
+				m.setCreatedOn(new DateTime(rs.getTimestamp("time").getTime()));
 				m.setDescription(rs.getString("message"));
 				m.setEmployee(getEmployee(rs.getString("username")));
 				m.setMeeting(getMeeting(rs.getInt("activityID")));
@@ -296,8 +315,8 @@ public class DBRetrieve {
 					a.setDescription(rs.getString("description"));
 					a.setLocation(rs.getString("location"));
 					a.setId(id);
-					a.setStartTime(new DateTime(rs.getTimestamp("starttime")));
-					a.setEndTime(new DateTime(rs.getTimestamp("endtime")));
+					a.setStartTime(new DateTime(rs.getTimestamp("starttime").getTime()));
+					a.setEndTime(new DateTime(rs.getTimestamp("endtime").getTime()));
 					// Add to cache
 					actCache.put(id, a);
 					System.out.println("Adding activity " + a.getId() + ", owned by " + a.getOwner() + " to cache.");
@@ -336,8 +355,8 @@ public class DBRetrieve {
 				m.setLocation(rs.getString("location"));
 				m.setRoom(getRoom(rs.getInt("roomID")));
 				m.setId(rs.getInt("activityID"));
-				m.setStartTime(new DateTime(rs.getTimestamp("starttime")));
-				m.setEndTime(new DateTime(rs.getTimestamp("endtime")));
+				m.setStartTime(new DateTime(rs.getTimestamp("starttime").getTime()));
+				m.setEndTime(new DateTime(rs.getTimestamp("endtime").getTime()));
 				m.setParticipants(getParticipantsByMeetingID(m.getId()));
 				System.out.println("Adding meeting " + m.getId() + ", owned by " + m.getOwner() + " to cache.");
 				mtngCache.put(m.getId(), m);
@@ -378,8 +397,8 @@ public class DBRetrieve {
 					m.setLocation(rs.getString("location"));
 					m.setRoom(getRoom(rs.getInt("roomID")));
 					m.setId(id);
-					m.setStartTime(new DateTime(rs.getTimestamp("starttime")));
-					m.setEndTime(new DateTime(rs.getTimestamp("endtime")));
+					m.setStartTime(new DateTime(rs.getTimestamp("starttime").getTime()));
+					m.setEndTime(new DateTime(rs.getTimestamp("endtime").getTime()));
 					m.setParticipants(getParticipantsByMeetingID(id));
 					// Add to cache
 					mtngCache.put(id, m);
@@ -437,8 +456,8 @@ public class DBRetrieve {
 					a.setDescription(rs.getString("description"));
 					a.setLocation(rs.getString("location"));
 					a.setId(id);
-					a.setStartTime(new DateTime(rs.getTimestamp("starttime")));
-					a.setEndTime(new DateTime(rs.getTimestamp("endtime")));
+					a.setStartTime(new DateTime(rs.getTimestamp("starttime").getTime()));
+					a.setEndTime(new DateTime(rs.getTimestamp("endtime").getTime()));
 					// Add to cache
 					actCache.put(id, a);
 					System.out.println("Adding activity " + a.getId() + ", owned by " + a.getOwner() + " to cache.");
@@ -497,8 +516,8 @@ public class DBRetrieve {
 					m.setLocation(rs.getString("location"));
 					m.setRoom(getRoom(rs.getInt("roomID")));
 					m.setId(id);
-					m.setStartTime(new DateTime(rs.getTimestamp("starttime")));
-					m.setEndTime(new DateTime(rs.getTimestamp("endtime")));
+					m.setStartTime(new DateTime(rs.getTimestamp("starttime").getTime()));
+					m.setEndTime(new DateTime(rs.getTimestamp("endtime").getTime()));
 					m.setParticipants(getParticipantsByMeetingID(id));
 					// Add to cache
 					mtngCache.put(id, m);
@@ -526,8 +545,8 @@ public class DBRetrieve {
 					m.setDescription(rs.getString("description"));
 					m.setLocation(rs.getString("location"));
 					m.setId(id);
-					m.setStartTime(new DateTime(rs.getTimestamp("starttime")));
-					m.setEndTime(new DateTime(rs.getTimestamp("endtime")));
+					m.setStartTime(new DateTime(rs.getTimestamp("starttime").getTime()));
+					m.setEndTime(new DateTime(rs.getTimestamp("endtime").getTime()));
 					m.setParticipants(getParticipantsByMeetingID(id));
 					// Add to cache
 					mtngCache.put(id, m);
@@ -574,7 +593,7 @@ public class DBRetrieve {
 			Message m;
 			while(rs.next()) {
 				m = new Message();
-				m.setCreatedOn(new DateTime(rs.getTimestamp("time")));
+				m.setCreatedOn(new DateTime(rs.getTimestamp("time").getTime()));
 				m.setDescription(rs.getString("message"));
 				m.setEmployee(getEmployee(username));
 				m.setMeeting(getMeeting(rs.getInt("activityID")));

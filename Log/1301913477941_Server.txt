@@ -1,0 +1,389 @@
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Timestamp        Logging Entity           Source                   Destination              Seq No  Flag    Ack No  Start Payload            Checksum    Comment                                           
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+12:37:58.639     AbstractConnection                                                                                                                      Waiting for incoming packet in doReceive()        
+12:37:58.672     CLSocket::receive                                                                                                                       Receiving at:10500                                
+12:38:1.440      AbstractConnection                                                                                                                      Waiting for incoming packet in doReceive()        
+12:38:1.442      CLSocket::receive                                                                                                                       Receiving at:10500                                
+12:38:1.447      CLSocket::coAccept                                                                                                                      Fant gjenbrukbar innsocket                        
+12:38:4.241      AbstractConnection                                                                                                                      Waiting for incoming packet in doReceive()        
+12:38:4.243      CLSocket::receive                                                                                                                       Receiving at:10500                                
+12:38:4.244      CLSocket::coAccept                                                                                                                      Fant gjenbrukbar innsocket                        
+12:38:7.42       AbstractConnection                                                                                                                      Waiting for incoming packet in doReceive()        
+12:38:7.44       CLSocket::receive                                                                                                                       Receiving at:10500                                
+12:38:7.48       CLSocket::coAccept                                                                                                                      Fant gjenbrukbar innsocket                        
+12:38:7.217      CLSocket::coReceive                                                                                                                     State of socket is:
+Bound:true
+Closed: false
+Connected: true
+Local Port: 10500
+Remote Port:55603
+12:38:7.267      CLSocket::receive                                                                                                                       Finished receiving at:10500                       
+12:38:7.268      AbstractConnection                                                                                                                      Received an internal packet in doReceive          
+12:38:7.270      AbstractConnection       78.91.5.74:62072         78.91.5.74:42195         6353    SYN_ACK 6060                             0           Sending Ack: 6060                                 
+12:38:7.282      NETWORK                                                                                                                                 Packet 6353 send!                                 
+12:38:7.283      AbstractConnection                                                                                                                      Waiting for incoming packet in receiveAck()       
+12:38:7.292      CLSocket::receive                                                                                                                       Receiving at:62072                                
+12:38:7.391      CLSocket::coReceive                                                                                                                     State of socket is:
+Bound:true
+Closed: false
+Connected: true
+Local Port: 62072
+Remote Port:55605
+12:38:7.393      CLSocket::receive                                                                                                                       Finished receiving at:62072                       
+12:38:7.394      AbstractConnection                                                                                                                      Received an internal packet in receiveAck         
+12:38:7.394      AbstractConnection                                                                                                                      Waiting for incoming packet in doReceive()        
+12:38:7.395      CLSocket::receive                                                                                                                       Receiving at:62072                                
+12:38:7.395      CLSocket::coAccept                                                                                                                      Fant gjenbrukbar innsocket                        
+12:38:7.499      CLSocket::coReceive                                                                                                                     State of socket is:
+Bound:true
+Closed: false
+Connected: true
+Local Port: 62072
+Remote Port:55606
+12:38:7.502      CLSocket::receive                                                                                                                       Finished receiving at:62072                       
+12:38:7.502      AbstractConnection                                                                                                                      Received an external packet in doReceive          
+12:38:7.503      AbstractConnection       78.91.5.74:62072         78.91.5.74:42195         6354    ACK     6062                             0           Sending Ack: 6062                                 
+12:38:7.505      NETWORK                                                                                                                                 Packet 6354 send!                                 
+12:38:7.509      AbstractConnection                                                                                                                      Waiting for incoming packet in doReceive()        
+12:38:7.511      CLSocket::receive                                                                                                                       Receiving at:62072                                
+12:38:7.511      CLSocket::coAccept                                                                                                                      Fant gjenbrukbar innsocket                        
+12:38:7.612      SendTimer                78.91.5.74:62072         78.91.5.74:42195         6355    NONE    -1      *: default joined.       237488121   Sending this datagram (try: 1)                    
+12:38:7.617      NETWORK                                                                                                                                 Packet 6355 send!                                 
+12:38:8.410      SendTimer                78.91.5.74:62072         78.91.5.74:42195         6355    NONE    -1      *: default joined.       237488121   Sending this datagram (try: 2)                    
+12:38:8.414      NETWORK                                                                                                                                 Packet 6355 send!                                 
+12:38:9.210      SendTimer                78.91.5.74:62072         78.91.5.74:42195         6355    NONE    -1      *: default joined.       237488121   Sending this datagram (try: 3)                    
+12:38:9.213      NETWORK                                                                                                                                 Packet 6355 send!                                 
+12:38:10.10      SendTimer                78.91.5.74:62072         78.91.5.74:42195         6355    NONE    -1      *: default joined.       237488121   Sending this datagram (try: 4)                    
+12:38:10.14      NETWORK                                                                                                                                 Packet 6355 send!                                 
+12:38:10.810     SendTimer                78.91.5.74:62072         78.91.5.74:42195         6355    NONE    -1      *: default joined.       237488121   Sending this datagram (try: 5)                    
+12:38:10.813     NETWORK                                                                                                                                 Packet 6355 send!                                 
+12:38:11.610     SendTimer                78.91.5.74:62072         78.91.5.74:42195         6355    NONE    -1      *: default joined.       237488121   Sending this datagram (try: 6)                    
+12:38:11.613     NETWORK                                                                                                                                 Packet 6355 send!                                 
+12:38:12.410     SendTimer                78.91.5.74:62072         78.91.5.74:42195         6355    NONE    -1      *: default joined.       237488121   Sending this datagram (try: 7)                    
+12:38:12.413     NETWORK                                                                                                                                 Packet 6355 send!                                 
+12:38:13.313     SendTimer                78.91.5.74:62072         78.91.5.74:42195         6356    NONE    -1      [default]                1927854161  Sending this datagram (try: 1)                    
+12:38:13.319     NETWORK                                                                                                                                 Packet 6356 send!                                 
+12:38:14.112     SendTimer                78.91.5.74:62072         78.91.5.74:42195         6356    NONE    -1      [default]                1927854161  Sending this datagram (try: 2)                    
+12:38:14.133     NETWORK                                                                                                                                 Packet 6356 send!                                 
+12:38:14.912     SendTimer                78.91.5.74:62072         78.91.5.74:42195         6356    NONE    -1      [default]                1927854161  Sending this datagram (try: 3)                    
+12:38:14.916     NETWORK                                                                                                                                 Packet 6356 send!                                 
+12:38:15.712     SendTimer                78.91.5.74:62072         78.91.5.74:42195         6356    NONE    -1      [default]                1927854161  Sending this datagram (try: 4)                    
+12:38:15.716     NETWORK                                                                                                                                 Packet 6356 send!                                 
+12:38:16.512     SendTimer                78.91.5.74:62072         78.91.5.74:42195         6356    NONE    -1      [default]                1927854161  Sending this datagram (try: 5)                    
+12:38:16.515     NETWORK                                                                                                                                 Packet 6356 send!                                 
+12:38:17.312     SendTimer                78.91.5.74:62072         78.91.5.74:42195         6356    NONE    -1      [default]                1927854161  Sending this datagram (try: 6)                    
+12:38:17.317     NETWORK                                                                                                                                 Packet 6356 send!                                 
+12:38:18.112     SendTimer                78.91.5.74:62072         78.91.5.74:42195         6356    NONE    -1      [default]                1927854161  Sending this datagram (try: 7)                    
+12:38:18.117     NETWORK                                                                                                                                 Packet 6356 send!                                 
+12:38:18.912     SendTimer                78.91.5.74:62072         78.91.5.74:42195         6356    NONE    -1      [default]                1927854161  Sending this datagram (try: 8)                    
+12:38:18.913     AbstractConnection                                                                                                                      Waiting for incoming packet in doReceive()        
+12:38:18.917     NETWORK                                                                                                                                 Packet 6356 send!                                 
+12:38:18.920     CLSocket::receive                                                                                                                       Receiving at:10500                                
+12:38:18.921     CLSocket::coAccept                                                                                                                      Fant gjenbrukbar innsocket                        
+12:38:21.714     AbstractConnection                                                                                                                      Waiting for incoming packet in doReceive()        
+12:38:21.717     CLSocket::receive                                                                                                                       Receiving at:10500                                
+12:38:21.718     CLSocket::coAccept                                                                                                                      Fant gjenbrukbar innsocket                        
+12:38:24.515     AbstractConnection                                                                                                                      Waiting for incoming packet in doReceive()        
+12:38:24.520     CLSocket::receive                                                                                                                       Receiving at:10500                                
+12:38:24.520     CLSocket::coAccept                                                                                                                      Fant gjenbrukbar innsocket                        
+12:38:27.317     AbstractConnection                                                                                                                      Waiting for incoming packet in doReceive()        
+12:38:27.320     CLSocket::receive                                                                                                                       Receiving at:10500                                
+12:38:27.321     CLSocket::coAccept                                                                                                                      Fant gjenbrukbar innsocket                        
+12:38:27.323     ClSocketReceiver                                                                                                                        Exception while receiving: socket closed          
+12:38:27.325     AbstractConnection                                                                                                                      Waiting for incoming packet in doReceive()        
+12:38:27.342     CLSocket::receive                                                                                                                       Receiving at:10500                                
+12:38:27.343     CLSocket::coAccept                                                                                                                      Fant gjenbrukbar innsocket                        
+12:38:28.206     CLSocket::coReceive                                                                                                                     State of socket is:
+Bound:true
+Closed: false
+Connected: true
+Local Port: 10500
+Remote Port:55646
+12:38:28.210     CLSocket::receive                                                                                                                       Finished receiving at:10500                       
+12:38:28.210     AbstractConnection                                                                                                                      Received an internal packet in doReceive          
+12:38:28.212     AbstractConnection       78.91.5.74:60421         78.91.5.74:48095         9127    SYN_ACK 3027                             0           Sending Ack: 3027                                 
+12:38:28.745     NETWORK                                                                                                                                 Packet 9127 send!                                 
+12:38:28.746     AbstractConnection                                                                                                                      Waiting for incoming packet in receiveAck()       
+12:38:28.749     CLSocket::receive                                                                                                                       Receiving at:60421                                
+12:38:28.856     CLSocket::coReceive                                                                                                                     State of socket is:
+Bound:true
+Closed: false
+Connected: true
+Local Port: 60421
+Remote Port:55648
+12:38:28.858     CLSocket::receive                                                                                                                       Finished receiving at:60421                       
+12:38:28.858     AbstractConnection                                                                                                                      Received an internal packet in receiveAck         
+12:38:28.859     AbstractConnection                                                                                                                      Waiting for incoming packet in doReceive()        
+12:38:28.859     CLSocket::receive                                                                                                                       Receiving at:60421                                
+12:38:28.860     CLSocket::coAccept                                                                                                                      Fant gjenbrukbar innsocket                        
+12:38:28.968     CLSocket::coReceive                                                                                                                     State of socket is:
+Bound:true
+Closed: false
+Connected: true
+Local Port: 60421
+Remote Port:55649
+12:38:28.971     CLSocket::receive                                                                                                                       Finished receiving at:60421                       
+12:38:28.971     AbstractConnection                                                                                                                      Received an external packet in doReceive          
+12:38:28.972     AbstractConnection       78.91.5.74:60421         78.91.5.74:48095         9128    ACK     3029                             0           Sending Ack: 3029                                 
+12:38:28.975     NETWORK                                                                                                                                 Packet 9128 send!                                 
+12:38:28.978     AbstractConnection                                                                                                                      Waiting for incoming packet in doReceive()        
+12:38:28.978     CLSocket::receive                                                                                                                       Receiving at:60421                                
+12:38:28.979     CLSocket::coAccept                                                                                                                      Fant gjenbrukbar innsocket                        
+12:38:29.78      SendTimer                78.91.5.74:62072         78.91.5.74:42195         6357    NONE    -1      *: defau joined.         497464412   Sending this datagram (try: 1)                    
+12:38:29.81      NETWORK                                                                                                                                 Packet 6357 send!                                 
+12:38:29.877     SendTimer                78.91.5.74:62072         78.91.5.74:42195         6357    NONE    -1      *: defau joined.         497464412   Sending this datagram (try: 2)                    
+12:38:29.887     NETWORK                                                                                                                                 Packet 6357 send!                                 
+12:38:30.678     SendTimer                78.91.5.74:62072         78.91.5.74:42195         6357    NONE    -1      *: defau joined.         497464412   Sending this datagram (try: 3)                    
+12:38:30.687     NETWORK                                                                                                                                 Packet 6357 send!                                 
+12:38:31.477     SendTimer                78.91.5.74:62072         78.91.5.74:42195         6357    NONE    -1      *: defau joined.         497464412   Sending this datagram (try: 4)                    
+12:38:31.482     NETWORK                                                                                                                                 Packet 6357 send!                                 
+12:38:31.978     SendTimer                78.91.5.74:60421         78.91.5.74:48095         9129    NONE    -1      *: defau joined.         497464412   Sending this datagram (try: 1)                    
+12:38:31.981     NETWORK                                                                                                                                 Packet 9129 send!                                 
+12:38:32.778     SendTimer                78.91.5.74:60421         78.91.5.74:48095         9129    NONE    -1      *: defau joined.         497464412   Sending this datagram (try: 2)                    
+12:38:32.780     NETWORK                                                                                                                                 Packet 9129 send!                                 
+12:38:33.578     SendTimer                78.91.5.74:60421         78.91.5.74:48095         9129    NONE    -1      *: defau joined.         497464412   Sending this datagram (try: 3)                    
+12:38:33.581     NETWORK                                                                                                                                 Packet 9129 send!                                 
+12:38:34.378     SendTimer                78.91.5.74:60421         78.91.5.74:48095         9129    NONE    -1      *: defau joined.         497464412   Sending this datagram (try: 4)                    
+12:38:34.381     NETWORK                                                                                                                                 Packet 9129 send!                                 
+12:38:35.178     SendTimer                78.91.5.74:60421         78.91.5.74:48095         9129    NONE    -1      *: defau joined.         497464412   Sending this datagram (try: 5)                    
+12:38:35.181     NETWORK                                                                                                                                 Packet 9129 send!                                 
+12:38:35.978     SendTimer                78.91.5.74:60421         78.91.5.74:48095         9129    NONE    -1      *: defau joined.         497464412   Sending this datagram (try: 6)                    
+12:38:35.980     NETWORK                                                                                                                                 Packet 9129 send!                                 
+12:38:36.778     SendTimer                78.91.5.74:60421         78.91.5.74:48095         9129    NONE    -1      *: defau joined.         497464412   Sending this datagram (try: 7)                    
+12:38:36.780     NETWORK                                                                                                                                 Packet 9129 send!                                 
+12:38:37.578     SendTimer                78.91.5.74:60421         78.91.5.74:48095         9129    NONE    -1      *: defau joined.         497464412   Sending this datagram (try: 8)                    
+12:38:37.581     NETWORK                                                                                                                                 Packet 9129 send!                                 
+12:38:37.740     SendTimer                78.91.5.74:62072         78.91.5.74:42195         6358    NONE    -1      [default, defau]         1008263453  Sending this datagram (try: 1)                    
+12:38:37.744     NETWORK                                                                                                                                 Packet 6358 send!                                 
+12:38:38.483     SendTimer                78.91.5.74:62072         78.91.5.74:42195         6358    NONE    -1      [default, defau]         1008263453  Sending this datagram (try: 2)                    
+12:38:38.487     NETWORK                                                                                                                                 Packet 6358 send!                                 
+12:38:39.283     SendTimer                78.91.5.74:62072         78.91.5.74:42195         6358    NONE    -1      [default, defau]         1008263453  Sending this datagram (try: 3)                    
+12:38:39.289     NETWORK                                                                                                                                 Packet 6358 send!                                 
+12:38:40.83      SendTimer                78.91.5.74:62072         78.91.5.74:42195         6358    NONE    -1      [default, defau]         1008263453  Sending this datagram (try: 4)                    
+12:38:40.87      NETWORK                                                                                                                                 Packet 6358 send!                                 
+12:38:40.883     SendTimer                78.91.5.74:62072         78.91.5.74:42195         6358    NONE    -1      [default, defau]         1008263453  Sending this datagram (try: 5)                    
+12:38:40.887     NETWORK                                                                                                                                 Packet 6358 send!                                 
+12:38:41.683     SendTimer                78.91.5.74:62072         78.91.5.74:42195         6358    NONE    -1      [default, defau]         1008263453  Sending this datagram (try: 6)                    
+12:38:41.686     NETWORK                                                                                                                                 Packet 6358 send!                                 
+12:38:42.483     SendTimer                78.91.5.74:62072         78.91.5.74:42195         6358    NONE    -1      [default, defau]         1008263453  Sending this datagram (try: 7)                    
+12:38:42.485     NETWORK                                                                                                                                 Packet 6358 send!                                 
+12:38:43.383     SendTimer                78.91.5.74:60421         78.91.5.74:48095         9130    NONE    -1      [default, defau]         1008263453  Sending this datagram (try: 1)                    
+12:38:43.388     NETWORK                                                                                                                                 Packet 9130 send!                                 
+12:38:44.183     SendTimer                78.91.5.74:60421         78.91.5.74:48095         9130    NONE    -1      [default, defau]         1008263453  Sending this datagram (try: 2)                    
+12:38:44.190     NETWORK                                                                                                                                 Packet 9130 send!                                 
+12:38:44.983     SendTimer                78.91.5.74:60421         78.91.5.74:48095         9130    NONE    -1      [default, defau]         1008263453  Sending this datagram (try: 3)                    
+12:38:44.986     NETWORK                                                                                                                                 Packet 9130 send!                                 
+12:38:45.783     SendTimer                78.91.5.74:60421         78.91.5.74:48095         9130    NONE    -1      [default, defau]         1008263453  Sending this datagram (try: 4)                    
+12:38:45.798     NETWORK                                                                                                                                 Packet 9130 send!                                 
+12:38:46.583     SendTimer                78.91.5.74:60421         78.91.5.74:48095         9130    NONE    -1      [default, defau]         1008263453  Sending this datagram (try: 5)                    
+12:38:46.585     NETWORK                                                                                                                                 Packet 9130 send!                                 
+12:38:47.383     SendTimer                78.91.5.74:60421         78.91.5.74:48095         9130    NONE    -1      [default, defau]         1008263453  Sending this datagram (try: 6)                    
+12:38:47.386     NETWORK                                                                                                                                 Packet 9130 send!                                 
+12:38:48.184     SendTimer                78.91.5.74:60421         78.91.5.74:48095         9130    NONE    -1      [default, defau]         1008263453  Sending this datagram (try: 7)                    
+12:38:48.188     NETWORK                                                                                                                                 Packet 9130 send!                                 
+12:38:48.983     SendTimer                78.91.5.74:60421         78.91.5.74:48095         9130    NONE    -1      [default, defau]         1008263453  Sending this datagram (try: 8)                    
+12:38:48.985     AbstractConnection                                                                                                                      Waiting for incoming packet in doReceive()        
+12:38:48.988     NETWORK                                                                                                                                 Packet 9130 send!                                 
+12:38:48.999     CLSocket::receive                                                                                                                       Receiving at:10500                                
+12:38:49.1       CLSocket::coAccept                                                                                                                      Fant gjenbrukbar innsocket                        
+12:38:50.864     CLSocket::coReceive                                                                                                                     State of socket is:
+Bound:true
+Closed: false
+Connected: true
+Local Port: 62072
+Remote Port:55688
+12:38:50.867     CLSocket::receive                                                                                                                       Finished receiving at:62072                       
+12:38:50.868     AbstractConnection                                                                                                                      Received an external packet in doReceive          
+12:38:50.868     AbstractConnection       78.91.5.74:62072         78.91.5.74:42195         6359    ACK     6063                             0           Sending Ack: 6063                                 
+12:38:50.871     NETWORK                                                                                                                                 Packet 6359 send!                                 
+12:38:50.973     AbstractConnection                                                                                                                      Waiting for incoming packet in receiveAck()       
+12:38:50.975     CLSocket::receive                                                                                                                       Receiving at:62072                                
+12:38:50.976     CLSocket::coAccept                                                                                                                      Fant gjenbrukbar innsocket                        
+12:38:50.984     SendTimer                78.91.5.74:62072         78.91.5.74:42195         6360    NONE    -1      default: p               1121970318  Sending this datagram (try: 1)                    
+12:38:50.987     NETWORK                                                                                                                                 Packet 6360 send!                                 
+12:38:51.773     SendTimer                78.91.5.74:62072         78.91.5.74:42195         6360    NONE    -1      default: p               1121970318  Sending this datagram (try: 2)                    
+12:38:51.778     NETWORK                                                                                                                                 Packet 6360 send!                                 
+12:38:51.787     AbstractConnection                                                                                                                      Waiting for incoming packet in doReceive()        
+12:38:51.792     CLSocket::receive                                                                                                                       Receiving at:10500                                
+12:38:51.793     CLSocket::coAccept                                                                                                                      Fant gjenbrukbar innsocket                        
+12:38:52.573     SendTimer                78.91.5.74:62072         78.91.5.74:42195         6360    NONE    -1      default: p               1121970318  Sending this datagram (try: 3)                    
+12:38:52.577     NETWORK                                                                                                                                 Packet 6360 send!                                 
+12:38:53.373     SendTimer                78.91.5.74:62072         78.91.5.74:42195         6360    NONE    -1      default: p               1121970318  Sending this datagram (try: 4)                    
+12:38:53.376     NETWORK                                                                                                                                 Packet 6360 send!                                 
+12:38:53.876     SendTimer                78.91.5.74:60421         78.91.5.74:48095         9131    NONE    -1      default: p               1121970318  Sending this datagram (try: 1)                    
+12:38:53.880     NETWORK                                                                                                                                 Packet 9131 send!                                 
+12:38:54.587     AbstractConnection                                                                                                                      Waiting for incoming packet in doReceive()        
+12:38:54.588     CLSocket::receive                                                                                                                       Receiving at:10500                                
+12:38:54.591     CLSocket::coAccept                                                                                                                      Fant gjenbrukbar innsocket                        
+12:38:54.675     SendTimer                78.91.5.74:60421         78.91.5.74:48095         9131    NONE    -1      default: p               1121970318  Sending this datagram (try: 2)                    
+12:38:54.683     NETWORK                                                                                                                                 Packet 9131 send!                                 
+12:38:55.475     SendTimer                78.91.5.74:60421         78.91.5.74:48095         9131    NONE    -1      default: p               1121970318  Sending this datagram (try: 3)                    
+12:38:55.477     NETWORK                                                                                                                                 Packet 9131 send!                                 
+12:38:56.275     SendTimer                78.91.5.74:60421         78.91.5.74:48095         9131    NONE    -1      default: p               1121970318  Sending this datagram (try: 4)                    
+12:38:56.279     NETWORK                                                                                                                                 Packet 9131 send!                                 
+12:38:57.75      SendTimer                78.91.5.74:60421         78.91.5.74:48095         9131    NONE    -1      default: p               1121970318  Sending this datagram (try: 5)                    
+12:38:57.82      NETWORK                                                                                                                                 Packet 9131 send!                                 
+12:38:57.387     AbstractConnection                                                                                                                      Waiting for incoming packet in doReceive()        
+12:38:57.390     CLSocket::receive                                                                                                                       Receiving at:10500                                
+12:38:57.391     CLSocket::coAccept                                                                                                                      Fant gjenbrukbar innsocket                        
+12:38:57.875     SendTimer                78.91.5.74:60421         78.91.5.74:48095         9131    NONE    -1      default: p               1121970318  Sending this datagram (try: 6)                    
+12:38:57.879     NETWORK                                                                                                                                 Packet 9131 send!                                 
+12:38:58.683     SendTimer                78.91.5.74:60421         78.91.5.74:48095         9131    NONE    -1      default: p               1121970318  Sending this datagram (try: 7)                    
+12:38:58.694     NETWORK                                                                                                                                 Packet 9131 send!                                 
+12:38:59.475     SendTimer                78.91.5.74:60421         78.91.5.74:48095         9131    NONE    -1      default: p               1121970318  Sending this datagram (try: 8)                    
+12:38:59.477     AbstractConnection                                                                                                                      Waiting for incoming packet in doReceive()        
+12:38:59.482     NETWORK                                                                                                                                 Packet 9131 send!                                 
+12:38:59.483     CLSocket::receive                                                                                                                       Receiving at:62072                                
+12:38:59.484     CLSocket::coAccept                                                                                                                      Fant gjenbrukbar innsocket                        
+12:39:0.188      AbstractConnection                                                                                                                      Waiting for incoming packet in doReceive()        
+12:39:0.190      CLSocket::receive                                                                                                                       Receiving at:10500                                
+12:39:0.191      CLSocket::coAccept                                                                                                                      Fant gjenbrukbar innsocket                        
+12:39:2.989      AbstractConnection                                                                                                                      Waiting for incoming packet in doReceive()        
+12:39:2.992      CLSocket::receive                                                                                                                       Receiving at:10500                                
+12:39:2.994      CLSocket::coAccept                                                                                                                      Fant gjenbrukbar innsocket                        
+12:39:5.791      AbstractConnection                                                                                                                      Waiting for incoming packet in doReceive()        
+12:39:5.793      CLSocket::receive                                                                                                                       Receiving at:10500                                
+12:39:5.794      CLSocket::coAccept                                                                                                                      Fant gjenbrukbar innsocket                        
+12:39:8.593      AbstractConnection                                                                                                                      Waiting for incoming packet in doReceive()        
+12:39:8.596      CLSocket::receive                                                                                                                       Receiving at:10500                                
+12:39:8.599      CLSocket::coAccept                                                                                                                      Fant gjenbrukbar innsocket                        
+12:39:10.32      CLSocket::coReceive                                                                                                                     State of socket is:
+Bound:true
+Closed: false
+Connected: true
+Local Port: 60421
+Remote Port:55716
+12:39:10.37      CLSocket::receive                                                                                                                       Finished receiving at:60421                       
+12:39:10.38      AbstractConnection                                                                                                                      Received an external packet in doReceive          
+12:39:10.39      AbstractConnection       78.91.5.74:60421         78.91.5.74:48095         9132    ACK     3030                             0           Sending Ack: 3030                                 
+12:39:10.44      NETWORK                                                                                                                                 Packet 9132 send!                                 
+12:39:10.153     SendTimer                78.91.5.74:62072         78.91.5.74:42195         6361    NONE    -1      defau: p                 3338443264  Sending this datagram (try: 1)                    
+12:39:10.156     NETWORK                                                                                                                                 Packet 6361 send!                                 
+12:39:10.949     SendTimer                78.91.5.74:62072         78.91.5.74:42195         6361    NONE    -1      defau: p                 3338443264  Sending this datagram (try: 2)                    
+12:39:10.953     NETWORK                                                                                                                                 Packet 6361 send!                                 
+12:39:11.393     AbstractConnection                                                                                                                      Waiting for incoming packet in doReceive()        
+12:39:11.395     CLSocket::receive                                                                                                                       Receiving at:10500                                
+12:39:11.396     CLSocket::coAccept                                                                                                                      Fant gjenbrukbar innsocket                        
+12:39:11.749     SendTimer                78.91.5.74:62072         78.91.5.74:42195         6361    NONE    -1      defau: p                 3338443264  Sending this datagram (try: 3)                    
+12:39:11.754     NETWORK                                                                                                                                 Packet 6361 send!                                 
+12:39:12.549     SendTimer                78.91.5.74:62072         78.91.5.74:42195         6361    NONE    -1      defau: p                 3338443264  Sending this datagram (try: 4)                    
+12:39:12.554     NETWORK                                                                                                                                 Packet 6361 send!                                 
+12:39:13.349     SendTimer                78.91.5.74:62072         78.91.5.74:42195         6361    NONE    -1      defau: p                 3338443264  Sending this datagram (try: 5)                    
+12:39:13.354     NETWORK                                                                                                                                 Packet 6361 send!                                 
+12:39:14.149     SendTimer                78.91.5.74:62072         78.91.5.74:42195         6361    NONE    -1      defau: p                 3338443264  Sending this datagram (try: 6)                    
+12:39:14.154     NETWORK                                                                                                                                 Packet 6361 send!                                 
+12:39:14.195     AbstractConnection                                                                                                                      Waiting for incoming packet in doReceive()        
+12:39:14.197     CLSocket::receive                                                                                                                       Receiving at:10500                                
+12:39:14.199     CLSocket::coAccept                                                                                                                      Fant gjenbrukbar innsocket                        
+12:39:14.950     SendTimer                78.91.5.74:62072         78.91.5.74:42195         6361    NONE    -1      defau: p                 3338443264  Sending this datagram (try: 7)                    
+12:39:14.958     NETWORK                                                                                                                                 Packet 6361 send!                                 
+12:39:15.749     SendTimer                78.91.5.74:62072         78.91.5.74:42195         6361    NONE    -1      defau: p                 3338443264  Sending this datagram (try: 8)                    
+12:39:15.755     NETWORK                                                                                                                                 Packet 6361 send!                                 
+12:39:15.849     AbstractConnection                                                                                                                      Waiting for incoming packet in receiveAck()       
+12:39:15.850     SendTimer                78.91.5.74:60421         78.91.5.74:48095         9133    NONE    -1      defau: p                 3338443264  Sending this datagram (try: 1)                    
+12:39:15.852     CLSocket::receive                                                                                                                       Receiving at:60421                                
+12:39:15.853     CLSocket::coAccept                                                                                                                      Fant gjenbrukbar innsocket                        
+12:39:15.856     NETWORK                                                                                                                                 Packet 9133 send!                                 
+12:39:16.649     SendTimer                78.91.5.74:60421         78.91.5.74:48095         9133    NONE    -1      defau: p                 3338443264  Sending this datagram (try: 2)                    
+12:39:16.652     NETWORK                                                                                                                                 Packet 9133 send!                                 
+12:39:16.997     AbstractConnection                                                                                                                      Waiting for incoming packet in doReceive()        
+12:39:17.0       CLSocket::receive                                                                                                                       Receiving at:10500                                
+12:39:17.0       CLSocket::coAccept                                                                                                                      Fant gjenbrukbar innsocket                        
+12:39:17.449     SendTimer                78.91.5.74:60421         78.91.5.74:48095         9133    NONE    -1      defau: p                 3338443264  Sending this datagram (try: 3)                    
+12:39:17.453     NETWORK                                                                                                                                 Packet 9133 send!                                 
+12:39:18.249     SendTimer                78.91.5.74:60421         78.91.5.74:48095         9133    NONE    -1      defau: p                 3338443264  Sending this datagram (try: 4)                    
+12:39:18.254     NETWORK                                                                                                                                 Packet 9133 send!                                 
+12:39:18.650     AbstractConnection                                                                                                                      Waiting for incoming packet in doReceive()        
+12:39:18.651     CLSocket::receive                                                                                                                       Receiving at:60421                                
+12:39:18.652     CLSocket::coAccept                                                                                                                      Fant gjenbrukbar innsocket                        
+12:39:19.798     AbstractConnection                                                                                                                      Waiting for incoming packet in doReceive()        
+12:39:19.875     CLSocket::receive                                                                                                                       Receiving at:10500                                
+12:39:19.875     CLSocket::coAccept                                                                                                                      Fant gjenbrukbar innsocket                        
+12:39:22.673     AbstractConnection                                                                                                                      Waiting for incoming packet in doReceive()        
+12:39:22.674     CLSocket::receive                                                                                                                       Receiving at:10500                                
+12:39:22.675     CLSocket::coAccept                                                                                                                      Fant gjenbrukbar innsocket                        
+12:39:25.474     AbstractConnection                                                                                                                      Waiting for incoming packet in doReceive()        
+12:39:25.475     CLSocket::receive                                                                                                                       Receiving at:10500                                
+12:39:25.476     CLSocket::coAccept                                                                                                                      Fant gjenbrukbar innsocket                        
+12:39:28.275     AbstractConnection                                                                                                                      Waiting for incoming packet in doReceive()        
+12:39:28.276     CLSocket::receive                                                                                                                       Receiving at:10500                                
+12:39:28.277     CLSocket::coAccept                                                                                                                      Fant gjenbrukbar innsocket                        
+12:39:30.873     CLSocket::coReceive                                                                                                                     State of socket is:
+Bound:true
+Closed: false
+Connected: true
+Local Port: 62072
+Remote Port:55751
+12:39:30.875     CLSocket::receive                                                                                                                       Finished receiving at:62072                       
+12:39:30.876     AbstractConnection                                                                                                                      Received an external packet in doReceive          
+12:39:30.876     AbstractConnection       78.91.5.74:62072         78.91.5.74:42195         6362    ACK     6064                             0           Sending Ack: 6064                                 
+12:39:30.880     NETWORK                                                                                                                                 Packet 6362 send!                                 
+12:39:30.981     AbstractConnection                                                                                                                      Waiting for incoming packet in receiveAck()       
+12:39:30.982     CLSocket::receive                                                                                                                       Receiving at:62072                                
+12:39:30.983     CLSocket::coAccept                                                                                                                      Fant gjenbrukbar innsocket                        
+12:39:30.991     SendTimer                78.91.5.74:62072         78.91.5.74:42195         6363    NONE    -1      default: oo              1404215418  Sending this datagram (try: 1)                    
+12:39:30.994     NETWORK                                                                                                                                 Packet 6363 send!                                 
+12:39:31.76      AbstractConnection                                                                                                                      Waiting for incoming packet in doReceive()        
+12:39:31.79      CLSocket::receive                                                                                                                       Receiving at:10500                                
+12:39:31.81      CLSocket::coAccept                                                                                                                      Fant gjenbrukbar innsocket                        
+12:39:31.781     SendTimer                78.91.5.74:62072         78.91.5.74:42195         6363    NONE    -1      default: oo              1404215418  Sending this datagram (try: 2)                    
+12:39:31.785     NETWORK                                                                                                                                 Packet 6363 send!                                 
+12:39:32.581     SendTimer                78.91.5.74:62072         78.91.5.74:42195         6363    NONE    -1      default: oo              1404215418  Sending this datagram (try: 3)                    
+12:39:32.583     NETWORK                                                                                                                                 Packet 6363 send!                                 
+12:39:33.381     SendTimer                78.91.5.74:62072         78.91.5.74:42195         6363    NONE    -1      default: oo              1404215418  Sending this datagram (try: 4)                    
+12:39:33.383     NETWORK                                                                                                                                 Packet 6363 send!                                 
+12:39:33.782     ClSocketReceiver                                                                                                                        Exception while receiving: socket closed          
+12:39:33.876     AbstractConnection                                                                                                                      Waiting for incoming packet in doReceive()        
+12:39:33.879     CLSocket::receive                                                                                                                       Receiving at:10500                                
+12:39:33.880     CLSocket::coAccept                                                                                                                      Fant gjenbrukbar innsocket                        
+12:39:33.902     SendTimer                78.91.5.74:60421         78.91.5.74:48095         9134    NONE    -1      default: oo              1404215418  Sending this datagram (try: 1)                    
+12:39:33.913     NETWORK                                                                                                                                 Packet 9134 send!                                 
+12:39:34.685     SendTimer                78.91.5.74:60421         78.91.5.74:48095         9134    NONE    -1      default: oo              1404215418  Sending this datagram (try: 2)                    
+12:39:34.689     NETWORK                                                                                                                                 Packet 9134 send!                                 
+12:39:35.485     SendTimer                78.91.5.74:60421         78.91.5.74:48095         9134    NONE    -1      default: oo              1404215418  Sending this datagram (try: 3)                    
+12:39:35.487     NETWORK                                                                                                                                 Packet 9134 send!                                 
+12:39:36.285     SendTimer                78.91.5.74:60421         78.91.5.74:48095         9134    NONE    -1      default: oo              1404215418  Sending this datagram (try: 4)                    
+12:39:36.287     NETWORK                                                                                                                                 Packet 9134 send!                                 
+12:39:36.678     AbstractConnection                                                                                                                      Waiting for incoming packet in doReceive()        
+12:39:36.682     CLSocket::receive                                                                                                                       Receiving at:10500                                
+12:39:36.728     CLSocket::coAccept                                                                                                                      Fant gjenbrukbar innsocket                        
+12:39:37.85      SendTimer                78.91.5.74:60421         78.91.5.74:48095         9134    NONE    -1      default: oo              1404215418  Sending this datagram (try: 5)                    
+12:39:37.89      NETWORK                                                                                                                                 Packet 9134 send!                                 
+12:39:37.887     SendTimer                78.91.5.74:60421         78.91.5.74:48095         9134    NONE    -1      default: oo              1404215418  Sending this datagram (try: 6)                    
+12:39:37.892     NETWORK                                                                                                                                 Packet 9134 send!                                 
+12:39:38.686     SendTimer                78.91.5.74:60421         78.91.5.74:48095         9134    NONE    -1      default: oo              1404215418  Sending this datagram (try: 7)                    
+12:39:38.688     NETWORK                                                                                                                                 Packet 9134 send!                                 
+12:39:39.479     AbstractConnection                                                                                                                      Waiting for incoming packet in doReceive()        
+12:39:39.481     CLSocket::receive                                                                                                                       Receiving at:10500                                
+12:39:39.483     CLSocket::coAccept                                                                                                                      Fant gjenbrukbar innsocket                        
+12:39:39.485     AbstractConnection                                                                                                                      Waiting for incoming packet in doReceive()        
+12:39:39.487     CLSocket::receive                                                                                                                       Receiving at:62072                                
+12:39:39.488     CLSocket::coAccept                                                                                                                      Fant gjenbrukbar innsocket                        
+12:39:42.280     AbstractConnection                                                                                                                      Waiting for incoming packet in doReceive()        
+12:39:42.295     CLSocket::receive                                                                                                                       Receiving at:10500                                
+12:39:42.297     CLSocket::coAccept                                                                                                                      Fant gjenbrukbar innsocket                        
+12:39:45.92      AbstractConnection                                                                                                                      Waiting for incoming packet in doReceive()        
+12:39:45.99      CLSocket::receive                                                                                                                       Receiving at:10500                                
+12:39:45.100     CLSocket::coAccept                                                                                                                      Fant gjenbrukbar innsocket                        
+12:39:47.893     AbstractConnection                                                                                                                      Waiting for incoming packet in doReceive()        
+12:39:47.896     CLSocket::receive                                                                                                                       Receiving at:10500                                
+12:39:47.900     CLSocket::coAccept                                                                                                                      Fant gjenbrukbar innsocket                        
+12:39:50.695     AbstractConnection                                                                                                                      Waiting for incoming packet in doReceive()        
+12:39:50.701     CLSocket::receive                                                                                                                       Receiving at:10500                                
+12:39:50.702     CLSocket::coAccept                                                                                                                      Fant gjenbrukbar innsocket                        
+12:39:53.497     AbstractConnection                                                                                                                      Waiting for incoming packet in doReceive()        
+12:39:53.499     CLSocket::receive                                                                                                                       Receiving at:10500                                
+12:39:53.500     CLSocket::coAccept                                                                                                                      Fant gjenbrukbar innsocket                        
+12:39:53.502     ClSocketReceiver                                                                                                                        Exception while receiving: socket closed          
+12:39:53.510     AbstractConnection                                                                                                                      Waiting for incoming packet in doReceive()        
+12:39:53.515     CLSocket::receive                                                                                                                       Receiving at:10500                                
+12:39:53.515     CLSocket::coAccept                                                                                                                      Fant gjenbrukbar innsocket                        
+12:39:56.311     AbstractConnection                                                                                                                      Waiting for incoming packet in doReceive()        
+12:39:56.312     CLSocket::receive                                                                                                                       Receiving at:10500                                
+12:39:56.313     CLSocket::coAccept                                                                                                                      Fant gjenbrukbar innsocket                        
+12:39:59.112     AbstractConnection                                                                                                                      Waiting for incoming packet in doReceive()        
+12:39:59.113     CLSocket::receive                                                                                                                       Receiving at:10500                                
+12:39:59.115     CLSocket::coAccept                                                                                                                      Fant gjenbrukbar innsocket                        

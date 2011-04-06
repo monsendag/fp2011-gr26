@@ -1604,6 +1604,10 @@ public class Gui extends javax.swing.JFrame {
         loginPasswordField.setText("passord");
         loginUsernameTextField.setText("brukernavn");
         loginPasswordField.setEchoChar('\u0000');
+        
+        Client.get().logoutAction();
+        
+        setVisible(false);
         loginDialog.setVisible(true);
     }                                            
 
@@ -1775,6 +1779,8 @@ public class Gui extends javax.swing.JFrame {
     		setVisible(true);
     	}
     	else {
+    		errorDialogTextArea.setText("Innlogging feilet!");
+    		errorDialog.pack();
     		errorDialog.setVisible(true);
     	}
     }

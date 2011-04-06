@@ -22,7 +22,7 @@ public class Server {
 	 */
 	public static void main(String[] args) {
 		
-		System.out.println("Starting calendar server on port "+port);
+		System.out.println("#NET: Starting server on port "+port);
 		ServerSocket srvr;
 		try {
 			srvr = new ServerSocket(port);
@@ -33,7 +33,7 @@ public class Server {
 			clients = new DefaultListModel();
 			
 			JList list = new JList(clients);
-			panel.add(new JLabel("Tilkoblede klienter: "));
+			panel.add(new JLabel("Connected clients: "));
 			panel.add(list);
 			frame.setPreferredSize(new Dimension(600,400));
 			frame.setContentPane(panel);

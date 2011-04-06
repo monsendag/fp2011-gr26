@@ -1803,6 +1803,7 @@ public class Gui extends javax.swing.JFrame {
     private void login() {
     	String username = loginUsernameTextField.getText();
     	String password = String.valueOf(loginPasswordField.getPassword());
+    	String ip = hostIPField.getText();
     	if(Client.get().loginAction(null, username, password)) {
     		loginDialog.setVisible(false);
     		setVisible(true);
@@ -1903,7 +1904,6 @@ public class Gui extends javax.swing.JFrame {
 //    }
 
     private void changeCalendarView(){
-
     }
     
     private void setNextWeek() {

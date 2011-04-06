@@ -152,7 +152,9 @@ public class DBTest {
 		
 		// Cache
 		
-		testPrint(dbr,dbs);
+		//testPrint(dbr,dbs);
 		//dbr.test();
+		
+		System.out.println(dbr.login("test", "1234").getName());
 	}	
 }

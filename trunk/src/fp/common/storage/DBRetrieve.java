@@ -42,20 +42,22 @@ public class DBRetrieve {
 		dbs.setDBR(this);
 	}
 	
-	public void test() {
+	public Employee login(String username,String passwd) {
 		try {
 			Statement s = conn.createStatement();
-			ResultSet rs = s.executeQuery("SELECT * FROM alert");
+			ResultSet rs = s.executeQuery("SELECT * FROM employee WHERE username = '" +
+					username + "' AND passwd = '" + passwd + "'");
 			
-			
+			Employee e = new Employee();
 			while(rs.next()) {
-				System.out.println(rs.getBoolean(1)+ " " + rs.getTimestamp(2).toString() + " " +
-							rs.getString(3) + " " + rs.getString(4) + " " + rs.getInt(5));
+				e.setName(rs.getString("name"));
+				e.setUsername(rs.getString("username"));
 			}
-			s.close();
+			return e;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		return null;
 	}
 	
 	public static DBRetrieve getInstance() {
@@ -84,7 +86,6 @@ public class DBRetrieve {
 				Employee e = new Employee();
 				e.setUsername(rs.getString("username"));
 				e.setName(rs.getString("name"));
-				e.setPassword(rs.getString("password"));
 				// Add to cache
 				empCache.put(e.getUsername(), e);
 				System.out.println("Adding " + e.getUsername() + " to cache.");
@@ -119,7 +120,6 @@ public class DBRetrieve {
 					e = new Employee();
 					e.setUsername(username);
 					e.setName(rs.getString("name"));
-					e.setPassword(rs.getString("password"));
 					System.out.println("Adding " + e.getUsername() + " to cache.");
 					empCache.put(username, e);
 				}
@@ -143,12 +143,12 @@ public class DBRetrieve {
 		ArrayList<Message> alerts = new ArrayList<Message>();
 		try {
 			Statement s = conn.createStatement();
-			ResultSet rs = s.executeQuery("SELECT * FROM alert " +
-					"WHERE (isread = false OR isread IS NULL)");
+			ResultSet rs = s.executeQuery("SELECT * FROM alert");
 			
 			Message m;
 			while(rs.next()) {
 				m = new Message();
+				m.setRead(rs.getBoolean("isread"));
 				m.setCreatedOn(new DateTime(rs.getTimestamp("time").getTime()));
 				m.setDescription(rs.getString("message"));
 				m.setEmployee(getEmployee(rs.getString("username")));
@@ -588,7 +588,7 @@ public class DBRetrieve {
 			 * Personal activities can't reserve a room.
 			 */
 			ResultSet rs = s.executeQuery("SELECT * FROM alert WHERE username ='"
-					+ username + "' AND isread = false OR isread IS NULL");
+					+ username + "'");
 			
 			Message m;
 			while(rs.next()) {
@@ -597,7 +597,7 @@ public class DBRetrieve {
 				m.setDescription(rs.getString("message"));
 				m.setEmployee(getEmployee(username));
 				m.setMeeting(getMeeting(rs.getInt("activityID")));
-				m.setRead(false);
+				m.setRead(rs.getBoolean("isread"));
 				alerts.add(m);
 			}
 			s.close();

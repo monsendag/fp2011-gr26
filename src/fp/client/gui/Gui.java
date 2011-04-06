@@ -1522,7 +1522,24 @@ public class Gui extends javax.swing.JFrame {
         participantChooserDialog.setVisible(true);
     }                                                                      
 
-    private void newAppointmentMakeButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                         
+    private void newAppointmentMakeButtonActionPerformed(java.awt.event.ActionEvent evt) {
+    	Activity newActivity = new Activity();
+    	newActivity.setTitle(newAppointmentTitleLabel.getText()); // title
+    	newActivity.setDescription(newAppointmentDescriptionTextArea.getText()); // description
+    	/*
+    	DateTime fromDate = new DateTime();
+    	DateTime toDate = new DateTime();
+    	newAppointmentStartTimeCB.setSelectedItem(act.getStartTime().toString("HH:mm"));
+    	newAppointmentEndTimeCB.setSelectedItem(act.getEndTime().toString("HH:mm"));
+    	fromDateChooserPanel.setDate(act.getStartTime().toDate());
+    	toDateChooserPanel.setDate(act.getEndTime().toDate());
+	    
+	    newAppointmentDialog.pack();
+	    newAppointmentDialog.setLocationRelativeTo(this);
+	    newAppointmentDialog.setVisible(true);
+    	
+    	Client.get().addActivity(newActivity);
+    	*/
         newAppointmentDialog.setVisible(false);
     }                                                        
 

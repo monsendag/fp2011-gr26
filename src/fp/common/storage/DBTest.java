@@ -137,6 +137,8 @@ public class DBTest {
 			System.out.println(m.getRead() + " " + m.getCreatedOn() + " " + m.getDescription()
 					+ " " + m.getEmployee().getUsername() + " " + m.getMeeting().getId());
 		}
+		
+		//dbs.addEmployee(new Employee("Test Hansen", "test", "1234"));
 	}
 	
 	public static void main(String[] args) {

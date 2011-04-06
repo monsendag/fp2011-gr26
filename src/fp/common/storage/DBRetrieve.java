@@ -48,10 +48,20 @@ public class DBRetrieve {
 			ResultSet rs = s.executeQuery("SELECT * FROM employee WHERE username = '" +
 					username + "' AND password = '" + passwd + "'");
 			
-			Employee e = new Employee();
+			Employee e;
 			while(rs.next()) {
-				e.setName(rs.getString("name"));
-				e.setUsername(rs.getString("username"));
+				// Check cache
+				if(empCache.containsKey(username)) {
+					e = empCache.get(username);
+					System.out.println("#DB: Getting " + e.getUsername() + " from cache.");
+				} else {
+					e = new Employee();
+					e.setName(rs.getString("name"));
+					e.setUsername(rs.getString("username"));
+					// Add to cache
+					empCache.put(username, e);
+					System.out.println("#DB: Adding " + e.getUsername() + " to cache.");
+				}
 				return e;
 			}
 			return null;
@@ -75,7 +85,7 @@ public class DBRetrieve {
 	public Employee getEmployee(String username) {
 		// Check cache
 		if(empCache.containsKey(username)) {
-			System.out.println("Getting " + username + " from cache.");
+			System.out.println("#DB: Getting " + username + " from cache.");
 			return empCache.get(username);
 			
 		}
@@ -87,9 +97,10 @@ public class DBRetrieve {
 				Employee e = new Employee();
 				e.setUsername(rs.getString("username"));
 				e.setName(rs.getString("name"));
+				e.setPassword(rs.getString("password"));
 				// Add to cache
 				empCache.put(e.getUsername(), e);
-				System.out.println("Adding " + e.getUsername() + " to cache.");
+				System.out.println("#DB: Adding " + e.getUsername() + " to cache.");
 				return e;
 			}
 			s.close();
@@ -116,12 +127,13 @@ public class DBRetrieve {
 				String username = rs.getString("username");
 				if(empCache.containsKey(username)) {
 					e = empCache.get(username);
-					System.out.println("Getting " + username + " from cache.");
+					System.out.println("#DB: Getting " + username + " from cache.");
 				} else {
 					e = new Employee();
 					e.setUsername(username);
 					e.setName(rs.getString("name"));
-					System.out.println("Adding " + e.getUsername() + " to cache.");
+					e.setPassword(rs.getString("password"));
+					System.out.println("#DB: Adding " + e.getUsername() + " to cache.");
 					empCache.put(username, e);
 				}
 				employees.add(e);
@@ -198,7 +210,7 @@ public class DBRetrieve {
 			while(rs.next()) {
 				String username = rs.getString("username");
 				if(empCache.containsKey(username)) {
-					System.out.println("Getting " + username + " from cache.");
+					System.out.println("#DB: Getting " + username + " from cache.");
 					e = empCache.get(username);
 				} else {
 					e = new Employee();
@@ -206,7 +218,7 @@ public class DBRetrieve {
 					e.setName(rs.getString("name"));
 					e.setPassword(rs.getString("password"));
 					empCache.put(username, e);
-					System.out.println("Adding " + username + " to cache.");
+					System.out.println("#DB: Adding " + username + " to cache.");
 				}
 				p = new Participant(e,Participant.intToEnum(rs.getInt("status")));
 				participants.add(p);
@@ -228,7 +240,7 @@ public class DBRetrieve {
 	public Room getRoom(int roomId) {
 		// Check cache
 		if(roomCache.containsKey(roomId)) {
-			System.out.println("Getting room " + roomId + " from cache.");
+			System.out.println("#DB: Getting room " + roomId + " from cache.");
 			return roomCache.get(roomId);
 		}
 		try {
@@ -242,7 +254,7 @@ public class DBRetrieve {
 				r.setCapacity(rs.getInt("capacity"));
 				// Add to cache
 				roomCache.put(r.getRoomID(), r);
-				System.out.println("Adding room " + r.getRoomID() + " to cache.");
+				System.out.println("#DB: Adding room " + r.getRoomID() + " to cache.");
 				return r;
 			}
 			s.close();
@@ -270,14 +282,14 @@ public class DBRetrieve {
 				// Checking cache
 				if(roomCache.containsKey(id)) {
 					r = roomCache.get(id);
-					System.out.println("Getting room " + id + " from cache.");
+					System.out.println("#DB: Getting room " + id + " from cache.");
 				} else {
 					r = new Room();
 					r.setName(rs.getString("name"));
 					r.setCapacity(rs.getInt("capacity"));
 					r.setRoomID(id);
 					// Adding to cache
-					System.out.println("Adding room " + id + " to cache.");
+					System.out.println("#DB: Adding room " + id + " to cache.");
 					roomCache.put(id, r);
 				}
 				rooms.add(r);
@@ -309,7 +321,7 @@ public class DBRetrieve {
 				// Checking cache
 				if(actCache.containsKey(id)) {
 					a = actCache.get(id);
-					System.out.println("Getting activity " + a.getId() + ", owned by " + a.getOwner() + " from cache.");
+					System.out.println("#DB: Getting activity " + a.getId() + " from cache.");
 				} else {
 					a = new Activity();
 					a.setOwner(getEmployee(rs.getString("username")));
@@ -320,7 +332,7 @@ public class DBRetrieve {
 					a.setEndTime(new DateTime(rs.getTimestamp("endtime").getTime()));
 					// Add to cache
 					actCache.put(id, a);
-					System.out.println("Adding activity " + a.getId() + ", owned by " + a.getOwner() + " to cache.");
+					System.out.println("#DB: Adding activity " + a.getId() + " to cache.");
 				}
 				activities.add(a);
 			}
@@ -340,7 +352,7 @@ public class DBRetrieve {
 	public Meeting getMeeting(int meetingID) {
 		if(mtngCache.containsKey(meetingID)) {
 			Meeting m1 = mtngCache.get(meetingID); // EDIT
-			System.out.println("Getting meeting " + m1.getId() + ", owned by " + m1.getOwner() + " from cache.");
+			System.out.println("#DB: Getting meeting " + m1.getId() + " from cache.");
 			return m1;
 		}
 		try {
@@ -359,7 +371,7 @@ public class DBRetrieve {
 				m.setStartTime(new DateTime(rs.getTimestamp("starttime").getTime()));
 				m.setEndTime(new DateTime(rs.getTimestamp("endtime").getTime()));
 				m.setParticipants(getParticipantsByMeetingID(m.getId()));
-				System.out.println("Adding meeting " + m.getId() + ", owned by " + m.getOwner() + " to cache.");
+				System.out.println("#DB: Adding meeting " + m.getId() + " to cache.");
 				mtngCache.put(m.getId(), m);
 				return m;
 			}
@@ -390,7 +402,7 @@ public class DBRetrieve {
 				// Check cache
 				if(mtngCache.containsKey(id)) {
 					m = mtngCache.get(id);
-					System.out.println("Getting meeting " + m.getId() + ", owned by " + m.getOwner() + " from cache.");
+					System.out.println("#DB: Getting meeting " + m.getId() + " from cache.");
 				} else {
 					m = new Meeting();
 					m.setOwner(getEmployee(rs.getString("username")));
@@ -403,7 +415,7 @@ public class DBRetrieve {
 					m.setParticipants(getParticipantsByMeetingID(id));
 					// Add to cache
 					mtngCache.put(id, m);
-					System.out.println("Adding meeting " + m.getId() + ", owned by " + m.getOwner() + " to cache.");
+					System.out.println("#DB: Adding meeting " + m.getId() + " to cache.");
 				}
 				meetings.add(m);
 			}
@@ -450,7 +462,7 @@ public class DBRetrieve {
 				// Check cache
 				if(actCache.containsKey(id)) {
 					a = actCache.get(id);
-					System.out.println("Getting activity " + a.getId() + ", owned by " + a.getOwner() + " from cache.");
+					System.out.println("#DB: Getting activity " + a.getId() + " from cache.");
 				} else {
 					a = new Activity();
 					a.setOwner(getEmployee(username));
@@ -461,7 +473,7 @@ public class DBRetrieve {
 					a.setEndTime(new DateTime(rs.getTimestamp("endtime").getTime()));
 					// Add to cache
 					actCache.put(id, a);
-					System.out.println("Adding activity " + a.getId() + ", owned by " + a.getOwner() + " to cache.");
+					System.out.println("#DB: Adding activity " + a.getId() + " to cache.");
 				}
 				activities.add(a);
 			}
@@ -498,7 +510,7 @@ public class DBRetrieve {
 			 * Fetches every meeting that the employee is invited to
 			 */
 			ResultSet rs = s.executeQuery("SELECT a.username, a.description, a.location, " +
-					"a.activityID, a.starttime, a.endtime " +
+					"a.activityID, a.starttime, a.endtime, a.roomID " +
 					"FROM activity a, participant p " +
 					"WHERE a.activityID = p.activityID AND p.username ='" + username + "' " +
 					"AND ismeeting = true AND (cancelled = false OR cancelled IS NULL)");
@@ -509,7 +521,7 @@ public class DBRetrieve {
 				// Check cache
 				if(mtngCache.containsKey(id)) {
 					m = mtngCache.get(id);
-					System.out.println("Getting meeting " + m.getId() + ", owned by " + m.getOwner() + " from cache.");
+					System.out.println("#DB: Getting meeting " + m.getId() + " from cache.");
 				} else {
 					m = new Meeting();
 					m.setOwner(getEmployee(rs.getString("username")));
@@ -522,7 +534,7 @@ public class DBRetrieve {
 					m.setParticipants(getParticipantsByMeetingID(id));
 					// Add to cache
 					mtngCache.put(id, m);
-					System.out.println("Adding meeting " + m.getId() + ", owned by " + m.getOwner() + " to cache.");
+					System.out.println("#DB: Adding meeting " + m.getId() + " to cache.");
 				}
 				meetings.add(m);
 			}
@@ -539,7 +551,7 @@ public class DBRetrieve {
 				// Check cache
 				if(mtngCache.containsKey(id)) {
 					m = mtngCache.get(id);
-					System.out.println("Getting meeting " + m.getId() + ", owned by " + m.getOwner() + " from cache.");
+					System.out.println("#DB: Getting meeting " + m.getId() + " from cache.");
 				} else {
 					m = new Meeting();
 					m.setOwner(getEmployee(rs.getString("username")));
@@ -551,7 +563,7 @@ public class DBRetrieve {
 					m.setParticipants(getParticipantsByMeetingID(id));
 					// Add to cache
 					mtngCache.put(id, m);
-					System.out.println("Adding meeting " + m.getId() + ", owned by " + m.getOwner() + " to cache.");
+					System.out.println("#DB: Adding meeting " + m.getId() + " to cache.");
 				}
 				meetings.add(m);
 			}

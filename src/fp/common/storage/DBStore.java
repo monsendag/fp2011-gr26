@@ -6,8 +6,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+
+import org.joda.time.DateTime;
 
 import fp.common.models.Activity;
 import fp.common.models.Employee;
@@ -60,6 +63,7 @@ public class DBStore {
 			
 			// Add to cache
 			empCache.put(emp.getUsername(), emp);
+			System.out.println("#DB: Adding " + emp.getUsername() + " to DB and cache.");
 		} catch (SQLException e) {
 			System.err.println("Could not add employee.");
 			e.printStackTrace();
@@ -81,6 +85,7 @@ public class DBStore {
 			
 			// Add to cache
 			roomCache.put(room.getRoomID(), room);
+			System.out.println("#DB: Adding room " + room.getRoomID() + " to DB and cache.");
 		} catch (SQLException e) {
 			System.err.println("Could not add room.");
 			e.printStackTrace();
@@ -146,6 +151,7 @@ public class DBStore {
 			
 			// Add to cache
 			actCache.put(act.getId(), act);
+			System.out.println("#DB: Adding activity " + act.getId() + " to DB and cache.");
 		} catch (SQLException e) {
 			System.err.println("Could not add activity.");
 			e.printStackTrace();
@@ -190,6 +196,7 @@ public class DBStore {
 			
 			// Add to cache
 			mtngCache.put(m.getId(), m);
+			System.out.println("#DB: Adding meeting " + m.getId() + " to DB and cache.");
 			
 			ps.close();
 		} catch (SQLException e) {
@@ -375,6 +382,7 @@ public class DBStore {
 			
 			// Remove from cache
 			mtngCache.remove(meetingID);
+			System.out.println("#DB: Canceling meeting " + meetingID + " in DB and removing from cache.");
 		} catch (SQLException e) {
 			System.err.println("Could not cancel meeting.");
 			e.printStackTrace();
@@ -451,6 +459,7 @@ public class DBStore {
 			
 			// Remove from cache
 			actCache.remove(actID);
+			System.out.println("#DB: Canceling activity " + actID + " in DB and removing from cache.");
 		} catch (SQLException e) {
 			System.err.println("Could not cancel meeting.");
 			e.printStackTrace();
@@ -516,5 +525,22 @@ public class DBStore {
 	
 	public void setDBR(DBRetrieve dbr) {
 		this.dbr = dbr;
+	}
+	
+	public void cancelEmpActivities(Employee emp) {
+		cancelEmpActivitiesByUsername(emp.getUsername());
+	}
+	
+	public void cancelEmpActivitiesByUsername(String username) {
+		try {
+			Statement s = conn.createStatement();
+			
+			s.execute("UPDATE activity SET cancelled = true WHERE username ='" + username + "'");
+			s.close();
+			System.out.println("#DB: Canceling " + username + "'s activities/meetings in DB");
+		} catch (SQLException e) {
+			System.err.println("Could not cancel activities.");
+			e.printStackTrace();
+		}
 	}
 }

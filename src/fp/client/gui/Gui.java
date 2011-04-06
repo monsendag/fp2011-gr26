@@ -14,6 +14,8 @@ package fp.client.gui;
 
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Date;
 import javax.imageio.ImageIO;
@@ -234,7 +236,7 @@ public class Gui extends javax.swing.JFrame {
             }
         });
 
-        hostIPField.setText("host ip");
+        try { hostIPField.setText(InetAddress.getLocalHost().getHostAddress());	} catch (UnknownHostException e) {}
         hostIPField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 hostIPFieldActionPerformed(evt);
@@ -1803,8 +1805,7 @@ public class Gui extends javax.swing.JFrame {
     private void login() {
     	String username = loginUsernameTextField.getText();
     	String password = String.valueOf(loginPasswordField.getPassword());
-    	String ip = hostIPField.getText();
-    	if(Client.get().loginAction(null, username, password)) {
+    	if(Client.get().loginAction(hostIPField.getText(), username, password)) {
     		loginDialog.setVisible(false);
     		setVisible(true);
     	}

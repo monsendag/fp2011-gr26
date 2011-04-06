@@ -7,6 +7,7 @@ import java.util.List;
 import org.joda.time.DateTime;
 
 import fp.client.gui.Gui;
+import fp.client.gui.calendar.CalendarModel;
 import fp.common.models.Activity;
 import fp.common.models.Employee;
 import fp.common.models.Meeting;
@@ -34,6 +35,7 @@ public class Client {
     
     public Gui gui;
 	public ClientConnection connection;
+	public CalendarModel calendarModel;
 	private List<Activity> activities;
 	private List<Message> messages;
 	public Employee currentUser;
@@ -43,10 +45,15 @@ public class Client {
 	public Client() {     
 		java.awt.EventQueue.invokeLater(new Runnable() {
 	        public void run() {
-	            gui = new Gui();
+	        	calendarModel = new CalendarModel();
+	        	gui = new Gui();
 	        }
 		});
     }
+	
+	public Employee getUser() {
+		return currentUser;
+	}
 	
 	enum Result{
 		SUCCESS, TIMEOUT, WRONGPWD; 
@@ -58,6 +65,7 @@ public class Client {
 			Thread thread = new Thread(connection);
 
 			if((currentUser = connection.login(username, password)) != null) { // login successful
+				calendarModel.addActivities(connection.getEmpActivities());
 				return true;
 			}
 		} catch (IOException e) { // could not connect to server
@@ -70,7 +78,7 @@ public class Client {
 		try {
 			connection.close();
 		} catch (IOException e) {
-		
+
 		}
 		// slett alle modeller.
 		usr = "";

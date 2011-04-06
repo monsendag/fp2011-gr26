@@ -2,6 +2,7 @@ package fp.common.network;
 
 import java.net.*;
 
+import fp.common.models.Employee;
 import fp.common.storage.DBRetrieve;
 import fp.common.storage.DBStore;
 
@@ -41,12 +42,16 @@ public class ServerConnection extends Connection implements Runnable {
 			case getCredentials: {
 				response.setCommand(NetworkCommand.returnCredentials);
 				DBStore.getInstance();
-				DBRetrieve dbs = DBRetrieve.getInstance();
-				System.out.println((String) request.get("username"));
-				System.out.println((String) request.get("password"));
-				System.out.println(dbs.login((String) request.get("username"),(String) request.get("password")));
-				response.put("employee", dbs.login((String) request.get("username"),(String) request.get("password")));
-			}
+				DBRetrieve dbr = DBRetrieve.getInstance();
+				response.put("employee", dbr.login((String) request.get("username"),(String) request.get("password")));
+			} break;
+			case getActivities: {
+				response.setCommand(NetworkCommand.returnActivities);
+				DBStore.getInstance();
+				DBRetrieve dbr = DBRetrieve.getInstance();
+				Employee user = (Employee) request.get("currentUser");
+				response.put("activities", dbr.getEmpActivities(user));
+			} break;
 		}
 		return response;
 	}

@@ -146,14 +146,15 @@ public class DBTest {
 		DBStore dbs = DBStore.getInstance();
 		DBRetrieve dbr = DBRetrieve.getInstance();
 		
+		Employee test = dbr.getEmployee("test");
+		Activity act1, act2, act3, act4;
+		DateTime start1 = new DateTime(2011, 4, 4, 7, 0, 0, 0);
+		act1 = new Activity(test, start1, start1.plusHours(6).plusMinutes(15), "Morramøte", "EL5");
+		act2 = new Activity(test, start1.plusDays(2), start1.plusDays(2).plusMinutes(30), "Onsdagsmøte", "EL6");
+		act3 = new Activity(test, start1.plusDays(3), start1.plusDays(3).plusHours(1), "Torsdagsmøte", "EL7");
 		
-		
-		
-		// Cache
-		
-		//testPrint(dbr,dbs);
-		//dbr.test();
-		
-		System.out.println(dbr.login("test", "1234").getName());
+		dbs.addActivity(act1);
+		dbs.addActivity(act2);
+		dbs.addActivity(act3);
 	}	
 }

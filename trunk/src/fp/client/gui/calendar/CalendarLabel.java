@@ -8,6 +8,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.BevelBorder;
 
+import fp.client.Client;
+
 /**
 * A panel that displays text and has a set size.
 * It can also display the value of a calendar field, and listen for changes to it.
@@ -25,7 +27,7 @@ public class CalendarLabel extends JPanel implements PropertyChangeListener {
 	* @param calendar The calendar to display a field from
 	* @param field The field to display
 	*/
-	public CalendarLabel(int width, int height, CalendarModel model, int offset) {
+	public CalendarLabel(int width, int height, int offset) {
 		Dimension size = new Dimension(width, height);
 		this.setPreferredSize(size);
 		this.setMaximumSize(size);
@@ -34,7 +36,7 @@ public class CalendarLabel extends JPanel implements PropertyChangeListener {
 		this.offset = offset;
 		label = new JLabel(getValue());
 		add(label);
-		model.addPropertyChangeListener(this);
+		Client.get().calendarModel.addPropertyChangeListener(this);
 	}
 
 	/**

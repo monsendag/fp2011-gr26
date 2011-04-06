@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import javax.swing.JFrame;
 import javax.swing.UIManager;
 
 import org.joda.time.DateTime;
@@ -42,6 +43,12 @@ public class Gui extends javax.swing.JFrame {
     public Gui() {
        try {UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());} catch (Exception exp) {}
        initComponents();
+
+       setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+       setTitle("Avtalebok 1.0");
+       setResizable(false);
+       
+       
        weekViewSP.setBorder(null);
        weekViewSP.setViewportView(new fp.client.gui.calendar.CalendarPanel());
        //setVisible(true);
@@ -1289,9 +1296,6 @@ public class Gui extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Avtalebok 1.0");
-        setResizable(false);
 
         messageViewButton.setText("Meldinger");
         messageViewButton.addActionListener(new java.awt.event.ActionListener() {
@@ -1336,6 +1340,10 @@ public class Gui extends javax.swing.JFrame {
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 nextWeekLabelMouseExited(evt);
             }
+            
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+            	setNextWeek();
+            }
         });
 
         previousWeekLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fp/client/gui/graphics/prevWeek.png"))); // NOI18N
@@ -1346,6 +1354,9 @@ public class Gui extends javax.swing.JFrame {
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 previousWeekLabelMouseExited(evt);
+            }
+        	public void mouseClicked(java.awt.event.MouseEvent evt) {
+        		setPreviousWeek();
             }
         });
 
@@ -1759,10 +1770,9 @@ public class Gui extends javax.swing.JFrame {
     private void login() {
     	String username = loginUsernameTextField.getText();
     	String password = String.valueOf(loginPasswordField.getPassword());
-
     	if(Client.get().loginAction(null, username, password)) {
     		loginDialog.setVisible(false);
-    		setVisible(false);
+    		setVisible(true);
     	}
     	else {
     		errorDialog.setVisible(true);
@@ -1858,6 +1868,14 @@ public class Gui extends javax.swing.JFrame {
 
     private void changeCalendarView(){
 
+    }
+    
+    private void setNextWeek() {
+    	Client.get().calendarModel.setNextWeek();
+    }
+    
+    private void setPreviousWeek() {
+    	Client.get().calendarModel.setPreviousWeek();
     }
     
     public void editActivity(Activity act){

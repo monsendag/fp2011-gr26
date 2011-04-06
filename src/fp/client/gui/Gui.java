@@ -20,6 +20,8 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.UIManager;
 
+import org.joda.time.DateTime;
+
 
 import fp.client.gui.calendar.*;
 import fp.common.models.Activity;
@@ -1826,10 +1828,11 @@ public class Gui extends javax.swing.JFrame {
 //    private void createActivity() {
 //    	Employee owner = userLoggedIn;
 //    	Room room = newAppointmentRoomCB.getSelectedItem();
-//    	Date startTime = toDateChooserPanel.getDate();
+//    	Date tempStartTime = toDateChooserPanel.getDate();
 //    	Date endTime = fromDateChooserPanel.getDate();
-//    	startTime.setMinutes(newAppointmentStartTimeCB.getSelectedIndex());
-//    	endTime.setMinutes(newAppointmentEndTimeCB.getSelectedIndex());
+//		DateTime startTime = new DateTime(tempStartTime.getYear(), tempStartTime.getMonth(), tempStartTime.getDay(), Integer.parseInt(((String) newAppointmentStartTimeCB.getSelectedItem()).substring(0,1)), Integer.parseInt(((String) newAppointmentStartTimeCB.getSelectedItem()).substring(2,3)), 0, 0);
+//		DateTime startTime2 = new DateTime(year, monthOfYear, dayOfMonth, hourOfDay, minuteOfHour, secondOfMinute, millisOfSecond)
+//		DateTime endTime = new DateTime(startTime.getDate() for dato, substring0-1 for time, substring 2-3 for minutter)
 //    	String description = newAppointmentDescriptionTextArea.getText();
 //    	String title = newAppointmentTitleLabel.getText();
 //    	

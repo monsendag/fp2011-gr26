@@ -50,7 +50,6 @@ public abstract class Connection {
 	}
 	
 	protected NetworkObject retrieve() throws IOException {
-		System.out.println("retrieving..");
 		String line, xml = "";
 		while((line = in.readLine()) != null) {
 			if(line.equals(EOF)) break;
@@ -64,7 +63,7 @@ public abstract class Connection {
 		return o;
 	}
 	
-	protected void close() throws IOException {
+	public void close() throws IOException {
 		socket.close();
 	}
 }

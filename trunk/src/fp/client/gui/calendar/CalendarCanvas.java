@@ -200,7 +200,7 @@ public class CalendarCanvas extends JPanel implements PropertyChangeListener {
 		DateTime startTime = day.plusMillis(calculateTimeFromYCoordinate(start.y));
 		DateTime endTime = day.plusMillis(calculateTimeFromYCoordinate(end.y));
 		
-		fp.client.Client.gui.dragNewActivity(new Activity(null, startTime, endTime, "", ""));
+		fp.client.Client.get().gui.dragNewActivity(new Activity(null, startTime, endTime, "", ""));
 	}
 
 	/**
@@ -321,7 +321,7 @@ public class CalendarCanvas extends JPanel implements PropertyChangeListener {
 			public void mouseClicked(MouseEvent e) {
 				Activity activity = getActivityByPosition(e.getX(), e.getY());
 				if(activity != null) {
-					fp.client.Client.gui.editActivity(activity);
+					fp.client.Client.get().gui.editActivity(activity);
 				}
 				pressedPoint = null; 
 				releasedPoint = null;

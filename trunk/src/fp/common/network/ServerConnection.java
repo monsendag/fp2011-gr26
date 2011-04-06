@@ -2,7 +2,8 @@ package fp.common.network;
 
 import java.net.*;
 
-import fp.common.models.Employee;
+import fp.common.storage.DBRetrieve;
+import fp.common.storage.DBStore;
 
 
 public class ServerConnection extends Connection implements Runnable {
@@ -22,11 +23,9 @@ public class ServerConnection extends Connection implements Runnable {
 
 	private void processRequest() throws Exception {
 		NetworkObject request;
-		do {
-			request = retrieve();
+		while((request = retrieve()) != null) {
 			send(getResponse(request));
 		}
-		while(request != null);
 		close();
 	}
 	
@@ -35,8 +34,19 @@ public class ServerConnection extends Connection implements Runnable {
 		switch(request.getCommand()) {
 			case getEmployees: {
 				response.setCommand(NetworkCommand.returnEmployees);
+				DBStore.getInstance();
+				DBRetrieve dbs = DBRetrieve.getInstance();
+				response.put("employees", dbs.getAllEmployees());
 			} break;
-			
+			case getCredentials: {
+				response.setCommand(NetworkCommand.returnCredentials);
+				DBStore.getInstance();
+				DBRetrieve dbs = DBRetrieve.getInstance();
+				System.out.println((String) request.get("username"));
+				System.out.println((String) request.get("password"));
+				System.out.println(dbs.login((String) request.get("username"),(String) request.get("password")));
+				response.put("employee", dbs.login((String) request.get("username"),(String) request.get("password")));
+			}
 		}
 		return response;
 	}

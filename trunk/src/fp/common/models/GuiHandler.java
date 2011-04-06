@@ -113,6 +113,4 @@ public class GuiHandler {
 		return m.getParticipants();
 	}
 	
-	
-	// hvordan importere andres kalendere? ser ut som de er  i 
 }

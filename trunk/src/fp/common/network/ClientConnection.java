@@ -3,7 +3,6 @@ package fp.common.network;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.util.ArrayList;
-import java.util.List;
 
 import fp.client.Client;
 import fp.common.models.Activity;
@@ -20,15 +19,20 @@ public class ClientConnection extends Connection implements Runnable {
 	}
 	
 	@Override
-	public void run() {
+	public void run() { 
 		
 	}
 	
+	/**
+	 * Tries to login with the given credentials
+	 * @param username - The username to search for
+	 * @param password - The password to match
+	 * @return An employee object if success, null if not
+	 * @throws IOException
+	 */
 	public Employee login(String username, String password) throws IOException {
 		NetworkObject n = new NetworkObject();
-		
 		n.setCommand(NetworkCommand.getCredentials);
-
 		n.put("username", username);
 		n.put("password", password);
 		send(n);
@@ -36,6 +40,11 @@ public class ClientConnection extends Connection implements Runnable {
 		return back.get("employee") != null ? ((Employee) back.get("employee")) : null;
 	}
 	
+	/**
+	 * @return a list of activities for currentUser (stored in Client)
+	 * @throws IOException
+	 */
+	@SuppressWarnings("unchecked")
 	public ArrayList<Activity> getEmpActivities() throws IOException {
 		NetworkObject n = new NetworkObject();
 		n.setCommand(NetworkCommand.getActivities);

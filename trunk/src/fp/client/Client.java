@@ -40,7 +40,6 @@ public class Client {
 	private List<Message> messages;
 	public Employee currentUser;
 	
-	String usr, pwd;
 	
 	public Client() {     
 		java.awt.EventQueue.invokeLater(new Runnable() {
@@ -80,11 +79,9 @@ public class Client {
 		} catch (IOException e) {
 
 		}
-		// slett alle modeller.
-		usr = "";
-		pwd = "";
-		activities = null;
-		messages = null;
+		
+		currentUser = null;
+		calendarModel = new CalendarModel();
 	}
 	
 	// noen metoder for å lytte til endringer fra nettverket, som igjen fyrer av endringer i guien.

@@ -9,7 +9,6 @@ import fp.common.storage.DBStore;
 
 public class ServerConnection extends Connection implements Runnable {
 
-	// Constructor
 	public ServerConnection(Socket socket) throws Exception {
 		super(socket);
 	}
@@ -30,6 +29,11 @@ public class ServerConnection extends Connection implements Runnable {
 		close();
 	}
 	
+	/**
+	 * Returns the appropriate response for the given request
+	 * @param request - The request object
+	 * @return
+	 */
 	private NetworkObject getResponse(NetworkObject request) {
 		NetworkObject response = new NetworkObject();
 		switch(request.getCommand()) {

@@ -23,7 +23,7 @@ public class ServerConnection extends Connection implements Runnable {
 
 	private void processRequest() throws Exception {
 		NetworkObject request;
-		while((request = retrieve()) != null) {
+		while((request = receive()) != null) {
 			send(getResponse(request));
 		}
 		close();

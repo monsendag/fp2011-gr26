@@ -73,6 +73,7 @@ public class Gui extends javax.swing.JFrame {
         loginUsernameTextField = new javax.swing.JTextField();
         loginButton = new javax.swing.JButton();
         loginPasswordField = new javax.swing.JPasswordField();
+        hostIPField = new javax.swing.JFormattedTextField();
         wrongUsernameDialog = new javax.swing.JDialog();
         wrongUsernameLabel = new javax.swing.JLabel();
         wrongUsernameButton = new javax.swing.JButton();
@@ -233,6 +234,21 @@ public class Gui extends javax.swing.JFrame {
             }
         });
 
+        hostIPField.setText("host ip");
+        hostIPField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                hostIPFieldActionPerformed(evt);
+            }
+        });
+        hostIPField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                hostIPFieldFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                hostIPFieldFocusLost(evt);
+            }
+        });
+
         javax.swing.GroupLayout loginPanelLayout = new javax.swing.GroupLayout(loginPanel);
         loginPanel.setLayout(loginPanelLayout);
         loginPanelLayout.setHorizontalGroup(
@@ -243,19 +259,22 @@ public class Gui extends javax.swing.JFrame {
                     .addComponent(loginPasswordField)
                     .addComponent(loginUsernameTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(loginButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(loginButton, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                    .addComponent(hostIPField, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE))
                 .addContainerGap())
         );
         loginPanelLayout.setVerticalGroup(
             loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(loginPanelLayout.createSequentialGroup()
                 .addContainerGap()
+                .addGroup(loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(loginUsernameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(hostIPField, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(loginButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 62, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, loginPanelLayout.createSequentialGroup()
-                        .addComponent(loginUsernameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(loginPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(loginButton, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
+                    .addComponent(loginPasswordField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -274,7 +293,8 @@ public class Gui extends javax.swing.JFrame {
 
         loginButton.requestDefaultFocus();
         loginUsernameTextField.setNextFocusableComponent(loginPasswordField);
-        loginPasswordField.setNextFocusableComponent(loginButton);
+        loginPasswordField.setNextFocusableComponent(hostIPField);
+        hostIPField.setNextFocusableComponent(loginButton);
         loginButton.setNextFocusableComponent(loginUsernameTextField);
 
         wrongUsernameDialog.setModal(true);
@@ -490,13 +510,13 @@ public class Gui extends javax.swing.JFrame {
         messageOverviewDialog.setResizable(false);
 
         messageList.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "09.04.2011 - MÃ¸te avlyst", "01.04.2011 - Sol i Trondheim" };
+            String[] strings = { "09.04.2011 - Møte avlyst", "01.04.2011 - Sol i Trondheim" };
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
         messagePanelListSP.setViewportView(messageList);
 
-        messagePanel.setBorder(javax.swing.BorderFactory.createTitledBorder("StyremÃ¸te - 10. April 2011"));
+        messagePanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Styremøte - 10. April 2011"));
 
         messagePanelCloseButton.setText("Lukk");
         messagePanelCloseButton.addActionListener(new java.awt.event.ActionListener() {
@@ -511,7 +531,7 @@ public class Gui extends javax.swing.JFrame {
         messageDescription.setEditable(false);
         messageDescription.setLineWrap(true);
         messageDescription.setRows(5);
-        messageDescription.setText("MÃ¸tet er avlyst grunnet potekreft i kattelabben. ");
+        messageDescription.setText("Møtet er avlyst grunnet potekreft i kattelabben. ");
         messageDescription.setWrapStyleWord(true);
         messagePanelTextSP.setViewportView(messageDescription);
 
@@ -566,13 +586,13 @@ public class Gui extends javax.swing.JFrame {
         messageOverviewTabbedPane.addTab("Meldinger", messagePanelTab);
 
         invitationList.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "03.03.2011 - StyremÃ¸te 10. April" };
+            String[] strings = { "03.03.2011 - Styremøte 10. April" };
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
         invitationPanelListSP.setViewportView(invitationList);
 
-        invitationPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("StyremÃ¸te - 10. April 2011"));
+        invitationPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Styremøte - 10. April 2011"));
 
         invitationPanelAttendingButton.setText("Jeg kommer");
 
@@ -596,7 +616,7 @@ public class Gui extends javax.swing.JFrame {
         invitationDescription.setEditable(false);
         invitationDescription.setLineWrap(true);
         invitationDescription.setRows(5);
-        invitationDescription.setText("Det blir et styremÃ¸te tiende april, husk Ã¥ ta med druer og paraply.");
+        invitationDescription.setText("Det blir et styremøte tiende april, husk å ta med druer og paraply.");
         invitationDescription.setWrapStyleWord(true);
         invitationPanelTextSP.setViewportView(invitationDescription);
 
@@ -730,7 +750,7 @@ public class Gui extends javax.swing.JFrame {
         appointmentDialog.setModal(true);
         appointmentDialog.setResizable(false);
 
-        appointmentFromDateButton.setText("LÃ¸rdag 24. Desember - 2012");
+        appointmentFromDateButton.setText("Lørdag 24. Desember - 2012");
         appointmentFromDateButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 appointmentFromDateButtonActionPerformed(evt);
@@ -739,7 +759,7 @@ public class Gui extends javax.swing.JFrame {
 
         appointmentStartTimeCB.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00:00", "00:15", "00:30", "00:45", "01:00", "01:15", "01:30", "01:45", "02:00", "02:15", "02:30", "02:45", "03:00", "03:15", "03:30", "03:45", "04:00", "04:15", "04:30", "04:45", "05:00", "05:15", "05:30", "05:45", "06:00", "06:15", "06:30", "06:45", "07:00", "07:15", "07:30", "07:45", "08:00", "08:15", "08:30", "08:45", "09:00", "09:15", "09:30", "09:45", "10:00", "10:15", "10:30", "10:45", "11:00", "11:15", "11:30", "11:45", "12:00", "12:15", "12:30", "12:45", "13:00", "13:15", "13:30", "13:45", "14:00", "14:15", "14:30", "14:45", "15:00", "15:15", "15:30", "15:45", "16:00", "16:15", "16:30", "16:45", "17:00", "17:15", "17:30", "17:45", "18:00", "18:15", "18:30", "18:45", "19:00", "19:15", "19:30", "19:45", "20:00", "20:15", "20:30", "20:45", "21:00", "21:15", "21:30", "21:45", "22:00", "22:15", "22:30", "22:45", "23:00", "23:15", "23:30", "23:45" }));
 
-        appointmentToDateButton.setText("LÃ¸rdag 24. Desember - 2012");
+        appointmentToDateButton.setText("Lørdag 24. Desember - 2012");
         appointmentToDateButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 appointmentToDateButtonActionPerformed(evt);
@@ -917,7 +937,7 @@ public class Gui extends javax.swing.JFrame {
         newAppointmentDialog.setModal(true);
         newAppointmentDialog.setResizable(false);
 
-        newAppointmentFromDateButton.setText("LÃ¸rdag 24. Desember - 2012");
+        newAppointmentFromDateButton.setText("Lørdag 24. Desember - 2012");
         newAppointmentFromDateButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 newAppointmentFromDateButtonActionPerformed(evt);
@@ -926,7 +946,7 @@ public class Gui extends javax.swing.JFrame {
 
         newAppointmentStartTimeCB.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "07:00", "07:15", "07:30", "07:45", "08:00", "08:15", "08:30", "08:45", "09:00", "09:15", "09:30", "09:45", "10:00", "10:15", "10:30", "10:45", "11:00", "11:15", "11:30", "11:45", "12:00", "12:15", "12:30", "12:45", "13:00", "13:15", "13:30", "13:45", "14:00", "14:15", "14:30", "14:45", "15:00", "15:15", "15:30", "15:45", "16:00", "16:15", "16:30", "16:45", "17:00", "17:15", "17:30", "17:45", "18:00", "18:15", "18:30", "18:45", "19:00", "19:15", "19:30", "19:45", "20:00", "20:15", "20:30", "20:45", "21:00", "21:15", "21:30", "21:45", "22:00", "22:15", "22:30", "22:45", "23:00", "23:15", "23:30", "23:45", "00:00", "00:15", "00:30", "00:45", "01:00", "01:15", "01:30", "01:45", "02:00", "02:15", "02:30", "02:45", "03:00", "03:15", "03:30", "03:45", "04:00", "04:15", "04:30", "04:45", "05:00", "05:15", "05:30", "05:45", "06:00", "06:15", "06:30", "06:45" }));
 
-        newAppointmentToDateButton.setText("LÃ¸rdag 24. Desember - 2012");
+        newAppointmentToDateButton.setText("Lørdag 24. Desember - 2012");
         newAppointmentToDateButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 newAppointmentToDateButtonActionPerformed(evt);
@@ -1296,6 +1316,9 @@ public class Gui extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Avtalebok 1.0");
+        setResizable(false);
 
         messageViewButton.setText("Meldinger");
         messageViewButton.addActionListener(new java.awt.event.ActionListener() {
@@ -1334,38 +1357,38 @@ public class Gui extends javax.swing.JFrame {
         nextWeekLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fp/client/gui/graphics/nextWeek.png"))); // NOI18N
         nextWeekLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         nextWeekLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                nextWeekLabelMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 nextWeekLabelMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 nextWeekLabelMouseExited(evt);
             }
-            
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-            	setNextWeek();
-            }
         });
 
         previousWeekLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fp/client/gui/graphics/prevWeek.png"))); // NOI18N
         previousWeekLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         previousWeekLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                previousWeekLabelMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 previousWeekLabelMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 previousWeekLabelMouseExited(evt);
             }
-        	public void mouseClicked(java.awt.event.MouseEvent evt) {
-        		setPreviousWeek();
-            }
         });
 
+        weekViewTable.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         weekViewTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Tid", "Mandag 20. September", "Tirsdag 21. September", "Onsdag 22. September", "Torsdag 23. September", "Fredag 24. September", "LÃ¸rdag 25. September", "SÃ¸ndag 26. September"
+                "Tid", "Mandag 20. September", "Tirsdag 21. September", "Onsdag 22. September", "Torsdag 23. September", "Fredag 24. September", "Lørdag 25. September", "Søndag 26. September"
             }
         ) {
             Class[] types = new Class [] {
@@ -1378,11 +1401,6 @@ public class Gui extends javax.swing.JFrame {
         });
         weekViewTable.setColumnSelectionAllowed(true);
         weekViewTable.setRowHeight(32);
-        weekViewTable.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                weekViewTableMouseClicked(evt);
-            }
-        });
         weekViewSP.setViewportView(weekViewTable);
         weekViewTable.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         weekViewTable.getColumnModel().getColumn(0).setMinWidth(33);
@@ -1401,10 +1419,11 @@ public class Gui extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(weekViewSP, javax.swing.GroupLayout.PREFERRED_SIZE, 914, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(8, 8, 8)
                         .addComponent(calendarShowingLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(shownCalendars, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(138, 138, 138)
+                        .addGap(124, 124, 124)
                         .addComponent(previousWeekLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(weekViewButton, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1432,8 +1451,8 @@ public class Gui extends javax.swing.JFrame {
                             .addComponent(nextWeekLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(previousWeekLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(calendarShowingLabel)
-                        .addComponent(shownCalendars, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(shownCalendars, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(calendarShowingLabel)))
                 .addGap(17, 17, 17)
                 .addComponent(weekViewSP, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -1447,132 +1466,10 @@ public class Gui extends javax.swing.JFrame {
         java.util.Calendar today = java.util.Calendar.getInstance();
         weekViewButton.setText("Uke "+ today.get(java.util.Calendar.WEEK_OF_YEAR) + " - " + today.get(java.util.Calendar.YEAR) );
 
+        weekViewButton.setFocusable(false);
+
         pack();
     }// </editor-fold>
-
-
-    /**
-    * @param args the command line arguments
-    */
-
-    // Variables declaration - do not modify
-    private javax.swing.JPanel appointmentButtonPanel;
-    private javax.swing.JButton appointmentCloseButton;
-    private javax.swing.JLabel appointmentDescriptionLabel;
-    private javax.swing.JTextArea appointmentDescriptionTextArea;
-    private javax.swing.JDialog appointmentDialog;
-    private javax.swing.JPanel appointmentEditPanel;
-    private javax.swing.JLabel appointmentEndLabel;
-    private javax.swing.JComboBox appointmentEndTimeCB;
-    private javax.swing.JButton appointmentFromDateButton;
-    private javax.swing.JPanel appointmentLabelPanel;
-    private javax.swing.JComboBox appointmentRoomCB;
-    private javax.swing.JLabel appointmentRoomLabel;
-    private javax.swing.JButton appointmentSayYoureNotCommingButton;
-    private javax.swing.JButton appointmentShowParticipantsButton;
-    private javax.swing.JLabel appointmentStartLabel;
-    private javax.swing.JComboBox appointmentStartTimeCB;
-    private javax.swing.JScrollPane appointmentTextSP;
-    private javax.swing.JLabel appointmentTitleLabel;
-    private javax.swing.JTextField appointmentTitleTextField;
-    private javax.swing.JButton appointmentToDateButton;
-    private javax.swing.JButton calendarChooserCancelButton;
-    private javax.swing.JDialog calendarChooserDialog;
-    private javax.swing.JButton calendarChooserOkButton;
-    private javax.swing.JScrollPane calendarChooserSC;
-    private javax.swing.JTextField calendarChooserSearchField;
-    private javax.swing.JLabel calendarChooserSearchIcon;
-    private javax.swing.JPanel calendarChooserSearchPanel;
-    private javax.swing.JTable calendarChooserTable;
-    private javax.swing.JLabel calendarShowingLabel;
-    private javax.swing.JDialog errorDialog;
-    private javax.swing.JButton errorDialogButton;
-    private javax.swing.JScrollPane errorDialogSP;
-    private javax.swing.JTextArea errorDialogTextArea;
-    private gui.FixedDateChooserPanel fromDateChooserPanel;
-    private javax.swing.JButton fromDateDateChooserCancelButton;
-    private javax.swing.JDialog fromDateDateChooserDialog;
-    private javax.swing.JButton fromDateDateChooserOkButton;
-    private javax.swing.JTextArea invitationDescription;
-    private javax.swing.JList invitationList;
-    private javax.swing.JPanel invitationPanel;
-    private javax.swing.JButton invitationPanelAttendingButton;
-    private javax.swing.JButton invitationPanelCloseButton;
-    private javax.swing.JScrollPane invitationPanelListSP;
-    private javax.swing.JButton invitationPanelNotAttendinButton;
-    private javax.swing.JPanel invitationPanelTab;
-    private javax.swing.JScrollPane invitationPanelTextSP;
-    private javax.swing.JLabel invitationPanelTimeRoomAvailability;
-    private javax.swing.JButton logOutButton;
-    private javax.swing.JButton loginButton;
-    private javax.swing.JDialog loginDialog;
-    private javax.swing.JPanel loginPanel;
-    private javax.swing.JPasswordField loginPasswordField;
-    private javax.swing.JTextField loginUsernameTextField;
-    private javax.swing.JTextArea messageDescription;
-    private javax.swing.JList messageList;
-    private javax.swing.JDialog messageOverviewDialog;
-    private javax.swing.JTabbedPane messageOverviewTabbedPane;
-    private javax.swing.JPanel messagePanel;
-    private javax.swing.JButton messagePanelCloseButton;
-    private javax.swing.JScrollPane messagePanelListSP;
-    private javax.swing.JPanel messagePanelTab;
-    private javax.swing.JScrollPane messagePanelTextSP;
-    private javax.swing.JLabel messagePanelTimeRoomAvailability;
-    private javax.swing.JButton messageViewButton;
-    private javax.swing.JButton newAppointmentButton;
-    private javax.swing.JPanel newAppointmentButtonpanel;
-    private javax.swing.JButton newAppointmentCancelButton;
-    private javax.swing.JButton newAppointmentChooseParticipantsButton;
-    private javax.swing.JLabel newAppointmentDescriptionLabel;
-    private javax.swing.JTextArea newAppointmentDescriptionTextArea;
-    private javax.swing.JDialog newAppointmentDialog;
-    private javax.swing.JPanel newAppointmentEditPanel;
-    private javax.swing.JLabel newAppointmentEndLabel;
-    private javax.swing.JComboBox newAppointmentEndTimeCB;
-    private javax.swing.JButton newAppointmentFromDateButton;
-    private javax.swing.JPanel newAppointmentLabelPanel;
-    private javax.swing.JButton newAppointmentMakeButton;
-    private javax.swing.JComboBox newAppointmentRoomCB;
-    private javax.swing.JLabel newAppointmentRoomLabel;
-    private javax.swing.JLabel newAppointmentStartLabel;
-    private javax.swing.JComboBox newAppointmentStartTimeCB;
-    private javax.swing.JScrollPane newAppointmentTextSP;
-    private javax.swing.JLabel newAppointmentTitleLabel;
-    private javax.swing.JTextField newAppointmentTitleTextField;
-    private javax.swing.JButton newAppointmentToDateButton;
-    private javax.swing.JLabel nextWeekLabel;
-    private javax.swing.JButton participantChooserCancelButton;
-    private javax.swing.JDialog participantChooserDialog;
-    private javax.swing.JButton participantChooserOkButton;
-    private javax.swing.JScrollPane participantChooserSP;
-    private javax.swing.JTextField participantChooserSearchField;
-    private javax.swing.JLabel participantChooserSearchIcon;
-    private javax.swing.JPanel participantChooserSearchPanel;
-    private javax.swing.JTable participantChooserTable;
-    private javax.swing.JButton participantOverviewChangeButton;
-    private javax.swing.JButton participantOverviewCloseButton;
-    private javax.swing.JDialog participantOverviewDialog;
-    private javax.swing.JList participantOverviewList;
-    private javax.swing.JScrollPane participantOverviewSP;
-    private javax.swing.JLabel previousWeekLabel;
-    private javax.swing.JButton shownCalendars;
-    private gui.FixedDateChooserPanel toDateChooserPanel;
-    private javax.swing.JButton toDateDateChooserCancelButton;
-    private javax.swing.JDialog toDateDateChooserDialog;
-    private javax.swing.JButton toDateDateChooserOkButton;
-    private javax.swing.JButton weekViewButton;
-    private javax.swing.JScrollPane weekViewSP;
-    private javax.swing.JTable weekViewTable;
-    private javax.swing.JButton wrongPasswordButton;
-    private javax.swing.JDialog wrongPasswordDialog;
-    private javax.swing.JLabel wrongPasswordLabel;
-    private javax.swing.JButton wrongUsernameButton;
-    private javax.swing.JDialog wrongUsernameDialog;
-    private javax.swing.JLabel wrongUsernameLabel;
-    // End of variables declaration
-    
-    
 
     private void messageViewButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                  
         messageOverviewDialog.pack();
@@ -1604,10 +1501,6 @@ public class Gui extends javax.swing.JFrame {
         loginPasswordField.setText("passord");
         loginUsernameTextField.setText("brukernavn");
         loginPasswordField.setEchoChar('\u0000');
-        
-        Client.get().logoutAction();
-        
-        setVisible(false);
         loginDialog.setVisible(true);
     }                                            
 
@@ -1758,18 +1651,154 @@ public class Gui extends javax.swing.JFrame {
         }
     }                                            
 
-    private void loginPasswordFieldActionPerformed(java.awt.event.ActionEvent evt) {
+    private void loginPasswordFieldActionPerformed(java.awt.event.ActionEvent evt) {                                                   
+        login();
+    }                                                  
+
+    private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {                                            
+        login();
+}                                           
+
+    private void hostIPFieldFocusGained(java.awt.event.FocusEvent evt) {
+        if (hostIPField.getText().equals("host ip"))
+            hostIPField.setText("");
+    }
+
+    private void hostIPFieldFocusLost(java.awt.event.FocusEvent evt) {
+        if (hostIPField.getText().equals("")){
+            hostIPField.setText("host ip");
+        }
+    }
+
+    private void hostIPFieldActionPerformed(java.awt.event.ActionEvent evt) {
         login();
     }
 
-    private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        login();
-}
+    private void nextWeekLabelMouseClicked(java.awt.event.MouseEvent evt) {
+        setNextWeek();
+    }
 
-    private void weekViewTableMouseClicked(java.awt.event.MouseEvent evt) {
-        System.out.println(weekViewTable.getSelectedRow() + ", " + weekViewTable.getSelectedColumn() );
-}
-    
+    private void previousWeekLabelMouseClicked(java.awt.event.MouseEvent evt) {
+        setPreviousWeek();
+    }
+
+    // Variables declaration - do not modify
+    private javax.swing.JPanel appointmentButtonPanel;
+    private javax.swing.JButton appointmentCloseButton;
+    private javax.swing.JLabel appointmentDescriptionLabel;
+    private javax.swing.JTextArea appointmentDescriptionTextArea;
+    private javax.swing.JDialog appointmentDialog;
+    private javax.swing.JPanel appointmentEditPanel;
+    private javax.swing.JLabel appointmentEndLabel;
+    private javax.swing.JComboBox appointmentEndTimeCB;
+    private javax.swing.JButton appointmentFromDateButton;
+    private javax.swing.JPanel appointmentLabelPanel;
+    private javax.swing.JComboBox appointmentRoomCB;
+    private javax.swing.JLabel appointmentRoomLabel;
+    private javax.swing.JButton appointmentSayYoureNotCommingButton;
+    private javax.swing.JButton appointmentShowParticipantsButton;
+    private javax.swing.JLabel appointmentStartLabel;
+    private javax.swing.JComboBox appointmentStartTimeCB;
+    private javax.swing.JScrollPane appointmentTextSP;
+    private javax.swing.JLabel appointmentTitleLabel;
+    private javax.swing.JTextField appointmentTitleTextField;
+    private javax.swing.JButton appointmentToDateButton;
+    private javax.swing.JButton calendarChooserCancelButton;
+    private javax.swing.JDialog calendarChooserDialog;
+    private javax.swing.JButton calendarChooserOkButton;
+    private javax.swing.JScrollPane calendarChooserSC;
+    private javax.swing.JTextField calendarChooserSearchField;
+    private javax.swing.JLabel calendarChooserSearchIcon;
+    private javax.swing.JPanel calendarChooserSearchPanel;
+    private javax.swing.JTable calendarChooserTable;
+    private javax.swing.JLabel calendarShowingLabel;
+    private javax.swing.JDialog errorDialog;
+    private javax.swing.JButton errorDialogButton;
+    private javax.swing.JScrollPane errorDialogSP;
+    private javax.swing.JTextArea errorDialogTextArea;
+    private gui.FixedDateChooserPanel fromDateChooserPanel;
+    private javax.swing.JButton fromDateDateChooserCancelButton;
+    private javax.swing.JDialog fromDateDateChooserDialog;
+    private javax.swing.JButton fromDateDateChooserOkButton;
+    private javax.swing.JFormattedTextField hostIPField;
+    private javax.swing.JTextArea invitationDescription;
+    private javax.swing.JList invitationList;
+    private javax.swing.JPanel invitationPanel;
+    private javax.swing.JButton invitationPanelAttendingButton;
+    private javax.swing.JButton invitationPanelCloseButton;
+    private javax.swing.JScrollPane invitationPanelListSP;
+    private javax.swing.JButton invitationPanelNotAttendinButton;
+    private javax.swing.JPanel invitationPanelTab;
+    private javax.swing.JScrollPane invitationPanelTextSP;
+    private javax.swing.JLabel invitationPanelTimeRoomAvailability;
+    private javax.swing.JButton logOutButton;
+    private javax.swing.JButton loginButton;
+    private javax.swing.JDialog loginDialog;
+    private javax.swing.JPanel loginPanel;
+    private javax.swing.JPasswordField loginPasswordField;
+    private javax.swing.JTextField loginUsernameTextField;
+    private javax.swing.JTextArea messageDescription;
+    private javax.swing.JList messageList;
+    private javax.swing.JDialog messageOverviewDialog;
+    private javax.swing.JTabbedPane messageOverviewTabbedPane;
+    private javax.swing.JPanel messagePanel;
+    private javax.swing.JButton messagePanelCloseButton;
+    private javax.swing.JScrollPane messagePanelListSP;
+    private javax.swing.JPanel messagePanelTab;
+    private javax.swing.JScrollPane messagePanelTextSP;
+    private javax.swing.JLabel messagePanelTimeRoomAvailability;
+    private javax.swing.JButton messageViewButton;
+    private javax.swing.JButton newAppointmentButton;
+    private javax.swing.JPanel newAppointmentButtonpanel;
+    private javax.swing.JButton newAppointmentCancelButton;
+    private javax.swing.JButton newAppointmentChooseParticipantsButton;
+    private javax.swing.JLabel newAppointmentDescriptionLabel;
+    private javax.swing.JTextArea newAppointmentDescriptionTextArea;
+    private javax.swing.JDialog newAppointmentDialog;
+    private javax.swing.JPanel newAppointmentEditPanel;
+    private javax.swing.JLabel newAppointmentEndLabel;
+    private javax.swing.JComboBox newAppointmentEndTimeCB;
+    private javax.swing.JButton newAppointmentFromDateButton;
+    private javax.swing.JPanel newAppointmentLabelPanel;
+    private javax.swing.JButton newAppointmentMakeButton;
+    private javax.swing.JComboBox newAppointmentRoomCB;
+    private javax.swing.JLabel newAppointmentRoomLabel;
+    private javax.swing.JLabel newAppointmentStartLabel;
+    private javax.swing.JComboBox newAppointmentStartTimeCB;
+    private javax.swing.JScrollPane newAppointmentTextSP;
+    private javax.swing.JLabel newAppointmentTitleLabel;
+    private javax.swing.JTextField newAppointmentTitleTextField;
+    private javax.swing.JButton newAppointmentToDateButton;
+    private javax.swing.JLabel nextWeekLabel;
+    private javax.swing.JButton participantChooserCancelButton;
+    private javax.swing.JDialog participantChooserDialog;
+    private javax.swing.JButton participantChooserOkButton;
+    private javax.swing.JScrollPane participantChooserSP;
+    private javax.swing.JTextField participantChooserSearchField;
+    private javax.swing.JLabel participantChooserSearchIcon;
+    private javax.swing.JPanel participantChooserSearchPanel;
+    private javax.swing.JTable participantChooserTable;
+    private javax.swing.JButton participantOverviewChangeButton;
+    private javax.swing.JButton participantOverviewCloseButton;
+    private javax.swing.JDialog participantOverviewDialog;
+    private javax.swing.JList participantOverviewList;
+    private javax.swing.JScrollPane participantOverviewSP;
+    private javax.swing.JLabel previousWeekLabel;
+    private javax.swing.JButton shownCalendars;
+    private gui.FixedDateChooserPanel toDateChooserPanel;
+    private javax.swing.JButton toDateDateChooserCancelButton;
+    private javax.swing.JDialog toDateDateChooserDialog;
+    private javax.swing.JButton toDateDateChooserOkButton;
+    private javax.swing.JButton weekViewButton;
+    private javax.swing.JScrollPane weekViewSP;
+    private javax.swing.JTable weekViewTable;
+    private javax.swing.JButton wrongPasswordButton;
+    private javax.swing.JDialog wrongPasswordDialog;
+    private javax.swing.JLabel wrongPasswordLabel;
+    private javax.swing.JButton wrongUsernameButton;
+    private javax.swing.JDialog wrongUsernameDialog;
+    private javax.swing.JLabel wrongUsernameLabel;
+    // End of variables declaration
     
     private void login() {
     	String username = loginUsernameTextField.getText();
@@ -1781,6 +1810,7 @@ public class Gui extends javax.swing.JFrame {
     	else {
     		errorDialogTextArea.setText("Innlogging feilet!");
     		errorDialog.pack();
+    		errorDialog.setLocationRelativeTo(loginDialog);
     		errorDialog.setVisible(true);
     	}
     }

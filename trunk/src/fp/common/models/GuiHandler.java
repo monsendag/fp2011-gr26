@@ -44,6 +44,8 @@ public class GuiHandler {
 	
 	// noen metoder for å lytte til endringer fra nettverket, som igjen fyrer av endringer i guien.
 	// for meldinger og møteinnkallinger.
+	// public void newMeetingListener(String input);
+	// public void newMessageListener(String input);
 	
 	
 	
@@ -106,8 +108,11 @@ public class GuiHandler {
 			//return Result.TIMEOUT;
 	}
 	
-	public List<Participant> getParticipants(Activity a){
+	public List<Participant> getParticipants(Meeting m){
 		// trenger ikke kontakte server vel?
+		return m.getParticipants();
 	}
 	
+	
+	// hvordan importere andres kalendere? ser ut som de er  i 
 }

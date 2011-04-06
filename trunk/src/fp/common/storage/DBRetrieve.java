@@ -46,7 +46,7 @@ public class DBRetrieve {
 		try {
 			Statement s = conn.createStatement();
 			ResultSet rs = s.executeQuery("SELECT * FROM employee WHERE username = '" +
-					username + "' AND passwd = '" + passwd + "'");
+					username + "' AND password = '" + passwd + "'");
 			
 			Employee e = new Employee();
 			while(rs.next()) {

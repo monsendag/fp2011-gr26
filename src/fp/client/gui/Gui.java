@@ -1515,7 +1515,7 @@ public class Gui extends javax.swing.JFrame {
 
     private void newAppointmentCreateButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                         
         newAppointmentDialog.setVisible(false);
-        createAppointment();
+        createActivity();
     }                                                        
 
     private void newAppointmentCancelButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                           
@@ -1592,7 +1592,7 @@ public class Gui extends javax.swing.JFrame {
         cancelActivity();
     }                                                                   
 
-    private void appointmentCloseButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                       
+	private void appointmentCloseButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                       
         appointmentDialog.setVisible(false);
     }                                                      
 
@@ -1823,6 +1823,11 @@ public class Gui extends javax.swing.JFrame {
     	Client.get().addActivity(newActivity);
     	*/
     }
+    
+    private void cancelActivity() {
+    	//if owner 
+		// TODO Auto-generated method stub
+	}
     
     private void login() {
     	String username = loginUsernameTextField.getText();

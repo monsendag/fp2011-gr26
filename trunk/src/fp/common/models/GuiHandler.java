@@ -35,7 +35,7 @@ public class GuiHandler {
 	
 	public void init(){
 		// importer alt, lag modeller for alt!
-		// dagene importeres i CalendarModel?
+		// dagene importeres/lages i CalendarModel?
 		// lagre activities og meetings
 		// lagre messages
 	}

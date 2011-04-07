@@ -322,7 +322,7 @@ public class CalendarCanvas extends JPanel implements PropertyChangeListener {
 			public void mouseClicked(MouseEvent e) {
 				Activity activity = getActivityByPosition(e.getX(), e.getY());
 				if(activity != null) {
-					fp.client.Client.get().gui.editActivity(activity);
+					fp.client.Client.get().gui.openActivity(activity);
 				}
 				pressedPoint = null; 
 				releasedPoint = null;

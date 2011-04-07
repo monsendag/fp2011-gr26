@@ -31,6 +31,7 @@ import fp.client.gui.calendar.*;
 import fp.common.models.Activity;
 import fp.common.models.Employee;
 import fp.common.models.Meeting;
+import fp.common.models.Message;
 import fp.common.models.Room;
 import fp.common.storage.ActivityStorage;
 
@@ -1823,6 +1824,10 @@ public class Gui extends javax.swing.JFrame {
     }
     
     private void buildParticipantList(){
+    }
+    
+    public void receiveMessages(){
+    	Client.get().currentUser;
     }
     
     private void cancelActivity() {

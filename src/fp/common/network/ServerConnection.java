@@ -2,7 +2,9 @@ package fp.common.network;
 
 import java.net.*;
 
-import fp.common.models.Employee;
+import org.joda.time.DateTime;
+
+import fp.common.models.*;
 import fp.common.storage.DBRetrieve;
 import fp.common.storage.DBStore;
 
@@ -36,63 +38,73 @@ public class ServerConnection extends Connection implements Runnable {
 	 */
 	private NetworkObject getResponse(NetworkObject request) {
 		NetworkObject response = new NetworkObject();
+		DBRetrieve dbr = DBRetrieve.getInstance();
+		DBStore dbs = DBStore.getInstance();
 		switch(request.getCommand()) {
 			case getEmployees: {
 				response.setCommand(NetworkCommand.returnEmployees);
-				DBStore.getInstance();
-				DBRetrieve dbs = DBRetrieve.getInstance();
-				response.put("employees", dbs.getAllEmployees());
+				response.put("employees", dbr.getAllEmployees());
 			} break;
 			case getCredentials: {
 				response.setCommand(NetworkCommand.returnCredentials);
-				DBStore.getInstance();
-				DBRetrieve dbr = DBRetrieve.getInstance();
 				response.put("employee", dbr.login((String) request.get("username"),(String) request.get("password")));
 			} break;
 			case getActivities: {
 				response.setCommand(NetworkCommand.returnActivities);
-				DBStore.getInstance();
-				DBRetrieve dbr = DBRetrieve.getInstance();
 				Employee user = (Employee) request.get("currentUser");
 				response.put("activities", dbr.getEmpActivities(user));
 			} break;
 			case getMessages: {
 				response.setCommand(NetworkCommand.returnMessages);
-				DBStore.getInstance();
-				DBRetrieve dbr = DBRetrieve.getInstance();
 				Employee user = (Employee) request.get("currentUser");
-				response.put("messages", dbr.getEmpAlerts(user));
+				response.put("messages", dbr.getEmpMessages(user));
 			}
 			case getMeetings: {
 				response.setCommand(NetworkCommand.returnMeetings);
-				DBStore.getInstance();
-				DBRetrieve dbr = DBRetrieve.getInstance();
 				Employee user = (Employee) request.get("currentUser");
 				response.put("meetings", dbr.getEmpMeetings(user));
 			}
 			case getAllActivities:{
 				response.setCommand(NetworkCommand.returnAllactivities);
-				DBStore.getInstance();
-				DBRetrieve dbr = DBRetrieve.getInstance();
 				response.put("allActivities", dbr.getAllActivities());
 			}
 			case getAllAlerts: {
 				response.setCommand(NetworkCommand.returnAllAlerts);
-				DBStore.getInstance();
-				DBRetrieve dbr = DBRetrieve.getInstance();
-				response.put("allAlerts", dbr.getAllAlerts());
+				response.put("allAlerts", dbr.getAllMessages());
 			}
 			case getAllRooms:{
 				response.setCommand(NetworkCommand.returnAllRooms);
-				DBStore.getInstance();
-				DBRetrieve dbr = DBRetrieve.getInstance();
 				response.put("allRooms", dbr.getAllRooms());
 			}
 			case getAllMeetings:{
 				response.setCommand(NetworkCommand.returnAllMeetings);
-				DBStore.getInstance();
-				DBRetrieve dbr = DBRetrieve.getInstance();
 				response.put("allMeetings", dbr.getAllMeetings());
+			}
+			case getAvailableRooms: {
+				response.setCommand(NetworkCommand.returnAvailableRooms);
+				DateTime startTime = (DateTime) request.get("startTime");
+				DateTime endTime = (DateTime) request.get("endTime");
+				response.put("availableRooms", dbr.getAvailableRooms(startTime, endTime));
+			}
+			case getMeeting: {
+				response.setCommand(NetworkCommand.returnMeeting);
+				int meetingID = (Integer)request.get("meetingID");
+				response.put("meeting", dbr.getMeeting(meetingID));
+			}
+			case getRoom: {
+				response.setCommand(NetworkCommand.returnRoom);
+				int roomID = (Integer)request.get("roomID");
+				response.put("room", dbr.getMeeting(roomID));
+			}
+			case addActivity: {
+				response.setCommand(NetworkCommand.returnActivityID);
+				Activity activity = (Activity)request.get("activity");
+				response.put("activityID", dbs.addActivity(activity));
+			}
+			case addMeeting: {
+				response.setCommand(NetworkCommand.returnMeetingID);
+				Meeting meeting = (Meeting)request.get("meeting");
+				response.put("meetingID", dbs.addActivity(meeting));
 			}
 
 			

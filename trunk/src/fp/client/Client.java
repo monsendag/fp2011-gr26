@@ -87,13 +87,10 @@ public class Client {
 	
 	
 	// usikker om det her fungerer, er for å håndtere beskjedene som skal requestes regelmessig i clientconnection -halvor
-	public void deliverMessages(ArrayList<Message> messages)
-	{
-		
-		// si fra til gui ellerno
+	public void deliverMessages(ArrayList<Message> messages){		
 		if (this.messages == messages)
 			return;
-		else
+		else// TODO: Si fra til GUI om at det har kommet nye meldinger?
 			this.messages = messages;
 	}
 

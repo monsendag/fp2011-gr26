@@ -9,7 +9,8 @@ import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.net.InetAddress;
 import java.net.Socket;
-import java.util.Queue;
+import java.util.LinkedList;
+
 
 import fp.common.models.XmlSerializer;
 
@@ -22,7 +23,7 @@ public abstract class Connection {
 	protected Writer out;
 	
 	
-	private Queue<NetworkObject> queue;
+	private LinkedList<NetworkObject> queue; 
 	private Boolean isSending = false;
 	
 	/**
@@ -65,7 +66,7 @@ public abstract class Connection {
 	 * @throws IOException
 	 */
 	protected void send(NetworkObject o) throws IOException {
-		
+		//System.out.println("SAP");
 		queue.add(o);
 		
 		if (isSending = false)
@@ -74,6 +75,7 @@ public abstract class Connection {
 	
 	protected void sendFromQueue() throws IOException {
 		while (!queue.isEmpty()){
+			//System.out.println("SUP");
 			isSending = true;
 			NetworkObject o = queue.poll();
 			System.out.println("#NET: sending: "+o.getCommand());

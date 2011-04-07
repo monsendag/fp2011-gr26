@@ -1423,6 +1423,11 @@ public class Gui extends javax.swing.JFrame{
         weekViewButton.setFont(new java.awt.Font("Calibri", 0, 15)); // NOI18N
         weekViewButton.setText("Uke 00 - 0000");
         weekViewButton.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        weekViewButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                weekViewButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -1477,15 +1482,14 @@ public class Gui extends javax.swing.JFrame{
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        java.util.Calendar today = java.util.Calendar.getInstance();
-        weekViewButton.setText("Uke "+ today.get(java.util.Calendar.WEEK_OF_YEAR) + " - " + today.get(java.util.Calendar.YEAR) );
-
         weekViewButton.setFocusable(false);
+        weekViewButton.setText("Uke " + Client.get().calendarModel.getWeekNumber() + " - " + Client.get().calendarModel.getYear());
 
         pack();
     }// </editor-fold>
 
     private void messageViewButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                  
+        buildMessage((Message)messageList.getSelectedValue());
         messageOverviewDialog.pack();
         messageOverviewDialog.setLocationRelativeTo(this);
         messageOverviewDialog.setVisible(true);
@@ -1618,6 +1622,7 @@ public class Gui extends javax.swing.JFrame{
     }                                                      
 
     private void appointmentShowParticipantsButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                                  
+//        buildParticipantList();
         participantOverviewDialog.pack();
         participantOverviewDialog.setVisible(true);
     }                                                                 
@@ -1711,7 +1716,12 @@ public class Gui extends javax.swing.JFrame{
     }
 
     private void invitationListValueChanged(javax.swing.event.ListSelectionEvent evt) {
-        buildInvitation((Message)invitationList.getSelectedValue());
+        buildInvitation((Message)messageList.getSelectedValue());
+    }
+
+    private void weekViewButtonActionPerformed(java.awt.event.ActionEvent evt) {
+        Client.get().calendarModel.setCurrentWeek();
+        weekViewButton.setText("Uke " + Client.get().calendarModel.getWeekNumber() + " - " + Client.get().calendarModel.getYear());
     }
 
     // Variables declaration - do not modify
@@ -1834,25 +1844,22 @@ public class Gui extends javax.swing.JFrame{
 	
 	//copy here
 
-	//ikke skriv kode over dette her!!!!!!!!!11111!!!!!!!!!
+	//ikke skriv kode over (^) dette her!!!!!!!!!11111!!!!!!!!!
 	
 	DefaultListModel messageListModel = new DefaultListModel();
 	DefaultListModel invitationListModel = new DefaultListModel();
 	DefaultListModel participantListModel = new DefaultListModel();
 
 	private void fixInvitationList(){
-		MessageRenderer mr = new MessageRenderer();
-		invitationList.setCellRenderer(mr);
+		invitationList.setCellRenderer(new MessageRenderer());
 		invitationList.setModel(invitationListModel);
 	}
 	private void fixMesssageList(){
-		MessageRenderer mr = new MessageRenderer();
-		messageList.setCellRenderer(mr);
+		messageList.setCellRenderer(new MessageRenderer());
 		messageList.setModel(messageListModel);
 	}
-	private void fixParticipantList(){
-		MessageRenderer mr = new MessageRenderer();
-		participantOverviewList.setCellRenderer(mr);
+	private void fixParticipantList(){;
+		participantOverviewList.setCellRenderer(new ParticipantRenderer());
 		participantOverviewList.setModel(participantListModel);
 	}
 
@@ -1890,7 +1897,6 @@ public class Gui extends javax.swing.JFrame{
 	public void setMessageRead(Message message){
 		Client.get().setRead(message);
 	}
-
 
 	public void receiveMessages(){
 		buildMessageList();
@@ -1966,25 +1972,20 @@ public class Gui extends javax.swing.JFrame{
 
 	}catch (Exception e){System.out.print(e);}
 
-	//Thread.setDefaultUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler() {
-	//public void uncaughtException(Thread t, Throwable e) {
-	//    //throw new UnsupportedOperationException("Not supported yet.");
-	//}});
 	}
 
 	public void buildMessage(Message message){
-		if(!message.isRead()){setMessageRead(message);}
+		if(!message.isRead()){setMessageRead(message); messageList.repaint();}
 		 messagePanel.setBorder(javax.swing.BorderFactory.createTitledBorder(message.getTitle() + " - " + dateToString(message.getMeeting().getStartTime().toDate())));
 		 messagePanelTimeRoomAvailability.setText(message.getMeeting().getStartTime().toString("HH:mm")+" - "+message.getMeeting().getEndTime().toString("HH:mm") + " - " + message.getMeeting().getRoom().getName());
 		 messageDescription.setText(message.getDescription());
 	}
 
 	public void buildInvitation(Message invitation){
-		if(!invitation.isRead()){setMessageRead(invitation);}
+		if(!invitation.isRead()){setMessageRead(invitation); invitationList.repaint();}
 		 invitationPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(invitation.getTitle() + " - " + dateToString(invitation.getMeeting().getStartTime().toDate())));
 		 invitationPanelTimeRoomAvailability.setText(invitation.getMeeting().getStartTime().toString("HH:mm")+" - "+invitation.getMeeting().getEndTime().toString("HH:mm") + " - " + invitation.getMeeting().getRoom().getName() + availabilityAndStatus(invitation));
 		 invitationDescription.setText(invitation.getDescription());
-		 
 	}
 
 	public String availabilityAndStatus(Message message){
@@ -2032,12 +2033,14 @@ public class Gui extends javax.swing.JFrame{
 
 	private void setNextWeek() {
 		Client.get().calendarModel.setNextWeek();
+		weekViewButton.setText("Uke " + Client.get().calendarModel.getWeekNumber() + " - " + Client.get().calendarModel.getYear());
 	}
 
 	private void setPreviousWeek() {
 		Client.get().calendarModel.setPreviousWeek();
+		weekViewButton.setText("Uke " + Client.get().calendarModel.getWeekNumber() + " - " + Client.get().calendarModel.getYear());
 	}
-
+	
 	public void editActivity(Activity act){
 		if(act instanceof Meeting){appointmentRoomCB.setSelectedItem(((Meeting) act).getRoom());}else{}
 		appointmentTitleLabel.setText(act.getTitle());

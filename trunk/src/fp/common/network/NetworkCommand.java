@@ -3,5 +3,6 @@ package fp.common.network;
 public enum NetworkCommand {
 	getActivities, getActivity, markRead, markUnread, createActivity,
 	returnActivities, returnEmployees, getEmployees, getCredentials, returnCredentials, getMessages, returnMessages,
-	getMeetings, returnMeetings, getRooms
+	getMeetings, returnMeetings, getRooms, getAllActivities, getAllRooms, getAllMeetings, getAllAlerts,
+	returnAllactivities, returnAllRooms, returnAllMeetings, returnAllAlerts
 }

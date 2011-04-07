@@ -135,9 +135,8 @@ public class ServerConnection extends Connection implements Runnable {
 				dbs.changeInviteStatus(meeting, participant);
 			} break;
 			case markMessageAsRead: {
-				Employee user = (Employee) request.get("currentUser");
-				Meeting meeting = (Meeting)request.get("meeting");
-				dbs.markMessageAsRead(meeting, user);
+				Message message = (Message) request.get("message");
+				dbs.markMessageAsRead(message);
 			} break;
 		}
 		return response;

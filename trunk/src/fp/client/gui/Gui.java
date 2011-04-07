@@ -20,6 +20,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.ListModel;
 import javax.swing.UIManager;
+import javax.swing.table.DefaultTableModel;
 
 import org.joda.time.DateTime;
 
@@ -63,6 +64,8 @@ public class Gui extends javax.swing.JFrame{
 		fixInvitationList();
 		fixMesssageList();
 		fixParticipantList();
+		fixParticipantTable();
+		fixCalendarTable();
 	}
 
 	/** This method is called from within the constructor to
@@ -1785,21 +1788,22 @@ public class Gui extends javax.swing.JFrame{
 
 	//ikke skriv kode over (^) dette her!!!!!!!!!11111!!!!!!!!!
     
-    private void setAttending() {
-    	Message invitation = (Message)invitationList.getSelectedValue();
-    	Client.get().setAttending(invitation, Status.ATTENDING);
-		
-	}
-    
-    private void setNotAttending() {
-    	Message invitation = (Message)invitationList.getSelectedValue();
-    	Client.get().setNotAttending(invitation, Status.NOT_ATTENDING);
-    }
 
 	DefaultListModel messageListModel = new DefaultListModel();
 	DefaultListModel invitationListModel = new DefaultListModel();
 	DefaultListModel participantListModel = new DefaultListModel();
+	DefaultTableModel participantTableModel = new DefaultTableModel();
+	DefaultTableModel calendarTableModel = new DefaultTableModel();
 
+	private void fixCalendarTable(){
+		calendarChooserTable.setModel(calendarTableModel);
+	}
+	
+	private void fixParticipantTable(){
+		participantChooserTable.setModel(participantTableModel);	
+	}
+	
+	
 	private void fixInvitationList(){
 		invitationList.setCellRenderer(new MessageRenderer());
 		invitationList.setModel(invitationListModel);
@@ -1811,8 +1815,8 @@ public class Gui extends javax.swing.JFrame{
 	}
 	
 	private void fixParticipantList(){;
-	participantOverviewList.setCellRenderer(new ParticipantRenderer());
-	participantOverviewList.setModel(participantListModel);
+		participantOverviewList.setCellRenderer(new ParticipantRenderer());
+		participantOverviewList.setModel(participantListModel);
 	}
 
 	private void buildMessageList(){
@@ -1846,65 +1850,47 @@ public class Gui extends javax.swing.JFrame{
 		//			i++;
 		//		}
 	}
-
+	
+	private void buildCalendarChooserTable(){
+		
+	}
+	
+	private void changeCalendarView(){
+	}
+	
+	private void buildParticipantChooserTable(){
+//		participantTableModel //remove everything
+//		ArrayList<Employee> allEmployees = Client.get().getAllEmployees();
+//		for(Employee employee : allEmployees){
+//			participantTableModel.addRow(employee, false);
+//		}
+	}
+	
 	public void receiveMessages(){
 		buildMessageList();
 		buildInvitationList();
 	}
 
-	private void cancelActivity() {
-		//if owner 
-		// TODO Auto-generated method stub
-	}
 
-	private void login() {
-		String username = loginUsernameTextField.getText();
-		String password = String.valueOf(loginPasswordField.getPassword());
-		if(Client.get().loginAction(hostIPField.getText(), username, password)) {
-			loginDialog.setVisible(false);
-			setVisible(true);
-		}
-		else {
-			errorDialogTextArea.setText("Innlogging feilet!");
-			errorDialog.pack();
-			errorDialog.setLocationRelativeTo(loginDialog);
-			errorDialog.setVisible(true);
-		}
+    private void setAttending() {
+    	Message invitation = (Message)invitationList.getSelectedValue();
+    	Client.get().setAttending(invitation, Status.ATTENDING);
 	}
-
-	private void logout(){
-		Client.get().logoutAction();
-	}
-
-
-	public void buildMessage(){
-		Message message = (Message)messageList.getSelectedValue();
-		if(!message.isRead()){
-			Client.get().setRead(message);
-			((Message)messageList.getSelectedValue()).isRead(true);
-			messageList.repaint();
-			}
-		messagePanel.setBorder(javax.swing.BorderFactory.createTitledBorder(message.getTitle() + " - " + dateToString(message.getMeeting().getStartTime().toDate())));
-		messagePanelTimeRoomAvailability.setText(message.getMeeting().getStartTime().toString("HH:mm")+" - "+message.getMeeting().getEndTime().toString("HH:mm") + " - " + message.getMeeting().getRoom().getName());
-		messageDescription.setText(message.getDescription());
-	}
-
-	public void buildInvitation(){
-		Message invitation = (Message)invitationList.getSelectedValue();
-		if(!invitation.isRead()){
-			Client.get().setRead(invitation); 
-			((Message)invitationList.getSelectedValue()).isRead(true);
-			invitationList.repaint();
-		}
-		invitationPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(invitation.getTitle() + " - " + dateToString(invitation.getMeeting().getStartTime().toDate())));
-		invitationPanelTimeRoomAvailability.setText(invitation.getMeeting().getStartTime().toString("HH:mm")+" - "+invitation.getMeeting().getEndTime().toString("HH:mm") + " - " + invitation.getMeeting().getRoom().getName() + availabilityAndStatus(invitation));
-		invitationDescription.setText(invitation.getDescription());
-	}
+    
+    private void setNotAttending() {
+    	Message invitation = (Message)invitationList.getSelectedValue();
+    	Client.get().setNotAttending(invitation, Status.NOT_ATTENDING);
+    }
 
 	public String availabilityAndStatus(Message message){
 		String temp = ", ";
 		//returnerer om du er opptatt om du ikke har svart, eller hva statusen din er dersom du har svart
 		return "";
+	}
+	
+	private void cancelActivity() {
+		//if owner 
+		// TODO Auto-generated method stub
 	}
 
 	private void createActivity()  {
@@ -1938,7 +1924,49 @@ public class Gui extends javax.swing.JFrame{
 			}
 	}
 
-	private void changeCalendarView(){
+	
+	public void buildMessage(){
+		Message message = (Message)messageList.getSelectedValue();
+		if(!message.isRead()){
+			Client.get().setRead(message);
+			((Message)messageList.getSelectedValue()).isRead(true);
+			messageList.repaint();
+			}
+		messagePanel.setBorder(javax.swing.BorderFactory.createTitledBorder(message.getTitle() + " - " + dateToString(message.getMeeting().getStartTime().toDate())));
+		messagePanelTimeRoomAvailability.setText(message.getMeeting().getStartTime().toString("HH:mm")+" - "+message.getMeeting().getEndTime().toString("HH:mm") + " - " + message.getMeeting().getRoom().getName());
+		messageDescription.setText(message.getDescription());
+	}
+
+	public void buildInvitation(){
+		Message invitation = (Message)invitationList.getSelectedValue();
+		if(!invitation.isRead()){
+			Client.get().setRead(invitation); 
+			((Message)invitationList.getSelectedValue()).isRead(true);
+			invitationList.repaint();
+		}
+		invitationPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(invitation.getTitle() + " - " + dateToString(invitation.getMeeting().getStartTime().toDate())));
+		invitationPanelTimeRoomAvailability.setText(invitation.getMeeting().getStartTime().toString("HH:mm")+" - "+invitation.getMeeting().getEndTime().toString("HH:mm") + " - " + invitation.getMeeting().getRoom().getName() + availabilityAndStatus(invitation));
+		invitationDescription.setText(invitation.getDescription());
+	}
+	
+	
+	private void login() {
+		String username = loginUsernameTextField.getText();
+		String password = String.valueOf(loginPasswordField.getPassword());
+		if(Client.get().loginAction(hostIPField.getText(), username, password)) {
+			loginDialog.setVisible(false);
+			setVisible(true);
+		}
+		else {
+			errorDialogTextArea.setText("Innlogging feilet!");
+			errorDialog.pack();
+			errorDialog.setLocationRelativeTo(loginDialog);
+			errorDialog.setVisible(true);
+		}
+	}
+
+	private void logout(){
+		Client.get().logoutAction();
 	}
 
 	private void setNextWeek() {

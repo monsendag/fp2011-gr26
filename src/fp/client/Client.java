@@ -81,10 +81,6 @@ public class Client {
 		calendarModel = new CalendarModel();
 	}
 	
-    public void setRead(Meeting meeting){
-        connection.markMessageAsRead(meeting);
-    }
-
 	
 	public void deliverMessages(ArrayList<Message> messages){		
 		if (this.messages == messages)
@@ -134,6 +130,10 @@ public class Client {
 		ArrayList<Room> rooms;
 		rooms = connection.getAvailableRooms(start, end);
 		return rooms;
+	}
+
+	public void setRead(Message message) {
+		connection.markMessageAsRead(message);
 	}
 	
 	/* TODO: hmm...

@@ -1876,6 +1876,10 @@ public class Gui extends javax.swing.JFrame {
 			i++;
 		}
 	}
+	
+	public void setMessageRead(Message message){
+		Client.get().setRead(message.getMeeting());
+	}
 
 
 	public void receiveMessages(){

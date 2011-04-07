@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.joda.time.DateTime;
 
+import fp.KTN.Connection;
 import fp.KTN.ReceiveMessageWorker;
 import fp.client.gui.Gui;
 import fp.client.gui.calendar.CalendarModel;
@@ -90,6 +91,15 @@ public class Client {
 		gui.receiveMessages();
 	}
 	
+	
+	public void setRead(Meeting meeting){
+		try {
+			connection.markMessageAsRead(meeting);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	
 	/*
 	public List<Room> getRooms(DateTime start, DateTime end){

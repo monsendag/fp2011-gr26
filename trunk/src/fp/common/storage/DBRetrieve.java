@@ -18,7 +18,9 @@ import fp.common.models.Room;
 
 
 /**
- * <p>Retrieves data from the database through {@link DBConnection}.</p>
+ * <p>Retrieves data from the database through {@link Storage}.</p>
+ * <p>Uses the HashMaps in Storage as cache to avoid duplicate objects
+ * in memory</p>
  * @author fp2011-gr26
  */
 public class DBRetrieve {
@@ -31,6 +33,11 @@ public class DBRetrieve {
 	private HashMap<Integer,Meeting> mtngCache;
 	private DBStore dbs;
 	
+	/**
+	 * <p>Default constructor</p>
+	 * <p>Retrieves instances of all the cache objects and the db-connection from
+	 * {@link Storage} and connects this to {@link DBStore}, and visa versa.</p>
+	 */
 	public DBRetrieve() {
 		Storage s = Storage.getInstance();
 		conn = s.getConn();
@@ -42,6 +49,15 @@ public class DBRetrieve {
 		dbs.setDBR(this);
 	}
 	
+	/**
+	 * <p>Login method</p>
+	 * <p>Checks if a given username and password matches any entry in the
+	 * employee table to see if the user exists. Returns an employee object
+	 * if the login is successful or null if no match was found.</p>
+	 * @param username The users username
+	 * @param passwd The users password
+	 * @return The correct employee object or null
+	 */
 	public Employee login(String username,String passwd) {
 		try {
 			Statement s = conn.createStatement();
@@ -71,14 +87,18 @@ public class DBRetrieve {
 		return null;
 	}
 	
+	/**
+	 * Used to gain access to the correct instance of this class.
+	 * @return This
+	 */
 	public static DBRetrieve getInstance() {
 		if(instance == null) instance = new DBRetrieve();
 		return instance;
 	}
 	
 	/**
-	 * Returns an employee with the specified username from the database
-	 * as an {@link Employee} object.
+	 * <p>Returns an employee with the specified username from the database
+	 * as an {@link Employee} object.<p>
 	 * @param username The username of the desired employee.
 	 * @return The {@link Employee} or null if no employee was found.
 	 */
@@ -113,8 +133,8 @@ public class DBRetrieve {
 	}
 	
 	/**
-	 * Returns an {@link #ArrayList} with every employee from the database as
-	 * {@link Employee} objects.
+	 * <p>Returns an {@link #ArrayList} with every employee from the database as
+	 * {@link Employee} objects.</p>
 	 * @return ArrayList with {@link employee}s or an empty ArrayList if no employees where found.
 	 */
 	public ArrayList<Employee> getAllEmployees() {
@@ -148,15 +168,15 @@ public class DBRetrieve {
 	}
 	
 	/**
-	 * Returns an {@link #ArrayList} with every unread alert from the database as
-	 * {@link Message} objects.
+	 * <p>Returns an {@link #ArrayList} with every unread message from the database as
+	 * {@link Message} objects.</p>
 	 * @return ArrayList with {@link Message}s.
 	 */
-	public ArrayList<Message> getAllAlerts() {
-		ArrayList<Message> alerts = new ArrayList<Message>();
+	public ArrayList<Message> getAllMessages() {
+		ArrayList<Message> messages = new ArrayList<Message>();
 		try {
 			Statement s = conn.createStatement();
-			ResultSet rs = s.executeQuery("SELECT * FROM alert");
+			ResultSet rs = s.executeQuery("SELECT * FROM message");
 			
 			Message m;
 			while(rs.next()) {
@@ -166,15 +186,15 @@ public class DBRetrieve {
 				m.setDescription(rs.getString("message"));
 				m.setEmployee(getEmployee(rs.getString("username")));
 				m.setMeeting(getMeeting(rs.getInt("activityID")));
-				alerts.add(m);
+				messages.add(m);
 			}
 			s.close();
 		} catch (SQLException e1) {
-			System.err.println("Error fetching alerts.");
+			System.err.println("Error fetching messages.");
 			e1.printStackTrace();
 		}
 		
-		return alerts;
+		return messages;
 	}
 	
 	/**
@@ -624,30 +644,30 @@ public class DBRetrieve {
 	}
 	
 	/**
-	 * Returns an {@link ArrayList} with an employee's alerts(messages),
+	 * Returns an {@link ArrayList} with an employee's messages,
 	 * based on an {@link Employee} object.
 	 * @param emp The employee
-	 * @return The ArrayList with alerts.
+	 * @return The ArrayList with messages.
 	 */
-	public ArrayList<Message> getEmpAlerts(Employee emp) {
-		return getEmpAlertsByUsername(emp.getUsername());
+	public ArrayList<Message> getEmpMessages(Employee emp) {
+		return getEmpMessagesByUsername(emp.getUsername());
 	}
 	
 	/**
-	 * Returns an {@link ArrayList} with an employee's alerts(messages),
+	 * Returns an {@link ArrayList} with an employee's messages,
 	 * based on username.
 	 * @param username The username
-	 * @return The ArrayList with alerts.
+	 * @return The ArrayList with messages.
 	 */
-	public ArrayList<Message> getEmpAlertsByUsername(String username) {
-		ArrayList<Message> alerts = new ArrayList<Message>();
+	public ArrayList<Message> getEmpMessagesByUsername(String username) {
+		ArrayList<Message> messages = new ArrayList<Message>();
 		try {
 			Statement s = conn.createStatement();
 			
 			/*
 			 * Personal activities can't reserve a room.
 			 */
-			ResultSet rs = s.executeQuery("SELECT * FROM alert WHERE username ='"
+			ResultSet rs = s.executeQuery("SELECT * FROM message WHERE username ='"
 					+ username + "'");
 			
 			Message m;
@@ -658,14 +678,14 @@ public class DBRetrieve {
 				m.setEmployee(getEmployee(username));
 				m.setMeeting(getMeeting(rs.getInt("activityID")));
 				m.setRead(rs.getBoolean("isread"));
-				alerts.add(m);
+				messages.add(m);
 			}
 			s.close();
 		} catch (SQLException e) {
-			System.err.println("Could not get employee's activities.");
+			System.err.println("Could not get employee's messages.");
 			e.printStackTrace();
 		}
 		
-		return alerts;
+		return messages;
 	}
 }

@@ -6,6 +6,9 @@ public class Message
 {
     //
     private String description;
+   
+    //
+    private String title;
 
     //
     private Boolean read;
@@ -25,6 +28,14 @@ public class Message
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+	
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
 	public Boolean getRead() {

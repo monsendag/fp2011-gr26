@@ -18,10 +18,10 @@ public class ParticipantRenderer extends DefaultListCellRenderer implements List
 		JLabel label = (JLabel) super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
 		// get image path
 		String iconName;
+		
 		if(participant.getStatus() == Status.ATTENDING){ iconName = "attending"; }
-		if(participant.getStatus() == Status.NOT_ATTENDING){ iconName = "notAttending"; }
-		else 
-			iconName = "awatingReply";
+		else if(participant.getStatus() == Status.NOT_ATTENDING){ iconName = "notAttending"; }
+		else iconName = "awatingReply";
 		
 		URL path = getClass().getResource("graphics/"+iconName+".png");
 		// set icon and text

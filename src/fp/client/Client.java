@@ -13,7 +13,6 @@ import fp.common.models.Activity;
 import fp.common.models.Employee;
 import fp.common.models.Meeting;
 import fp.common.models.Message;
-import fp.common.models.Participant;
 import fp.common.models.Room;
 import fp.common.network.ClientConnection;
 
@@ -55,9 +54,6 @@ public class Client {
 		return currentUser;
 	}
 	
-	enum Result{
-		SUCCESS, TIMEOUT, WRONGPWD; 
-	}
 	
 	public boolean loginAction(String ip, String username, String password) {
 		try {

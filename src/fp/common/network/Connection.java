@@ -69,16 +69,17 @@ public abstract class Connection {
 	 * @throws IOException
 	 */
 	protected void send(NetworkObject o) throws IOException {
-		//System.out.println("SAP");
+		System.out.println("SAP");
 		queue.add(o);
 		
-		if (isSending = false)
+		if (isSending == false)
 			sendFromQueue();
 	}
 	
 	protected void sendFromQueue() throws IOException {
+		System.out.println("SUPe");
 		while (!queue.isEmpty()){
-			//System.out.println("SUP");
+			System.out.println("SUP");
 			isSending = true;
 			NetworkObject o = queue.poll();
 			System.out.println("#NET: sending: "+o.getCommand());

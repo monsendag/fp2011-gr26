@@ -1486,7 +1486,6 @@ public class Gui extends javax.swing.JFrame{
 
     private void newAppointmentCreateButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                           
         newAppointmentDialog.setVisible(false);
-        createActivity();
     }                                                          
 
     private void newAppointmentCancelButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                           
@@ -1563,7 +1562,8 @@ public class Gui extends javax.swing.JFrame{
         cancelActivity();
     }                                                                   
 
-    private void appointmentCloseButtonActionPerformed(java.awt.event.ActionEvent evt) { 
+    private void appointmentCloseButtonActionPerformed(java.awt.event.ActionEvent evt) {
+    	changeActivity(activityModel);
         appointmentDialog.setVisible(false);
     }                                                      
 
@@ -1905,6 +1905,7 @@ public class Gui extends javax.swing.JFrame{
     	
     	DateTime startTime = new DateTime(fromDate.getYear()+1900, fromDate.getMonth()+1, fromDate.getDate(), Integer.parseInt(((String) newAppointmentStartTimeCB.getSelectedItem()).substring(0,2)), Integer.parseInt(((String) newAppointmentStartTimeCB.getSelectedItem()).substring(3)), 00, 00);
 		DateTime endTime = new DateTime(toDate.getYear()+1900, toDate.getMonth()+1, toDate.getDate(), Integer.parseInt(((String) newAppointmentEndTimeCB.getSelectedItem()).substring(0,2)), Integer.parseInt(((String) newAppointmentEndTimeCB.getSelectedItem()).substring(3)), 00, 00);
+    	System.out.println(startTime.getHourOfDay() + " - " + startTime.getMinuteOfHour());
 		String description = newAppointmentDescriptionTextArea.getText();
     	String title = newAppointmentTitleLabel.getText();
 
@@ -1931,8 +1932,8 @@ public class Gui extends javax.swing.JFrame{
 		Date fromDate = fromDateChooserPanel.getDate();
     	Date toDate = toDateChooserPanel.getDate();
     	
-    	DateTime startTime = new DateTime(fromDate.getYear()+1900, fromDate.getMonth()+1, fromDate.getDate(), fromDate.getHours(), fromDate.getMinutes(),00,00);
-		DateTime endTime = new DateTime(toDate.getYear()+1900, toDate.getMonth()+1, toDate.getDate(), toDate.getHours(), toDate.getMinutes(),00,00);
+    	DateTime startTime = new DateTime(fromDate.getYear()+1900, fromDate.getMonth()+1, fromDate.getDate(), Integer.parseInt(((String) appointmentStartTimeCB.getSelectedItem()).substring(0,2)), Integer.parseInt(((String) newAppointmentStartTimeCB.getSelectedItem()).substring(3)), 00, 00);
+		DateTime endTime = new DateTime(toDate.getYear()+1900, toDate.getMonth()+1, toDate.getDate(), Integer.parseInt(((String) appointmentEndTimeCB.getSelectedItem()).substring(0,2)), Integer.parseInt(((String) newAppointmentEndTimeCB.getSelectedItem()).substring(3)), 00, 00);
 		String description = appointmentDescriptionTextArea.getText();
     	String title = appointmentTitleLabel.getText();
 

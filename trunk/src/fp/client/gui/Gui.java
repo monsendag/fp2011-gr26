@@ -14,6 +14,7 @@ package fp.client.gui;
 
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.io.IOException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
@@ -42,7 +43,7 @@ import fp.common.storage.ActivityStorage;
  *
  * @author David
  */
-public class Gui extends javax.swing.JFrame {
+public class Gui extends javax.swing.JFrame{
 	Employee userLoggedIn;
 	/** Creates new form Gui */
 	public Gui() {
@@ -1013,7 +1014,8 @@ public class Gui extends javax.swing.JFrame {
 		newAppointmentCreateButton.setText("Opprett Avtale");
 		newAppointmentCreateButton.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				newAppointmentCreateButtonActionPerformed(evt);
+					newAppointmentCreateButtonActionPerformed(evt);
+				
 			}
 		});
 
@@ -1531,7 +1533,7 @@ public class Gui extends javax.swing.JFrame {
 		participantChooserDialog.setVisible(true);
 	}                                                                      
 
-	private void newAppointmentCreateButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                         
+	private void newAppointmentCreateButtonActionPerformed(java.awt.event.ActionEvent evt){                                                         
 		newAppointmentDialog.setVisible(false);
 		createActivity();
 	}                                                        
@@ -1980,32 +1982,38 @@ public class Gui extends javax.swing.JFrame {
 
 	}
 
-	private void createActivity() {
-		/*
-    	Activity newActivity = new Activity();
-    	newActivity.setTitle(newAppointmentTitleLabel.getText()); // title
-    	newActivity.setDescription(newAppointmentDescriptionTextArea.getText()); // description
-
-    	Date fromDate = toDateChooserPanel.getDate();
-    	Date toDate = fromDateChooserPanel.getDate();
-
-    	//DateTime fromDate = new DateTime();
-    	//DateTime fromDate = new DateTime();
-
-    	DateTime startTime = new DateTime(tempStartTime.getYear(), tempStartTime.getMonth(), tempStartTime.getDay(), Integer.parseInt(((String) newAppointmentStartTimeCB.getSelectedItem()).substring(0,1)), Integer.parseInt(((String) newAppointmentStartTimeCB.getSelectedItem()).substring(2,3)), 0, 0);
-		DateTime endTime = new DateTime(tempStartTime.getYear(), tempStartTime.getMonth(), tempEndTime.getDay(), Integer.parseInt(((String) newAppointmentEndTimeCB.getSelectedItem()).substring(0,1)), Integer.parseInt(((String) newAppointmentEndTimeCB.getSelectedItem()).substring(2,3)), 0, 0);
-
-		String description = newAppointmentDescriptionTextArea.getText();
-    	String title = newAppointmentTitleLabel.getText();
-
-        //ArrayList<Employee> participants = participantChooserTable.getSelectedRows();
-
-    	if(participantChooserTable.getSelectedRows().length > 0)
-    		ActivityStorage.createActivity(new Meeting(owner, participants, room, startTime, endTime, description, location, title));
-		ActivityStorage.createActivity(new Activity(owner, room, startTime, endTime, description, location, title));
-
-		Client.get().addActivity(newActivity);
-		 */
+	private void createActivity()  {
+		
+//    	Activity newActivity = new Activity();
+//    	newActivity.setTitle(newAppointmentTitleLabel.getText()); // title
+//    	newActivity.setDescription(newAppointmentDescriptionTextArea.getText()); // description
+//
+//    	Date fromDate = toDateChooserPanel.getDate();
+//    	Date toDate = fromDateChooserPanel.getDate();
+//
+//
+//    	DateTime startTime = new DateTime(fromDate.getYear(), fromDate.getMonth(), fromDate.getDay(), fromDate.getHours(), fromDate.getMinutes(),00,00);
+//		DateTime endTime = new DateTime(toDate.getYear(), toDate.getMonth(), toDate.getDay(), toDate.getHours(), toDate.getMinutes(),00,00);
+//
+//		String description = newAppointmentDescriptionTextArea.getText();
+//    	String title = newAppointmentTitleLabel.getText();
+//
+//        ArrayList<Participant> participants = new ArrayList<Participant>();// = participantChooserTable.getSelectedRows();
+//        Room room = new Room();
+//
+//    	if(participantChooserTable.getSelectedRows().length > 0)
+//			try {
+//				ActivityStorage.createActivity(new Meeting(Client.get().getUser(), participants, room, startTime, endTime, description, room.getName()));
+//			} catch (IOException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+//		try {
+//			ActivityStorage.createActivity(new Activity(Client.get().getUser(), startTime, endTime, newAppointmentDescriptionTextArea.getText(), (String)newAppointmentRoomCB.getSelectedItem()));
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 	}
 
 	private void changeCalendarView(){

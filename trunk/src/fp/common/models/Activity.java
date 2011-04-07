@@ -6,7 +6,7 @@ public class Activity
 {
 	private int id;
 	private DateTime startTime, endTime;
-	private String description, location, title;
+	private String description,location, title;
 	private Employee owner;
 	
 	public Activity() {

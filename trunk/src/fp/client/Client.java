@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.joda.time.DateTime;
 
+import fp.KTN.ReceiveMessageWorker;
 import fp.client.gui.Gui;
 import fp.client.gui.calendar.CalendarModel;
 import fp.common.models.Activity;
@@ -37,17 +38,18 @@ public class Client {
 	public ClientConnection connection;
 	public CalendarModel calendarModel;
 	private List<Activity> activities;
-	public ArrayList<Message> messages;
+	public List<Message> messages;
 	public Employee currentUser;
 	
 	
-	public Client() {     
-		java.awt.EventQueue.invokeLater(new Runnable() {
+	public Client() {
+		Thread thread = new Thread(new Runnable() {
 	        public void run() {
 	        	calendarModel = new CalendarModel();
 	        	gui = new Gui();
 	        }
 		});
+		thread.start();
     }
 	
 	public Employee getUser() {
@@ -84,39 +86,9 @@ public class Client {
 	
 	// usikker om det her fungerer, er for å håndtere beskjedene som skal requestes regelmessig i clientconnection -halvor
 	public void deliverMessages(ArrayList<Message> messages){		
-		if (this.messages == messages)
-			return;
-		else{// TODO: Si fra til GUI om at det har kommet nye meldinger?
-			this.messages = messages;
-			gui.receiveMessages();
-		}
+		this.messages = messages;
+		gui.receiveMessages();
 	}
-
-	public void markMessageAsRead(Message m)
-	{
-		try {
-			connection.markMessageAsRead(m);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			
-			e.printStackTrace();
-			return;
-		}
-		messages.remove(m);
-		m.isRead(true);
-		messages.add(m);
-		
-		deliverMessages(messages);
-	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 	/*

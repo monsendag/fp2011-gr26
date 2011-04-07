@@ -77,7 +77,7 @@ public class Gui extends javax.swing.JFrame{
 	@SuppressWarnings("unchecked")
 	// <editor-fold defaultstate="collapsed" desc="Generated Code">
 
-	 private void initComponents() {
+	  private void initComponents() {
 
         loginDialog = new javax.swing.JDialog();
         loginPanel = new javax.swing.JPanel();
@@ -1475,6 +1475,7 @@ public class Gui extends javax.swing.JFrame{
 
     private void fromDateDateChooserOkButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                            
         newAppointmentFromDateButton.setText(dateToString(fromDateChooserPanel.getDate()));
+        appointmentFromDateButton.setText(dateToString(fromDateChooserPanel.getDate()));
         fromDateDateChooserDialog.setVisible(false);
     }                                                           
 
@@ -1511,6 +1512,7 @@ public class Gui extends javax.swing.JFrame{
 
     private void toDateDateChooserOkButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                          
         newAppointmentToDateButton.setText(dateToString(toDateChooserPanel.getDate()));
+        appointmentToDateButton.setText(dateToString(toDateChooserPanel.getDate()));
         toDateDateChooserDialog.setVisible(false);
     }                                                         
 
@@ -1550,20 +1552,12 @@ public class Gui extends javax.swing.JFrame{
         messageOverviewDialog.setVisible(false);
     }                                                       
 
-    private void appointmentToDateButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                        
-        // TODO add your handling code here:
-    }                                                       
-
-    private void appointmentFromDateButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                          
-        // TODO add your handling code here:
-    }                                                         
-
     private void appointmentSayYoureNotCommingButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                                    
         appointmentDialog.setVisible(false);
         cancelActivity();
     }                                                                   
 
-    private void appointmentCloseButtonActionPerformed(java.awt.event.ActionEvent evt) {
+    private void appointmentCloseButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                       
         appointmentDialog.setVisible(false);
     }                                                      
 
@@ -1662,16 +1656,31 @@ public class Gui extends javax.swing.JFrame{
         weekViewButton.setText("Uke " + Client.get().calendarModel.getWeekNumber() + " - " + Client.get().calendarModel.getYear());
     }                                              
 
-    private void invitationPanelAttendingButtonActionPerformed(java.awt.event.ActionEvent evt) {
+    private void invitationPanelAttendingButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                               
         setAttending();
-    }
+    }                                                              
 
-	private void invitationPanelNotAttendinButtonActionPerformed(java.awt.event.ActionEvent evt) {
+    private void invitationPanelNotAttendinButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                                 
         setNotAttending();
+    }                                                                
+
+    private void appointmentFromDateButtonActionPerformed(java.awt.event.ActionEvent evt) {
+        fromDateDateChooserDialog.pack();
+        java.awt.Point buttonLocation = ((javax.swing.JButton) evt.getSource()).getLocationOnScreen();
+        buttonLocation.translate(-20, 25);
+        fromDateDateChooserDialog.setLocation(buttonLocation);
+        fromDateDateChooserDialog.setVisible(true);
     }
 
+    private void appointmentToDateButtonActionPerformed(java.awt.event.ActionEvent evt) {
+        toDateDateChooserDialog.pack();
+        java.awt.Point buttonLocation = ((javax.swing.JButton) evt.getSource()).getLocationOnScreen();
+        buttonLocation.translate(-20, 25);
+        toDateDateChooserDialog.setLocation(buttonLocation);
+        toDateDateChooserDialog.setVisible(true);
+    }
 
-	// Variables declaration - do not modify
+    // Variables declaration - do not modify
     private javax.swing.JPanel appointmentButtonPanel;
     private javax.swing.JButton appointmentCloseButton;
     private javax.swing.JLabel appointmentDescriptionLabel;
@@ -1929,6 +1938,9 @@ public class Gui extends javax.swing.JFrame{
 	}
 	
 	public void changeActivity(Activity act) {
+		
+		if(Client.get().currentUser != act.getOwner()){ disableEditing();}
+		
 		Date fromDate = fromDateChooserPanel.getDate();
     	Date toDate = toDateChooserPanel.getDate();
     	
@@ -1957,6 +1969,15 @@ public class Gui extends javax.swing.JFrame{
 			e.printStackTrace();
 		}
 
+	}
+	
+	private void disableEditing(){
+		newAppointmentFromDateButton.setEnabled(false);
+		newAppointmentToDateButton.setEnabled(false);
+		newAppointmentEndTimeCB.setEnabled(false);
+		newAppointmentStartTimeCB.setEnabled(false);
+		newAppointmentTitleTextField.setEditable(false);
+		newAppointmentDescriptionTextArea.setEditable(false);
 	}
 
 	

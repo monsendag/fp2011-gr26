@@ -1858,8 +1858,7 @@ public class Gui extends javax.swing.JFrame {
 	}
 
 	private void buildInvitationList(){
-		messageListModel.removeAllElements();
-
+		invitationListModel.removeAllElements();
 		int i = 0;
 		for(Message message : Client.get().messages){
 			if(message.isInvitation()){

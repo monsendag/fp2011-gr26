@@ -167,8 +167,10 @@ public class DBStore {
 	 * <p>An invited employee's status is set to {@link Participant.Status#AWAITING_REPLY}
 	 * by default.</p>
 	 * @param m The meeting to be added.
+	 * @return The auto generated id.
 	 */
-	public void addMeeting(Meeting m) {
+	public int addMeeting(Meeting m) {
+		int id = -1;
 		/*
 		 * Stores the meeting in the meeting table.
 		 */
@@ -192,6 +194,7 @@ public class DBStore {
 			ResultSet rs = ps.getGeneratedKeys();
 			while(rs.next() && rs != null) {
 				m.setId(rs.getInt(1));
+				id = m.getId();
 			}
 			
 			// Add to cache
@@ -243,6 +246,7 @@ public class DBStore {
 			System.err.println("Could not add messages.");
 			e.printStackTrace();
 		}
+		return id;
 	}
 	
 	/**

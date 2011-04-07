@@ -78,7 +78,7 @@ public class Gui extends javax.swing.JFrame{
 	@SuppressWarnings("unchecked")
 	// <editor-fold defaultstate="collapsed" desc="Generated Code">
 
-	private void initComponents() {
+	 private void initComponents() {
 
         loginDialog = new javax.swing.JDialog();
         loginPanel = new javax.swing.JPanel();
@@ -364,10 +364,7 @@ public class Gui extends javax.swing.JFrame{
 
         calendarChooserTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+
             },
             new String [] {
                 "Ansatt", ""
@@ -388,6 +385,7 @@ public class Gui extends javax.swing.JFrame{
                 return canEdit [columnIndex];
             }
         });
+        calendarChooserTable.setColumnSelectionAllowed(true);
         calendarChooserTable.setSelectionBackground(new java.awt.Color(231, 233, 255));
         calendarChooserSC.setViewportView(calendarChooserTable);
         calendarChooserTable.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
@@ -471,11 +469,6 @@ public class Gui extends javax.swing.JFrame{
         messageOverviewDialog.setModal(true);
         messageOverviewDialog.setResizable(false);
 
-        messageList.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "09.04.2011 - Møte avlyst", "01.04.2011 - Sol i Trondheim" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
-        });
         messageList.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
                 messageListValueChanged(evt);
@@ -483,7 +476,7 @@ public class Gui extends javax.swing.JFrame{
         });
         messagePanelListSP.setViewportView(messageList);
 
-        messagePanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Styremøte - 10. April 2011"));
+        messagePanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Ingen melding valgt"));
 
         messagePanelCloseButton.setText("Lukk");
         messagePanelCloseButton.addActionListener(new java.awt.event.ActionListener() {
@@ -492,13 +485,13 @@ public class Gui extends javax.swing.JFrame{
             }
         });
 
-        messagePanelTimeRoomAvailability.setText("10:00 - 12:15 - Kattelabben");
+        messagePanelTimeRoomAvailability.setText("   ");
 
         messageDescription.setColumns(20);
         messageDescription.setEditable(false);
         messageDescription.setLineWrap(true);
         messageDescription.setRows(5);
-        messageDescription.setText("Møtet er avlyst grunnet potekreft i kattelabben. ");
+        messageDescription.setText("Velg en melding til venstre i listen, dersom du skulle være så heldig å ha noen :p");
         messageDescription.setWrapStyleWord(true);
         messagePanelTextSP.setViewportView(messageDescription);
 
@@ -552,11 +545,6 @@ public class Gui extends javax.swing.JFrame{
 
         messageOverviewTabbedPane.addTab("Meldinger", messagePanelTab);
 
-        invitationList.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "03.03.2011 - Styremøte 10. April" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
-        });
         invitationList.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
                 invitationListValueChanged(evt);
@@ -564,7 +552,7 @@ public class Gui extends javax.swing.JFrame{
         });
         invitationPanelListSP.setViewportView(invitationList);
 
-        invitationPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Styremøte - 10. April 2011"));
+        invitationPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Ingen innkalling valgt"));
 
         invitationPanelAttendingButton.setText("Jeg kommer");
 
@@ -582,13 +570,13 @@ public class Gui extends javax.swing.JFrame{
             }
         });
 
-        invitationPanelTimeRoomAvailability.setText("10:15 - 12:00 - Kattelabben - Du kommer");
+        invitationPanelTimeRoomAvailability.setText("   ");
 
         invitationDescription.setColumns(20);
         invitationDescription.setEditable(false);
         invitationDescription.setLineWrap(true);
         invitationDescription.setRows(5);
-        invitationDescription.setText("Det blir et styremøte tiende april, husk å ta med druer og paraply.");
+        invitationDescription.setText("Velg en innkalling i til venstre i listen, dersom du skulle være så heldig å ha noen :p");
         invitationDescription.setWrapStyleWord(true);
         invitationPanelTextSP.setViewportView(invitationDescription);
 
@@ -1097,10 +1085,7 @@ public class Gui extends javax.swing.JFrame{
 
         participantChooserTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+
             },
             new String [] {
                 "Ansatt", ""
@@ -1664,8 +1649,8 @@ public class Gui extends javax.swing.JFrame{
         errorDialog.setVisible(false);
     }                                                       
 
-    private void messageListValueChanged(javax.swing.event.ListSelectionEvent evt) {   
-    	buildMessage();
+    private void messageListValueChanged(javax.swing.event.ListSelectionEvent evt) {                                         
+        buildMessage();
     }                                        
 
     private void invitationListValueChanged(javax.swing.event.ListSelectionEvent evt) {                                            

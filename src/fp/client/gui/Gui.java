@@ -1664,12 +1664,12 @@ public class Gui extends javax.swing.JFrame{
         errorDialog.setVisible(false);
     }                                                       
 
-    private void messageListValueChanged(javax.swing.event.ListSelectionEvent evt) {                                         
-        buildMessage((Message)messageList.getSelectedValue());
+    private void messageListValueChanged(javax.swing.event.ListSelectionEvent evt) {   
+    	buildMessage();
     }                                        
 
     private void invitationListValueChanged(javax.swing.event.ListSelectionEvent evt) {                                            
-        buildInvitation((Message)invitationList.getSelectedValue());
+        buildInvitation();
     }                                           
 
     private void weekViewButtonActionPerformed(java.awt.event.ActionEvent evt) {                                               
@@ -1880,9 +1880,11 @@ public class Gui extends javax.swing.JFrame{
 	}
 
 
-	public void buildMessage(Message message){
+	public void buildMessage(){
+		Message message = (Message)messageList.getSelectedValue();
 		if(!message.isRead()){
-			setMessageRead(message); 
+			setMessageRead(message);
+			((Message)messageList.getSelectedValue()).isRead(true);
 			messageList.repaint();
 			}
 		messagePanel.setBorder(javax.swing.BorderFactory.createTitledBorder(message.getTitle() + " - " + dateToString(message.getMeeting().getStartTime().toDate())));
@@ -1890,9 +1892,11 @@ public class Gui extends javax.swing.JFrame{
 		messageDescription.setText(message.getDescription());
 	}
 
-	public void buildInvitation(Message invitation){
+	public void buildInvitation(){
+		Message invitation = (Message)invitationList.getSelectedValue();
 		if(!invitation.isRead()){
 			setMessageRead(invitation); 
+			((Message)invitationList.getSelectedValue()).isRead(true);
 			invitationList.repaint();
 		}
 		invitationPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(invitation.getTitle() + " - " + dateToString(invitation.getMeeting().getStartTime().toDate())));

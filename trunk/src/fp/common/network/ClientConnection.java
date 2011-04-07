@@ -23,15 +23,13 @@ public class ClientConnection extends Connection implements Runnable {
 	
 	
 	private Timer timer;
-	private Client client;
 	
-	public ClientConnection(InetAddress host, Client client) throws IOException {
+	public ClientConnection(InetAddress host) throws IOException {
 		super(host);
-		this.client = client;
 	}
 	
-	public ClientConnection(Client client) throws IOException {
-		this(InetAddress.getLocalHost(), client);
+	public ClientConnection() throws IOException {
+		this(InetAddress.getLocalHost());
 	}
 	
 	@Override
@@ -49,7 +47,7 @@ public class ClientConnection extends Connection implements Runnable {
 			public void run() {
 				try {
 					// hent beskjeder, trenger en metode i modellen for å faktisk legge dem til. ha en referanse til client i denne klassen? må vel ha det.
-					client.deliverMessages(getEmpMessages());
+					Client.get().deliverMessages(getEmpMessages());
 					
 				} catch (IOException e) {
 					// TODO Auto-generated catch block

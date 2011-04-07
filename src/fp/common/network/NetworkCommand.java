@@ -7,6 +7,6 @@ public enum NetworkCommand {
 	returnAllactivities, returnAllRooms, returnAllMeetings, returnAllAlerts, getAvailableRooms,
 	returnAvailableRooms, getMeeting, getRoom, returnMeeting, returnRoom, addActivity,
 	returnActivityID, addMeeting, returnMeetingID, cancelActivity, cancelMeeting, changeActivity,
-	changeMeeting
+	changeMeeting, changeInviteStatus, markMessageAsRead
 	
 }

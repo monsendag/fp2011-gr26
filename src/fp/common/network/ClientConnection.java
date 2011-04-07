@@ -13,6 +13,7 @@ import fp.common.models.Activity;
 import fp.common.models.Employee;
 import fp.common.models.Meeting;
 import fp.common.models.Message;
+import fp.common.models.Participant;
 import fp.common.models.Room;
 import fp.common.storage.DBStore;
 
@@ -216,7 +217,19 @@ public class ClientConnection extends Connection implements Runnable {
 		n.put("meeting", meeting);
 		send(n);
 	}
-	
+	public void changeInviteStatus(Meeting meeting, Participant participant) throws IOException {
+		NetworkObject n = new NetworkObject();
+		n.setCommand(NetworkCommand.changeInviteStatus);
+		n.put("meeting", meeting);
+		n.put("participant", participant);
+		send(n);
+	}
+	public void markMessageAsRead(Meeting meeting) throws IOException {
+		NetworkObject n = new NetworkObject();
+		n.setCommand(NetworkCommand.markMessageAsRead);
+		n.put("meeting", meeting);
+		send(n);
+	}
 
 }
 	

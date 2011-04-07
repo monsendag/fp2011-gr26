@@ -391,7 +391,7 @@ public class DBRetrieve {
 		try {
 			Statement s = conn.createStatement();
 			ResultSet rs = s.executeQuery("SELECT * FROM activity WHERE ismeeting = false " +
-					"AND (cancelled = false OR cancelled IS NULL)");
+					"AND (canceled = false OR canceled IS NULL)");
 			
 			Activity a;
 			while(rs.next()) {
@@ -472,7 +472,7 @@ public class DBRetrieve {
 		try {
 			Statement s = conn.createStatement();
 			ResultSet rs = s.executeQuery("SELECT * FROM activity WHERE ismeeting = true " +
-					"AND (cancelled = false OR cancelled IS NULL)");
+					"AND (canceled = false OR canceled IS NULL)");
 			
 			Meeting m;
 			while(rs.next()) {
@@ -532,7 +532,7 @@ public class DBRetrieve {
 			 */
 			ResultSet rs = s.executeQuery("SELECT * FROM activity WHERE username ='"
 					+ username + "' AND ismeeting = false " +
-					"AND (cancelled = false OR cancelled IS NULL)");
+					"AND (canceled = false OR canceled IS NULL)");
 			
 			Activity a;
 			while(rs.next()) {
@@ -591,7 +591,7 @@ public class DBRetrieve {
 					"a.activityID, a.starttime, a.endtime, a.roomID " +
 					"FROM activity a, participant p " +
 					"WHERE a.activityID = p.activityID AND p.username ='" + username + "' " +
-					"AND ismeeting = true AND (cancelled = false OR cancelled IS NULL)");
+					"AND ismeeting = true AND (canceled = false OR canceled IS NULL)");
 			
 			Meeting m;
 			while(rs.next()) {
@@ -622,7 +622,7 @@ public class DBRetrieve {
 			 */
 			rs = s.executeQuery("SELECT * FROM activity " +
 					"WHERE username ='" + username + "' AND ismeeting = true " +
-					"AND (cancelled = false OR cancelled IS NULL)");
+					"AND (canceled = false OR canceled IS NULL)");
 			
 			while(rs.next()) {
 				int id = rs.getInt("activityID");

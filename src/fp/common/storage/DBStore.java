@@ -379,7 +379,7 @@ public class DBStore {
 	 */
 	public void cancelMeetingByID(int meetingID) {
 		try {
-			PreparedStatement ps = conn.prepareStatement("UPDATE activity SET cancelled = ? " +
+			PreparedStatement ps = conn.prepareStatement("UPDATE activity SET canceled = ? " +
 					"WHERE activityID = " + meetingID);
 			ps.setBoolean(1,true);
 			ps.executeUpdate();
@@ -474,7 +474,7 @@ public class DBStore {
 	 */
 	public void cancelActivityByID(int actID) {
 		try {
-			PreparedStatement ps = conn.prepareStatement("UPDATE activity SET cancelled = ? " +
+			PreparedStatement ps = conn.prepareStatement("UPDATE activity SET canceled = ? " +
 					"WHERE activityID = " + actID);
 			ps.setBoolean(1,true);
 			ps.executeUpdate();
@@ -570,7 +570,7 @@ public class DBStore {
 		try {
 			Statement s = conn.createStatement();
 			
-			s.execute("UPDATE activity SET cancelled = true WHERE username ='" + username + "'");
+			s.execute("UPDATE activity SET canceled = true WHERE username ='" + username + "'");
 			s.close();
 			
 			System.out.println("#DB: Canceling " + username + "'s activities/meetings in DB");

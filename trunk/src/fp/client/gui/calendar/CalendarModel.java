@@ -18,8 +18,8 @@ public class CalendarModel {
 	private PropertyChangeSupport changeSupport;
 	
 	public CalendarModel() {
-		setCurrentWeek();
 		changeSupport = new PropertyChangeSupport(this);
+		setCurrentWeek();
 		activities = new ArrayList<Activity>();
 	}
 
@@ -30,6 +30,7 @@ public class CalendarModel {
 	public void setCurrentWeek() {
 		DateTime now = new DateTime();
 		monday = now.minusDays((now.getDayOfWeek()-1)).minusMillis(now.getMillisOfDay());  // Monday@00:00.000 
+		changeSupport.firePropertyChange("week", null, monday);
 	}
 	
 	public DateTime getMonday() {

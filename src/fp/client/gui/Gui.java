@@ -1435,7 +1435,11 @@ public class Gui extends javax.swing.JFrame {
 		);
 
 		layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {logOutButton, messageViewButton, newAppointmentButton});
-
+        weekViewButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                weekViewButtonActionPerformed(evt);
+            }
+        });
 		layout.setVerticalGroup(
 				layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 				.addGroup(layout.createSequentialGroup()
@@ -1466,6 +1470,9 @@ public class Gui extends javax.swing.JFrame {
 
 		pack();
 	}// </editor-fold>
+	private void weekViewButtonActionPerformed(java.awt.event.ActionEvent evt) {       
+		Client.get().calendarModel.setCurrentWeek();
+	}                                                 
 
 	private void messageViewButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                  
 		messageOverviewDialog.pack();

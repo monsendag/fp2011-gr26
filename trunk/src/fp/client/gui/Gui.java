@@ -1669,7 +1669,7 @@ public class Gui extends javax.swing.JFrame{
     }                                        
 
     private void invitationListValueChanged(javax.swing.event.ListSelectionEvent evt) {                                            
-        buildInvitation((Message)messageList.getSelectedValue());
+        buildInvitation((Message)invitationList.getSelectedValue());
     }                                           
 
     private void weekViewButtonActionPerformed(java.awt.event.ActionEvent evt) {                                               

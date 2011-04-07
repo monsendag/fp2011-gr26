@@ -104,9 +104,24 @@ public class ServerConnection extends Connection implements Runnable {
 			case addMeeting: {
 				response.setCommand(NetworkCommand.returnMeetingID);
 				Meeting meeting = (Meeting)request.get("meeting");
-				response.put("meetingID", dbs.addActivity(meeting));
+				response.put("meetingID", dbs.addMeeting(meeting));
 			}
-
+			case cancelActivity: {
+				Activity activity = (Activity)request.get("activity");
+				dbs.cancelActivity(activity);
+			}
+			case cancelMeeting: {
+				Meeting meeting = (Meeting)request.get("meeting");
+				dbs.cancelMeeting(meeting);
+			}
+			case changeActivity: {
+				Activity activity = (Activity)request.get("activity");
+				dbs.changeActivity(activity);
+			}
+			case changeMeeting: {
+				Meeting meeting = (Meeting)request.get("meeting");
+				dbs.changeMeeting(meeting);
+			}
 			
 		}
 		return response;

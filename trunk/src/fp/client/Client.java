@@ -2,6 +2,7 @@ package fp.client;
 
 import java.io.IOException;
 import java.net.InetAddress;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.joda.time.DateTime;
@@ -60,7 +61,7 @@ public class Client {
 	
 	public boolean loginAction(String ip, String username, String password) {
 		try {
-			connection = new ClientConnection(InetAddress.getByName(ip));
+			connection = new ClientConnection(InetAddress.getByName(ip), this);
 			Thread thread = new Thread(connection);
 
 			if((currentUser = connection.login(username, password)) != null) { // login successful
@@ -84,10 +85,18 @@ public class Client {
 		calendarModel = new CalendarModel();
 	}
 	
-	// noen metoder for å lytte til endringer fra nettverket, som igjen fyrer av endringer i guien.
-	// for meldinger og møteinnkallinger.
-	// public void newMeetingListener(String input);
-	// public void newMessageListener(String input);
+	
+	// usikker om det her fungerer, er for å håndtere beskjedene som skal requestes regelmessig i clientconnection -halvor
+	public void deliverMessages(ArrayList<Message> messages)
+	{
+		
+		// si fra til gui ellerno
+		if (this.messages == messages)
+			return;
+		else
+			this.messages = messages;
+	}
+
 		
 	public List<Room> getRooms(DateTime start, DateTime end){
 		// hent rom fra server ledige i gitt tidsrom, return liste med rom.

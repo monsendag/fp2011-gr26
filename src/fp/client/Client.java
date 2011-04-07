@@ -114,22 +114,21 @@ public class Client {
 		calendarModel.addActivity(a);
 	}
 	
-	/* TODO: lag en metode for å fjerne activity i calendarmodel.
+
 	public void remActivity(Activity a) throws IOException {
 	
 	connection.cancelActivity(a);
 	calendarModel.remActivity(a);
 	}
-	*/
+
 	
 	
-	/* TODO: Lag en metode for å endre activity i calendarmodel.
+
 	public void chngActivity(Activity a) throws IOException {
 		connection.changeActivity(a);
-		
 		calendarModel.chngActivity(a);
 	}
-	*/
+
 	
 	public ArrayList<Room> findRooms(DateTime start, DateTime end) throws IOException { // ikke kapasitet?
 		ArrayList<Room> rooms;

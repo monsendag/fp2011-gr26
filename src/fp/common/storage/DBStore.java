@@ -519,25 +519,23 @@ public class DBStore {
 	}
 	
 	/**
-	 * Marks a message, by a {@link Meeting} and a {@link Employee} object,
+	 * Marks a message, by a {@link Message} object,
 	 * in the database as read.
-	 * @param meeting The meeting
-	 * @param emp The employee
+	 * @param message The message
 	 */
-	public void markMessageAsRead(Meeting meeting,Employee emp) {
-		markMessageAsReadByIDs(meeting.getId(), emp.getUsername());
+	public void markMessageAsRead(Message message) {
+		markMessageAsReadByIDs(message.getMessageID());
 	}
 	
 	/**
-	 * Marks a message, by the meeting's ID and the employee's username,
+	 * Marks a message, by the message's ID,
 	 * in the database as read.
-	 * @param meetingID The meeting's ID
-	 * @param username The employee's username
+	 * @param messageID The message's ID
 	 */
-	public void markMessageAsReadByIDs(int meetingID,String username) {
+	public void markMessageAsReadByIDs(int messageID) {
 		try {
 			PreparedStatement ps = conn.prepareStatement("UPDATE message SET isread = ? " +
-					"WHERE activityID = " + meetingID + " AND username = '" + username + "'");
+					"WHERE messageID = " + messageID);
 			ps.setBoolean(1,true);
 			ps.executeUpdate();
 			ps.close();
@@ -548,14 +546,26 @@ public class DBStore {
 		}
 	}
 	
+	/**
+	 * Sets the database retrieval object for this store object.
+	 * @param dbr
+	 */
 	public void setDBR(DBRetrieve dbr) {
 		this.dbr = dbr;
 	}
 	
+	/**
+	 * Strictly for testing. Restart program after.
+	 * @param emp
+	 */
 	public void cancelEmpActivities(Employee emp) {
 		cancelEmpActivitiesByUsername(emp.getUsername());
 	}
 	
+	/**
+	 * Strictly for testing. Restart program after.
+	 * @param username
+	 */
 	public void cancelEmpActivitiesByUsername(String username) {
 		try {
 			Statement s = conn.createStatement();

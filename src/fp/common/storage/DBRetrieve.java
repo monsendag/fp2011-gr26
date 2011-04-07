@@ -176,18 +176,27 @@ public class DBRetrieve {
 		ArrayList<Message> messages = new ArrayList<Message>();
 		try {
 			Statement s = conn.createStatement();
-			ResultSet rs = s.executeQuery("SELECT * FROM message");
+			ResultSet rs = s.executeQuery("SELECT m.messageID, m.isinvite, " +
+					"m.isread, m.time, m.username, m.message, m.activityID, a.title, a.description " +
+					"FROM message m, activity a " +
+					"WHERE m.activityID = a.activityID");
 			
 			Message m;
 			while(rs.next()) {
+				boolean isInvite = rs.getBoolean("isinvite");
 				m = new Message();
-				m.setMessageID(rs.getInt("messageID"));
-				m.isInvitation(rs.getBoolean("isinvite"));
-				m.isRead(rs.getBoolean("isread"));
 				m.setCreatedOn(new DateTime(rs.getTimestamp("time").getTime()));
-				m.setDescription(rs.getString("message"));
+				if(isInvite) {
+					m.setDescription(rs.getString("description"));
+				} else {
+					m.setDescription(rs.getString("message"));
+				}
 				m.setEmployee(getEmployee(rs.getString("username")));
 				m.setMeeting(getMeeting(rs.getInt("activityID")));
+				m.setMessageID(rs.getInt("messageID"));
+				m.isInvitation(isInvite);
+				m.isRead(rs.getBoolean("isread"));
+				m.setTitle(rs.getString("title"));
 				messages.add(m);
 			}
 			s.close();
@@ -666,22 +675,28 @@ public class DBRetrieve {
 		try {
 			Statement s = conn.createStatement();
 			
-			/*
-			 * Personal activities can't reserve a room.
-			 */
-			ResultSet rs = s.executeQuery("SELECT * FROM message WHERE username ='"
+			ResultSet rs = s.executeQuery("SELECT m.messageID, m.isinvite, " +
+					"m.isread, m.time, m.username, m.message, m.activityID, a.title, a.description " +
+					"FROM message m, activity a " +
+					"WHERE m.activityID = a.activityID AND m.username ='"
 					+ username + "'");
 			
 			Message m;
 			while(rs.next()) {
+				boolean isInvite = rs.getBoolean("isinvite");
 				m = new Message();
 				m.setCreatedOn(new DateTime(rs.getTimestamp("time").getTime()));
-				m.setDescription(rs.getString("message"));
+				if(isInvite) {
+					m.setDescription(rs.getString("description"));
+				} else {
+					m.setDescription(rs.getString("message"));
+				}
 				m.setEmployee(getEmployee(username));
 				m.setMeeting(getMeeting(rs.getInt("activityID")));
 				m.setMessageID(rs.getInt("messageID"));
-				m.isInvitation(rs.getBoolean("isinvite"));
+				m.isInvitation(isInvite);
 				m.isRead(rs.getBoolean("isread"));
+				m.setTitle(rs.getString("title"));
 				messages.add(m);
 			}
 			s.close();
@@ -714,22 +729,28 @@ public class DBRetrieve {
 		try {
 			Statement s = conn.createStatement();
 			
-			/*
-			 * Personal activities can't reserve a room.
-			 */
-			ResultSet rs = s.executeQuery("SELECT * FROM message WHERE username ='"
-					+ username + "' AND (isread = false OR isread IS NULL)");
+			ResultSet rs = s.executeQuery("SELECT m.messageID, m.isinvite, " +
+					"m.isread, m.time, m.username, m.message, m.activityID, a.title, a.description " +
+					"FROM message m, activity a " +
+					"WHERE m.activityID = a.activityID AND m.username ='"
+					+ username + "' AND isread = false");
 			
 			Message m;
 			while(rs.next()) {
+				boolean isInvite = rs.getBoolean("isinvite");
 				m = new Message();
 				m.setCreatedOn(new DateTime(rs.getTimestamp("time").getTime()));
-				m.setDescription(rs.getString("message"));
+				if(isInvite) {
+					m.setDescription(rs.getString("description"));
+				} else {
+					m.setDescription(rs.getString("message"));
+				}
 				m.setEmployee(getEmployee(username));
 				m.setMeeting(getMeeting(rs.getInt("activityID")));
 				m.setMessageID(rs.getInt("messageID"));
-				m.isInvitation(rs.getBoolean("isinvite"));
+				m.isInvitation(isInvite);
 				m.isRead(rs.getBoolean("isread"));
+				m.setTitle(rs.getString("title"));
 				messages.add(m);
 			}
 			s.close();

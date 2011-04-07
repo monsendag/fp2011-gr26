@@ -194,5 +194,31 @@ public class ClientConnection extends Connection implements Runnable {
 		NetworkObject back = receive();
 		meeting.setId((Integer) back.get("meetingId"));
 	}
+	public void cancelActivity(Activity activity) throws IOException {
+		NetworkObject n = new NetworkObject();
+		n.setCommand(NetworkCommand.cancelActivity);
+		n.put("activity", activity);
+		send(n);
+	}
+	public void cancelMeeting(Meeting meeting) throws IOException {
+		NetworkObject n = new NetworkObject();
+		n.setCommand(NetworkCommand.cancelMeeting);
+		n.put("meeting", meeting);
+		send(n);
+	}
+	public void changeActivity(Activity activity) throws IOException {
+		NetworkObject n = new NetworkObject();
+		n.setCommand(NetworkCommand.changeActivity);
+		n.put("activity", activity);
+		send(n);
+	}
+	public void changeMeeting(Meeting meeting) throws IOException {
+		NetworkObject n = new NetworkObject();
+		n.setCommand(NetworkCommand.changeMeeting);
+		n.put("meeting", meeting);
+		send(n);
+	}
+	
+
 }
 	

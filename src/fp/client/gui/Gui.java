@@ -77,7 +77,7 @@ public class Gui extends javax.swing.JFrame{
 	 */
 	@SuppressWarnings("unchecked")
 	// <editor-fold defaultstate="collapsed" desc="Generated Code">
-	
+
 	private void initComponents() {
 
         loginDialog = new javax.swing.JDialog();
@@ -86,10 +86,6 @@ public class Gui extends javax.swing.JFrame{
         loginButton = new javax.swing.JButton();
         loginPasswordField = new javax.swing.JPasswordField();
         hostIPField = new javax.swing.JFormattedTextField();
-        loadingDialog = new javax.swing.JDialog();
-        progressBar = new javax.swing.JProgressBar();
-        loadingLabel = new javax.swing.JLabel();
-        loadingCloseButton = new javax.swing.JButton();
         errorDialog = new javax.swing.JDialog();
         errorDialogButton = new javax.swing.JButton();
         errorDialogSP = new javax.swing.JScrollPane();
@@ -309,46 +305,8 @@ public class Gui extends javax.swing.JFrame{
         hostIPField.setNextFocusableComponent(loginButton);
         loginButton.setNextFocusableComponent(loginUsernameTextField);
 
-        loadingDialog.setTitle("V�r t�lmodig plz..");
-        loadingDialog.setModal(true);
-        loadingDialog.setResizable(false);
-
-        loadingLabel.setText("Henter data fra databasen");
-
-        loadingCloseButton.setText("Lukk");
-        loadingCloseButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                loadingCloseButtonActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout loadingDialogLayout = new javax.swing.GroupLayout(loadingDialog.getContentPane());
-        loadingDialog.getContentPane().setLayout(loadingDialogLayout);
-        loadingDialogLayout.setHorizontalGroup(
-            loadingDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(loadingDialogLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(loadingDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(progressBar, 0, 0, Short.MAX_VALUE)
-                    .addComponent(loadingLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(loadingCloseButton)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        loadingDialogLayout.setVerticalGroup(
-            loadingDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(loadingDialogLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(loadingDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(loadingCloseButton, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
-                    .addGroup(loadingDialogLayout.createSequentialGroup()
-                        .addComponent(loadingLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(progressBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
-        );
-
         errorDialog.setTitle("Sorry, det skjedde noe galt =(");
+        errorDialog.setAlwaysOnTop(true);
         errorDialog.setLocationByPlatform(true);
         errorDialog.setModal(true);
         errorDialog.setResizable(false);
@@ -1420,7 +1378,7 @@ public class Gui extends javax.swing.JFrame{
         weekViewTable.getColumnModel().getColumn(0).setMinWidth(33);
         weekViewTable.getColumnModel().getColumn(0).setMaxWidth(33);
 
-        weekViewButton.setFont(new java.awt.Font("Calibri", 0, 15)); // NOI18N
+        weekViewButton.setFont(new java.awt.Font("Calibri", 0, 15));
         weekViewButton.setText("Uke 00 - 0000");
         weekViewButton.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         weekViewButton.addActionListener(new java.awt.event.ActionListener() {
@@ -1489,7 +1447,6 @@ public class Gui extends javax.swing.JFrame{
     }// </editor-fold>
 
     private void messageViewButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                  
-        buildMessage((Message)messageList.getSelectedValue());
         messageOverviewDialog.pack();
         messageOverviewDialog.setLocationRelativeTo(this);
         messageOverviewDialog.setVisible(true);
@@ -1622,7 +1579,7 @@ public class Gui extends javax.swing.JFrame{
     }                                                      
 
     private void appointmentShowParticipantsButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                                  
-//        buildParticipantList();
+        buildParticipantList();
         participantOverviewDialog.pack();
         participantOverviewDialog.setVisible(true);
     }                                                                 
@@ -1703,26 +1660,22 @@ public class Gui extends javax.swing.JFrame{
         setPreviousWeek();
     }                                              
 
-    private void loadingCloseButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                   
-        loadingDialog.setVisible(false);
-    }                                                  
-
     private void iWontStandForThisButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                        
         errorDialog.setVisible(false);
     }                                                       
 
-    private void messageListValueChanged(javax.swing.event.ListSelectionEvent evt) {
+    private void messageListValueChanged(javax.swing.event.ListSelectionEvent evt) {                                         
         buildMessage((Message)messageList.getSelectedValue());
-    }
+    }                                        
 
-    private void invitationListValueChanged(javax.swing.event.ListSelectionEvent evt) {
+    private void invitationListValueChanged(javax.swing.event.ListSelectionEvent evt) {                                            
         buildInvitation((Message)messageList.getSelectedValue());
-    }
+    }                                           
 
-    private void weekViewButtonActionPerformed(java.awt.event.ActionEvent evt) {
+    private void weekViewButtonActionPerformed(java.awt.event.ActionEvent evt) {                                               
         Client.get().calendarModel.setCurrentWeek();
         weekViewButton.setText("Uke " + Client.get().calendarModel.getWeekNumber() + " - " + Client.get().calendarModel.getYear());
-    }
+    }                                              
 
     // Variables declaration - do not modify
     private javax.swing.JPanel appointmentButtonPanel;
@@ -1774,9 +1727,6 @@ public class Gui extends javax.swing.JFrame{
     private javax.swing.JPanel invitationPanelTab;
     private javax.swing.JScrollPane invitationPanelTextSP;
     private javax.swing.JLabel invitationPanelTimeRoomAvailability;
-    private javax.swing.JButton loadingCloseButton;
-    private javax.swing.JDialog loadingDialog;
-    private javax.swing.JLabel loadingLabel;
     private javax.swing.JButton logOutButton;
     private javax.swing.JButton loginButton;
     private javax.swing.JDialog loginDialog;
@@ -1830,7 +1780,6 @@ public class Gui extends javax.swing.JFrame{
     private javax.swing.JList participantOverviewList;
     private javax.swing.JScrollPane participantOverviewSP;
     private javax.swing.JLabel previousWeekLabel;
-    private javax.swing.JProgressBar progressBar;
     private javax.swing.JButton shownCalendars;
     private gui.FixedDateChooserPanel toDateChooserPanel;
     private javax.swing.JButton toDateDateChooserCancelButton;
@@ -1840,12 +1789,12 @@ public class Gui extends javax.swing.JFrame{
     private javax.swing.JScrollPane weekViewSP;
     private javax.swing.JTable weekViewTable;
     // End of variables declaration
-	
-	
+
+
 	//copy here
 
 	//ikke skriv kode over (^) dette her!!!!!!!!!11111!!!!!!!!!
-	
+
 	DefaultListModel messageListModel = new DefaultListModel();
 	DefaultListModel invitationListModel = new DefaultListModel();
 	DefaultListModel participantListModel = new DefaultListModel();
@@ -1854,13 +1803,15 @@ public class Gui extends javax.swing.JFrame{
 		invitationList.setCellRenderer(new MessageRenderer());
 		invitationList.setModel(invitationListModel);
 	}
+	
 	private void fixMesssageList(){
 		messageList.setCellRenderer(new MessageRenderer());
 		messageList.setModel(messageListModel);
 	}
+	
 	private void fixParticipantList(){;
-		participantOverviewList.setCellRenderer(new ParticipantRenderer());
-		participantOverviewList.setModel(participantListModel);
+	participantOverviewList.setCellRenderer(new ParticipantRenderer());
+	participantOverviewList.setModel(participantListModel);
 	}
 
 	private void buildMessageList(){
@@ -1885,15 +1836,16 @@ public class Gui extends javax.swing.JFrame{
 		}
 	}
 
-	private void buildParticipantList(Message message){
-		participantListModel.removeAllElements();
-		int i = 0;
-		for(Participant participant : message.getMeeting().getParticipants()){
-			participantListModel.add(i, participant);
-			i++;
-		}
+	private void buildParticipantList(){
+		//		//ta fra currentActivity ?
+		//		participantListModel.removeAllElements();
+		//		int i = 0;
+		//		for(Participant participant : message.getMeeting().getParticipants()){
+		//			participantListModel.add(i, participant);
+		//			i++;
+		//		}
 	}
-	
+
 	public void setMessageRead(Message message){
 		Client.get().setRead(message);
 	}
@@ -1927,65 +1879,25 @@ public class Gui extends javax.swing.JFrame{
 		Client.get().logoutAction();
 	}
 
-	private String dateToString(Date date){
-		String dateString = "";
-		String month = "";
-		String day ="";
-
-		switch(date.getDay()){
-		case 0: day = "SÃ¸ndag"; break;
-		case 1: day = "Mandag"; break;
-		case 2: day = "Tirsdag"; break;
-		case 3: day = "Onsdag"; break;
-		case 4: day = "Torsdag"; break;
-		case 5: day = "Fredag"; break;
-		case 6: day = "LÃ¸rdag"; break;
-		}
-
-		switch(date.getMonth()){
-		case  0: month = "Januar"; break;
-		case  1: month = "Februar"; break;
-		case  2: month = "Mars"; break;
-		case  3: month = "April"; break;
-		case  4: month = "Mai"; break;
-		case  5: month = "Juni"; break;
-		case  6: month = "Juli"; break;
-		case  7: month = "August"; break;
-		case  8: month = "September"; break;
-		case  9: month = "Oktober"; break;
-		case 10: month = "November"; break;
-		case 11: month = "Desember"; break;
-		}
-
-		dateString = day + " " + (date.getDate()) +". " + month + " - " + (date.getYear()+1900);
-
-		return dateString;
-	}
-	//lololololol
-	ImageIcon next, prev,nextMO, prevMO, appIcon;
-	{try{
-		next            = new ImageIcon(ImageIO.read(Gui.class.getResource("graphics/nextWeek.png")));
-		prev            = new ImageIcon(ImageIO.read(Gui.class.getResource("graphics/prevWeek.png")));
-		nextMO          = new ImageIcon(ImageIO.read(Gui.class.getResource("graphics/nextWeekMO.png")));
-		prevMO          = new ImageIcon(ImageIO.read(Gui.class.getResource("graphics/prevWeekMO.png")));
-		appIcon         = new ImageIcon(ImageIO.read(Gui.class.getResource("graphics/appIcon.png")));
-
-	}catch (Exception e){System.out.print(e);}
-
-	}
 
 	public void buildMessage(Message message){
-		if(!message.isRead()){setMessageRead(message); messageList.repaint();}
-		 messagePanel.setBorder(javax.swing.BorderFactory.createTitledBorder(message.getTitle() + " - " + dateToString(message.getMeeting().getStartTime().toDate())));
-		 messagePanelTimeRoomAvailability.setText(message.getMeeting().getStartTime().toString("HH:mm")+" - "+message.getMeeting().getEndTime().toString("HH:mm") + " - " + message.getMeeting().getRoom().getName());
-		 messageDescription.setText(message.getDescription());
+		if(!message.isRead()){
+			setMessageRead(message); 
+			messageList.repaint();
+			}
+		messagePanel.setBorder(javax.swing.BorderFactory.createTitledBorder(message.getTitle() + " - " + dateToString(message.getMeeting().getStartTime().toDate())));
+		messagePanelTimeRoomAvailability.setText(message.getMeeting().getStartTime().toString("HH:mm")+" - "+message.getMeeting().getEndTime().toString("HH:mm") + " - " + message.getMeeting().getRoom().getName());
+		messageDescription.setText(message.getDescription());
 	}
 
 	public void buildInvitation(Message invitation){
-		if(!invitation.isRead()){setMessageRead(invitation); invitationList.repaint();}
-		 invitationPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(invitation.getTitle() + " - " + dateToString(invitation.getMeeting().getStartTime().toDate())));
-		 invitationPanelTimeRoomAvailability.setText(invitation.getMeeting().getStartTime().toString("HH:mm")+" - "+invitation.getMeeting().getEndTime().toString("HH:mm") + " - " + invitation.getMeeting().getRoom().getName() + availabilityAndStatus(invitation));
-		 invitationDescription.setText(invitation.getDescription());
+		if(!invitation.isRead()){
+			setMessageRead(invitation); 
+			invitationList.repaint();
+		}
+		invitationPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(invitation.getTitle() + " - " + dateToString(invitation.getMeeting().getStartTime().toDate())));
+		invitationPanelTimeRoomAvailability.setText(invitation.getMeeting().getStartTime().toString("HH:mm")+" - "+invitation.getMeeting().getEndTime().toString("HH:mm") + " - " + invitation.getMeeting().getRoom().getName() + availabilityAndStatus(invitation));
+		invitationDescription.setText(invitation.getDescription());
 	}
 
 	public String availabilityAndStatus(Message message){
@@ -1995,37 +1907,37 @@ public class Gui extends javax.swing.JFrame{
 	}
 
 	private void createActivity()  {
-		
-//    	Activity newActivity = new Activity();
-//    	newActivity.setTitle(newAppointmentTitleLabel.getText()); // title
-//    	newActivity.setDescription(newAppointmentDescriptionTextArea.getText()); // description
-//
-//    	Date fromDate = toDateChooserPanel.getDate();
-//    	Date toDate = fromDateChooserPanel.getDate();
-//
-//
-//    	DateTime startTime = new DateTime(fromDate.getYear(), fromDate.getMonth(), fromDate.getDay(), fromDate.getHours(), fromDate.getMinutes(),00,00);
-//		DateTime endTime = new DateTime(toDate.getYear(), toDate.getMonth(), toDate.getDay(), toDate.getHours(), toDate.getMinutes(),00,00);
-//
-//		String description = newAppointmentDescriptionTextArea.getText();
-//    	String title = newAppointmentTitleLabel.getText();
-//
-//        ArrayList<Participant> participants = new ArrayList<Participant>();// = participantChooserTable.getSelectedRows();
-//        Room room = new Room();
-//
-//    	if(participantChooserTable.getSelectedRows().length > 0)
-//			try {
-//				ActivityStorage.createActivity(new Meeting(Client.get().getUser(), participants, room, startTime, endTime, description, room.getName()));
-//			} catch (IOException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-//		try {
-//			ActivityStorage.createActivity(new Activity(Client.get().getUser(), startTime, endTime, newAppointmentDescriptionTextArea.getText(), (String)newAppointmentRoomCB.getSelectedItem()));
-//		} catch (IOException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
+
+		//    	Activity newActivity = new Activity();
+		//    	newActivity.setTitle(newAppointmentTitleLabel.getText()); // title
+		//    	newActivity.setDescription(newAppointmentDescriptionTextArea.getText()); // description
+		//
+		//    	Date fromDate = toDateChooserPanel.getDate();
+		//    	Date toDate = fromDateChooserPanel.getDate();
+		//
+		//
+		//    	DateTime startTime = new DateTime(fromDate.getYear(), fromDate.getMonth(), fromDate.getDay(), fromDate.getHours(), fromDate.getMinutes(),00,00);
+		//		DateTime endTime = new DateTime(toDate.getYear(), toDate.getMonth(), toDate.getDay(), toDate.getHours(), toDate.getMinutes(),00,00);
+		//
+		//		String description = newAppointmentDescriptionTextArea.getText();
+		//    	String title = newAppointmentTitleLabel.getText();
+		//
+		//        ArrayList<Participant> participants = new ArrayList<Participant>();// = participantChooserTable.getSelectedRows();
+		//        Room room = new Room();
+		//
+		//    	if(participantChooserTable.getSelectedRows().length > 0)
+		//			try {
+		//				ActivityStorage.createActivity(new Meeting(Client.get().getUser(), participants, room, startTime, endTime, description, room.getName()));
+		//			} catch (IOException e) {
+		//				// TODO Auto-generated catch block
+		//				e.printStackTrace();
+		//			}
+		//		try {
+		//			ActivityStorage.createActivity(new Activity(Client.get().getUser(), startTime, endTime, newAppointmentDescriptionTextArea.getText(), (String)newAppointmentRoomCB.getSelectedItem()));
+		//		} catch (IOException e) {
+		//			// TODO Auto-generated catch block
+		//			e.printStackTrace();
+		//		}
 	}
 
 	private void changeCalendarView(){
@@ -2040,7 +1952,7 @@ public class Gui extends javax.swing.JFrame{
 		Client.get().calendarModel.setPreviousWeek();
 		weekViewButton.setText("Uke " + Client.get().calendarModel.getWeekNumber() + " - " + Client.get().calendarModel.getYear());
 	}
-	
+
 	public void editActivity(Activity act){
 		if(act instanceof Meeting){appointmentRoomCB.setSelectedItem(((Meeting) act).getRoom());}else{}
 		appointmentTitleLabel.setText(act.getTitle());
@@ -2068,5 +1980,52 @@ public class Gui extends javax.swing.JFrame{
 		newAppointmentDialog.pack();
 		newAppointmentDialog.setLocationRelativeTo(this);
 		newAppointmentDialog.setVisible(true);
+	}
+	
+	private String dateToString(Date date){
+		String dateString = "";
+		String month = "";
+		String day ="";
+		
+		switch(date.getDay()){
+		case 0: day = "SÃ¸ndag"; break;
+		case 1: day = "Mandag"; break;
+		case 2: day = "Tirsdag"; break;
+		case 3: day = "Onsdag"; break;
+		case 4: day = "Torsdag"; break;
+		case 5: day = "Fredag"; break;
+		case 6: day = "LÃ¸rdag"; break;
+		}
+		
+		switch(date.getMonth()){
+		case  0: month = "Januar"; break;
+		case  1: month = "Februar"; break;
+		case  2: month = "Mars"; break;
+		case  3: month = "April"; break;
+		case  4: month = "Mai"; break;
+		case  5: month = "Juni"; break;
+		case  6: month = "Juli"; break;
+		case  7: month = "August"; break;
+		case  8: month = "September"; break;
+		case  9: month = "Oktober"; break;
+		case 10: month = "November"; break;
+		case 11: month = "Desember"; break;
+		}
+		
+		dateString = day + " " + (date.getDate()) +". " + month + " - " + (date.getYear()+1900);
+		
+		return dateString;
+	}
+	//lololololol
+	ImageIcon next, prev,nextMO, prevMO, appIcon;
+	{try{
+		next            = new ImageIcon(ImageIO.read(Gui.class.getResource("graphics/nextWeek.png")));
+		prev            = new ImageIcon(ImageIO.read(Gui.class.getResource("graphics/prevWeek.png")));
+		nextMO          = new ImageIcon(ImageIO.read(Gui.class.getResource("graphics/nextWeekMO.png")));
+		prevMO          = new ImageIcon(ImageIO.read(Gui.class.getResource("graphics/prevWeekMO.png")));
+		appIcon         = new ImageIcon(ImageIO.read(Gui.class.getResource("graphics/appIcon.png")));
+		
+	}catch (Exception e){System.out.print(e);}
+	
 	}
 }

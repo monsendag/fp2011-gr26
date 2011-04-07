@@ -230,14 +230,15 @@ public class DBStore {
 		 */
 		try {
 			ps = conn.prepareStatement("INSERT INTO message " +
-			"(isread,time,message,username,activityID) VALUES (?,?,?,?,?)");
+			"(isinvite,isread,time,message,username,activityID) VALUES (?,?,?,?,?,?)");
 			for (Participant p : m.getParticipants()) {
-				ps.setBoolean(1,false); // isRead = false
-				ps.setTimestamp(2,new Timestamp(new Date().getTime()));
-				ps.setString(3,"Du har blitt invitert til møte den "+
+				ps.setBoolean(1,true); // isInvite = true
+				ps.setBoolean(2,false); // isRead = false
+				ps.setTimestamp(3,new Timestamp(new Date().getTime()));
+				ps.setString(4,"Du har blitt invitert til møte den "+
 						m.getStartTime()+" av "+m.getOwner().getName()+".");
-				ps.setString(4, p.getEmployee().getUsername());
-				ps.setInt(5, m.getId());
+				ps.setString(5, p.getEmployee().getUsername());
+				ps.setInt(6, m.getId());
 				ps.addBatch();
 			}
 			ps.executeBatch();
@@ -285,14 +286,15 @@ public class DBStore {
 			
 			// Create message
 			ps = conn.prepareStatement("INSERT INTO message " +
-			"(isread,time,message,username,activity) VALUES (?,?,?,?,?)");
+			"(isinvite,isread,time,message,username,activity) VALUES (?,?,?,?,?,?)");
 			
-			ps.setBoolean(1,false); // isRead = false
-			ps.setTimestamp(2,new Timestamp(new Date().getTime()));
-			ps.setString(3,"Du er invitert til møtet den " +m.getStartTime()+
+			ps.setBoolean(1,true); // isInvite = true
+			ps.setBoolean(2,false); // isRead = false
+			ps.setTimestamp(3,new Timestamp(new Date().getTime()));
+			ps.setString(4,"Du er invitert til møtet den " +m.getStartTime()+
 						" satt opp av "+m.getOwner().getName()+".");
-			ps.setString(4, username);
-			ps.setInt(5, meetingID);
+			ps.setString(5, username);
+			ps.setInt(6, meetingID);
 			ps.executeUpdate();
 			ps.close();
 			
@@ -339,16 +341,17 @@ public class DBStore {
 			// Create messages
 			if(Participant.intToEnum(status) == Participant.Status.NOT_ATTENDING) {
 				ps = conn.prepareStatement("INSERT INTO message " +
-				"(isread,time,message,username,activityID) VALUES (?,?,?,?,?)");
+				"(isinvite,isread,time,message,username,activityID) VALUES (?,?,?,?,?,?)");
 				Employee decliner = dbr.getEmployee(username);
 				for (Participant p : m.getParticipants()) {
-					ps.setBoolean(1,false); // isRead = false
-					ps.setTimestamp(2,new Timestamp(new Date().getTime()));
-					ps.setString(3,decliner.getName()+" har avslått " +
+					ps.setBoolean(1,false); // isInvite = false
+					ps.setBoolean(2,false); // isRead = false
+					ps.setTimestamp(3,new Timestamp(new Date().getTime()));
+					ps.setString(4,decliner.getName()+" har avslått " +
 							"invitasjon til møtet den "+m.getStartTime()+".");
-					ps.setString(4, p.getEmployee().getUsername());
+					ps.setString(5, p.getEmployee().getUsername());
 					System.out.println(p.getEmployee().getUsername());
-					ps.setInt(5, activityID);
+					ps.setInt(6, activityID);
 					ps.addBatch();
 				}
 				ps.executeBatch();
@@ -383,15 +386,16 @@ public class DBStore {
 			
 			// Create messages
 			ps = conn.prepareStatement("INSERT INTO message " +
-			"(isread,time,message,username,activityID) VALUES (?,?,?,?,?)");
+			"(isinvite,isread,time,message,username,activityID) VALUES (?,?,?,?,?,?)");
 			Meeting m = dbr.getMeeting(meetingID);
 			for (Participant p : m.getParticipants()) {
 				String username = p.getEmployee().getUsername();
-				ps.setBoolean(1,false); // isRead = false
-				ps.setTimestamp(2,new Timestamp(new Date().getTime()));
-				ps.setString(3,"Møte den "+m.getStartTime()+" er avlyst av "+m.getOwner().getName()+".");
-				ps.setString(4, username);
-				ps.setInt(5, meetingID);
+				ps.setBoolean(1,false); // isInvite = false
+				ps.setBoolean(2,false); // isRead = false
+				ps.setTimestamp(3,new Timestamp(new Date().getTime()));
+				ps.setString(4,"Møte den "+m.getStartTime()+" er avlyst av "+m.getOwner().getName()+".");
+				ps.setString(5, username);
+				ps.setInt(6, meetingID);
 				ps.addBatch();
 			}
 			ps.executeBatch();
@@ -428,14 +432,15 @@ public class DBStore {
 			
 			// Create messages
 			ps = conn.prepareStatement("INSERT INTO message " +
-			"(isread,time,message,username,activityID) VALUES (?,?,?,?,?)");
+			"(isinvite,isread,time,message,username,activityID) VALUES (?,?,?,?,?,?)");
 			for (Participant p : m.getParticipants()) {
 				String username = p.getEmployee().getUsername();
-				ps.setBoolean(1,false); // isRead = false
-				ps.setTimestamp(2,new Timestamp(new Date().getTime()));
-				ps.setString(3,"Møte den "+m.getStartTime()+" er endret av "+m.getOwner().getName()+".");
-				ps.setString(4, username);
-				ps.setInt(5, m.getId());
+				ps.setBoolean(1,true); // isInvite = true
+				ps.setBoolean(2,false); // isRead = false
+				ps.setTimestamp(3,new Timestamp(new Date().getTime()));
+				ps.setString(4,"Møte den "+m.getStartTime()+" er endret av "+m.getOwner().getName()+".");
+				ps.setString(5, username);
+				ps.setInt(6, m.getId());
 				ps.addBatch();
 			}
 			ps.executeBatch();

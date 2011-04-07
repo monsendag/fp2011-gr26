@@ -14,6 +14,7 @@ import fp.common.models.Employee;
 import fp.common.models.Meeting;
 import fp.common.models.Message;
 import fp.common.models.Room;
+import fp.common.models.Participant.Status;
 import fp.common.network.ClientConnection;
 
 
@@ -129,6 +130,14 @@ public class Client {
 		
 		deliverMessages(messages);
 		*/
+	}
+
+	public void setAttending(Message invitation, Status attending) {
+		// shit.
+	}
+
+	public void setNotAttending(Message invitation, Status notAttending) {
+		// shit 2
 	}
 	
 	/* TODO: hmm...

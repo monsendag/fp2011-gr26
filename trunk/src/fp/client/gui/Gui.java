@@ -23,6 +23,7 @@ import javax.imageio.ImageIO;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.ListModel;
 import javax.swing.UIManager;
 
 import org.joda.time.DateTime;
@@ -76,1752 +77,1759 @@ public class Gui extends javax.swing.JFrame{
 	 */
 	@SuppressWarnings("unchecked")
 	// <editor-fold defaultstate="collapsed" desc="Generated Code">
+	
 	private void initComponents() {
 
-		loginDialog = new javax.swing.JDialog();
-		loginPanel = new javax.swing.JPanel();
-		loginUsernameTextField = new javax.swing.JTextField();
-		loginButton = new javax.swing.JButton();
-		loginPasswordField = new javax.swing.JPasswordField();
-		hostIPField = new javax.swing.JFormattedTextField();
-		errorDialog = new javax.swing.JDialog();
-		errorDialogButton = new javax.swing.JButton();
-		errorDialogSP = new javax.swing.JScrollPane();
-		errorDialogTextArea = new javax.swing.JTextArea();
-		iWontStandForThisButton = new javax.swing.JButton();
-		calendarChooserDialog = new javax.swing.JDialog();
-		calendarChooserSC = new javax.swing.JScrollPane();
-		calendarChooserTable = new javax.swing.JTable();
-		calendarChooserOkButton = new javax.swing.JButton();
-		calendarChooserCancelButton = new javax.swing.JButton();
-		calendarChooserSearchPanel = new javax.swing.JPanel();
-		calendarChooserSearchField = new javax.swing.JTextField();
-		calendarChooserSearchIcon = new javax.swing.JLabel();
-		messageOverviewDialog = new javax.swing.JDialog();
-		messageOverviewTabbedPane = new javax.swing.JTabbedPane();
-		messagePanelTab = new javax.swing.JPanel();
-		messagePanelListSP = new javax.swing.JScrollPane();
-		messageList = new javax.swing.JList();
-		messagePanel = new javax.swing.JPanel();
-		messagePanelCloseButton = new javax.swing.JButton();
-		messagePanelTimeRoomAvailability = new javax.swing.JLabel();
-		messagePanelTextSP = new javax.swing.JScrollPane();
-		messageDescription = new javax.swing.JTextArea();
-		invitationPanelTab = new javax.swing.JPanel();
-		invitationPanelListSP = new javax.swing.JScrollPane();
-		invitationList = new javax.swing.JList();
-		invitationPanel = new javax.swing.JPanel();
-		invitationPanelAttendingButton = new javax.swing.JButton();
-		invitationPanelNotAttendinButton = new javax.swing.JButton();
-		invitationPanelCloseButton = new javax.swing.JButton();
-		invitationPanelTimeRoomAvailability = new javax.swing.JLabel();
-		invitationPanelTextSP = new javax.swing.JScrollPane();
-		invitationDescription = new javax.swing.JTextArea();
-		participantOverviewDialog = new javax.swing.JDialog();
-		participantOverviewSP = new javax.swing.JScrollPane();
-		participantOverviewList = new javax.swing.JList();
-		participantOverviewChangeButton = new javax.swing.JButton();
-		participantOverviewCloseButton = new javax.swing.JButton();
-		appointmentDialog = new javax.swing.JDialog();
-		appointmentEditPanel = new javax.swing.JPanel();
-		appointmentFromDateButton = new javax.swing.JButton();
-		appointmentStartTimeCB = new javax.swing.JComboBox();
-		appointmentToDateButton = new javax.swing.JButton();
-		appointmentEndTimeCB = new javax.swing.JComboBox();
-		appointmentRoomCB = new javax.swing.JComboBox();
-		appointmentTitleTextField = new javax.swing.JTextField();
-		appointmentTextSP = new javax.swing.JScrollPane();
-		appointmentDescriptionTextArea = new javax.swing.JTextArea();
-		appointmentLabelPanel = new javax.swing.JPanel();
-		appointmentDescriptionLabel = new javax.swing.JLabel();
-		appointmentTitleLabel = new javax.swing.JLabel();
-		appointmentRoomLabel = new javax.swing.JLabel();
-		appointmentEndLabel = new javax.swing.JLabel();
-		appointmentStartLabel = new javax.swing.JLabel();
-		appointmentButtonPanel = new javax.swing.JPanel();
-		appointmentSayYoureNotCommingButton = new javax.swing.JButton();
-		appointmentCloseButton = new javax.swing.JButton();
-		appointmentShowParticipantsButton = new javax.swing.JButton();
-		newAppointmentDialog = new javax.swing.JDialog();
-		newAppointmentEditPanel = new javax.swing.JPanel();
-		newAppointmentFromDateButton = new javax.swing.JButton();
-		newAppointmentStartTimeCB = new javax.swing.JComboBox();
-		newAppointmentToDateButton = new javax.swing.JButton();
-		newAppointmentEndTimeCB = new javax.swing.JComboBox();
-		newAppointmentRoomCB = new javax.swing.JComboBox();
-		newAppointmentTitleTextField = new javax.swing.JTextField();
-		newAppointmentTextSP = new javax.swing.JScrollPane();
-		newAppointmentDescriptionTextArea = new javax.swing.JTextArea();
-		newAppointmentLabelPanel = new javax.swing.JPanel();
-		newAppointmentDescriptionLabel = new javax.swing.JLabel();
-		newAppointmentTitleLabel = new javax.swing.JLabel();
-		newAppointmentRoomLabel = new javax.swing.JLabel();
-		newAppointmentEndLabel = new javax.swing.JLabel();
-		newAppointmentStartLabel = new javax.swing.JLabel();
-		newAppointmentButtonpanel = new javax.swing.JPanel();
-		newAppointmentCreateButton = new javax.swing.JButton();
-		newAppointmentCancelButton = new javax.swing.JButton();
-		newAppointmentChooseParticipantsButton = new javax.swing.JButton();
-		participantChooserDialog = new javax.swing.JDialog();
-		participantChooserSP = new javax.swing.JScrollPane();
-		participantChooserTable = new javax.swing.JTable();
-		participantChooserOkButton = new javax.swing.JButton();
-		participantChooserCancelButton = new javax.swing.JButton();
-		participantChooserSearchPanel = new javax.swing.JPanel();
-		participantChooserSearchIcon = new javax.swing.JLabel();
-		participantChooserSearchField = new javax.swing.JTextField();
-		fromDateDateChooserDialog = new javax.swing.JDialog();
-		fromDateDateChooserOkButton = new javax.swing.JButton();
-		fromDateDateChooserCancelButton = new javax.swing.JButton();
-		fromDateChooserPanel = new gui.FixedDateChooserPanel();
-		toDateDateChooserDialog = new javax.swing.JDialog();
-		toDateDateChooserOkButton = new javax.swing.JButton();
-		toDateDateChooserCancelButton = new javax.swing.JButton();
-		toDateChooserPanel = new gui.FixedDateChooserPanel();
-		loadingDialog = new javax.swing.JDialog();
-		progressBar = new javax.swing.JProgressBar();
-		loadingLabel = new javax.swing.JLabel();
-		loadingCloseButton = new javax.swing.JButton();
-		messageViewButton = new javax.swing.JButton();
-		newAppointmentButton = new javax.swing.JButton();
-		logOutButton = new javax.swing.JButton();
-		calendarShowingLabel = new javax.swing.JLabel();
-		shownCalendars = new javax.swing.JButton();
-		nextWeekLabel = new javax.swing.JLabel();
-		previousWeekLabel = new javax.swing.JLabel();
-		weekViewSP = new javax.swing.JScrollPane();
-		weekViewTable = new javax.swing.JTable();
-		weekViewButton = new javax.swing.JButton();
-
-		loginDialog.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-		loginDialog.setTitle("Logg inn");
-		loginDialog.setLocationByPlatform(true);
-		loginDialog.setModal(true);
-		loginDialog.setResizable(false);
-		loginDialog.addWindowListener(new WindowListener() {
-			public void windowClosed(WindowEvent arg0) {
-				System.exit(0);
-			}
-			public void windowActivated(WindowEvent arg0) {}
-			public void windowClosing(WindowEvent arg0) {}
-			public void windowDeactivated(WindowEvent arg0) {}
-			public void windowDeiconified(WindowEvent arg0) {}
-			public void windowIconified(WindowEvent arg0) {}
-			public void windowOpened(WindowEvent arg0) {}
-		});
-
-		loginUsernameTextField.setText("brukernavn");
-		loginUsernameTextField.addFocusListener(new java.awt.event.FocusAdapter() {
-			public void focusGained(java.awt.event.FocusEvent evt) {
-				loginUsernameTextFieldFocusGained(evt);
-			}
-			public void focusLost(java.awt.event.FocusEvent evt) {
-				loginUsernameTextFieldFocusLost(evt);
-			}
-		});
-
-		loginButton.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-		loginButton.setText("Logg inn");
-		loginButton.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				loginButtonActionPerformed(evt);
-			}
-		});
-
-		loginPasswordField.setText("passord");
-		loginPasswordField.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				loginPasswordFieldActionPerformed(evt);
-			}
-		});
-		loginPasswordField.addFocusListener(new java.awt.event.FocusAdapter() {
-			public void focusGained(java.awt.event.FocusEvent evt) {
-				loginPasswordFieldFocusGained(evt);
-			}
-			public void focusLost(java.awt.event.FocusEvent evt) {
-				loginPasswordFieldFocusLost(evt);
-			}
-		});
-
-		hostIPField.setText("host ip");
-		try { hostIPField.setText(InetAddress.getLocalHost().getHostAddress());	} catch (UnknownHostException e) {}
-		hostIPField.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				hostIPFieldActionPerformed(evt);
-			}
-		});
-		hostIPField.addFocusListener(new java.awt.event.FocusAdapter() {
-			public void focusGained(java.awt.event.FocusEvent evt) {
-				hostIPFieldFocusGained(evt);
-			}
-			public void focusLost(java.awt.event.FocusEvent evt) {
-				hostIPFieldFocusLost(evt);
-			}
-		});
-
-		javax.swing.GroupLayout loginPanelLayout = new javax.swing.GroupLayout(loginPanel);
-		loginPanel.setLayout(loginPanelLayout);
-		loginPanelLayout.setHorizontalGroup(
-				loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addGroup(loginPanelLayout.createSequentialGroup()
-						.addContainerGap()
-						.addGroup(loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-								.addComponent(loginPasswordField)
-								.addComponent(loginUsernameTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE))
-								.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-								.addGroup(loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-										.addComponent(loginButton, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
-										.addComponent(hostIPField, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE))
-										.addContainerGap())
-		);
-		loginPanelLayout.setVerticalGroup(
-				loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addGroup(loginPanelLayout.createSequentialGroup()
-						.addContainerGap()
-						.addGroup(loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-								.addComponent(loginUsernameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-								.addComponent(hostIPField, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-								.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-								.addGroup(loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-										.addComponent(loginButton, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
-										.addComponent(loginPasswordField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-										.addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-		);
-
-		loginPasswordField.setEchoChar('\u0000');
-
-		javax.swing.GroupLayout loginDialogLayout = new javax.swing.GroupLayout(loginDialog.getContentPane());
-		loginDialog.getContentPane().setLayout(loginDialogLayout);
-		loginDialogLayout.setHorizontalGroup(
-				loginDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addComponent(loginPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-		);
-		loginDialogLayout.setVerticalGroup(
-				loginDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addComponent(loginPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-		);
-
-		loginButton.requestDefaultFocus();
-		loginUsernameTextField.setNextFocusableComponent(loginPasswordField);
-		loginPasswordField.setNextFocusableComponent(hostIPField);
-		hostIPField.setNextFocusableComponent(loginButton);
-		loginButton.setNextFocusableComponent(loginUsernameTextField);
-
-		errorDialog.setTitle("Sorry, det skjedde noe galt =(");
-		errorDialog.setLocationByPlatform(true);
-		errorDialog.setModal(true);
-		errorDialog.setResizable(false);
-
-		errorDialogButton.setText("Javel...");
-		errorDialogButton.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				errorDialogButtonActionPerformed(evt);
-			}
-		});
-
-		errorDialogTextArea.setColumns(20);
-		errorDialogTextArea.setEditable(false);
-		errorDialogTextArea.setLineWrap(true);
-		errorDialogTextArea.setRows(5);
-		errorDialogTextArea.setWrapStyleWord(true);
-		errorDialogSP.setViewportView(errorDialogTextArea);
-
-		iWontStandForThisButton.setText("Dette finner jeg meg ikke i..!");
-		iWontStandForThisButton.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				iWontStandForThisButtonActionPerformed(evt);
-			}
-		});
-
-		javax.swing.GroupLayout errorDialogLayout = new javax.swing.GroupLayout(errorDialog.getContentPane());
-		errorDialog.getContentPane().setLayout(errorDialogLayout);
-		errorDialogLayout.setHorizontalGroup(
-				errorDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addGroup(errorDialogLayout.createSequentialGroup()
-						.addContainerGap()
-						.addGroup(errorDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-								.addComponent(errorDialogSP, javax.swing.GroupLayout.Alignment.LEADING)
-								.addGroup(javax.swing.GroupLayout.Alignment.LEADING, errorDialogLayout.createSequentialGroup()
-										.addComponent(errorDialogButton)
-										.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-										.addComponent(iWontStandForThisButton)))
-										.addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-		);
-		errorDialogLayout.setVerticalGroup(
-				errorDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addGroup(errorDialogLayout.createSequentialGroup()
-						.addContainerGap()
-						.addComponent(errorDialogSP, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-						.addGroup(errorDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-								.addComponent(errorDialogButton)
-								.addComponent(iWontStandForThisButton))
-								.addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-		);
-
-		calendarChooserDialog.setTitle("Velg Kalendere");
-		calendarChooserDialog.setModal(true);
-		calendarChooserDialog.setResizable(false);
-
-		calendarChooserTable.setModel(new javax.swing.table.DefaultTableModel(
-				new Object [][] {
-						{null, null},
-						{null, null},
-						{null, null},
-						{null, null}
-				},
-				new String [] {
-						"Ansatt", ""
-				}
-		) {
-			Class[] types = new Class [] {
-					java.lang.Object.class, java.lang.Boolean.class
-			};
-			boolean[] canEdit = new boolean [] {
-					false, true
-			};
-
-			public Class getColumnClass(int columnIndex) {
-				return types [columnIndex];
-			}
-
-			public boolean isCellEditable(int rowIndex, int columnIndex) {
-				return canEdit [columnIndex];
-			}
-		});
-		calendarChooserTable.setSelectionBackground(new java.awt.Color(231, 233, 255));
-		calendarChooserSC.setViewportView(calendarChooserTable);
-		calendarChooserTable.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
-		calendarChooserTable.getColumnModel().getColumn(0).setResizable(false);
-		calendarChooserTable.getColumnModel().getColumn(0).setPreferredWidth(200);
-		calendarChooserTable.getColumnModel().getColumn(1).setResizable(false);
-		calendarChooserTable.getColumnModel().getColumn(1).setPreferredWidth(16);
-
-		calendarChooserOkButton.setText("Ok");
-		calendarChooserOkButton.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				calendarChooserOkButtonActionPerformed(evt);
-			}
-		});
-
-		calendarChooserCancelButton.setText("Avbryt");
-		calendarChooserCancelButton.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				calendarChooserCancelButtonActionPerformed(evt);
-			}
-		});
-
-		calendarChooserSearchPanel.setBackground(new java.awt.Color(255, 255, 255));
-		calendarChooserSearchPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
-
-		calendarChooserSearchField.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-		calendarChooserSearchField.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-
-		calendarChooserSearchIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fp/client/gui/graphics/Search-icon 30x30 v4.png"))); // NOI18N
-
-		javax.swing.GroupLayout calendarChooserSearchPanelLayout = new javax.swing.GroupLayout(calendarChooserSearchPanel);
-		calendarChooserSearchPanel.setLayout(calendarChooserSearchPanelLayout);
-		calendarChooserSearchPanelLayout.setHorizontalGroup(
-				calendarChooserSearchPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addGroup(calendarChooserSearchPanelLayout.createSequentialGroup()
-						.addContainerGap()
-						.addComponent(calendarChooserSearchField, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-						.addComponent(calendarChooserSearchIcon))
-		);
-		calendarChooserSearchPanelLayout.setVerticalGroup(
-				calendarChooserSearchPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addComponent(calendarChooserSearchIcon)
-				.addComponent(calendarChooserSearchField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-		);
-
-		javax.swing.GroupLayout calendarChooserDialogLayout = new javax.swing.GroupLayout(calendarChooserDialog.getContentPane());
-		calendarChooserDialog.getContentPane().setLayout(calendarChooserDialogLayout);
-		calendarChooserDialogLayout.setHorizontalGroup(
-				calendarChooserDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addGroup(javax.swing.GroupLayout.Alignment.TRAILING, calendarChooserDialogLayout.createSequentialGroup()
-						.addContainerGap()
-						.addGroup(calendarChooserDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-								.addComponent(calendarChooserSC, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 192, Short.MAX_VALUE)
-								.addComponent(calendarChooserSearchPanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-								.addGroup(javax.swing.GroupLayout.Alignment.LEADING, calendarChooserDialogLayout.createSequentialGroup()
-										.addComponent(calendarChooserOkButton, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-										.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-										.addComponent(calendarChooserCancelButton, javax.swing.GroupLayout.DEFAULT_SIZE, 93, Short.MAX_VALUE)))
-										.addContainerGap())
-		);
-
-		calendarChooserDialogLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {calendarChooserCancelButton, calendarChooserOkButton});
-
-		calendarChooserDialogLayout.setVerticalGroup(
-				calendarChooserDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addGroup(calendarChooserDialogLayout.createSequentialGroup()
-						.addContainerGap()
-						.addComponent(calendarChooserSearchPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-						.addComponent(calendarChooserSC, javax.swing.GroupLayout.DEFAULT_SIZE, 203, Short.MAX_VALUE)
-						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-						.addGroup(calendarChooserDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-								.addComponent(calendarChooserOkButton)
-								.addComponent(calendarChooserCancelButton))
-								.addContainerGap())
-		);
-
-		messageOverviewDialog.setTitle("Meldinger");
-		messageOverviewDialog.setLocationByPlatform(true);
-		messageOverviewDialog.setModal(true);
-		messageOverviewDialog.setResizable(false);
-
-		messageList.setModel(new javax.swing.AbstractListModel() {
-			String[] strings = { "09.04.2011 - Møte avlyst", "01.04.2011 - Sol i Trondheim" };
-			public int getSize() { return strings.length; }
-			public Object getElementAt(int i) { return strings[i]; }
-		});
-		messagePanelListSP.setViewportView(messageList);
-
-		messagePanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Styremøte - 10. April 2011"));
-
-		messagePanelCloseButton.setText("Lukk");
-		messagePanelCloseButton.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				messagePanelCloseButtonActionPerformed(evt);
-			}
-		});
-
-		messagePanelTimeRoomAvailability.setText("10:00 - 12:15 - Kattelabben");
-
-		messageDescription.setColumns(20);
-		messageDescription.setEditable(false);
-		messageDescription.setLineWrap(true);
-		messageDescription.setRows(5);
-		messageDescription.setText("Møtet er avlyst grunnet potekreft i kattelabben. ");
-		messageDescription.setWrapStyleWord(true);
-		messagePanelTextSP.setViewportView(messageDescription);
-
-		javax.swing.GroupLayout messagePanelLayout = new javax.swing.GroupLayout(messagePanel);
-		messagePanel.setLayout(messagePanelLayout);
-		messagePanelLayout.setHorizontalGroup(
-				messagePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addGroup(messagePanelLayout.createSequentialGroup()
-						.addGroup(messagePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-								.addGroup(messagePanelLayout.createSequentialGroup()
-										.addGap(252, 252, 252)
-										.addComponent(messagePanelCloseButton, javax.swing.GroupLayout.DEFAULT_SIZE, 111, Short.MAX_VALUE))
-										.addGroup(messagePanelLayout.createSequentialGroup()
-												.addContainerGap()
-												.addGroup(messagePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-														.addComponent(messagePanelTextSP, javax.swing.GroupLayout.DEFAULT_SIZE, 353, Short.MAX_VALUE)
-														.addComponent(messagePanelTimeRoomAvailability))))
-														.addContainerGap())
-		);
-		messagePanelLayout.setVerticalGroup(
-				messagePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addGroup(javax.swing.GroupLayout.Alignment.TRAILING, messagePanelLayout.createSequentialGroup()
-						.addContainerGap()
-						.addComponent(messagePanelTimeRoomAvailability)
-						.addGap(18, 18, 18)
-						.addComponent(messagePanelTextSP)
-						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-						.addComponent(messagePanelCloseButton))
-		);
-
-		javax.swing.GroupLayout messagePanelTabLayout = new javax.swing.GroupLayout(messagePanelTab);
-		messagePanelTab.setLayout(messagePanelTabLayout);
-		messagePanelTabLayout.setHorizontalGroup(
-				messagePanelTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addGroup(javax.swing.GroupLayout.Alignment.TRAILING, messagePanelTabLayout.createSequentialGroup()
-						.addContainerGap()
-						.addComponent(messagePanelListSP, javax.swing.GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)
-						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-						.addComponent(messagePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-						.addContainerGap())
-		);
-		messagePanelTabLayout.setVerticalGroup(
-				messagePanelTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addGroup(javax.swing.GroupLayout.Alignment.TRAILING, messagePanelTabLayout.createSequentialGroup()
-						.addContainerGap()
-						.addGroup(messagePanelTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-								.addComponent(messagePanelListSP, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-								.addComponent(messagePanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-								.addContainerGap())
-		);
-
-		messageOverviewTabbedPane.addTab("Meldinger", messagePanelTab);
-
-		invitationList.setModel(new javax.swing.AbstractListModel() {
-			String[] strings = { "03.03.2011 - Styremøte 10. April" };
-			public int getSize() { return strings.length; }
-			public Object getElementAt(int i) { return strings[i]; }
-		});
-		invitationPanelListSP.setViewportView(invitationList);
-
-		invitationPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Styremøte - 10. April 2011"));
-
-		invitationPanelAttendingButton.setText("Jeg kommer");
-
-		invitationPanelNotAttendinButton.setText("Jeg kommer ikke");
-		invitationPanelNotAttendinButton.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				invitationPanelNotAttendinButtonActionPerformed(evt);
-			}
-		});
-
-		invitationPanelCloseButton.setText("Lukk");
-		invitationPanelCloseButton.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				invitationPanelCloseButtonActionPerformed(evt);
-			}
-		});
-
-		invitationPanelTimeRoomAvailability.setText("10:15 - 12:00 - Kattelabben - Du kommer");
-
-		invitationDescription.setColumns(20);
-		invitationDescription.setEditable(false);
-		invitationDescription.setLineWrap(true);
-		invitationDescription.setRows(5);
-		invitationDescription.setText("Det blir et styremøte tiende april, husk å ta med druer og paraply.");
-		invitationDescription.setWrapStyleWord(true);
-		invitationPanelTextSP.setViewportView(invitationDescription);
-
-		javax.swing.GroupLayout invitationPanelLayout = new javax.swing.GroupLayout(invitationPanel);
-		invitationPanel.setLayout(invitationPanelLayout);
-		invitationPanelLayout.setHorizontalGroup(
-				invitationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addGroup(invitationPanelLayout.createSequentialGroup()
-						.addContainerGap()
-						.addGroup(invitationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-								.addComponent(invitationPanelTimeRoomAvailability)
-								.addGroup(invitationPanelLayout.createSequentialGroup()
-										.addComponent(invitationPanelNotAttendinButton)
-										.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-										.addComponent(invitationPanelAttendingButton)
-										.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-										.addComponent(invitationPanelCloseButton))
-										.addComponent(invitationPanelTextSP))
-										.addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-		);
-
-		invitationPanelLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {invitationPanelAttendingButton, invitationPanelCloseButton, invitationPanelNotAttendinButton});
-
-		invitationPanelLayout.setVerticalGroup(
-				invitationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addGroup(javax.swing.GroupLayout.Alignment.TRAILING, invitationPanelLayout.createSequentialGroup()
-						.addContainerGap()
-						.addComponent(invitationPanelTimeRoomAvailability)
-						.addGap(18, 18, 18)
-						.addComponent(invitationPanelTextSP)
-						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-						.addGroup(invitationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-								.addComponent(invitationPanelNotAttendinButton)
-								.addComponent(invitationPanelAttendingButton)
-								.addComponent(invitationPanelCloseButton)))
-		);
-
-		javax.swing.GroupLayout invitationPanelTabLayout = new javax.swing.GroupLayout(invitationPanelTab);
-		invitationPanelTab.setLayout(invitationPanelTabLayout);
-		invitationPanelTabLayout.setHorizontalGroup(
-				invitationPanelTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addGroup(javax.swing.GroupLayout.Alignment.TRAILING, invitationPanelTabLayout.createSequentialGroup()
-						.addContainerGap()
-						.addComponent(invitationPanelListSP, javax.swing.GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)
-						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-						.addComponent(invitationPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-						.addContainerGap())
-		);
-		invitationPanelTabLayout.setVerticalGroup(
-				invitationPanelTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addGroup(javax.swing.GroupLayout.Alignment.TRAILING, invitationPanelTabLayout.createSequentialGroup()
-						.addContainerGap()
-						.addGroup(invitationPanelTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-								.addComponent(invitationPanelListSP, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-								.addComponent(invitationPanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-								.addContainerGap())
-		);
-
-		messageOverviewTabbedPane.addTab("Innkallinger", invitationPanelTab);
-
-		javax.swing.GroupLayout messageOverviewDialogLayout = new javax.swing.GroupLayout(messageOverviewDialog.getContentPane());
-		messageOverviewDialog.getContentPane().setLayout(messageOverviewDialogLayout);
-		messageOverviewDialogLayout.setHorizontalGroup(
-				messageOverviewDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addGroup(messageOverviewDialogLayout.createSequentialGroup()
-						.addComponent(messageOverviewTabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 590, javax.swing.GroupLayout.PREFERRED_SIZE)
-						.addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-		);
-		messageOverviewDialogLayout.setVerticalGroup(
-				messageOverviewDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addComponent(messageOverviewTabbedPane, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
-		);
-
-		participantOverviewDialog.setTitle("Deltakere");
-		participantOverviewDialog.setLocationByPlatform(true);
-		participantOverviewDialog.setModal(true);
-		participantOverviewDialog.setResizable(false);
-
-		participantOverviewList.setModel(new javax.swing.AbstractListModel() {
-			String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-			public int getSize() { return strings.length; }
-			public Object getElementAt(int i) { return strings[i]; }
-		});
-		participantOverviewSP.setViewportView(participantOverviewList);
-
-		participantOverviewChangeButton.setText("Endre");
-		participantOverviewChangeButton.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				participantOverviewChangeButtonActionPerformed(evt);
-			}
-		});
-
-		participantOverviewCloseButton.setText("Lukk");
-		participantOverviewCloseButton.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				participantOverviewCloseButtonActionPerformed(evt);
-			}
-		});
-
-		javax.swing.GroupLayout participantOverviewDialogLayout = new javax.swing.GroupLayout(participantOverviewDialog.getContentPane());
-		participantOverviewDialog.getContentPane().setLayout(participantOverviewDialogLayout);
-		participantOverviewDialogLayout.setHorizontalGroup(
-				participantOverviewDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addGroup(participantOverviewDialogLayout.createSequentialGroup()
-						.addContainerGap()
-						.addGroup(participantOverviewDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-								.addComponent(participantOverviewSP, javax.swing.GroupLayout.Alignment.LEADING)
-								.addGroup(javax.swing.GroupLayout.Alignment.LEADING, participantOverviewDialogLayout.createSequentialGroup()
-										.addComponent(participantOverviewChangeButton)
-										.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-										.addComponent(participantOverviewCloseButton)))
-										.addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-		);
-
-		participantOverviewDialogLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {participantOverviewChangeButton, participantOverviewCloseButton});
-
-		participantOverviewDialogLayout.setVerticalGroup(
-				participantOverviewDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addGroup(participantOverviewDialogLayout.createSequentialGroup()
-						.addContainerGap()
-						.addComponent(participantOverviewSP, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-						.addGroup(participantOverviewDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-								.addComponent(participantOverviewChangeButton)
-								.addComponent(participantOverviewCloseButton))
-								.addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-		);
-
-		appointmentDialog.setTitle("Ny Avtale");
-		appointmentDialog.setLocationByPlatform(true);
-		appointmentDialog.setModal(true);
-		appointmentDialog.setResizable(false);
-
-		appointmentFromDateButton.setText("Lørdag 24. Desember - 2012");
-		appointmentFromDateButton.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				appointmentFromDateButtonActionPerformed(evt);
-			}
-		});
-
-		appointmentStartTimeCB.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00:00", "00:15", "00:30", "00:45", "01:00", "01:15", "01:30", "01:45", "02:00", "02:15", "02:30", "02:45", "03:00", "03:15", "03:30", "03:45", "04:00", "04:15", "04:30", "04:45", "05:00", "05:15", "05:30", "05:45", "06:00", "06:15", "06:30", "06:45", "07:00", "07:15", "07:30", "07:45", "08:00", "08:15", "08:30", "08:45", "09:00", "09:15", "09:30", "09:45", "10:00", "10:15", "10:30", "10:45", "11:00", "11:15", "11:30", "11:45", "12:00", "12:15", "12:30", "12:45", "13:00", "13:15", "13:30", "13:45", "14:00", "14:15", "14:30", "14:45", "15:00", "15:15", "15:30", "15:45", "16:00", "16:15", "16:30", "16:45", "17:00", "17:15", "17:30", "17:45", "18:00", "18:15", "18:30", "18:45", "19:00", "19:15", "19:30", "19:45", "20:00", "20:15", "20:30", "20:45", "21:00", "21:15", "21:30", "21:45", "22:00", "22:15", "22:30", "22:45", "23:00", "23:15", "23:30", "23:45" }));
-
-		appointmentToDateButton.setText("Lørdag 24. Desember - 2012");
-		appointmentToDateButton.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				appointmentToDateButtonActionPerformed(evt);
-			}
-		});
-
-		appointmentEndTimeCB.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00:00", "00:15", "00:30", "00:45", "01:00", "01:15", "01:30", "01:45", "02:00", "02:15", "02:30", "02:45", "03:00", "03:15", "03:30", "03:45", "04:00", "04:15", "04:30", "04:45", "05:00", "05:15", "05:30", "05:45", "06:00", "06:15", "06:30", "06:45", "07:00", "07:15", "07:30", "07:45", "08:00", "08:15", "08:30", "08:45", "09:00", "09:15", "09:30", "09:45", "10:00", "10:15", "10:30", "10:45", "11:00", "11:15", "11:30", "11:45", "12:00", "12:15", "12:30", "12:45", "13:00", "13:15", "13:30", "13:45", "14:00", "14:15", "14:30", "14:45", "15:00", "15:15", "15:30", "15:45", "16:00", "16:15", "16:30", "16:45", "17:00", "17:15", "17:30", "17:45", "18:00", "18:15", "18:30", "18:45", "19:00", "19:15", "19:30", "19:45", "20:00", "20:15", "20:30", "20:45", "21:00", "21:15", "21:30", "21:45", "22:00", "22:15", "22:30", "22:45", "23:00", "23:15", "23:30", "23:45" }));
-
-		appointmentRoomCB.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-		appointmentDescriptionTextArea.setColumns(20);
-		appointmentDescriptionTextArea.setLineWrap(true);
-		appointmentDescriptionTextArea.setRows(5);
-		appointmentDescriptionTextArea.setWrapStyleWord(true);
-		appointmentTextSP.setViewportView(appointmentDescriptionTextArea);
-
-		javax.swing.GroupLayout appointmentEditPanelLayout = new javax.swing.GroupLayout(appointmentEditPanel);
-		appointmentEditPanel.setLayout(appointmentEditPanelLayout);
-		appointmentEditPanelLayout.setHorizontalGroup(
-				appointmentEditPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addGroup(appointmentEditPanelLayout.createSequentialGroup()
-						.addContainerGap()
-						.addGroup(appointmentEditPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-								.addGroup(appointmentEditPanelLayout.createSequentialGroup()
-										.addGroup(appointmentEditPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-												.addComponent(appointmentRoomCB, 0, 244, Short.MAX_VALUE)
-												.addGroup(appointmentEditPanelLayout.createSequentialGroup()
-														.addGroup(appointmentEditPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-																.addComponent(appointmentFromDateButton, javax.swing.GroupLayout.DEFAULT_SIZE, 185, Short.MAX_VALUE)
-																.addComponent(appointmentToDateButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 185, Short.MAX_VALUE))
-																.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-																.addGroup(appointmentEditPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-																		.addComponent(appointmentEndTimeCB, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-																		.addComponent(appointmentStartTimeCB, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-																		.addContainerGap())
-																		.addGroup(javax.swing.GroupLayout.Alignment.TRAILING, appointmentEditPanelLayout.createSequentialGroup()
-																				.addGroup(appointmentEditPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-																						.addComponent(appointmentTextSP, javax.swing.GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE)
-																						.addComponent(appointmentTitleTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE))
-																						.addContainerGap())))
-		);
-		appointmentEditPanelLayout.setVerticalGroup(
-				appointmentEditPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addGroup(appointmentEditPanelLayout.createSequentialGroup()
-						.addContainerGap()
-						.addGroup(appointmentEditPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-								.addComponent(appointmentStartTimeCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-								.addComponent(appointmentFromDateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 20, Short.MAX_VALUE))
-								.addGap(9, 9, 9)
-								.addGroup(appointmentEditPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-										.addComponent(appointmentToDateButton, 0, 0, Short.MAX_VALUE)
-										.addComponent(appointmentEndTimeCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-										.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-										.addComponent(appointmentRoomCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-										.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-										.addComponent(appointmentTitleTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-										.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-										.addComponent(appointmentTextSP, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-										.addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-		);
-
-		appointmentDescriptionLabel.setText("Beskrivelse");
-
-		appointmentTitleLabel.setText("Tittel");
-
-		appointmentRoomLabel.setText("Hvor");
-
-		appointmentEndLabel.setText("Slutt");
-
-		appointmentStartLabel.setText("Start");
-
-		javax.swing.GroupLayout appointmentLabelPanelLayout = new javax.swing.GroupLayout(appointmentLabelPanel);
-		appointmentLabelPanel.setLayout(appointmentLabelPanelLayout);
-		appointmentLabelPanelLayout.setHorizontalGroup(
-				appointmentLabelPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addGroup(appointmentLabelPanelLayout.createSequentialGroup()
-						.addContainerGap()
-						.addGroup(appointmentLabelPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-								.addComponent(appointmentStartLabel)
-								.addComponent(appointmentEndLabel)
-								.addComponent(appointmentRoomLabel)
-								.addComponent(appointmentTitleLabel)
-								.addComponent(appointmentDescriptionLabel))
-								.addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-		);
-		appointmentLabelPanelLayout.setVerticalGroup(
-				appointmentLabelPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addGroup(appointmentLabelPanelLayout.createSequentialGroup()
-						.addContainerGap()
-						.addComponent(appointmentStartLabel)
-						.addGap(18, 18, 18)
-						.addComponent(appointmentEndLabel)
-						.addGap(18, 18, 18)
-						.addComponent(appointmentRoomLabel)
-						.addGap(18, 18, 18)
-						.addComponent(appointmentTitleLabel)
-						.addGap(18, 18, 18)
-						.addComponent(appointmentDescriptionLabel)
-						.addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-		);
-
-		appointmentSayYoureNotCommingButton.setText("Meld Avbud");
-		appointmentSayYoureNotCommingButton.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				appointmentSayYoureNotCommingButtonActionPerformed(evt);
-			}
-		});
-
-		appointmentCloseButton.setText("Lukk");
-		appointmentCloseButton.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				appointmentCloseButtonActionPerformed(evt);
-			}
-		});
-
-		appointmentShowParticipantsButton.setText("Vis Deltakere");
-		appointmentShowParticipantsButton.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				appointmentShowParticipantsButtonActionPerformed(evt);
-			}
-		});
-
-		javax.swing.GroupLayout appointmentButtonPanelLayout = new javax.swing.GroupLayout(appointmentButtonPanel);
-		appointmentButtonPanel.setLayout(appointmentButtonPanelLayout);
-		appointmentButtonPanelLayout.setHorizontalGroup(
-				appointmentButtonPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addGroup(appointmentButtonPanelLayout.createSequentialGroup()
-						.addContainerGap()
-						.addComponent(appointmentShowParticipantsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-						.addComponent(appointmentSayYoureNotCommingButton, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-						.addComponent(appointmentCloseButton, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-						.addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-		);
-
-		appointmentButtonPanelLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {appointmentCloseButton, appointmentSayYoureNotCommingButton, appointmentShowParticipantsButton});
-
-		appointmentButtonPanelLayout.setVerticalGroup(
-				appointmentButtonPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addGroup(appointmentButtonPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE, false)
-						.addComponent(appointmentShowParticipantsButton)
-						.addComponent(appointmentSayYoureNotCommingButton)
-						.addComponent(appointmentCloseButton))
-		);
-
-		javax.swing.GroupLayout appointmentDialogLayout = new javax.swing.GroupLayout(appointmentDialog.getContentPane());
-		appointmentDialog.getContentPane().setLayout(appointmentDialogLayout);
-		appointmentDialogLayout.setHorizontalGroup(
-				appointmentDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addGroup(appointmentDialogLayout.createSequentialGroup()
-						.addContainerGap()
-						.addGroup(appointmentDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-								.addGroup(appointmentDialogLayout.createSequentialGroup()
-										.addComponent(appointmentLabelPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-										.addGap(18, 18, 18)
-										.addComponent(appointmentEditPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-										.addComponent(appointmentButtonPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-										.addContainerGap())
-		);
-		appointmentDialogLayout.setVerticalGroup(
-				appointmentDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addGroup(appointmentDialogLayout.createSequentialGroup()
-						.addContainerGap()
-						.addGroup(appointmentDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-								.addComponent(appointmentLabelPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-								.addComponent(appointmentEditPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-								.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-								.addComponent(appointmentButtonPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-								.addContainerGap(14, Short.MAX_VALUE))
-		);
-
-		newAppointmentDialog.setTitle("Ny Avtale");
-		newAppointmentDialog.setLocationByPlatform(true);
-		newAppointmentDialog.setModal(true);
-		newAppointmentDialog.setResizable(false);
-
-		newAppointmentFromDateButton.setText("Lørdag 24. Desember - 2012");
-		newAppointmentFromDateButton.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				newAppointmentFromDateButtonActionPerformed(evt);
-			}
-		});
-
-		newAppointmentStartTimeCB.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "07:00", "07:15", "07:30", "07:45", "08:00", "08:15", "08:30", "08:45", "09:00", "09:15", "09:30", "09:45", "10:00", "10:15", "10:30", "10:45", "11:00", "11:15", "11:30", "11:45", "12:00", "12:15", "12:30", "12:45", "13:00", "13:15", "13:30", "13:45", "14:00", "14:15", "14:30", "14:45", "15:00", "15:15", "15:30", "15:45", "16:00", "16:15", "16:30", "16:45", "17:00", "17:15", "17:30", "17:45", "18:00", "18:15", "18:30", "18:45", "19:00", "19:15", "19:30", "19:45", "20:00", "20:15", "20:30", "20:45", "21:00", "21:15", "21:30", "21:45", "22:00", "22:15", "22:30", "22:45", "23:00", "23:15", "23:30", "23:45", "00:00", "00:15", "00:30", "00:45", "01:00", "01:15", "01:30", "01:45", "02:00", "02:15", "02:30", "02:45", "03:00", "03:15", "03:30", "03:45", "04:00", "04:15", "04:30", "04:45", "05:00", "05:15", "05:30", "05:45", "06:00", "06:15", "06:30", "06:45" }));
-
-		newAppointmentToDateButton.setText("Lørdag 24. Desember - 2012");
-		newAppointmentToDateButton.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				newAppointmentToDateButtonActionPerformed(evt);
-			}
-		});
-
-		newAppointmentEndTimeCB.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "07:00", "07:15", "07:30", "07:45", "08:00", "08:15", "08:30", "08:45", "09:00", "09:15", "09:30", "09:45", "10:00", "10:15", "10:30", "10:45", "11:00", "11:15", "11:30", "11:45", "12:00", "12:15", "12:30", "12:45", "13:00", "13:15", "13:30", "13:45", "14:00", "14:15", "14:30", "14:45", "15:00", "15:15", "15:30", "15:45", "16:00", "16:15", "16:30", "16:45", "17:00", "17:15", "17:30", "17:45", "18:00", "18:15", "18:30", "18:45", "19:00", "19:15", "19:30", "19:45", "20:00", "20:15", "20:30", "20:45", "21:00", "21:15", "21:30", "21:45", "22:00", "22:15", "22:30", "22:45", "23:00", "23:15", "23:30", "23:45", "00:00", "00:15", "00:30", "00:45", "01:00", "01:15", "01:30", "01:45", "02:00", "02:15", "02:30", "02:45", "03:00", "03:15", "03:30", "03:45", "04:00", "04:15", "04:30", "04:45", "05:00", "05:15", "05:30", "05:45", "06:00", "06:15", "06:30", "06:45" }));
-
-		newAppointmentRoomCB.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Kattelabben", "Hundelabben", "Fiskelabben" }));
-
-		newAppointmentDescriptionTextArea.setColumns(20);
-		newAppointmentDescriptionTextArea.setLineWrap(true);
-		newAppointmentDescriptionTextArea.setRows(5);
-		newAppointmentDescriptionTextArea.setWrapStyleWord(true);
-		newAppointmentTextSP.setViewportView(newAppointmentDescriptionTextArea);
-
-		javax.swing.GroupLayout newAppointmentEditPanelLayout = new javax.swing.GroupLayout(newAppointmentEditPanel);
-		newAppointmentEditPanel.setLayout(newAppointmentEditPanelLayout);
-		newAppointmentEditPanelLayout.setHorizontalGroup(
-				newAppointmentEditPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addGroup(newAppointmentEditPanelLayout.createSequentialGroup()
-						.addContainerGap()
-						.addGroup(newAppointmentEditPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-								.addGroup(newAppointmentEditPanelLayout.createSequentialGroup()
-										.addGroup(newAppointmentEditPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-												.addComponent(newAppointmentRoomCB, 0, 244, Short.MAX_VALUE)
-												.addGroup(newAppointmentEditPanelLayout.createSequentialGroup()
-														.addGroup(newAppointmentEditPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-																.addComponent(newAppointmentFromDateButton, javax.swing.GroupLayout.DEFAULT_SIZE, 185, Short.MAX_VALUE)
-																.addComponent(newAppointmentToDateButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 185, Short.MAX_VALUE))
-																.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-																.addGroup(newAppointmentEditPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-																		.addComponent(newAppointmentEndTimeCB, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-																		.addComponent(newAppointmentStartTimeCB, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-																		.addContainerGap())
-																		.addGroup(javax.swing.GroupLayout.Alignment.TRAILING, newAppointmentEditPanelLayout.createSequentialGroup()
-																				.addGroup(newAppointmentEditPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-																						.addComponent(newAppointmentTextSP, javax.swing.GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE)
-																						.addComponent(newAppointmentTitleTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE))
-																						.addContainerGap())))
-		);
-		newAppointmentEditPanelLayout.setVerticalGroup(
-				newAppointmentEditPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addGroup(newAppointmentEditPanelLayout.createSequentialGroup()
-						.addContainerGap()
-						.addGroup(newAppointmentEditPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-								.addComponent(newAppointmentStartTimeCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-								.addComponent(newAppointmentFromDateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 20, Short.MAX_VALUE))
-								.addGap(9, 9, 9)
-								.addGroup(newAppointmentEditPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-										.addComponent(newAppointmentToDateButton, 0, 0, Short.MAX_VALUE)
-										.addComponent(newAppointmentEndTimeCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-										.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-										.addComponent(newAppointmentRoomCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-										.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-										.addComponent(newAppointmentTitleTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-										.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-										.addComponent(newAppointmentTextSP, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-										.addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-		);
-
-		newAppointmentDescriptionLabel.setText("Beskrivelse");
-
-		newAppointmentTitleLabel.setText("Tittel");
-
-		newAppointmentRoomLabel.setText("Hvor");
-
-		newAppointmentEndLabel.setText("Slutt");
-
-		newAppointmentStartLabel.setText("Start");
-
-		javax.swing.GroupLayout newAppointmentLabelPanelLayout = new javax.swing.GroupLayout(newAppointmentLabelPanel);
-		newAppointmentLabelPanel.setLayout(newAppointmentLabelPanelLayout);
-		newAppointmentLabelPanelLayout.setHorizontalGroup(
-				newAppointmentLabelPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addGroup(newAppointmentLabelPanelLayout.createSequentialGroup()
-						.addContainerGap()
-						.addGroup(newAppointmentLabelPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-								.addComponent(newAppointmentStartLabel)
-								.addComponent(newAppointmentEndLabel)
-								.addComponent(newAppointmentRoomLabel)
-								.addComponent(newAppointmentTitleLabel)
-								.addComponent(newAppointmentDescriptionLabel))
-								.addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-		);
-		newAppointmentLabelPanelLayout.setVerticalGroup(
-				newAppointmentLabelPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addGroup(newAppointmentLabelPanelLayout.createSequentialGroup()
-						.addContainerGap()
-						.addComponent(newAppointmentStartLabel)
-						.addGap(18, 18, 18)
-						.addComponent(newAppointmentEndLabel)
-						.addGap(18, 18, 18)
-						.addComponent(newAppointmentRoomLabel)
-						.addGap(18, 18, 18)
-						.addComponent(newAppointmentTitleLabel)
-						.addGap(18, 18, 18)
-						.addComponent(newAppointmentDescriptionLabel)
-						.addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-		);
-
-		newAppointmentCreateButton.setText("Opprett Avtale");
-		newAppointmentCreateButton.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-					newAppointmentCreateButtonActionPerformed(evt);
-				
-			}
-		});
-
-		newAppointmentCancelButton.setText("Avbryt");
-		newAppointmentCancelButton.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				newAppointmentCancelButtonActionPerformed(evt);
-			}
-		});
-
-		newAppointmentChooseParticipantsButton.setText("Velg Deltakere");
-		newAppointmentChooseParticipantsButton.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				newAppointmentChooseParticipantsButtonActionPerformed(evt);
-			}
-		});
-
-		javax.swing.GroupLayout newAppointmentButtonpanelLayout = new javax.swing.GroupLayout(newAppointmentButtonpanel);
-		newAppointmentButtonpanel.setLayout(newAppointmentButtonpanelLayout);
-		newAppointmentButtonpanelLayout.setHorizontalGroup(
-				newAppointmentButtonpanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addGroup(newAppointmentButtonpanelLayout.createSequentialGroup()
-						.addContainerGap()
-						.addComponent(newAppointmentChooseParticipantsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-						.addComponent(newAppointmentCreateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-						.addComponent(newAppointmentCancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-						.addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-		);
-
-		newAppointmentButtonpanelLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {newAppointmentCancelButton, newAppointmentChooseParticipantsButton, newAppointmentCreateButton});
-
-		newAppointmentButtonpanelLayout.setVerticalGroup(
-				newAppointmentButtonpanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addGroup(newAppointmentButtonpanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE, false)
-						.addComponent(newAppointmentChooseParticipantsButton)
-						.addComponent(newAppointmentCreateButton)
-						.addComponent(newAppointmentCancelButton))
-		);
-
-		javax.swing.GroupLayout newAppointmentDialogLayout = new javax.swing.GroupLayout(newAppointmentDialog.getContentPane());
-		newAppointmentDialog.getContentPane().setLayout(newAppointmentDialogLayout);
-		newAppointmentDialogLayout.setHorizontalGroup(
-				newAppointmentDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addGroup(newAppointmentDialogLayout.createSequentialGroup()
-						.addContainerGap()
-						.addGroup(newAppointmentDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-								.addGroup(newAppointmentDialogLayout.createSequentialGroup()
-										.addComponent(newAppointmentLabelPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-										.addGap(18, 18, 18)
-										.addComponent(newAppointmentEditPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-										.addComponent(newAppointmentButtonpanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-										.addContainerGap())
-		);
-		newAppointmentDialogLayout.setVerticalGroup(
-				newAppointmentDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addGroup(newAppointmentDialogLayout.createSequentialGroup()
-						.addContainerGap()
-						.addGroup(newAppointmentDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-								.addComponent(newAppointmentLabelPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-								.addComponent(newAppointmentEditPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-								.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-								.addComponent(newAppointmentButtonpanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-								.addContainerGap(14, Short.MAX_VALUE))
-		);
-
-		participantChooserDialog.setTitle("Velg Deltakere");
-		participantChooserDialog.setModal(true);
-		participantChooserDialog.setResizable(false);
-
-		participantChooserTable.setModel(new javax.swing.table.DefaultTableModel(
-				new Object [][] {
-						{null, null},
-						{null, null},
-						{null, null},
-						{null, null}
-				},
-				new String [] {
-						"Ansatt", ""
-				}
-		) {
-			Class[] types = new Class [] {
-					java.lang.Object.class, java.lang.Boolean.class
-			};
-			boolean[] canEdit = new boolean [] {
-					false, true
-			};
-
-			public Class getColumnClass(int columnIndex) {
-				return types [columnIndex];
-			}
-
-			public boolean isCellEditable(int rowIndex, int columnIndex) {
-				return canEdit [columnIndex];
-			}
-		});
-		participantChooserTable.setColumnSelectionAllowed(true);
-		participantChooserTable.setSelectionBackground(new java.awt.Color(231, 233, 255));
-		participantChooserSP.setViewportView(participantChooserTable);
-		participantChooserTable.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
-		participantChooserTable.getColumnModel().getColumn(0).setResizable(false);
-		participantChooserTable.getColumnModel().getColumn(0).setPreferredWidth(200);
-		participantChooserTable.getColumnModel().getColumn(1).setResizable(false);
-		participantChooserTable.getColumnModel().getColumn(1).setPreferredWidth(16);
-
-		participantChooserOkButton.setText("Ok");
-		participantChooserOkButton.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				participantChooserOkButtonActionPerformed(evt);
-			}
-		});
-
-		participantChooserCancelButton.setText("Avbryt");
-		participantChooserCancelButton.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				participantChooserCancelButtonActionPerformed(evt);
-			}
-		});
-
-		participantChooserSearchPanel.setBackground(new java.awt.Color(255, 255, 255));
-		participantChooserSearchPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
-
-		participantChooserSearchIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fp/client/gui/graphics/Search-icon 30x30 v4.png"))); // NOI18N
-
-		participantChooserSearchField.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-		participantChooserSearchField.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-
-		javax.swing.GroupLayout participantChooserSearchPanelLayout = new javax.swing.GroupLayout(participantChooserSearchPanel);
-		participantChooserSearchPanel.setLayout(participantChooserSearchPanelLayout);
-		participantChooserSearchPanelLayout.setHorizontalGroup(
-				participantChooserSearchPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addGroup(participantChooserSearchPanelLayout.createSequentialGroup()
-						.addContainerGap()
-						.addComponent(participantChooserSearchField, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-						.addComponent(participantChooserSearchIcon))
-		);
-		participantChooserSearchPanelLayout.setVerticalGroup(
-				participantChooserSearchPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addComponent(participantChooserSearchIcon)
-				.addComponent(participantChooserSearchField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-		);
-
-		javax.swing.GroupLayout participantChooserDialogLayout = new javax.swing.GroupLayout(participantChooserDialog.getContentPane());
-		participantChooserDialog.getContentPane().setLayout(participantChooserDialogLayout);
-		participantChooserDialogLayout.setHorizontalGroup(
-				participantChooserDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addGroup(javax.swing.GroupLayout.Alignment.TRAILING, participantChooserDialogLayout.createSequentialGroup()
-						.addContainerGap()
-						.addGroup(participantChooserDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-								.addComponent(participantChooserSP, javax.swing.GroupLayout.Alignment.LEADING, 0, 0, Short.MAX_VALUE)
-								.addComponent(participantChooserSearchPanel, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-								.addGroup(javax.swing.GroupLayout.Alignment.LEADING, participantChooserDialogLayout.createSequentialGroup()
-										.addComponent(participantChooserOkButton, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-										.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-										.addComponent(participantChooserCancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))
-										.addContainerGap())
-		);
-
-		participantChooserDialogLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {participantChooserCancelButton, participantChooserOkButton});
-
-		participantChooserDialogLayout.setVerticalGroup(
-				participantChooserDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addGroup(participantChooserDialogLayout.createSequentialGroup()
-						.addContainerGap()
-						.addComponent(participantChooserSearchPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-						.addComponent(participantChooserSP, javax.swing.GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE)
-						.addGap(12, 12, 12)
-						.addGroup(participantChooserDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-								.addComponent(participantChooserOkButton)
-								.addComponent(participantChooserCancelButton))
-								.addContainerGap())
-		);
-
-		fromDateDateChooserDialog.setTitle("Velg Dato");
-		fromDateDateChooserDialog.setModal(true);
-		fromDateDateChooserDialog.setResizable(false);
-
-		fromDateDateChooserOkButton.setText("Ok");
-		fromDateDateChooserOkButton.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				fromDateDateChooserOkButtonActionPerformed(evt);
-			}
-		});
-
-		fromDateDateChooserCancelButton.setText("Avbryt");
-		fromDateDateChooserCancelButton.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				fromDateDateChooserCancelButtonActionPerformed(evt);
-			}
-		});
-
-		javax.swing.GroupLayout fromDateDateChooserDialogLayout = new javax.swing.GroupLayout(fromDateDateChooserDialog.getContentPane());
-		fromDateDateChooserDialog.getContentPane().setLayout(fromDateDateChooserDialogLayout);
-		fromDateDateChooserDialogLayout.setHorizontalGroup(
-				fromDateDateChooserDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addGroup(fromDateDateChooserDialogLayout.createSequentialGroup()
-						.addContainerGap()
-						.addGroup(fromDateDateChooserDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-								.addComponent(fromDateChooserPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 204, Short.MAX_VALUE)
-								.addGroup(fromDateDateChooserDialogLayout.createSequentialGroup()
-										.addComponent(fromDateDateChooserOkButton, javax.swing.GroupLayout.DEFAULT_SIZE, 99, Short.MAX_VALUE)
-										.addGap(10, 10, 10)
-										.addComponent(fromDateDateChooserCancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)))
-										.addContainerGap())
-		);
-		fromDateDateChooserDialogLayout.setVerticalGroup(
-				fromDateDateChooserDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addGroup(javax.swing.GroupLayout.Alignment.TRAILING, fromDateDateChooserDialogLayout.createSequentialGroup()
-						.addContainerGap()
-						.addComponent(fromDateChooserPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 233, Short.MAX_VALUE)
-						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-						.addGroup(fromDateDateChooserDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-								.addComponent(fromDateDateChooserOkButton)
-								.addComponent(fromDateDateChooserCancelButton))
-								.addContainerGap())
-		);
-
-		toDateDateChooserDialog.setTitle("Velg Dato");
-		toDateDateChooserDialog.setModal(true);
-		toDateDateChooserDialog.setResizable(false);
-
-		toDateDateChooserOkButton.setText("Ok");
-		toDateDateChooserOkButton.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				toDateDateChooserOkButtonActionPerformed(evt);
-			}
-		});
-
-		toDateDateChooserCancelButton.setText("Avbryt");
-		toDateDateChooserCancelButton.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				toDateDateChooserCancelButtonActionPerformed(evt);
-			}
-		});
-
-		javax.swing.GroupLayout toDateDateChooserDialogLayout = new javax.swing.GroupLayout(toDateDateChooserDialog.getContentPane());
-		toDateDateChooserDialog.getContentPane().setLayout(toDateDateChooserDialogLayout);
-		toDateDateChooserDialogLayout.setHorizontalGroup(
-				toDateDateChooserDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addGroup(toDateDateChooserDialogLayout.createSequentialGroup()
-						.addContainerGap()
-						.addGroup(toDateDateChooserDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-								.addComponent(toDateChooserPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 204, Short.MAX_VALUE)
-								.addGroup(toDateDateChooserDialogLayout.createSequentialGroup()
-										.addComponent(toDateDateChooserOkButton, javax.swing.GroupLayout.DEFAULT_SIZE, 99, Short.MAX_VALUE)
-										.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-										.addComponent(toDateDateChooserCancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)))
-										.addContainerGap())
-		);
-		toDateDateChooserDialogLayout.setVerticalGroup(
-				toDateDateChooserDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addGroup(javax.swing.GroupLayout.Alignment.TRAILING, toDateDateChooserDialogLayout.createSequentialGroup()
-						.addContainerGap()
-						.addComponent(toDateChooserPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 233, Short.MAX_VALUE)
-						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-						.addGroup(toDateDateChooserDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-								.addComponent(toDateDateChooserOkButton)
-								.addComponent(toDateDateChooserCancelButton))
-								.addContainerGap())
-		);
-
-		loadingDialog.setTitle("Vær tålmodig plz..");
-		loadingDialog.setModal(true);
-		loadingDialog.setResizable(false);
-
-		loadingLabel.setText("Henter data fra databasen");
-
-		loadingCloseButton.setText("Lukk");
-		loadingCloseButton.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				loadingCloseButtonActionPerformed(evt);
-			}
-		});
-
-		javax.swing.GroupLayout loadingDialogLayout = new javax.swing.GroupLayout(loadingDialog.getContentPane());
-		loadingDialog.getContentPane().setLayout(loadingDialogLayout);
-		loadingDialogLayout.setHorizontalGroup(
-				loadingDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addGroup(loadingDialogLayout.createSequentialGroup()
-						.addContainerGap()
-						.addGroup(loadingDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-								.addComponent(progressBar, 0, 0, Short.MAX_VALUE)
-								.addComponent(loadingLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-								.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-								.addComponent(loadingCloseButton)
-								.addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-		);
-		loadingDialogLayout.setVerticalGroup(
-				loadingDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addGroup(loadingDialogLayout.createSequentialGroup()
-						.addContainerGap()
-						.addGroup(loadingDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-								.addComponent(loadingCloseButton, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
-								.addGroup(loadingDialogLayout.createSequentialGroup()
-										.addComponent(loadingLabel)
-										.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-										.addComponent(progressBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-										.addContainerGap())
-		);
-
-		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-		setTitle("Avtalebok 1.0");
-		setResizable(false);
-
-		messageViewButton.setText("Meldinger");
-		messageViewButton.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				messageViewButtonActionPerformed(evt);
-			}
-		});
-
-		newAppointmentButton.setText("Ny Avtale");
-		newAppointmentButton.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				newAppointmentButtonActionPerformed(evt);
-			}
-		});
-
-		logOutButton.setText("Logg Ut");
-		logOutButton.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				logOutButtonActionPerformed(evt);
-			}
-		});
-
-		calendarShowingLabel.setFont(new java.awt.Font("Tahoma", 0, 12));
-		calendarShowingLabel.setText("Viser:");
-
-		shownCalendars.setText("Ingen Kalender");
-		shownCalendars.setFocusable(false);
-		shownCalendars.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-		shownCalendars.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
-		shownCalendars.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				shownCalendarsActionPerformed(evt);
-			}
-		});
-
-		nextWeekLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fp/client/gui/graphics/nextWeek.png"))); // NOI18N
-		nextWeekLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-		nextWeekLabel.addMouseListener(new java.awt.event.MouseAdapter() {
-			public void mouseClicked(java.awt.event.MouseEvent evt) {
-				nextWeekLabelMouseClicked(evt);
-			}
-			public void mouseEntered(java.awt.event.MouseEvent evt) {
-				nextWeekLabelMouseEntered(evt);
-			}
-			public void mouseExited(java.awt.event.MouseEvent evt) {
-				nextWeekLabelMouseExited(evt);
-			}
-		});
-
-		previousWeekLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fp/client/gui/graphics/prevWeek.png"))); // NOI18N
-		previousWeekLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-		previousWeekLabel.addMouseListener(new java.awt.event.MouseAdapter() {
-			public void mouseClicked(java.awt.event.MouseEvent evt) {
-				previousWeekLabelMouseClicked(evt);
-			}
-			public void mouseEntered(java.awt.event.MouseEvent evt) {
-				previousWeekLabelMouseEntered(evt);
-			}
-			public void mouseExited(java.awt.event.MouseEvent evt) {
-				previousWeekLabelMouseExited(evt);
-			}
-		});
-
-		weekViewTable.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-		weekViewTable.setModel(new javax.swing.table.DefaultTableModel(
-				new Object [][] {
-
-				},
-				new String [] {
-						"Tid", "Mandag 20. September", "Tirsdag 21. September", "Onsdag 22. September", "Torsdag 23. September", "Fredag 24. September", "Lørdag 25. September", "Søndag 26. September"
-				}
-		) {
-			Class[] types = new Class [] {
-					java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
-			};
-
-			public Class getColumnClass(int columnIndex) {
-				return types [columnIndex];
-			}
-		});
-		weekViewTable.setColumnSelectionAllowed(true);
-		weekViewTable.setRowHeight(32);
-		weekViewSP.setViewportView(weekViewTable);
-		weekViewTable.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-		weekViewTable.getColumnModel().getColumn(0).setMinWidth(33);
-		weekViewTable.getColumnModel().getColumn(0).setMaxWidth(33);
-
-		weekViewButton.setFont(new java.awt.Font("Calibri", 0, 15));
-		weekViewButton.setText("Uke 00 - 0000");
-		weekViewButton.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-
-		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-		getContentPane().setLayout(layout);
-		layout.setHorizontalGroup(
-				layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addGroup(layout.createSequentialGroup()
-						.addContainerGap()
-						.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-								.addComponent(weekViewSP, javax.swing.GroupLayout.PREFERRED_SIZE, 914, javax.swing.GroupLayout.PREFERRED_SIZE)
-								.addGroup(layout.createSequentialGroup()
-										.addGap(8, 8, 8)
-										.addComponent(calendarShowingLabel)
-										.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-										.addComponent(shownCalendars, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-										.addGap(124, 124, 124)
-										.addComponent(previousWeekLabel)
-										.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-										.addComponent(weekViewButton, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-										.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-										.addComponent(nextWeekLabel))
-										.addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-												.addComponent(logOutButton, javax.swing.GroupLayout.DEFAULT_SIZE, 79, Short.MAX_VALUE)
-												.addGap(667, 667, 667)
-												.addComponent(newAppointmentButton)
-												.addGap(10, 10, 10)
-												.addComponent(messageViewButton)))
-												.addContainerGap())
-		);
-
-		layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {logOutButton, messageViewButton, newAppointmentButton});
-		weekViewButton.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				weekViewButtonActionPerformed(evt);
-			}
-		});
-		layout.setVerticalGroup(
-				layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addGroup(layout.createSequentialGroup()
-						.addContainerGap()
-						.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-								.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-										.addComponent(weekViewButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-										.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-												.addComponent(nextWeekLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-												.addComponent(previousWeekLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-												.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-														.addComponent(shownCalendars, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-														.addComponent(calendarShowingLabel)))
-														.addGap(17, 17, 17)
-														.addComponent(weekViewSP, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE)
-														.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-														.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-																.addComponent(logOutButton)
-																.addComponent(newAppointmentButton)
-																.addComponent(messageViewButton))
-																.addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-		);
-
-		java.util.Calendar today = java.util.Calendar.getInstance();
-		weekViewButton.setText("Uke "+ today.get(java.util.Calendar.WEEK_OF_YEAR) + " - " + today.get(java.util.Calendar.YEAR) );
-
-		weekViewButton.setFocusable(false);
-
-		pack();
-	}// </editor-fold>
-	private void weekViewButtonActionPerformed(java.awt.event.ActionEvent evt) {       
-		Client.get().calendarModel.setCurrentWeek();
-	}                                                 
-
-	private void messageViewButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                  
-		messageOverviewDialog.pack();
-		messageOverviewDialog.setLocationRelativeTo(this);
-		messageOverviewDialog.setVisible(true);
-	}                                                 
-
-	private void newAppointmentButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                     
-		newAppointmentToDateButton.setText(dateToString(new Date()));
-		newAppointmentFromDateButton.setText(dateToString(new Date()));
-		newAppointmentDialog.pack();
-		newAppointmentDialog.setLocationRelativeTo(this);
-		newAppointmentDialog.setVisible(true);
-	}                                                    
-
-	private void errorDialogButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                  
-		errorDialog.setVisible(false);
-	}                                                 
-
-	private void participantOverviewChangeButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                                
-		participantOverviewDialog.setVisible(false);
-	}                                                               
-
-	private void participantOverviewCloseButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                               
-		participantOverviewDialog.setVisible(false);
-	}                                                              
-
-	private void logOutButtonActionPerformed(java.awt.event.ActionEvent evt) {                                             
-		loginPasswordField.setText("passord");
-		loginUsernameTextField.setText("brukernavn");
-		loginPasswordField.setEchoChar('\u0000');
-		// logg ut av serveren!
-		logout();
-
-		loginDialog.setVisible(true);
-	}                                            
-
-	private void fromDateDateChooserCancelButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                                
-		System.out.print(fromDateChooserPanel.getDate());
-		fromDateDateChooserDialog.setVisible(false);
-	}                                                               
-
-	private void fromDateDateChooserOkButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                            
-		newAppointmentFromDateButton.setText(dateToString(fromDateChooserPanel.getDate()));
-		fromDateDateChooserDialog.setVisible(false);
-	}                                                           
-
-	private void newAppointmentChooseParticipantsButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                                       
-		participantChooserDialog.pack();
-		participantChooserDialog.setLocationRelativeTo(newAppointmentDialog);
-		participantChooserDialog.setVisible(true);
-	}                                                                      
-
-	private void newAppointmentCreateButtonActionPerformed(java.awt.event.ActionEvent evt){                                                         
-		newAppointmentDialog.setVisible(false);
-		createActivity();
-	}                                                        
-
-	private void newAppointmentCancelButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                           
-		newAppointmentDialog.setVisible(false);
-	}                                                          
-
-	private void newAppointmentToDateButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                           
-		toDateDateChooserDialog.pack();
-		java.awt.Point buttonLocation = ((javax.swing.JButton) evt.getSource()).getLocationOnScreen();
-		buttonLocation.translate(-20, 25);
-		toDateDateChooserDialog.setLocation(buttonLocation);
-		toDateDateChooserDialog.setVisible(true);
-	}                                                          
-
-	private void newAppointmentFromDateButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                             
-		fromDateDateChooserDialog.pack();
-		java.awt.Point buttonLocation = ((javax.swing.JButton) evt.getSource()).getLocationOnScreen();
-		buttonLocation.translate(-20, 25);
-		fromDateDateChooserDialog.setLocation(buttonLocation);
-		fromDateDateChooserDialog.setVisible(true);
-	}                                                            
-
-	private void toDateDateChooserOkButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                          
-		newAppointmentToDateButton.setText(dateToString(toDateChooserPanel.getDate()));
-		toDateDateChooserDialog.setVisible(false);
-	}                                                         
-
-	private void toDateDateChooserCancelButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                              
-		toDateDateChooserDialog.setVisible(false);
-	}                                                             
-
-	private void participantChooserOkButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                           
-		participantChooserDialog.setVisible(false);
-	}                                                          
-
-	private void participantChooserCancelButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                               
-		participantChooserDialog.setVisible(false);
-	}                                                              
-
-	private void calendarChooserOkButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                        
-		changeCalendarView();
-		calendarChooserDialog.setVisible(false);
-	}                                                       
-
-	private void calendarChooserCancelButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                            
-		calendarChooserDialog.setVisible(false);
-	}                                                           
-
-	private void shownCalendarsActionPerformed(java.awt.event.ActionEvent evt) {                                               
-		calendarChooserDialog.pack();
-		java.awt.Point buttonLocation = ((javax.swing.JButton) evt.getSource()).getLocationOnScreen();
-		calendarChooserDialog.setLocation(buttonLocation);
-		calendarChooserDialog.setVisible(true);
-	}                                              
-
-	private void invitationPanelCloseButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                           
-		messageOverviewDialog.setVisible(false);
-	}                                                          
-
-	private void messagePanelCloseButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                        
-		messageOverviewDialog.setVisible(false);
-	}                                                       
-
-	private void appointmentToDateButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                        
-		// TODO add your handling code here:
-	}                                                       
-
-	private void appointmentFromDateButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                          
-		// TODO add your handling code here:
-	}                                                         
-
-	private void appointmentSayYoureNotCommingButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                                    
-		appointmentDialog.setVisible(false);
-		cancelActivity();
-	}                                                                   
-
-	private void appointmentCloseButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                       
-		appointmentDialog.setVisible(false);
-	}                                                      
-
-	private void appointmentShowParticipantsButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                                  
-		participantOverviewDialog.pack();
-		participantOverviewDialog.setVisible(true);
-	}                                                                 
-
-	private void invitationPanelNotAttendinButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                                 
-		// TODO add your handling code here:
-	}                                                                
-
-	private void nextWeekLabelMouseEntered(java.awt.event.MouseEvent evt) {                                           
-		nextWeekLabel.setIcon(nextMO);
-	}                                          
-
-	private void nextWeekLabelMouseExited(java.awt.event.MouseEvent evt) {                                          
-		nextWeekLabel.setIcon(next);
-	}                                         
-
-	private void previousWeekLabelMouseEntered(java.awt.event.MouseEvent evt) {                                               
-		previousWeekLabel.setIcon(prevMO);
-	}                                              
-
-	private void previousWeekLabelMouseExited(java.awt.event.MouseEvent evt) {                                              
-		previousWeekLabel.setIcon(prev);
-	}                                             
-
-	private void loginUsernameTextFieldFocusGained(java.awt.event.FocusEvent evt) {                                                   
-		if (loginUsernameTextField.getText().equals("brukernavn"))
-			loginUsernameTextField.setText("");
-	}                                                  
-
-	private void loginUsernameTextFieldFocusLost(java.awt.event.FocusEvent evt) {                                                 
-		if (loginUsernameTextField.getText().equals("")){
-			loginUsernameTextField.setText("brukernavn");
-		}
-	}                                                
-
-	private void loginPasswordFieldFocusGained(java.awt.event.FocusEvent evt) {                                               
-		if (loginPasswordField.getText().equals("passord")){
-			loginPasswordField.setText("");
-			loginPasswordField.setEchoChar('\u25cf');
-		}
-	}                                              
-
-	private void loginPasswordFieldFocusLost(java.awt.event.FocusEvent evt) {                                             
-		if (loginPasswordField.getText().equals("")){
-			loginPasswordField.setText("passord");
-			loginPasswordField.setEchoChar('\u0000');
-		}
-	}                                            
-
-	private void loginPasswordFieldActionPerformed(java.awt.event.ActionEvent evt) {                                                   
-		login();
-	}                                                  
-
-	private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {                                            
-		login();
-	}                                           
-
-	private void hostIPFieldFocusGained(java.awt.event.FocusEvent evt) {
-		if (hostIPField.getText().equals("host ip"))
-			hostIPField.setText("");
-	}
-
-	private void hostIPFieldFocusLost(java.awt.event.FocusEvent evt) {
-		if (hostIPField.getText().equals("")){
-			hostIPField.setText("host ip");
-		}
-	}
-
-	private void hostIPFieldActionPerformed(java.awt.event.ActionEvent evt) {
-		login();
-	}
-
-	private void nextWeekLabelMouseClicked(java.awt.event.MouseEvent evt) {
-		setNextWeek();
-	}
-
-	private void previousWeekLabelMouseClicked(java.awt.event.MouseEvent evt) {
-		setPreviousWeek();
-	}
-
-	private void loadingCloseButtonActionPerformed(java.awt.event.ActionEvent evt) {
-		loadingDialog.setVisible(false);
-	}
-
-	private void iWontStandForThisButtonActionPerformed(java.awt.event.ActionEvent evt) {
-		errorDialog.setVisible(false);
-	}
-
-
-	// Variables declaration - do not modify
-	private javax.swing.JPanel appointmentButtonPanel;
-	private javax.swing.JButton appointmentCloseButton;
-	private javax.swing.JLabel appointmentDescriptionLabel;
-	private javax.swing.JTextArea appointmentDescriptionTextArea;
-	private javax.swing.JDialog appointmentDialog;
-	private javax.swing.JPanel appointmentEditPanel;
-	private javax.swing.JLabel appointmentEndLabel;
-	private javax.swing.JComboBox appointmentEndTimeCB;
-	private javax.swing.JButton appointmentFromDateButton;
-	private javax.swing.JPanel appointmentLabelPanel;
-	private javax.swing.JComboBox appointmentRoomCB;
-	private javax.swing.JLabel appointmentRoomLabel;
-	private javax.swing.JButton appointmentSayYoureNotCommingButton;
-	private javax.swing.JButton appointmentShowParticipantsButton;
-	private javax.swing.JLabel appointmentStartLabel;
-	private javax.swing.JComboBox appointmentStartTimeCB;
-	private javax.swing.JScrollPane appointmentTextSP;
-	private javax.swing.JLabel appointmentTitleLabel;
-	private javax.swing.JTextField appointmentTitleTextField;
-	private javax.swing.JButton appointmentToDateButton;
-	private javax.swing.JButton calendarChooserCancelButton;
-	private javax.swing.JDialog calendarChooserDialog;
-	private javax.swing.JButton calendarChooserOkButton;
-	private javax.swing.JScrollPane calendarChooserSC;
-	private javax.swing.JTextField calendarChooserSearchField;
-	private javax.swing.JLabel calendarChooserSearchIcon;
-	private javax.swing.JPanel calendarChooserSearchPanel;
-	private javax.swing.JTable calendarChooserTable;
-	private javax.swing.JLabel calendarShowingLabel;
-	private javax.swing.JDialog errorDialog;
-	private javax.swing.JButton errorDialogButton;
-	private javax.swing.JScrollPane errorDialogSP;
-	private javax.swing.JTextArea errorDialogTextArea;
-	private gui.FixedDateChooserPanel fromDateChooserPanel;
-	private javax.swing.JButton fromDateDateChooserCancelButton;
-	private javax.swing.JDialog fromDateDateChooserDialog;
-	private javax.swing.JButton fromDateDateChooserOkButton;
-	private javax.swing.JFormattedTextField hostIPField;
-	private javax.swing.JButton iWontStandForThisButton;
-	private javax.swing.JTextArea invitationDescription;
-	private javax.swing.JList invitationList;
-	private javax.swing.JPanel invitationPanel;
-	private javax.swing.JButton invitationPanelAttendingButton;
-	private javax.swing.JButton invitationPanelCloseButton;
-	private javax.swing.JScrollPane invitationPanelListSP;
-	private javax.swing.JButton invitationPanelNotAttendinButton;
-	private javax.swing.JPanel invitationPanelTab;
-	private javax.swing.JScrollPane invitationPanelTextSP;
-	private javax.swing.JLabel invitationPanelTimeRoomAvailability;
-	private javax.swing.JButton loadingCloseButton;
-	private javax.swing.JDialog loadingDialog;
-	private javax.swing.JLabel loadingLabel;
-	private javax.swing.JButton logOutButton;
-	private javax.swing.JButton loginButton;
-	private javax.swing.JDialog loginDialog;
-	private javax.swing.JPanel loginPanel;
-	private javax.swing.JPasswordField loginPasswordField;
-	private javax.swing.JTextField loginUsernameTextField;
-	private javax.swing.JTextArea messageDescription;
-	private javax.swing.JList messageList;
-	private javax.swing.JDialog messageOverviewDialog;
-	private javax.swing.JTabbedPane messageOverviewTabbedPane;
-	private javax.swing.JPanel messagePanel;
-	private javax.swing.JButton messagePanelCloseButton;
-	private javax.swing.JScrollPane messagePanelListSP;
-	private javax.swing.JPanel messagePanelTab;
-	private javax.swing.JScrollPane messagePanelTextSP;
-	private javax.swing.JLabel messagePanelTimeRoomAvailability;
-	private javax.swing.JButton messageViewButton;
-	private javax.swing.JButton newAppointmentButton;
-	private javax.swing.JPanel newAppointmentButtonpanel;
-	private javax.swing.JButton newAppointmentCancelButton;
-	private javax.swing.JButton newAppointmentChooseParticipantsButton;
-	private javax.swing.JButton newAppointmentCreateButton;
-	private javax.swing.JLabel newAppointmentDescriptionLabel;
-	private javax.swing.JTextArea newAppointmentDescriptionTextArea;
-	private javax.swing.JDialog newAppointmentDialog;
-	private javax.swing.JPanel newAppointmentEditPanel;
-	private javax.swing.JLabel newAppointmentEndLabel;
-	private javax.swing.JComboBox newAppointmentEndTimeCB;
-	private javax.swing.JButton newAppointmentFromDateButton;
-	private javax.swing.JPanel newAppointmentLabelPanel;
-	private javax.swing.JComboBox newAppointmentRoomCB;
-	private javax.swing.JLabel newAppointmentRoomLabel;
-	private javax.swing.JLabel newAppointmentStartLabel;
-	private javax.swing.JComboBox newAppointmentStartTimeCB;
-	private javax.swing.JScrollPane newAppointmentTextSP;
-	private javax.swing.JLabel newAppointmentTitleLabel;
-	private javax.swing.JTextField newAppointmentTitleTextField;
-	private javax.swing.JButton newAppointmentToDateButton;
-	private javax.swing.JLabel nextWeekLabel;
-	private javax.swing.JButton participantChooserCancelButton;
-	private javax.swing.JDialog participantChooserDialog;
-	private javax.swing.JButton participantChooserOkButton;
-	private javax.swing.JScrollPane participantChooserSP;
-	private javax.swing.JTextField participantChooserSearchField;
-	private javax.swing.JLabel participantChooserSearchIcon;
-	private javax.swing.JPanel participantChooserSearchPanel;
-	private javax.swing.JTable participantChooserTable;
-	private javax.swing.JButton participantOverviewChangeButton;
-	private javax.swing.JButton participantOverviewCloseButton;
-	private javax.swing.JDialog participantOverviewDialog;
-	private javax.swing.JList participantOverviewList;
-	private javax.swing.JScrollPane participantOverviewSP;
-	private javax.swing.JLabel previousWeekLabel;
-	private javax.swing.JProgressBar progressBar;
-	private javax.swing.JButton shownCalendars;
-	private gui.FixedDateChooserPanel toDateChooserPanel;
-	private javax.swing.JButton toDateDateChooserCancelButton;
-	private javax.swing.JDialog toDateDateChooserDialog;
-	private javax.swing.JButton toDateDateChooserOkButton;
-	private javax.swing.JButton weekViewButton;
-	private javax.swing.JScrollPane weekViewSP;
-	private javax.swing.JTable weekViewTable;
-	// End of variables declaration
+        loginDialog = new javax.swing.JDialog();
+        loginPanel = new javax.swing.JPanel();
+        loginUsernameTextField = new javax.swing.JTextField();
+        loginButton = new javax.swing.JButton();
+        loginPasswordField = new javax.swing.JPasswordField();
+        hostIPField = new javax.swing.JFormattedTextField();
+        loadingDialog = new javax.swing.JDialog();
+        progressBar = new javax.swing.JProgressBar();
+        loadingLabel = new javax.swing.JLabel();
+        loadingCloseButton = new javax.swing.JButton();
+        errorDialog = new javax.swing.JDialog();
+        errorDialogButton = new javax.swing.JButton();
+        errorDialogSP = new javax.swing.JScrollPane();
+        errorDialogTextArea = new javax.swing.JTextArea();
+        iWontStandForThisButton = new javax.swing.JButton();
+        calendarChooserDialog = new javax.swing.JDialog();
+        calendarChooserSC = new javax.swing.JScrollPane();
+        calendarChooserTable = new javax.swing.JTable();
+        calendarChooserOkButton = new javax.swing.JButton();
+        calendarChooserCancelButton = new javax.swing.JButton();
+        calendarChooserSearchPanel = new javax.swing.JPanel();
+        calendarChooserSearchField = new javax.swing.JTextField();
+        calendarChooserSearchIcon = new javax.swing.JLabel();
+        messageOverviewDialog = new javax.swing.JDialog();
+        messageOverviewTabbedPane = new javax.swing.JTabbedPane();
+        messagePanelTab = new javax.swing.JPanel();
+        messagePanelListSP = new javax.swing.JScrollPane();
+        messageList = new javax.swing.JList();
+        messagePanel = new javax.swing.JPanel();
+        messagePanelCloseButton = new javax.swing.JButton();
+        messagePanelTimeRoomAvailability = new javax.swing.JLabel();
+        messagePanelTextSP = new javax.swing.JScrollPane();
+        messageDescription = new javax.swing.JTextArea();
+        invitationPanelTab = new javax.swing.JPanel();
+        invitationPanelListSP = new javax.swing.JScrollPane();
+        invitationList = new javax.swing.JList();
+        invitationPanel = new javax.swing.JPanel();
+        invitationPanelAttendingButton = new javax.swing.JButton();
+        invitationPanelNotAttendinButton = new javax.swing.JButton();
+        invitationPanelCloseButton = new javax.swing.JButton();
+        invitationPanelTimeRoomAvailability = new javax.swing.JLabel();
+        invitationPanelTextSP = new javax.swing.JScrollPane();
+        invitationDescription = new javax.swing.JTextArea();
+        participantOverviewDialog = new javax.swing.JDialog();
+        participantOverviewSP = new javax.swing.JScrollPane();
+        participantOverviewList = new javax.swing.JList();
+        participantOverviewChangeButton = new javax.swing.JButton();
+        participantOverviewCloseButton = new javax.swing.JButton();
+        appointmentDialog = new javax.swing.JDialog();
+        appointmentEditPanel = new javax.swing.JPanel();
+        appointmentFromDateButton = new javax.swing.JButton();
+        appointmentStartTimeCB = new javax.swing.JComboBox();
+        appointmentToDateButton = new javax.swing.JButton();
+        appointmentEndTimeCB = new javax.swing.JComboBox();
+        appointmentRoomCB = new javax.swing.JComboBox();
+        appointmentTitleTextField = new javax.swing.JTextField();
+        appointmentTextSP = new javax.swing.JScrollPane();
+        appointmentDescriptionTextArea = new javax.swing.JTextArea();
+        appointmentLabelPanel = new javax.swing.JPanel();
+        appointmentDescriptionLabel = new javax.swing.JLabel();
+        appointmentTitleLabel = new javax.swing.JLabel();
+        appointmentRoomLabel = new javax.swing.JLabel();
+        appointmentEndLabel = new javax.swing.JLabel();
+        appointmentStartLabel = new javax.swing.JLabel();
+        appointmentButtonPanel = new javax.swing.JPanel();
+        appointmentSayYoureNotCommingButton = new javax.swing.JButton();
+        appointmentCloseButton = new javax.swing.JButton();
+        appointmentShowParticipantsButton = new javax.swing.JButton();
+        newAppointmentDialog = new javax.swing.JDialog();
+        newAppointmentEditPanel = new javax.swing.JPanel();
+        newAppointmentFromDateButton = new javax.swing.JButton();
+        newAppointmentStartTimeCB = new javax.swing.JComboBox();
+        newAppointmentToDateButton = new javax.swing.JButton();
+        newAppointmentEndTimeCB = new javax.swing.JComboBox();
+        newAppointmentRoomCB = new javax.swing.JComboBox();
+        newAppointmentTitleTextField = new javax.swing.JTextField();
+        newAppointmentTextSP = new javax.swing.JScrollPane();
+        newAppointmentDescriptionTextArea = new javax.swing.JTextArea();
+        newAppointmentLabelPanel = new javax.swing.JPanel();
+        newAppointmentDescriptionLabel = new javax.swing.JLabel();
+        newAppointmentTitleLabel = new javax.swing.JLabel();
+        newAppointmentRoomLabel = new javax.swing.JLabel();
+        newAppointmentEndLabel = new javax.swing.JLabel();
+        newAppointmentStartLabel = new javax.swing.JLabel();
+        newAppointmentButtonpanel = new javax.swing.JPanel();
+        newAppointmentCreateButton = new javax.swing.JButton();
+        newAppointmentCancelButton = new javax.swing.JButton();
+        newAppointmentChooseParticipantsButton = new javax.swing.JButton();
+        participantChooserDialog = new javax.swing.JDialog();
+        participantChooserSP = new javax.swing.JScrollPane();
+        participantChooserTable = new javax.swing.JTable();
+        participantChooserOkButton = new javax.swing.JButton();
+        participantChooserCancelButton = new javax.swing.JButton();
+        participantChooserSearchPanel = new javax.swing.JPanel();
+        participantChooserSearchIcon = new javax.swing.JLabel();
+        participantChooserSearchField = new javax.swing.JTextField();
+        fromDateDateChooserDialog = new javax.swing.JDialog();
+        fromDateDateChooserOkButton = new javax.swing.JButton();
+        fromDateDateChooserCancelButton = new javax.swing.JButton();
+        fromDateChooserPanel = new gui.FixedDateChooserPanel();
+        toDateDateChooserDialog = new javax.swing.JDialog();
+        toDateDateChooserOkButton = new javax.swing.JButton();
+        toDateDateChooserCancelButton = new javax.swing.JButton();
+        toDateChooserPanel = new gui.FixedDateChooserPanel();
+        messageViewButton = new javax.swing.JButton();
+        newAppointmentButton = new javax.swing.JButton();
+        logOutButton = new javax.swing.JButton();
+        calendarShowingLabel = new javax.swing.JLabel();
+        shownCalendars = new javax.swing.JButton();
+        nextWeekLabel = new javax.swing.JLabel();
+        previousWeekLabel = new javax.swing.JLabel();
+        weekViewSP = new javax.swing.JScrollPane();
+        weekViewTable = new javax.swing.JTable();
+        weekViewButton = new javax.swing.JButton();
+
+        loginDialog.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        loginDialog.setTitle("Logg inn");
+        loginDialog.setLocationByPlatform(true);
+        loginDialog.setModal(true);
+        loginDialog.setResizable(false);
+        loginDialog.addWindowListener(new WindowListener() {
+            public void windowClosed(WindowEvent arg0) {
+                System.exit(0);
+            }
+            public void windowActivated(WindowEvent arg0) {}
+            public void windowClosing(WindowEvent arg0) {}
+            public void windowDeactivated(WindowEvent arg0) {}
+            public void windowDeiconified(WindowEvent arg0) {}
+            public void windowIconified(WindowEvent arg0) {}
+            public void windowOpened(WindowEvent arg0) {}
+        });
+
+        loginUsernameTextField.setText("brukernavn");
+        loginUsernameTextField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                loginUsernameTextFieldFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                loginUsernameTextFieldFocusLost(evt);
+            }
+        });
+
+        loginButton.setFont(new java.awt.Font("Tahoma", 0, 12));
+        loginButton.setText("Logg inn");
+        loginButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                loginButtonActionPerformed(evt);
+            }
+        });
+
+        loginPasswordField.setText("passord");
+        loginPasswordField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                loginPasswordFieldActionPerformed(evt);
+            }
+        });
+        loginPasswordField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                loginPasswordFieldFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                loginPasswordFieldFocusLost(evt);
+            }
+        });
+
+        hostIPField.setText("host ip");
+        try { hostIPField.setText(InetAddress.getLocalHost().getHostAddress());	} catch (UnknownHostException e) {}
+        hostIPField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                hostIPFieldActionPerformed(evt);
+            }
+        });
+        hostIPField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                hostIPFieldFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                hostIPFieldFocusLost(evt);
+            }
+        });
+
+        javax.swing.GroupLayout loginPanelLayout = new javax.swing.GroupLayout(loginPanel);
+        loginPanel.setLayout(loginPanelLayout);
+        loginPanelLayout.setHorizontalGroup(
+            loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(loginPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(loginPasswordField)
+                    .addComponent(loginUsernameTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(loginButton, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                    .addComponent(hostIPField, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        loginPanelLayout.setVerticalGroup(
+            loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(loginPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(loginUsernameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(hostIPField, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(loginButton, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
+                    .addComponent(loginPasswordField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        loginPasswordField.setEchoChar('\u0000');
+
+        javax.swing.GroupLayout loginDialogLayout = new javax.swing.GroupLayout(loginDialog.getContentPane());
+        loginDialog.getContentPane().setLayout(loginDialogLayout);
+        loginDialogLayout.setHorizontalGroup(
+            loginDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(loginPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        loginDialogLayout.setVerticalGroup(
+            loginDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(loginPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+
+        loginButton.requestDefaultFocus();
+        loginUsernameTextField.setNextFocusableComponent(loginPasswordField);
+        loginPasswordField.setNextFocusableComponent(hostIPField);
+        hostIPField.setNextFocusableComponent(loginButton);
+        loginButton.setNextFocusableComponent(loginUsernameTextField);
+
+        loadingDialog.setTitle("Vær tålmodig plz..");
+        loadingDialog.setModal(true);
+        loadingDialog.setResizable(false);
+
+        loadingLabel.setText("Henter data fra databasen");
+
+        loadingCloseButton.setText("Lukk");
+        loadingCloseButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                loadingCloseButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout loadingDialogLayout = new javax.swing.GroupLayout(loadingDialog.getContentPane());
+        loadingDialog.getContentPane().setLayout(loadingDialogLayout);
+        loadingDialogLayout.setHorizontalGroup(
+            loadingDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(loadingDialogLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(loadingDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(progressBar, 0, 0, Short.MAX_VALUE)
+                    .addComponent(loadingLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(loadingCloseButton)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        loadingDialogLayout.setVerticalGroup(
+            loadingDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(loadingDialogLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(loadingDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(loadingCloseButton, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
+                    .addGroup(loadingDialogLayout.createSequentialGroup()
+                        .addComponent(loadingLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(progressBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
+        );
+
+        errorDialog.setTitle("Sorry, det skjedde noe galt =(");
+        errorDialog.setLocationByPlatform(true);
+        errorDialog.setModal(true);
+        errorDialog.setResizable(false);
+
+        errorDialogButton.setText("Javel...");
+        errorDialogButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                errorDialogButtonActionPerformed(evt);
+            }
+        });
+
+        errorDialogTextArea.setColumns(20);
+        errorDialogTextArea.setEditable(false);
+        errorDialogTextArea.setLineWrap(true);
+        errorDialogTextArea.setRows(5);
+        errorDialogTextArea.setWrapStyleWord(true);
+        errorDialogSP.setViewportView(errorDialogTextArea);
+
+        iWontStandForThisButton.setText("Dette finner jeg meg ikke i..!");
+        iWontStandForThisButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                iWontStandForThisButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout errorDialogLayout = new javax.swing.GroupLayout(errorDialog.getContentPane());
+        errorDialog.getContentPane().setLayout(errorDialogLayout);
+        errorDialogLayout.setHorizontalGroup(
+            errorDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(errorDialogLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(errorDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(errorDialogSP, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, errorDialogLayout.createSequentialGroup()
+                        .addComponent(errorDialogButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(iWontStandForThisButton)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        errorDialogLayout.setVerticalGroup(
+            errorDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(errorDialogLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(errorDialogSP, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(errorDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(errorDialogButton)
+                    .addComponent(iWontStandForThisButton))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        calendarChooserDialog.setTitle("Velg Kalendere");
+        calendarChooserDialog.setModal(true);
+        calendarChooserDialog.setResizable(false);
+
+        calendarChooserTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "Ansatt", ""
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.Boolean.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, true
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        calendarChooserTable.setSelectionBackground(new java.awt.Color(231, 233, 255));
+        calendarChooserSC.setViewportView(calendarChooserTable);
+        calendarChooserTable.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+        calendarChooserTable.getColumnModel().getColumn(0).setResizable(false);
+        calendarChooserTable.getColumnModel().getColumn(0).setPreferredWidth(200);
+        calendarChooserTable.getColumnModel().getColumn(1).setResizable(false);
+        calendarChooserTable.getColumnModel().getColumn(1).setPreferredWidth(16);
+
+        calendarChooserOkButton.setText("Ok");
+        calendarChooserOkButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                calendarChooserOkButtonActionPerformed(evt);
+            }
+        });
+
+        calendarChooserCancelButton.setText("Avbryt");
+        calendarChooserCancelButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                calendarChooserCancelButtonActionPerformed(evt);
+            }
+        });
+
+        calendarChooserSearchPanel.setBackground(new java.awt.Color(255, 255, 255));
+        calendarChooserSearchPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
+
+        calendarChooserSearchField.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        calendarChooserSearchField.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+
+        calendarChooserSearchIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fp/client/gui/graphics/Search-icon 30x30 v4.png"))); // NOI18N
+
+        javax.swing.GroupLayout calendarChooserSearchPanelLayout = new javax.swing.GroupLayout(calendarChooserSearchPanel);
+        calendarChooserSearchPanel.setLayout(calendarChooserSearchPanelLayout);
+        calendarChooserSearchPanelLayout.setHorizontalGroup(
+            calendarChooserSearchPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(calendarChooserSearchPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(calendarChooserSearchField, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(calendarChooserSearchIcon))
+        );
+        calendarChooserSearchPanelLayout.setVerticalGroup(
+            calendarChooserSearchPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(calendarChooserSearchIcon)
+            .addComponent(calendarChooserSearchField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+
+        javax.swing.GroupLayout calendarChooserDialogLayout = new javax.swing.GroupLayout(calendarChooserDialog.getContentPane());
+        calendarChooserDialog.getContentPane().setLayout(calendarChooserDialogLayout);
+        calendarChooserDialogLayout.setHorizontalGroup(
+            calendarChooserDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, calendarChooserDialogLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(calendarChooserDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(calendarChooserSC, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 192, Short.MAX_VALUE)
+                    .addComponent(calendarChooserSearchPanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, calendarChooserDialogLayout.createSequentialGroup()
+                        .addComponent(calendarChooserOkButton, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(calendarChooserCancelButton, javax.swing.GroupLayout.DEFAULT_SIZE, 93, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+
+        calendarChooserDialogLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {calendarChooserCancelButton, calendarChooserOkButton});
+
+        calendarChooserDialogLayout.setVerticalGroup(
+            calendarChooserDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(calendarChooserDialogLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(calendarChooserSearchPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(calendarChooserSC, javax.swing.GroupLayout.DEFAULT_SIZE, 203, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(calendarChooserDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(calendarChooserOkButton)
+                    .addComponent(calendarChooserCancelButton))
+                .addContainerGap())
+        );
+
+        messageOverviewDialog.setTitle("Meldinger");
+        messageOverviewDialog.setLocationByPlatform(true);
+        messageOverviewDialog.setModal(true);
+        messageOverviewDialog.setResizable(false);
+
+        messageList.setModel(new javax.swing.AbstractListModel() {
+            String[] strings = { "09.04.2011 - Møte avlyst", "01.04.2011 - Sol i Trondheim" };
+            public int getSize() { return strings.length; }
+            public Object getElementAt(int i) { return strings[i]; }
+        });
+        messageList.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                messageListValueChanged(evt);
+            }
+        });
+        messagePanelListSP.setViewportView(messageList);
+
+        messagePanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Styremøte - 10. April 2011"));
+
+        messagePanelCloseButton.setText("Lukk");
+        messagePanelCloseButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                messagePanelCloseButtonActionPerformed(evt);
+            }
+        });
+
+        messagePanelTimeRoomAvailability.setText("10:00 - 12:15 - Kattelabben");
+
+        messageDescription.setColumns(20);
+        messageDescription.setEditable(false);
+        messageDescription.setLineWrap(true);
+        messageDescription.setRows(5);
+        messageDescription.setText("Møtet er avlyst grunnet potekreft i kattelabben. ");
+        messageDescription.setWrapStyleWord(true);
+        messagePanelTextSP.setViewportView(messageDescription);
+
+        javax.swing.GroupLayout messagePanelLayout = new javax.swing.GroupLayout(messagePanel);
+        messagePanel.setLayout(messagePanelLayout);
+        messagePanelLayout.setHorizontalGroup(
+            messagePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(messagePanelLayout.createSequentialGroup()
+                .addGroup(messagePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(messagePanelLayout.createSequentialGroup()
+                        .addGap(252, 252, 252)
+                        .addComponent(messagePanelCloseButton, javax.swing.GroupLayout.DEFAULT_SIZE, 111, Short.MAX_VALUE))
+                    .addGroup(messagePanelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(messagePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(messagePanelTextSP, javax.swing.GroupLayout.DEFAULT_SIZE, 353, Short.MAX_VALUE)
+                            .addComponent(messagePanelTimeRoomAvailability))))
+                .addContainerGap())
+        );
+        messagePanelLayout.setVerticalGroup(
+            messagePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, messagePanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(messagePanelTimeRoomAvailability)
+                .addGap(18, 18, 18)
+                .addComponent(messagePanelTextSP)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(messagePanelCloseButton))
+        );
+
+        javax.swing.GroupLayout messagePanelTabLayout = new javax.swing.GroupLayout(messagePanelTab);
+        messagePanelTab.setLayout(messagePanelTabLayout);
+        messagePanelTabLayout.setHorizontalGroup(
+            messagePanelTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, messagePanelTabLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(messagePanelListSP, javax.swing.GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(messagePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        messagePanelTabLayout.setVerticalGroup(
+            messagePanelTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, messagePanelTabLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(messagePanelTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(messagePanelListSP, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                    .addComponent(messagePanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
+        );
+
+        messageOverviewTabbedPane.addTab("Meldinger", messagePanelTab);
+
+        invitationList.setModel(new javax.swing.AbstractListModel() {
+            String[] strings = { "03.03.2011 - Styremøte 10. April" };
+            public int getSize() { return strings.length; }
+            public Object getElementAt(int i) { return strings[i]; }
+        });
+        invitationList.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                invitationListValueChanged(evt);
+            }
+        });
+        invitationPanelListSP.setViewportView(invitationList);
+
+        invitationPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Styremøte - 10. April 2011"));
+
+        invitationPanelAttendingButton.setText("Jeg kommer");
+
+        invitationPanelNotAttendinButton.setText("Jeg kommer ikke");
+        invitationPanelNotAttendinButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                invitationPanelNotAttendinButtonActionPerformed(evt);
+            }
+        });
+
+        invitationPanelCloseButton.setText("Lukk");
+        invitationPanelCloseButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                invitationPanelCloseButtonActionPerformed(evt);
+            }
+        });
+
+        invitationPanelTimeRoomAvailability.setText("10:15 - 12:00 - Kattelabben - Du kommer");
+
+        invitationDescription.setColumns(20);
+        invitationDescription.setEditable(false);
+        invitationDescription.setLineWrap(true);
+        invitationDescription.setRows(5);
+        invitationDescription.setText("Det blir et styremøte tiende april, husk å ta med druer og paraply.");
+        invitationDescription.setWrapStyleWord(true);
+        invitationPanelTextSP.setViewportView(invitationDescription);
+
+        javax.swing.GroupLayout invitationPanelLayout = new javax.swing.GroupLayout(invitationPanel);
+        invitationPanel.setLayout(invitationPanelLayout);
+        invitationPanelLayout.setHorizontalGroup(
+            invitationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(invitationPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(invitationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(invitationPanelTimeRoomAvailability)
+                    .addGroup(invitationPanelLayout.createSequentialGroup()
+                        .addComponent(invitationPanelNotAttendinButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(invitationPanelAttendingButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(invitationPanelCloseButton))
+                    .addComponent(invitationPanelTextSP))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        invitationPanelLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {invitationPanelAttendingButton, invitationPanelCloseButton, invitationPanelNotAttendinButton});
+
+        invitationPanelLayout.setVerticalGroup(
+            invitationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, invitationPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(invitationPanelTimeRoomAvailability)
+                .addGap(18, 18, 18)
+                .addComponent(invitationPanelTextSP)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(invitationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(invitationPanelNotAttendinButton)
+                    .addComponent(invitationPanelAttendingButton)
+                    .addComponent(invitationPanelCloseButton)))
+        );
+
+        javax.swing.GroupLayout invitationPanelTabLayout = new javax.swing.GroupLayout(invitationPanelTab);
+        invitationPanelTab.setLayout(invitationPanelTabLayout);
+        invitationPanelTabLayout.setHorizontalGroup(
+            invitationPanelTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, invitationPanelTabLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(invitationPanelListSP, javax.swing.GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(invitationPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        invitationPanelTabLayout.setVerticalGroup(
+            invitationPanelTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, invitationPanelTabLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(invitationPanelTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(invitationPanelListSP, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                    .addComponent(invitationPanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+
+        messageOverviewTabbedPane.addTab("Innkallinger", invitationPanelTab);
+
+        javax.swing.GroupLayout messageOverviewDialogLayout = new javax.swing.GroupLayout(messageOverviewDialog.getContentPane());
+        messageOverviewDialog.getContentPane().setLayout(messageOverviewDialogLayout);
+        messageOverviewDialogLayout.setHorizontalGroup(
+            messageOverviewDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(messageOverviewDialogLayout.createSequentialGroup()
+                .addComponent(messageOverviewTabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 590, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        messageOverviewDialogLayout.setVerticalGroup(
+            messageOverviewDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(messageOverviewTabbedPane, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
+        );
+
+        participantOverviewDialog.setTitle("Deltakere");
+        participantOverviewDialog.setLocationByPlatform(true);
+        participantOverviewDialog.setModal(true);
+        participantOverviewDialog.setResizable(false);
+
+        participantOverviewList.setModel(new javax.swing.AbstractListModel() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public Object getElementAt(int i) { return strings[i]; }
+        });
+        participantOverviewSP.setViewportView(participantOverviewList);
+
+        participantOverviewChangeButton.setText("Endre");
+        participantOverviewChangeButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                participantOverviewChangeButtonActionPerformed(evt);
+            }
+        });
+
+        participantOverviewCloseButton.setText("Lukk");
+        participantOverviewCloseButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                participantOverviewCloseButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout participantOverviewDialogLayout = new javax.swing.GroupLayout(participantOverviewDialog.getContentPane());
+        participantOverviewDialog.getContentPane().setLayout(participantOverviewDialogLayout);
+        participantOverviewDialogLayout.setHorizontalGroup(
+            participantOverviewDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(participantOverviewDialogLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(participantOverviewDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(participantOverviewSP, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, participantOverviewDialogLayout.createSequentialGroup()
+                        .addComponent(participantOverviewChangeButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(participantOverviewCloseButton)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        participantOverviewDialogLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {participantOverviewChangeButton, participantOverviewCloseButton});
+
+        participantOverviewDialogLayout.setVerticalGroup(
+            participantOverviewDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(participantOverviewDialogLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(participantOverviewSP, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(participantOverviewDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(participantOverviewChangeButton)
+                    .addComponent(participantOverviewCloseButton))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        appointmentDialog.setTitle("Ny Avtale");
+        appointmentDialog.setLocationByPlatform(true);
+        appointmentDialog.setModal(true);
+        appointmentDialog.setResizable(false);
+
+        appointmentFromDateButton.setText("Lørdag 24. Desember - 2012");
+        appointmentFromDateButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                appointmentFromDateButtonActionPerformed(evt);
+            }
+        });
+
+        appointmentStartTimeCB.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00:00", "00:15", "00:30", "00:45", "01:00", "01:15", "01:30", "01:45", "02:00", "02:15", "02:30", "02:45", "03:00", "03:15", "03:30", "03:45", "04:00", "04:15", "04:30", "04:45", "05:00", "05:15", "05:30", "05:45", "06:00", "06:15", "06:30", "06:45", "07:00", "07:15", "07:30", "07:45", "08:00", "08:15", "08:30", "08:45", "09:00", "09:15", "09:30", "09:45", "10:00", "10:15", "10:30", "10:45", "11:00", "11:15", "11:30", "11:45", "12:00", "12:15", "12:30", "12:45", "13:00", "13:15", "13:30", "13:45", "14:00", "14:15", "14:30", "14:45", "15:00", "15:15", "15:30", "15:45", "16:00", "16:15", "16:30", "16:45", "17:00", "17:15", "17:30", "17:45", "18:00", "18:15", "18:30", "18:45", "19:00", "19:15", "19:30", "19:45", "20:00", "20:15", "20:30", "20:45", "21:00", "21:15", "21:30", "21:45", "22:00", "22:15", "22:30", "22:45", "23:00", "23:15", "23:30", "23:45" }));
+
+        appointmentToDateButton.setText("Lørdag 24. Desember - 2012");
+        appointmentToDateButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                appointmentToDateButtonActionPerformed(evt);
+            }
+        });
+
+        appointmentEndTimeCB.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00:00", "00:15", "00:30", "00:45", "01:00", "01:15", "01:30", "01:45", "02:00", "02:15", "02:30", "02:45", "03:00", "03:15", "03:30", "03:45", "04:00", "04:15", "04:30", "04:45", "05:00", "05:15", "05:30", "05:45", "06:00", "06:15", "06:30", "06:45", "07:00", "07:15", "07:30", "07:45", "08:00", "08:15", "08:30", "08:45", "09:00", "09:15", "09:30", "09:45", "10:00", "10:15", "10:30", "10:45", "11:00", "11:15", "11:30", "11:45", "12:00", "12:15", "12:30", "12:45", "13:00", "13:15", "13:30", "13:45", "14:00", "14:15", "14:30", "14:45", "15:00", "15:15", "15:30", "15:45", "16:00", "16:15", "16:30", "16:45", "17:00", "17:15", "17:30", "17:45", "18:00", "18:15", "18:30", "18:45", "19:00", "19:15", "19:30", "19:45", "20:00", "20:15", "20:30", "20:45", "21:00", "21:15", "21:30", "21:45", "22:00", "22:15", "22:30", "22:45", "23:00", "23:15", "23:30", "23:45" }));
+
+        appointmentRoomCB.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        appointmentDescriptionTextArea.setColumns(20);
+        appointmentDescriptionTextArea.setLineWrap(true);
+        appointmentDescriptionTextArea.setRows(5);
+        appointmentDescriptionTextArea.setWrapStyleWord(true);
+        appointmentTextSP.setViewportView(appointmentDescriptionTextArea);
+
+        javax.swing.GroupLayout appointmentEditPanelLayout = new javax.swing.GroupLayout(appointmentEditPanel);
+        appointmentEditPanel.setLayout(appointmentEditPanelLayout);
+        appointmentEditPanelLayout.setHorizontalGroup(
+            appointmentEditPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(appointmentEditPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(appointmentEditPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(appointmentEditPanelLayout.createSequentialGroup()
+                        .addGroup(appointmentEditPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(appointmentRoomCB, 0, 244, Short.MAX_VALUE)
+                            .addGroup(appointmentEditPanelLayout.createSequentialGroup()
+                                .addGroup(appointmentEditPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(appointmentFromDateButton, javax.swing.GroupLayout.DEFAULT_SIZE, 185, Short.MAX_VALUE)
+                                    .addComponent(appointmentToDateButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 185, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(appointmentEditPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(appointmentEndTimeCB, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(appointmentStartTimeCB, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, appointmentEditPanelLayout.createSequentialGroup()
+                        .addGroup(appointmentEditPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(appointmentTextSP, javax.swing.GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE)
+                            .addComponent(appointmentTitleTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE))
+                        .addContainerGap())))
+        );
+        appointmentEditPanelLayout.setVerticalGroup(
+            appointmentEditPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(appointmentEditPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(appointmentEditPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(appointmentStartTimeCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(appointmentFromDateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 20, Short.MAX_VALUE))
+                .addGap(9, 9, 9)
+                .addGroup(appointmentEditPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(appointmentToDateButton, 0, 0, Short.MAX_VALUE)
+                    .addComponent(appointmentEndTimeCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(appointmentRoomCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(appointmentTitleTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(appointmentTextSP, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        appointmentDescriptionLabel.setText("Beskrivelse");
+
+        appointmentTitleLabel.setText("Tittel");
+
+        appointmentRoomLabel.setText("Hvor");
+
+        appointmentEndLabel.setText("Slutt");
+
+        appointmentStartLabel.setText("Start");
+
+        javax.swing.GroupLayout appointmentLabelPanelLayout = new javax.swing.GroupLayout(appointmentLabelPanel);
+        appointmentLabelPanel.setLayout(appointmentLabelPanelLayout);
+        appointmentLabelPanelLayout.setHorizontalGroup(
+            appointmentLabelPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(appointmentLabelPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(appointmentLabelPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(appointmentStartLabel)
+                    .addComponent(appointmentEndLabel)
+                    .addComponent(appointmentRoomLabel)
+                    .addComponent(appointmentTitleLabel)
+                    .addComponent(appointmentDescriptionLabel))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        appointmentLabelPanelLayout.setVerticalGroup(
+            appointmentLabelPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(appointmentLabelPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(appointmentStartLabel)
+                .addGap(18, 18, 18)
+                .addComponent(appointmentEndLabel)
+                .addGap(18, 18, 18)
+                .addComponent(appointmentRoomLabel)
+                .addGap(18, 18, 18)
+                .addComponent(appointmentTitleLabel)
+                .addGap(18, 18, 18)
+                .addComponent(appointmentDescriptionLabel)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        appointmentSayYoureNotCommingButton.setText("Meld Avbud");
+        appointmentSayYoureNotCommingButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                appointmentSayYoureNotCommingButtonActionPerformed(evt);
+            }
+        });
+
+        appointmentCloseButton.setText("Lukk");
+        appointmentCloseButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                appointmentCloseButtonActionPerformed(evt);
+            }
+        });
+
+        appointmentShowParticipantsButton.setText("Vis Deltakere");
+        appointmentShowParticipantsButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                appointmentShowParticipantsButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout appointmentButtonPanelLayout = new javax.swing.GroupLayout(appointmentButtonPanel);
+        appointmentButtonPanel.setLayout(appointmentButtonPanelLayout);
+        appointmentButtonPanelLayout.setHorizontalGroup(
+            appointmentButtonPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(appointmentButtonPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(appointmentShowParticipantsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(appointmentSayYoureNotCommingButton, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(appointmentCloseButton, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        appointmentButtonPanelLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {appointmentCloseButton, appointmentSayYoureNotCommingButton, appointmentShowParticipantsButton});
+
+        appointmentButtonPanelLayout.setVerticalGroup(
+            appointmentButtonPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(appointmentButtonPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE, false)
+                .addComponent(appointmentShowParticipantsButton)
+                .addComponent(appointmentSayYoureNotCommingButton)
+                .addComponent(appointmentCloseButton))
+        );
+
+        javax.swing.GroupLayout appointmentDialogLayout = new javax.swing.GroupLayout(appointmentDialog.getContentPane());
+        appointmentDialog.getContentPane().setLayout(appointmentDialogLayout);
+        appointmentDialogLayout.setHorizontalGroup(
+            appointmentDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(appointmentDialogLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(appointmentDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(appointmentDialogLayout.createSequentialGroup()
+                        .addComponent(appointmentLabelPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(appointmentEditPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(appointmentButtonPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        appointmentDialogLayout.setVerticalGroup(
+            appointmentDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(appointmentDialogLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(appointmentDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(appointmentLabelPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(appointmentEditPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(appointmentButtonPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(14, Short.MAX_VALUE))
+        );
+
+        newAppointmentDialog.setTitle("Ny Avtale");
+        newAppointmentDialog.setLocationByPlatform(true);
+        newAppointmentDialog.setModal(true);
+        newAppointmentDialog.setResizable(false);
+
+        newAppointmentFromDateButton.setText("Lørdag 24. Desember - 2012");
+        newAppointmentFromDateButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                newAppointmentFromDateButtonActionPerformed(evt);
+            }
+        });
+
+        newAppointmentStartTimeCB.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "07:00", "07:15", "07:30", "07:45", "08:00", "08:15", "08:30", "08:45", "09:00", "09:15", "09:30", "09:45", "10:00", "10:15", "10:30", "10:45", "11:00", "11:15", "11:30", "11:45", "12:00", "12:15", "12:30", "12:45", "13:00", "13:15", "13:30", "13:45", "14:00", "14:15", "14:30", "14:45", "15:00", "15:15", "15:30", "15:45", "16:00", "16:15", "16:30", "16:45", "17:00", "17:15", "17:30", "17:45", "18:00", "18:15", "18:30", "18:45", "19:00", "19:15", "19:30", "19:45", "20:00", "20:15", "20:30", "20:45", "21:00", "21:15", "21:30", "21:45", "22:00", "22:15", "22:30", "22:45", "23:00", "23:15", "23:30", "23:45", "00:00", "00:15", "00:30", "00:45", "01:00", "01:15", "01:30", "01:45", "02:00", "02:15", "02:30", "02:45", "03:00", "03:15", "03:30", "03:45", "04:00", "04:15", "04:30", "04:45", "05:00", "05:15", "05:30", "05:45", "06:00", "06:15", "06:30", "06:45" }));
+
+        newAppointmentToDateButton.setText("Lørdag 24. Desember - 2012");
+        newAppointmentToDateButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                newAppointmentToDateButtonActionPerformed(evt);
+            }
+        });
+
+        newAppointmentEndTimeCB.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "07:00", "07:15", "07:30", "07:45", "08:00", "08:15", "08:30", "08:45", "09:00", "09:15", "09:30", "09:45", "10:00", "10:15", "10:30", "10:45", "11:00", "11:15", "11:30", "11:45", "12:00", "12:15", "12:30", "12:45", "13:00", "13:15", "13:30", "13:45", "14:00", "14:15", "14:30", "14:45", "15:00", "15:15", "15:30", "15:45", "16:00", "16:15", "16:30", "16:45", "17:00", "17:15", "17:30", "17:45", "18:00", "18:15", "18:30", "18:45", "19:00", "19:15", "19:30", "19:45", "20:00", "20:15", "20:30", "20:45", "21:00", "21:15", "21:30", "21:45", "22:00", "22:15", "22:30", "22:45", "23:00", "23:15", "23:30", "23:45", "00:00", "00:15", "00:30", "00:45", "01:00", "01:15", "01:30", "01:45", "02:00", "02:15", "02:30", "02:45", "03:00", "03:15", "03:30", "03:45", "04:00", "04:15", "04:30", "04:45", "05:00", "05:15", "05:30", "05:45", "06:00", "06:15", "06:30", "06:45" }));
+
+        newAppointmentRoomCB.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Kattelabben", "Hundelabben", "Fiskelabben" }));
+
+        newAppointmentDescriptionTextArea.setColumns(20);
+        newAppointmentDescriptionTextArea.setLineWrap(true);
+        newAppointmentDescriptionTextArea.setRows(5);
+        newAppointmentDescriptionTextArea.setWrapStyleWord(true);
+        newAppointmentTextSP.setViewportView(newAppointmentDescriptionTextArea);
+
+        javax.swing.GroupLayout newAppointmentEditPanelLayout = new javax.swing.GroupLayout(newAppointmentEditPanel);
+        newAppointmentEditPanel.setLayout(newAppointmentEditPanelLayout);
+        newAppointmentEditPanelLayout.setHorizontalGroup(
+            newAppointmentEditPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(newAppointmentEditPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(newAppointmentEditPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(newAppointmentEditPanelLayout.createSequentialGroup()
+                        .addGroup(newAppointmentEditPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(newAppointmentRoomCB, 0, 244, Short.MAX_VALUE)
+                            .addGroup(newAppointmentEditPanelLayout.createSequentialGroup()
+                                .addGroup(newAppointmentEditPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(newAppointmentFromDateButton, javax.swing.GroupLayout.DEFAULT_SIZE, 185, Short.MAX_VALUE)
+                                    .addComponent(newAppointmentToDateButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 185, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(newAppointmentEditPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(newAppointmentEndTimeCB, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(newAppointmentStartTimeCB, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, newAppointmentEditPanelLayout.createSequentialGroup()
+                        .addGroup(newAppointmentEditPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(newAppointmentTextSP, javax.swing.GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE)
+                            .addComponent(newAppointmentTitleTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE))
+                        .addContainerGap())))
+        );
+        newAppointmentEditPanelLayout.setVerticalGroup(
+            newAppointmentEditPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(newAppointmentEditPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(newAppointmentEditPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(newAppointmentStartTimeCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(newAppointmentFromDateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 20, Short.MAX_VALUE))
+                .addGap(9, 9, 9)
+                .addGroup(newAppointmentEditPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(newAppointmentToDateButton, 0, 0, Short.MAX_VALUE)
+                    .addComponent(newAppointmentEndTimeCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(newAppointmentRoomCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(newAppointmentTitleTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(newAppointmentTextSP, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        newAppointmentDescriptionLabel.setText("Beskrivelse");
+
+        newAppointmentTitleLabel.setText("Tittel");
+
+        newAppointmentRoomLabel.setText("Hvor");
+
+        newAppointmentEndLabel.setText("Slutt");
+
+        newAppointmentStartLabel.setText("Start");
+
+        javax.swing.GroupLayout newAppointmentLabelPanelLayout = new javax.swing.GroupLayout(newAppointmentLabelPanel);
+        newAppointmentLabelPanel.setLayout(newAppointmentLabelPanelLayout);
+        newAppointmentLabelPanelLayout.setHorizontalGroup(
+            newAppointmentLabelPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(newAppointmentLabelPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(newAppointmentLabelPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(newAppointmentStartLabel)
+                    .addComponent(newAppointmentEndLabel)
+                    .addComponent(newAppointmentRoomLabel)
+                    .addComponent(newAppointmentTitleLabel)
+                    .addComponent(newAppointmentDescriptionLabel))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        newAppointmentLabelPanelLayout.setVerticalGroup(
+            newAppointmentLabelPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(newAppointmentLabelPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(newAppointmentStartLabel)
+                .addGap(18, 18, 18)
+                .addComponent(newAppointmentEndLabel)
+                .addGap(18, 18, 18)
+                .addComponent(newAppointmentRoomLabel)
+                .addGap(18, 18, 18)
+                .addComponent(newAppointmentTitleLabel)
+                .addGap(18, 18, 18)
+                .addComponent(newAppointmentDescriptionLabel)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        newAppointmentCreateButton.setText("Opprett Avtale");
+        newAppointmentCreateButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                newAppointmentCreateButtonActionPerformed(evt);
+            }
+        });
+
+        newAppointmentCancelButton.setText("Avbryt");
+        newAppointmentCancelButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                newAppointmentCancelButtonActionPerformed(evt);
+            }
+        });
+
+        newAppointmentChooseParticipantsButton.setText("Velg Deltakere");
+        newAppointmentChooseParticipantsButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                newAppointmentChooseParticipantsButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout newAppointmentButtonpanelLayout = new javax.swing.GroupLayout(newAppointmentButtonpanel);
+        newAppointmentButtonpanel.setLayout(newAppointmentButtonpanelLayout);
+        newAppointmentButtonpanelLayout.setHorizontalGroup(
+            newAppointmentButtonpanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(newAppointmentButtonpanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(newAppointmentChooseParticipantsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(newAppointmentCreateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(newAppointmentCancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        newAppointmentButtonpanelLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {newAppointmentCancelButton, newAppointmentChooseParticipantsButton, newAppointmentCreateButton});
+
+        newAppointmentButtonpanelLayout.setVerticalGroup(
+            newAppointmentButtonpanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(newAppointmentButtonpanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE, false)
+                .addComponent(newAppointmentChooseParticipantsButton)
+                .addComponent(newAppointmentCreateButton)
+                .addComponent(newAppointmentCancelButton))
+        );
+
+        javax.swing.GroupLayout newAppointmentDialogLayout = new javax.swing.GroupLayout(newAppointmentDialog.getContentPane());
+        newAppointmentDialog.getContentPane().setLayout(newAppointmentDialogLayout);
+        newAppointmentDialogLayout.setHorizontalGroup(
+            newAppointmentDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(newAppointmentDialogLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(newAppointmentDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(newAppointmentDialogLayout.createSequentialGroup()
+                        .addComponent(newAppointmentLabelPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(newAppointmentEditPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(newAppointmentButtonpanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        newAppointmentDialogLayout.setVerticalGroup(
+            newAppointmentDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(newAppointmentDialogLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(newAppointmentDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(newAppointmentLabelPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(newAppointmentEditPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(newAppointmentButtonpanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(14, Short.MAX_VALUE))
+        );
+
+        participantChooserDialog.setTitle("Velg Deltakere");
+        participantChooserDialog.setModal(true);
+        participantChooserDialog.setResizable(false);
+
+        participantChooserTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "Ansatt", ""
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.Boolean.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, true
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        participantChooserTable.setColumnSelectionAllowed(true);
+        participantChooserTable.setSelectionBackground(new java.awt.Color(231, 233, 255));
+        participantChooserSP.setViewportView(participantChooserTable);
+        participantChooserTable.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+        participantChooserTable.getColumnModel().getColumn(0).setResizable(false);
+        participantChooserTable.getColumnModel().getColumn(0).setPreferredWidth(200);
+        participantChooserTable.getColumnModel().getColumn(1).setResizable(false);
+        participantChooserTable.getColumnModel().getColumn(1).setPreferredWidth(16);
+
+        participantChooserOkButton.setText("Ok");
+        participantChooserOkButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                participantChooserOkButtonActionPerformed(evt);
+            }
+        });
+
+        participantChooserCancelButton.setText("Avbryt");
+        participantChooserCancelButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                participantChooserCancelButtonActionPerformed(evt);
+            }
+        });
+
+        participantChooserSearchPanel.setBackground(new java.awt.Color(255, 255, 255));
+        participantChooserSearchPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
+
+        participantChooserSearchIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fp/client/gui/graphics/Search-icon 30x30 v4.png"))); // NOI18N
+
+        participantChooserSearchField.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        participantChooserSearchField.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+
+        javax.swing.GroupLayout participantChooserSearchPanelLayout = new javax.swing.GroupLayout(participantChooserSearchPanel);
+        participantChooserSearchPanel.setLayout(participantChooserSearchPanelLayout);
+        participantChooserSearchPanelLayout.setHorizontalGroup(
+            participantChooserSearchPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(participantChooserSearchPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(participantChooserSearchField, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(participantChooserSearchIcon))
+        );
+        participantChooserSearchPanelLayout.setVerticalGroup(
+            participantChooserSearchPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(participantChooserSearchIcon)
+            .addComponent(participantChooserSearchField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+
+        javax.swing.GroupLayout participantChooserDialogLayout = new javax.swing.GroupLayout(participantChooserDialog.getContentPane());
+        participantChooserDialog.getContentPane().setLayout(participantChooserDialogLayout);
+        participantChooserDialogLayout.setHorizontalGroup(
+            participantChooserDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, participantChooserDialogLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(participantChooserDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(participantChooserSP, javax.swing.GroupLayout.Alignment.LEADING, 0, 0, Short.MAX_VALUE)
+                    .addComponent(participantChooserSearchPanel, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, participantChooserDialogLayout.createSequentialGroup()
+                        .addComponent(participantChooserOkButton, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(participantChooserCancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
+        );
+
+        participantChooserDialogLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {participantChooserCancelButton, participantChooserOkButton});
+
+        participantChooserDialogLayout.setVerticalGroup(
+            participantChooserDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(participantChooserDialogLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(participantChooserSearchPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(participantChooserSP, javax.swing.GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE)
+                .addGap(12, 12, 12)
+                .addGroup(participantChooserDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(participantChooserOkButton)
+                    .addComponent(participantChooserCancelButton))
+                .addContainerGap())
+        );
+
+        fromDateDateChooserDialog.setTitle("Velg Dato");
+        fromDateDateChooserDialog.setModal(true);
+        fromDateDateChooserDialog.setResizable(false);
+
+        fromDateDateChooserOkButton.setText("Ok");
+        fromDateDateChooserOkButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fromDateDateChooserOkButtonActionPerformed(evt);
+            }
+        });
+
+        fromDateDateChooserCancelButton.setText("Avbryt");
+        fromDateDateChooserCancelButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fromDateDateChooserCancelButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout fromDateDateChooserDialogLayout = new javax.swing.GroupLayout(fromDateDateChooserDialog.getContentPane());
+        fromDateDateChooserDialog.getContentPane().setLayout(fromDateDateChooserDialogLayout);
+        fromDateDateChooserDialogLayout.setHorizontalGroup(
+            fromDateDateChooserDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(fromDateDateChooserDialogLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(fromDateDateChooserDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(fromDateChooserPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 204, Short.MAX_VALUE)
+                    .addGroup(fromDateDateChooserDialogLayout.createSequentialGroup()
+                        .addComponent(fromDateDateChooserOkButton, javax.swing.GroupLayout.DEFAULT_SIZE, 99, Short.MAX_VALUE)
+                        .addGap(10, 10, 10)
+                        .addComponent(fromDateDateChooserCancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
+        );
+        fromDateDateChooserDialogLayout.setVerticalGroup(
+            fromDateDateChooserDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, fromDateDateChooserDialogLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(fromDateChooserPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 233, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(fromDateDateChooserDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(fromDateDateChooserOkButton)
+                    .addComponent(fromDateDateChooserCancelButton))
+                .addContainerGap())
+        );
+
+        toDateDateChooserDialog.setTitle("Velg Dato");
+        toDateDateChooserDialog.setModal(true);
+        toDateDateChooserDialog.setResizable(false);
+
+        toDateDateChooserOkButton.setText("Ok");
+        toDateDateChooserOkButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                toDateDateChooserOkButtonActionPerformed(evt);
+            }
+        });
+
+        toDateDateChooserCancelButton.setText("Avbryt");
+        toDateDateChooserCancelButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                toDateDateChooserCancelButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout toDateDateChooserDialogLayout = new javax.swing.GroupLayout(toDateDateChooserDialog.getContentPane());
+        toDateDateChooserDialog.getContentPane().setLayout(toDateDateChooserDialogLayout);
+        toDateDateChooserDialogLayout.setHorizontalGroup(
+            toDateDateChooserDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(toDateDateChooserDialogLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(toDateDateChooserDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(toDateChooserPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 204, Short.MAX_VALUE)
+                    .addGroup(toDateDateChooserDialogLayout.createSequentialGroup()
+                        .addComponent(toDateDateChooserOkButton, javax.swing.GroupLayout.DEFAULT_SIZE, 99, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(toDateDateChooserCancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
+        );
+        toDateDateChooserDialogLayout.setVerticalGroup(
+            toDateDateChooserDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, toDateDateChooserDialogLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(toDateChooserPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 233, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(toDateDateChooserDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(toDateDateChooserOkButton)
+                    .addComponent(toDateDateChooserCancelButton))
+                .addContainerGap())
+        );
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Avtalebok 1.0");
+        setResizable(false);
+
+        messageViewButton.setText("Meldinger");
+        messageViewButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                messageViewButtonActionPerformed(evt);
+            }
+        });
+
+        newAppointmentButton.setText("Ny Avtale");
+        newAppointmentButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                newAppointmentButtonActionPerformed(evt);
+            }
+        });
+
+        logOutButton.setText("Logg Ut");
+        logOutButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                logOutButtonActionPerformed(evt);
+            }
+        });
+
+        calendarShowingLabel.setFont(new java.awt.Font("Tahoma", 0, 12));
+        calendarShowingLabel.setText("Viser:");
+
+        shownCalendars.setText("Ingen Kalender");
+        shownCalendars.setFocusable(false);
+        shownCalendars.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        shownCalendars.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        shownCalendars.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                shownCalendarsActionPerformed(evt);
+            }
+        });
+
+        nextWeekLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fp/client/gui/graphics/nextWeek.png"))); // NOI18N
+        nextWeekLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        nextWeekLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                nextWeekLabelMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                nextWeekLabelMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                nextWeekLabelMouseExited(evt);
+            }
+        });
+
+        previousWeekLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fp/client/gui/graphics/prevWeek.png"))); // NOI18N
+        previousWeekLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        previousWeekLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                previousWeekLabelMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                previousWeekLabelMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                previousWeekLabelMouseExited(evt);
+            }
+        });
+
+        weekViewTable.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        weekViewTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Tid", "Mandag 20. September", "Tirsdag 21. September", "Onsdag 22. September", "Torsdag 23. September", "Fredag 24. September", "Lørdag 25. September", "Søndag 26. September"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        weekViewTable.setColumnSelectionAllowed(true);
+        weekViewTable.setRowHeight(32);
+        weekViewSP.setViewportView(weekViewTable);
+        weekViewTable.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        weekViewTable.getColumnModel().getColumn(0).setMinWidth(33);
+        weekViewTable.getColumnModel().getColumn(0).setMaxWidth(33);
+
+        weekViewButton.setFont(new java.awt.Font("Calibri", 0, 15)); // NOI18N
+        weekViewButton.setText("Uke 00 - 0000");
+        weekViewButton.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(weekViewSP, javax.swing.GroupLayout.PREFERRED_SIZE, 914, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(8, 8, 8)
+                        .addComponent(calendarShowingLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(shownCalendars, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(124, 124, 124)
+                        .addComponent(previousWeekLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(weekViewButton, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(nextWeekLabel))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(logOutButton, javax.swing.GroupLayout.DEFAULT_SIZE, 79, Short.MAX_VALUE)
+                        .addGap(667, 667, 667)
+                        .addComponent(newAppointmentButton)
+                        .addGap(10, 10, 10)
+                        .addComponent(messageViewButton)))
+                .addContainerGap())
+        );
+
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {logOutButton, messageViewButton, newAppointmentButton});
+
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(weekViewButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(nextWeekLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(previousWeekLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(shownCalendars, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(calendarShowingLabel)))
+                .addGap(17, 17, 17)
+                .addComponent(weekViewSP, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(logOutButton)
+                    .addComponent(newAppointmentButton)
+                    .addComponent(messageViewButton))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        java.util.Calendar today = java.util.Calendar.getInstance();
+        weekViewButton.setText("Uke "+ today.get(java.util.Calendar.WEEK_OF_YEAR) + " - " + today.get(java.util.Calendar.YEAR) );
+
+        weekViewButton.setFocusable(false);
+
+        pack();
+    }// </editor-fold>
+
+    private void messageViewButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                  
+        messageOverviewDialog.pack();
+        messageOverviewDialog.setLocationRelativeTo(this);
+        messageOverviewDialog.setVisible(true);
+    }                                                 
+
+    private void newAppointmentButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                     
+        newAppointmentToDateButton.setText(dateToString(new Date()));
+        newAppointmentFromDateButton.setText(dateToString(new Date()));
+        newAppointmentDialog.pack();
+        newAppointmentDialog.setLocationRelativeTo(this);
+        newAppointmentDialog.setVisible(true);
+    }                                                    
+
+    private void errorDialogButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                  
+       errorDialog.setVisible(false);
+    }                                                 
+
+    private void participantOverviewChangeButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                                
+        participantOverviewDialog.setVisible(false);
+    }                                                               
+
+    private void participantOverviewCloseButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                               
+        participantOverviewDialog.setVisible(false);
+    }                                                              
+
+    private void logOutButtonActionPerformed(java.awt.event.ActionEvent evt) {                                             
+        loginPasswordField.setText("passord");
+        loginUsernameTextField.setText("brukernavn");
+        loginPasswordField.setEchoChar('\u0000');
+        loginDialog.setVisible(true);
+    }                                            
+
+    private void fromDateDateChooserCancelButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                                
+        System.out.print(fromDateChooserPanel.getDate());
+        fromDateDateChooserDialog.setVisible(false);
+    }                                                               
+
+    private void fromDateDateChooserOkButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                            
+        newAppointmentFromDateButton.setText(dateToString(fromDateChooserPanel.getDate()));
+        fromDateDateChooserDialog.setVisible(false);
+    }                                                           
+
+    private void newAppointmentChooseParticipantsButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                                       
+        participantChooserDialog.pack();
+        participantChooserDialog.setLocationRelativeTo(newAppointmentDialog);
+        participantChooserDialog.setVisible(true);
+    }                                                                      
+
+    private void newAppointmentCreateButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                           
+        newAppointmentDialog.setVisible(false);
+        createActivity();
+    }                                                          
+
+    private void newAppointmentCancelButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                           
+        newAppointmentDialog.setVisible(false);
+    }                                                          
+
+    private void newAppointmentToDateButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                           
+        toDateDateChooserDialog.pack();
+        java.awt.Point buttonLocation = ((javax.swing.JButton) evt.getSource()).getLocationOnScreen();
+        buttonLocation.translate(-20, 25);
+        toDateDateChooserDialog.setLocation(buttonLocation);
+        toDateDateChooserDialog.setVisible(true);
+    }                                                          
+
+    private void newAppointmentFromDateButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                             
+        fromDateDateChooserDialog.pack();
+        java.awt.Point buttonLocation = ((javax.swing.JButton) evt.getSource()).getLocationOnScreen();
+        buttonLocation.translate(-20, 25);
+        fromDateDateChooserDialog.setLocation(buttonLocation);
+        fromDateDateChooserDialog.setVisible(true);
+    }                                                            
+
+    private void toDateDateChooserOkButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                          
+        newAppointmentToDateButton.setText(dateToString(toDateChooserPanel.getDate()));
+        toDateDateChooserDialog.setVisible(false);
+    }                                                         
+
+    private void toDateDateChooserCancelButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                              
+        toDateDateChooserDialog.setVisible(false);
+    }                                                             
+
+    private void participantChooserOkButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                           
+        participantChooserDialog.setVisible(false);
+    }                                                          
+
+    private void participantChooserCancelButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                               
+        participantChooserDialog.setVisible(false);
+    }                                                              
+
+    private void calendarChooserOkButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                        
+        changeCalendarView();
+        calendarChooserDialog.setVisible(false);
+    }                                                       
+
+    private void calendarChooserCancelButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                            
+        calendarChooserDialog.setVisible(false);
+    }                                                           
+
+    private void shownCalendarsActionPerformed(java.awt.event.ActionEvent evt) {                                               
+        calendarChooserDialog.pack();
+        java.awt.Point buttonLocation = ((javax.swing.JButton) evt.getSource()).getLocationOnScreen();
+        calendarChooserDialog.setLocation(buttonLocation);
+        calendarChooserDialog.setVisible(true);
+    }                                              
+
+    private void invitationPanelCloseButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                           
+        messageOverviewDialog.setVisible(false);
+    }                                                          
+
+    private void messagePanelCloseButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                        
+        messageOverviewDialog.setVisible(false);
+    }                                                       
+
+    private void appointmentToDateButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                        
+        // TODO add your handling code here:
+    }                                                       
+
+    private void appointmentFromDateButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                          
+        // TODO add your handling code here:
+    }                                                         
+
+    private void appointmentSayYoureNotCommingButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                                    
+        appointmentDialog.setVisible(false);
+        cancelActivity();
+    }                                                                   
+
+    private void appointmentCloseButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                       
+        appointmentDialog.setVisible(false);
+    }                                                      
+
+    private void appointmentShowParticipantsButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                                  
+        participantOverviewDialog.pack();
+        participantOverviewDialog.setVisible(true);
+    }                                                                 
+
+    private void invitationPanelNotAttendinButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                                 
+        // TODO add your handling code here:
+    }                                                                
+
+    private void nextWeekLabelMouseEntered(java.awt.event.MouseEvent evt) {                                           
+        nextWeekLabel.setIcon(nextMO);
+    }                                          
+
+    private void nextWeekLabelMouseExited(java.awt.event.MouseEvent evt) {                                          
+        nextWeekLabel.setIcon(next);
+    }                                         
+
+    private void previousWeekLabelMouseEntered(java.awt.event.MouseEvent evt) {                                               
+        previousWeekLabel.setIcon(prevMO);
+    }                                              
+
+    private void previousWeekLabelMouseExited(java.awt.event.MouseEvent evt) {                                              
+        previousWeekLabel.setIcon(prev);
+    }                                             
+
+    private void loginUsernameTextFieldFocusGained(java.awt.event.FocusEvent evt) {                                                   
+        if (loginUsernameTextField.getText().equals("brukernavn"))
+            loginUsernameTextField.setText("");
+    }                                                  
+
+    private void loginUsernameTextFieldFocusLost(java.awt.event.FocusEvent evt) {                                                 
+        if (loginUsernameTextField.getText().equals("")){
+            loginUsernameTextField.setText("brukernavn");
+        }
+    }                                                
+
+    private void loginPasswordFieldFocusGained(java.awt.event.FocusEvent evt) {                                               
+         if (loginPasswordField.getText().equals("passord")){
+            loginPasswordField.setText("");
+            loginPasswordField.setEchoChar('\u25cf');
+        }
+    }                                              
+
+    private void loginPasswordFieldFocusLost(java.awt.event.FocusEvent evt) {                                             
+         if (loginPasswordField.getText().equals("")){
+            loginPasswordField.setText("passord");
+            loginPasswordField.setEchoChar('\u0000');
+        }
+    }                                            
+
+    private void loginPasswordFieldActionPerformed(java.awt.event.ActionEvent evt) {                                                   
+        login();
+    }                                                  
+
+    private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {                                            
+        login();
+}                                           
+
+    private void hostIPFieldFocusGained(java.awt.event.FocusEvent evt) {                                        
+        if (hostIPField.getText().equals("host ip"))
+            hostIPField.setText("");
+    }                                       
+
+    private void hostIPFieldFocusLost(java.awt.event.FocusEvent evt) {                                      
+        if (hostIPField.getText().equals("")){
+            hostIPField.setText("host ip");
+        }
+    }                                     
+
+    private void hostIPFieldActionPerformed(java.awt.event.ActionEvent evt) {                                            
+        login();
+    }                                           
+
+    private void nextWeekLabelMouseClicked(java.awt.event.MouseEvent evt) {                                           
+        setNextWeek();
+    }                                          
+
+    private void previousWeekLabelMouseClicked(java.awt.event.MouseEvent evt) {                                               
+        setPreviousWeek();
+    }                                              
+
+    private void loadingCloseButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                   
+        loadingDialog.setVisible(false);
+    }                                                  
+
+    private void iWontStandForThisButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                        
+        errorDialog.setVisible(false);
+    }                                                       
+
+    private void messageListValueChanged(javax.swing.event.ListSelectionEvent evt) {
+        buildMessage((Message)messageList.getSelectedValue());
+    }
+
+    private void invitationListValueChanged(javax.swing.event.ListSelectionEvent evt) {
+        buildInvitation((Message)invitationList.getSelectedValue());
+    }
+
+    // Variables declaration - do not modify
+    private javax.swing.JPanel appointmentButtonPanel;
+    private javax.swing.JButton appointmentCloseButton;
+    private javax.swing.JLabel appointmentDescriptionLabel;
+    private javax.swing.JTextArea appointmentDescriptionTextArea;
+    private javax.swing.JDialog appointmentDialog;
+    private javax.swing.JPanel appointmentEditPanel;
+    private javax.swing.JLabel appointmentEndLabel;
+    private javax.swing.JComboBox appointmentEndTimeCB;
+    private javax.swing.JButton appointmentFromDateButton;
+    private javax.swing.JPanel appointmentLabelPanel;
+    private javax.swing.JComboBox appointmentRoomCB;
+    private javax.swing.JLabel appointmentRoomLabel;
+    private javax.swing.JButton appointmentSayYoureNotCommingButton;
+    private javax.swing.JButton appointmentShowParticipantsButton;
+    private javax.swing.JLabel appointmentStartLabel;
+    private javax.swing.JComboBox appointmentStartTimeCB;
+    private javax.swing.JScrollPane appointmentTextSP;
+    private javax.swing.JLabel appointmentTitleLabel;
+    private javax.swing.JTextField appointmentTitleTextField;
+    private javax.swing.JButton appointmentToDateButton;
+    private javax.swing.JButton calendarChooserCancelButton;
+    private javax.swing.JDialog calendarChooserDialog;
+    private javax.swing.JButton calendarChooserOkButton;
+    private javax.swing.JScrollPane calendarChooserSC;
+    private javax.swing.JTextField calendarChooserSearchField;
+    private javax.swing.JLabel calendarChooserSearchIcon;
+    private javax.swing.JPanel calendarChooserSearchPanel;
+    private javax.swing.JTable calendarChooserTable;
+    private javax.swing.JLabel calendarShowingLabel;
+    private javax.swing.JDialog errorDialog;
+    private javax.swing.JButton errorDialogButton;
+    private javax.swing.JScrollPane errorDialogSP;
+    private javax.swing.JTextArea errorDialogTextArea;
+    private gui.FixedDateChooserPanel fromDateChooserPanel;
+    private javax.swing.JButton fromDateDateChooserCancelButton;
+    private javax.swing.JDialog fromDateDateChooserDialog;
+    private javax.swing.JButton fromDateDateChooserOkButton;
+    private javax.swing.JFormattedTextField hostIPField;
+    private javax.swing.JButton iWontStandForThisButton;
+    private javax.swing.JTextArea invitationDescription;
+    private javax.swing.JList invitationList;
+    private javax.swing.JPanel invitationPanel;
+    private javax.swing.JButton invitationPanelAttendingButton;
+    private javax.swing.JButton invitationPanelCloseButton;
+    private javax.swing.JScrollPane invitationPanelListSP;
+    private javax.swing.JButton invitationPanelNotAttendinButton;
+    private javax.swing.JPanel invitationPanelTab;
+    private javax.swing.JScrollPane invitationPanelTextSP;
+    private javax.swing.JLabel invitationPanelTimeRoomAvailability;
+    private javax.swing.JButton loadingCloseButton;
+    private javax.swing.JDialog loadingDialog;
+    private javax.swing.JLabel loadingLabel;
+    private javax.swing.JButton logOutButton;
+    private javax.swing.JButton loginButton;
+    private javax.swing.JDialog loginDialog;
+    private javax.swing.JPanel loginPanel;
+    private javax.swing.JPasswordField loginPasswordField;
+    private javax.swing.JTextField loginUsernameTextField;
+    private javax.swing.JTextArea messageDescription;
+    private javax.swing.JList messageList;
+    private javax.swing.JDialog messageOverviewDialog;
+    private javax.swing.JTabbedPane messageOverviewTabbedPane;
+    private javax.swing.JPanel messagePanel;
+    private javax.swing.JButton messagePanelCloseButton;
+    private javax.swing.JScrollPane messagePanelListSP;
+    private javax.swing.JPanel messagePanelTab;
+    private javax.swing.JScrollPane messagePanelTextSP;
+    private javax.swing.JLabel messagePanelTimeRoomAvailability;
+    private javax.swing.JButton messageViewButton;
+    private javax.swing.JButton newAppointmentButton;
+    private javax.swing.JPanel newAppointmentButtonpanel;
+    private javax.swing.JButton newAppointmentCancelButton;
+    private javax.swing.JButton newAppointmentChooseParticipantsButton;
+    private javax.swing.JButton newAppointmentCreateButton;
+    private javax.swing.JLabel newAppointmentDescriptionLabel;
+    private javax.swing.JTextArea newAppointmentDescriptionTextArea;
+    private javax.swing.JDialog newAppointmentDialog;
+    private javax.swing.JPanel newAppointmentEditPanel;
+    private javax.swing.JLabel newAppointmentEndLabel;
+    private javax.swing.JComboBox newAppointmentEndTimeCB;
+    private javax.swing.JButton newAppointmentFromDateButton;
+    private javax.swing.JPanel newAppointmentLabelPanel;
+    private javax.swing.JComboBox newAppointmentRoomCB;
+    private javax.swing.JLabel newAppointmentRoomLabel;
+    private javax.swing.JLabel newAppointmentStartLabel;
+    private javax.swing.JComboBox newAppointmentStartTimeCB;
+    private javax.swing.JScrollPane newAppointmentTextSP;
+    private javax.swing.JLabel newAppointmentTitleLabel;
+    private javax.swing.JTextField newAppointmentTitleTextField;
+    private javax.swing.JButton newAppointmentToDateButton;
+    private javax.swing.JLabel nextWeekLabel;
+    private javax.swing.JButton participantChooserCancelButton;
+    private javax.swing.JDialog participantChooserDialog;
+    private javax.swing.JButton participantChooserOkButton;
+    private javax.swing.JScrollPane participantChooserSP;
+    private javax.swing.JTextField participantChooserSearchField;
+    private javax.swing.JLabel participantChooserSearchIcon;
+    private javax.swing.JPanel participantChooserSearchPanel;
+    private javax.swing.JTable participantChooserTable;
+    private javax.swing.JButton participantOverviewChangeButton;
+    private javax.swing.JButton participantOverviewCloseButton;
+    private javax.swing.JDialog participantOverviewDialog;
+    private javax.swing.JList participantOverviewList;
+    private javax.swing.JScrollPane participantOverviewSP;
+    private javax.swing.JLabel previousWeekLabel;
+    private javax.swing.JProgressBar progressBar;
+    private javax.swing.JButton shownCalendars;
+    private gui.FixedDateChooserPanel toDateChooserPanel;
+    private javax.swing.JButton toDateDateChooserCancelButton;
+    private javax.swing.JDialog toDateDateChooserDialog;
+    private javax.swing.JButton toDateDateChooserOkButton;
+    private javax.swing.JButton weekViewButton;
+    private javax.swing.JScrollPane weekViewSP;
+    private javax.swing.JTable weekViewTable;
+    // End of variables declaration
 	
 	
 	//copy here
@@ -1964,22 +1972,25 @@ public class Gui extends javax.swing.JFrame{
 	//}});
 	}
 
-	public void buildMessage(){
-		// messagePanel.setBorder(javax.swing.BorderFactory.createTitledBorder(message.getTitle() + " - " + dateToString(message.getDate())));
-		// messagePanelTimeRoomAvailability.setText(message.getTime() + " - " message.getRoom() + ", " + availabilityAndStatus(message));
-		// messageDescription.setText(message.getDescription());
+	public void buildMessage(Message message){
+		if(!message.isRead()){setMessageRead(message);}
+		 messagePanel.setBorder(javax.swing.BorderFactory.createTitledBorder(message.getTitle() + " - " + dateToString(message.getMeeting().getStartTime().toDate())));
+		 messagePanelTimeRoomAvailability.setText(message.getMeeting().getStartTime().toString("HH:mm")+" - "+message.getMeeting().getEndTime().toString("HH:mm") + " - " + message.getMeeting().getRoom().getName());
+		 messageDescription.setText(message.getDescription());
 	}
 
-	public void buildInvitation(){
-		// invitationPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(invitation.getTitle() + " - " + dateToString(invitation.getDate())));
-		// invitationPanelTimeRoomAvailability.setText(invitation.getTime() + " - " invitation.getRoom() + " " + availabilityAndStatus(invitation));
-		// invitationDescription.setText(invitation.getDescription());
+	public void buildInvitation(Message invitation){
+		if(!invitation.isRead()){setMessageRead(invitation);}
+		 invitationPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(invitation.getTitle() + " - " + dateToString(invitation.getMeeting().getStartTime().toDate())));
+		 invitationPanelTimeRoomAvailability.setText(invitation.getMeeting().getStartTime().toString("HH:mm")+" - "+invitation.getMeeting().getEndTime().toString("HH:mm") + " - " + invitation.getMeeting().getRoom().getName() + availabilityAndStatus(invitation));
+		 invitationDescription.setText(invitation.getDescription());
+		 
 	}
 
-	public void availabilityAndStatus(){
-
+	public String availabilityAndStatus(Message message){
+		String temp = ", ";
 		//returnerer om du er opptatt om du ikke har svart, eller hva statusen din er dersom du har svart
-
+		return "";
 	}
 
 	private void createActivity()  {

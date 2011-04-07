@@ -267,10 +267,10 @@ public class ClientConnection extends Connection implements Runnable {
 		n.put("participant", participant);
 		send(n);
 	}
-	public void markMessageAsRead(Meeting meeting) {
+	public void markMessageAsRead(Message message) {
 		NetworkObject n = new NetworkObject();
 		n.setCommand(NetworkCommand.markMessageAsRead);
-		n.put("meeting", meeting);
+		n.put("message", message);
 		send(n);
 	}
 

@@ -61,7 +61,7 @@ public class Client {
 	
 	public boolean loginAction(String ip, String username, String password) {
 		try {
-			connection = new ClientConnection(InetAddress.getByName(ip), this);
+			connection = new ClientConnection(InetAddress.getByName(ip));
 			Thread thread = new Thread(connection);
 
 			if((currentUser = connection.login(username, password)) != null) { // login successful

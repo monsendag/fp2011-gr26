@@ -2035,7 +2035,7 @@ public class Gui extends javax.swing.JFrame {
 	}
 
 	public void dragNewActivity(Activity act){
-		newAppointmentTitleLabel.setText("");
+		newAppointmentTitleTextField.setText("");
 		newAppointmentDescriptionTextArea.setText("");
 		newAppointmentStartTimeCB.setSelectedItem(act.getStartTime().toString("HH:mm"));
 		newAppointmentEndTimeCB.setSelectedItem(act.getEndTime().toString("HH:mm"));

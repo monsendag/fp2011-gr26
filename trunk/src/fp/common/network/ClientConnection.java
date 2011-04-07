@@ -7,7 +7,9 @@ import java.util.ArrayList;
 import fp.client.Client;
 import fp.common.models.Activity;
 import fp.common.models.Employee;
+import fp.common.models.Meeting;
 import fp.common.models.Message;
+import fp.common.models.Room;
 
 public class ClientConnection extends Connection implements Runnable {
 	
@@ -40,7 +42,14 @@ public class ClientConnection extends Connection implements Runnable {
 		NetworkObject back = receive();
 		return back.get("employee") != null ? ((Employee) back.get("employee")) : null;
 	}
-	
+	public ArrayList<Employee> getAllEmployees() throws IOException {
+		NetworkObject n = new NetworkObject();
+		n.setCommand(NetworkCommand.getEmployees);
+		n.put("currentUser", Client.get().getUser());
+		send(n);
+		NetworkObject back = receive();
+		return (ArrayList<Employee>) back.get("employees");
+	}
 	/**
 	 * @return a list of activities for currentUser (stored in Client)
 	 * @throws IOException
@@ -57,11 +66,51 @@ public class ClientConnection extends Connection implements Runnable {
 	
 	public ArrayList<Message> getEmpMessages() throws IOException {
 		NetworkObject n = new NetworkObject();
-		n.setCommand(NetworkCommand.getActivities);
+		n.setCommand(NetworkCommand.getMessages);
 		n.put("currentUser", Client.get().getUser());
 		send(n);
 		NetworkObject back = receive();
 		return (ArrayList<Message>) back.get("messages");
+	}
+	public ArrayList<Meeting> getEmpMeetings() throws IOException {
+		NetworkObject n = new NetworkObject();
+		n.setCommand(NetworkCommand.getMeetings);
+		n.put("currentUser", Client.get().getUser());
+		send(n);
+		NetworkObject back = receive();
+		return (ArrayList<Meeting>) back.get("meetings");
+	}
+	public ArrayList<Activity> getAllActivities() throws IOException {
+		NetworkObject n = new NetworkObject();
+		n.setCommand(NetworkCommand.getAllActivities);
+		n.put("currentUser", Client.get().getUser());
+		send(n);
+		NetworkObject back = receive();
+		return (ArrayList<Activity>) back.get("allActivities");
+	}
+	public ArrayList<Message> getAllAlerts() throws IOException {
+		NetworkObject n = new NetworkObject();
+		n.setCommand(NetworkCommand.getAllAlerts);
+		n.put("currentUser", Client.get().getUser());
+		send(n);
+		NetworkObject back = receive();
+		return (ArrayList<Message>) back.get("allAlerts");
+	}
+	public ArrayList<Room> getAllRooms() throws IOException {
+		NetworkObject n = new NetworkObject();
+		n.setCommand(NetworkCommand.getAllRooms);
+		n.put("currentUser", Client.get().getUser());
+		send(n);
+		NetworkObject back = receive();
+		return (ArrayList<Room>) back.get("allRooms");
+	}
+	public ArrayList<Meeting> getAllMeetings() throws IOException {
+		NetworkObject n = new NetworkObject();
+		n.setCommand(NetworkCommand.getAllAlerts);
+		n.put("currentUser", Client.get().getUser());
+		send(n);
+		NetworkObject back = receive();
+		return (ArrayList<Meeting>) back.get("allMeetings");
 	}
 	
 }

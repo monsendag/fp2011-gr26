@@ -3,6 +3,7 @@ package fp.client.gui.calendar;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 
@@ -60,6 +61,20 @@ public class CalendarModel {
 	public void addActivities(ArrayList<Activity> a) {
 		for(Activity act : a) {
 			activities.add(act);
+		}
+	}
+	
+	public void remActivity(Activity a){
+		activities.remove(a);		
+	}
+	
+	public void chngActivity(Activity a) {
+		
+		for (int i = 0; i < activities.size(); i++) {
+			if (activities.get(i).getId() == a.getId()){
+				activities.remove(i);
+				activities.add(i, a);
+			}
 		}
 	}
 

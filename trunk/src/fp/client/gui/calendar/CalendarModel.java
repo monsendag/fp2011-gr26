@@ -27,6 +27,10 @@ public class CalendarModel {
 	public int getWeekNumber() {
 		return monday.getWeekOfWeekyear();
 	}
+	
+	public int getYear(){
+		return monday.getYear();
+	}
 
 	public void setCurrentWeek() {
 		DateTime now = new DateTime();

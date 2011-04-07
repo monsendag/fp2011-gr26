@@ -1,9 +1,4 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/*
  * Gui.java
  *
  * Created on 21.mar.2011, 13:33:19
@@ -37,6 +32,7 @@ import fp.common.models.Meeting;
 import fp.common.models.Message;
 import fp.common.models.Participant;
 import fp.common.models.Room;
+import fp.common.models.Participant.Status;
 import fp.common.storage.ActivityStorage;
 
 
@@ -45,8 +41,7 @@ import fp.common.storage.ActivityStorage;
  * @author David
  */
 public class Gui extends javax.swing.JFrame{
-	Employee userLoggedIn;
-	/** Creates new form Gui */
+
 	public Gui() {
 		try {UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());} catch (Exception exp) {}
 		initComponents();
@@ -555,6 +550,11 @@ public class Gui extends javax.swing.JFrame{
         invitationPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Ingen innkalling valgt"));
 
         invitationPanelAttendingButton.setText("Jeg kommer");
+        invitationPanelAttendingButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                invitationPanelAttendingButtonActionPerformed(evt);
+            }
+        });
 
         invitationPanelNotAttendinButton.setText("Jeg kommer ikke");
         invitationPanelNotAttendinButton.addActionListener(new java.awt.event.ActionListener() {
@@ -1569,10 +1569,6 @@ public class Gui extends javax.swing.JFrame{
         participantOverviewDialog.setVisible(true);
     }                                                                 
 
-    private void invitationPanelNotAttendinButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                                 
-        // TODO add your handling code here:
-    }                                                                
-
     private void nextWeekLabelMouseEntered(java.awt.event.MouseEvent evt) {                                           
         nextWeekLabel.setIcon(nextMO);
     }                                          
@@ -1662,7 +1658,16 @@ public class Gui extends javax.swing.JFrame{
         weekViewButton.setText("Uke " + Client.get().calendarModel.getWeekNumber() + " - " + Client.get().calendarModel.getYear());
     }                                              
 
-    // Variables declaration - do not modify
+    private void invitationPanelAttendingButtonActionPerformed(java.awt.event.ActionEvent evt) {
+        setAttending();
+    }
+
+	private void invitationPanelNotAttendinButtonActionPerformed(java.awt.event.ActionEvent evt) {
+        setNotAttending();
+    }
+
+
+	// Variables declaration - do not modify
     private javax.swing.JPanel appointmentButtonPanel;
     private javax.swing.JButton appointmentCloseButton;
     private javax.swing.JLabel appointmentDescriptionLabel;
@@ -1779,6 +1784,17 @@ public class Gui extends javax.swing.JFrame{
 	//copy here
 
 	//ikke skriv kode over (^) dette her!!!!!!!!!11111!!!!!!!!!
+    
+    private void setAttending() {
+    	Message invitation = (Message)invitationList.getSelectedValue();
+    	Client.get().setAttending(invitation, Status.ATTENDING);
+		
+	}
+    
+    private void setNotAttending() {
+    	Message invitation = (Message)invitationList.getSelectedValue();
+    	Client.get().setNotAttending(invitation, Status.NOT_ATTENDING);
+    }
 
 	DefaultListModel messageListModel = new DefaultListModel();
 	DefaultListModel invitationListModel = new DefaultListModel();
@@ -1831,10 +1847,6 @@ public class Gui extends javax.swing.JFrame{
 		//		}
 	}
 
-	public void setMessageRead(Message message){
-		Client.get().setRead(message);
-	}
-
 	public void receiveMessages(){
 		buildMessageList();
 		buildInvitationList();
@@ -1868,7 +1880,7 @@ public class Gui extends javax.swing.JFrame{
 	public void buildMessage(){
 		Message message = (Message)messageList.getSelectedValue();
 		if(!message.isRead()){
-			setMessageRead(message);
+			Client.get().setRead(message);
 			((Message)messageList.getSelectedValue()).isRead(true);
 			messageList.repaint();
 			}
@@ -1880,7 +1892,7 @@ public class Gui extends javax.swing.JFrame{
 	public void buildInvitation(){
 		Message invitation = (Message)invitationList.getSelectedValue();
 		if(!invitation.isRead()){
-			setMessageRead(invitation); 
+			Client.get().setRead(invitation); 
 			((Message)invitationList.getSelectedValue()).isRead(true);
 			invitationList.repaint();
 		}

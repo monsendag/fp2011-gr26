@@ -38,7 +38,7 @@ public class Client {
 	public ClientConnection connection;
 	public CalendarModel calendarModel;
 	private List<Activity> activities;
-	private List<Message> messages;
+	public List<Message> messages;
 	public Employee currentUser;
 	
 	
@@ -90,9 +90,10 @@ public class Client {
 	public void deliverMessages(ArrayList<Message> messages){		
 		if (this.messages == messages)
 			return;
-		else// TODO: Si fra til GUI om at det har kommet nye meldinger?
+		else{// TODO: Si fra til GUI om at det har kommet nye meldinger?
 			this.messages = messages;
-		// is Invitation : messages.get(0).getMeeting().getParticipants().size() > 0;
+			gui.receiveMessages();
+		}
 	}
 
 	

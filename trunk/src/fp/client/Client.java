@@ -93,15 +93,11 @@ public class Client {
 	}
 	/*		TODO: FIX clientconnection, serverconnection og DBStore - > messages burde bli markert as read med message og message ID som parameter, ikke meeting.
 	public void markMessageAsRead(Message m) throws IOException {
-		try {
 			// feil i db? loolol
-			connection.markMessageAsRead(m);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			
-			e.printStackTrace();
-			throw new IOException();
-		}
+		connection.markMessageAsRead(m);
+		
+		
+		
 		messages.remove(m);
 		m.isRead(true);
 		messages.add(m);
@@ -117,26 +113,17 @@ public class Client {
 	
 	/* TODO: lag en metode for å fjerne activity i calendarmodel.
 	public void remActivity(Activity a) throws IOException {
-		try {
-			connection.cancelActivity(a);
-			
-		} catch (IOException e) {
-			e.printStackTrace();
-			throw new IOException();
-		}
-		calendarModel.remActivity(a);
+	
+	connection.cancelActivity(a);
+	calendarModel.remActivity(a);
 	}
 	*/
 	
 	
 	/* TODO: Lag en metode for å endre activity i calendarmodel.
 	public void chngActivity(Activity a) throws IOException {
-		try {
-			connection.changeActivity(a);
-		} catch (IOException e) {
-			e.printStacTrace();
-			throw new IOException();
-		}
+		connection.changeActivity(a);
+		
 		calendarModel.chngActivity(a);
 	}
 	*/
@@ -149,34 +136,8 @@ public class Client {
 	
 	/* TODO: hmm...
 	public answerInvitation(Meeting m, Message msg, boolean answer) throws IOException {
-		try {
-			connection.changeInviteStatus(m, participant...)	
-			markMessageAsRead(msg);
-		}
-		catch (IOException e) {
-			e.printStackTrace();
-			throw new IOException;
-		}
-		
+		connection.changeInviteStatus(m, participant...)			
 	}
 	*/
 
-	
-	/*
-	
-	// true = ja, false = nei.
-	public Result answerInvitation(Message m, boolean answer){ // trengs det noe messageID? isf. legg til
-		// send shit til server, vent på godkjennelse 
-		// hvis godkjent:
-			m.setRead(true);
-			return Result.SUCCESS;
-		// hvis fail:
-			//return Result.TIMEOUT;
-	}
-	
-	public List<Participant> getParticipants(Meeting m){
-		// trenger ikke kontakte server vel?
-		return m.getParticipants();
-	}
-  **/	
 }

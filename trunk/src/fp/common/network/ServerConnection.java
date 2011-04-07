@@ -1,5 +1,6 @@
 package fp.common.network;
 
+import java.io.IOException;
 import java.net.*;
 
 import org.joda.time.DateTime;
@@ -25,12 +26,16 @@ public class ServerConnection extends Connection implements Runnable {
 		}
 	}
 
-	private void processRequest() throws Exception {
+	private void processRequest() {
 		NetworkObject request;
 		while((request = receive()) != null) {
 			send(getResponse(request));
 		}
-		close();
+		try {
+			close();
+		} catch (IOException e) {
+			System.err.println("#NET: Failed to close connection.");
+		}
 	}
 	
 	/**

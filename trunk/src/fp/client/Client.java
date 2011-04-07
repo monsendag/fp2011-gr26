@@ -127,7 +127,7 @@ public class Client {
 		message.isread(true);
 		messages.add(message);
 		
-		deliverMessages(message);
+		deliverMessages(messages);
 		*/
 	}
 	

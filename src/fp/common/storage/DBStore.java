@@ -93,12 +93,12 @@ public class DBStore {
 	}
 	
 	/**
-	 * Adds one or multiple alerts/messages to the database from a {@link Message} object.
-	 * @param message The message/alert to be added.
+	 * Adds one or multiple messages to the database from a {@link Message} object.
+	 * @param message The message to be added.
 	 */
-	public void addAlerts(Message message) {
+	public void addMessage(Message message) {
 		try {
-			PreparedStatement ps = conn.prepareStatement("INSERT INTO alert " +
+			PreparedStatement ps = conn.prepareStatement("INSERT INTO message " +
 					"(isread,time,message,username,activityID) VALUES (?,?,?,?,?)");
 			
 			for (Participant p : message.getMeeting().getParticipants()) {
@@ -112,7 +112,7 @@ public class DBStore {
 			ps.executeBatch();
 			ps.close();
 		} catch (SQLException e) {
-			System.err.println("Could not add alert(s).");
+			System.err.println("Could not add message(s).");
 			e.printStackTrace();
 		}
 	}
@@ -226,7 +226,7 @@ public class DBStore {
 		 * Adds invite messages
 		 */
 		try {
-			ps = conn.prepareStatement("INSERT INTO alert " +
+			ps = conn.prepareStatement("INSERT INTO message " +
 			"(isread,time,message,username,activityID) VALUES (?,?,?,?,?)");
 			for (Participant p : m.getParticipants()) {
 				ps.setBoolean(1,false); // isRead = false
@@ -240,7 +240,7 @@ public class DBStore {
 			ps.executeBatch();
 			ps.close();
 		} catch (SQLException e) {
-			System.err.println("Could not add alerts.");
+			System.err.println("Could not add messages.");
 			e.printStackTrace();
 		}
 	}
@@ -280,7 +280,7 @@ public class DBStore {
 			System.out.println("#DB: Adding "+e.getUsername()+" as a meeting "+m.getId()+" participant. In DB and cache");
 			
 			// Create message
-			ps = conn.prepareStatement("INSERT INTO alert " +
+			ps = conn.prepareStatement("INSERT INTO message " +
 			"(isread,time,message,username,activity) VALUES (?,?,?,?,?)");
 			
 			ps.setBoolean(1,false); // isRead = false
@@ -334,7 +334,7 @@ public class DBStore {
 			
 			// Create messages
 			if(Participant.intToEnum(status) == Participant.Status.NOT_ATTENDING) {
-				ps = conn.prepareStatement("INSERT INTO alert " +
+				ps = conn.prepareStatement("INSERT INTO message " +
 				"(isread,time,message,username,activityID) VALUES (?,?,?,?,?)");
 				Employee decliner = dbr.getEmployee(username);
 				for (Participant p : m.getParticipants()) {
@@ -378,7 +378,7 @@ public class DBStore {
 			ps.executeUpdate();
 			
 			// Create messages
-			ps = conn.prepareStatement("INSERT INTO alert " +
+			ps = conn.prepareStatement("INSERT INTO message " +
 			"(isread,time,message,username,activityID) VALUES (?,?,?,?,?)");
 			Meeting m = dbr.getMeeting(meetingID);
 			for (Participant p : m.getParticipants()) {
@@ -423,7 +423,7 @@ public class DBStore {
 			ps.close();
 			
 			// Create messages
-			ps = conn.prepareStatement("INSERT INTO alert " +
+			ps = conn.prepareStatement("INSERT INTO message " +
 			"(isread,time,message,username,activityID) VALUES (?,?,?,?,?)");
 			for (Participant p : m.getParticipants()) {
 				String username = p.getEmployee().getUsername();
@@ -510,31 +510,31 @@ public class DBStore {
 	}
 	
 	/**
-	 * Marks an alert(message), by a {@link Meeting} and a {@link Employee} object,
+	 * Marks a message, by a {@link Meeting} and a {@link Employee} object,
 	 * in the database as read.
 	 * @param meeting The meeting
 	 * @param emp The employee
 	 */
-	public void markAlertAsRead(Meeting meeting,Employee emp) {
-		markAlertAsReadByIDs(meeting.getId(), emp.getUsername());
+	public void markMessageAsRead(Meeting meeting,Employee emp) {
+		markMessageAsReadByIDs(meeting.getId(), emp.getUsername());
 	}
 	
 	/**
-	 * Marks an alert(message), by the meeting's ID and the employee's username,
+	 * Marks a message, by the meeting's ID and the employee's username,
 	 * in the database as read.
 	 * @param meetingID The meeting's ID
 	 * @param username The employee's username
 	 */
-	public void markAlertAsReadByIDs(int meetingID,String username) {
+	public void markMessageAsReadByIDs(int meetingID,String username) {
 		try {
-			PreparedStatement ps = conn.prepareStatement("UPDATE alert SET read = ? " +
+			PreparedStatement ps = conn.prepareStatement("UPDATE message SET isread = ? " +
 					"WHERE activityID = " + meetingID + " AND username = '" + username + "'");
 			ps.setBoolean(1,true);
 			ps.executeUpdate();
 			ps.close();
-			System.out.println("#DB: Marked alert as read in DB");
+			System.out.println("#DB: Marked message as read in DB");
 		} catch (SQLException e) {
-			System.err.println("Could not mark alert as read.");
+			System.err.println("Could not mark message as read.");
 			e.printStackTrace();
 		}
 	}

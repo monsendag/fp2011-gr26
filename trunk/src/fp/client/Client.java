@@ -92,6 +92,7 @@ public class Client {
 			return;
 		else// TODO: Si fra til GUI om at det har kommet nye meldinger?
 			this.messages = messages;
+		// is Invitation : messages.get(0).getMeeting().getParticipants().size() > 0;
 	}
 
 	

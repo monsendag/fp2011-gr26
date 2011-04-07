@@ -1827,10 +1827,9 @@ public class Gui extends javax.swing.JFrame {
     }
     
     public void receiveMessages(){
-    	Client.get().currentUser;
     	messageList.removeAll();
-    	messageList.
     	
+//    	messageList.
     }
     
     private void cancelActivity() {

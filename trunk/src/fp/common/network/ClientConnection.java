@@ -82,6 +82,11 @@ public class ClientConnection extends Connection implements Runnable {
 			return null;
 		//return back.get("employee") != null ? ((Employee) back.get("employee")) : null;
 	}
+	/**
+	 * 
+	 * @return a list of all employees
+	 * @throws IOException
+	 */
 	public ArrayList<Employee> getAllEmployees() throws IOException {
 		NetworkObject n = new NetworkObject();
 		n.setCommand(NetworkCommand.getEmployees);
@@ -103,7 +108,11 @@ public class ClientConnection extends Connection implements Runnable {
 		NetworkObject back = receive();
 		return (ArrayList<Activity>) back.get("activities");
 	}
-	
+	/**
+	 * 
+	 * @return a list of messages for currentUser
+	 * @throws IOException
+	 */
 	public ArrayList<Message> getEmpMessages() throws IOException {
 		NetworkObject n = new NetworkObject();
 		n.setCommand(NetworkCommand.getMessages);
@@ -112,6 +121,11 @@ public class ClientConnection extends Connection implements Runnable {
 		NetworkObject back = receive();
 		return (ArrayList<Message>) back.get("messages");
 	}
+	/**
+	 * 
+	 * @return a list of meetings for currentUser
+	 * @throws IOException
+	 */
 	public ArrayList<Meeting> getEmpMeetings() throws IOException {
 		NetworkObject n = new NetworkObject();
 		n.setCommand(NetworkCommand.getMeetings);
@@ -120,6 +134,11 @@ public class ClientConnection extends Connection implements Runnable {
 		NetworkObject back = receive();
 		return (ArrayList<Meeting>) back.get("meetings");
 	}
+	/**
+	 * 
+	 * @return a list of all activities
+	 * @throws IOException
+	 */
 	public ArrayList<Activity> getAllActivities() throws IOException {
 		NetworkObject n = new NetworkObject();
 		n.setCommand(NetworkCommand.getAllActivities);
@@ -128,14 +147,24 @@ public class ClientConnection extends Connection implements Runnable {
 		NetworkObject back = receive();
 		return (ArrayList<Activity>) back.get("allActivities");
 	}
-	public ArrayList<Message> getAllAlerts() throws IOException {
+	/**
+	 * 
+	 * @return a list of all messages
+	 * @throws IOException
+	 */
+	public ArrayList<Message> getAllMessages() throws IOException {
 		NetworkObject n = new NetworkObject();
-		n.setCommand(NetworkCommand.getAllAlerts);
+		n.setCommand(NetworkCommand.getAllMessages);
 		n.put("currentUser", Client.get().getUser());
 		send(n);
 		NetworkObject back = receive();
-		return (ArrayList<Message>) back.get("allAlerts");
+		return (ArrayList<Message>) back.get("allMessages");
 	}
+	/**
+	 * 
+	 * @return a list of all rooms
+	 * @throws IOException
+	 */
 	public ArrayList<Room> getAllRooms() throws IOException {
 		NetworkObject n = new NetworkObject();
 		n.setCommand(NetworkCommand.getAllRooms);
@@ -144,14 +173,26 @@ public class ClientConnection extends Connection implements Runnable {
 		NetworkObject back = receive();
 		return (ArrayList<Room>) back.get("allRooms");
 	}
+	/**
+	 * 	
+	 * @return a list of all meetings
+	 * @throws IOException
+	 */
 	public ArrayList<Meeting> getAllMeetings() throws IOException {
 		NetworkObject n = new NetworkObject();
-		n.setCommand(NetworkCommand.getAllAlerts);
+		n.setCommand(NetworkCommand.getAllMeetings);
 		n.put("currentUser", Client.get().getUser());
 		send(n);
 		NetworkObject back = receive();
 		return (ArrayList<Meeting>) back.get("allMeetings");
 	}
+	/**
+	 * 
+	 * @param startTime
+	 * @param endTime
+	 * @return a list of all available rooms in the given time interval
+	 * @throws IOException
+	 */
 	public ArrayList<Room> getAvailableRooms(DateTime startTime, DateTime endTime) throws IOException {
 		NetworkObject n = new NetworkObject();
 		n.setCommand(NetworkCommand.getAvailableRooms);
@@ -161,6 +202,12 @@ public class ClientConnection extends Connection implements Runnable {
 		NetworkObject back = receive();
 		return (ArrayList<Room>) back.get("availableRooms");
 	}
+	/**
+	 * 
+	 * @param meetingID
+	 * @return a meeting
+	 * @throws IOException
+	 */
 	public Meeting getMeeting(int meetingID) throws IOException {
 		NetworkObject n = new NetworkObject();
 		n.setCommand(NetworkCommand.getMeeting);
@@ -169,6 +216,12 @@ public class ClientConnection extends Connection implements Runnable {
 		NetworkObject back = receive();
 		return (Meeting) back.get("meeting");
 	}
+	/**
+	 * 
+	 * @param roomID
+	 * @return a room
+	 * @throws IOException
+	 */
 	public Room getRoom(int roomID) throws IOException {
 		NetworkObject n = new NetworkObject();
 		n.setCommand(NetworkCommand.getRoom);
@@ -177,6 +230,7 @@ public class ClientConnection extends Connection implements Runnable {
 		NetworkObject back = receive();
 		return (Room) back.get("room");
 	}
+	
 	public void addActivity(Activity activity) throws IOException{
 		NetworkObject n = new NetworkObject();
 		n.setCommand(NetworkCommand.addActivity);

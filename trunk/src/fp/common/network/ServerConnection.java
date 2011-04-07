@@ -68,8 +68,8 @@ public class ServerConnection extends Connection implements Runnable {
 				response.setCommand(NetworkCommand.returnAllactivities);
 				response.put("allActivities", dbr.getAllActivities());
 			}
-			case getAllAlerts: {
-				response.setCommand(NetworkCommand.returnAllAlerts);
+			case getAllMessages: {
+				response.setCommand(NetworkCommand.returnAllMessages);
 				response.put("allAlerts", dbr.getAllMessages());
 			}
 			case getAllRooms:{
@@ -94,7 +94,7 @@ public class ServerConnection extends Connection implements Runnable {
 			case getRoom: {
 				response.setCommand(NetworkCommand.returnRoom);
 				int roomID = (Integer)request.get("roomID");
-				response.put("room", dbr.getMeeting(roomID));
+				response.put("room", dbr.getRoom(roomID));
 			}
 			case addActivity: {
 				response.setCommand(NetworkCommand.returnActivityID);

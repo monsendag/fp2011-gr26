@@ -68,22 +68,26 @@ public abstract class Connection {
 	 * @param o
 	 * @throws IOException
 	 */
-	protected void send(NetworkObject o) throws IOException {
+	protected void send(NetworkObject o) {
 		queue.add(o);
 		
 		if (isSending == false)
 			sendFromQueue();
 	}
 	
-	protected void sendFromQueue() throws IOException {
+	protected void sendFromQueue() {
 		while (!queue.isEmpty()){
 			isSending = true;
 			NetworkObject o = queue.poll();
-			System.out.println("#NET: sending: "+o.getCommand());
-			String xml = XmlSerializer.getInstance().serialize(o);
-			out.write(xml+EOL);
-			writeLn(EOT);
-			out.flush();
+			try {
+				System.out.println("#NET: sending: "+o.getCommand());
+				String xml = XmlSerializer.getInstance().serialize(o);
+				out.write(xml+EOL);
+				writeLn(EOT);
+				out.flush();
+			} catch (IOException e) {
+				System.err.println("#NET: failed sending: "+o.getCommand());
+			}
 		}
 		isSending = false;
 		
@@ -95,11 +99,15 @@ public abstract class Connection {
 	 * @return the NetworkObject retrieved
 	 * @throws IOException
 	 */
-	protected NetworkObject receive() throws IOException {
+	protected NetworkObject receive() {
 		String line, xml = "";
-		while((line = in.readLine()) != null) {
-			if(line.equals(EOT)) break;
-			xml += line;
+		try {
+			while((line = in.readLine()) != null) {
+				if(line.equals(EOT)) break;
+				xml += line;
+			}
+		} catch (IOException e) {
+			System.err.println("#NET: Failed to receive NetworkObject");
 		}
 		NetworkObject o = null;
 		if(xml.length() > 0) {

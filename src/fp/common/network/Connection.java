@@ -32,6 +32,9 @@ public abstract class Connection {
 	 * @throws IOException
 	 */
 	public Connection(Socket socket) throws IOException {
+		
+		queue = new LinkedList<NetworkObject>();
+		
 		this.socket = socket;
 		InputStream is = socket.getInputStream();
 		OutputStream os = socket.getOutputStream();

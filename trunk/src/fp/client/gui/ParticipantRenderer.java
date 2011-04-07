@@ -6,25 +6,26 @@ import java.net.URL;
 import javax.swing.*;
 
 import fp.common.models.Employee;
+import fp.common.models.Participant;
+import fp.common.models.Participant.Status;
 
 public class ParticipantRenderer extends DefaultListCellRenderer implements ListCellRenderer {
 
-	@Override
+	Participant participant;
+	
 	public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
 		// get label from superclass
-		Employee participant = (Employee) value;
-		
 		JLabel label = (JLabel) super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
 		// get image path
 		String iconName;
-		if(participant.getStatus() == attending){ iconName = "attending"; }
-		if(participant.getStatus() == notAttending){ iconName = "notAttending"; }
+		if(participant.getStatus() == Status.ATTENDING){ iconName = "attending"; }
+		if(participant.getStatus() == Status.NOT_ATTENDING){ iconName = "notAttending"; }
 		else 
 			iconName = "awatingReply";
 		
-		URL path = getClass().getResource("ico/"+iconName+"-icon.png");
+		URL path = getClass().getResource("graphics/"+iconName+".png");
 		// set icon and text
-		label.setText(participant.getName());
+		label.setText(participant.getEmployee().getName());
 		label.setIcon(new ImageIcon(path));
 		return label;
 	}

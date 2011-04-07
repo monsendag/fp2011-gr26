@@ -94,7 +94,19 @@ public class Client {
 			this.messages = messages;
 	}
 
-	/**
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	/*
 	public List<Room> getRooms(DateTime start, DateTime end){
 		// hent rom fra server ledige i gitt tidsrom, return liste med rom.
 		

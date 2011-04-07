@@ -35,11 +35,12 @@ public class Server {
 			JList list = new JList(clients);
 			panel.add(new JLabel("Connected clients: "));
 			panel.add(list);
-			frame.setPreferredSize(new Dimension(600,400));
+			frame.setPreferredSize(new Dimension(200,400));
 			frame.setContentPane(panel);
 			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			frame.setLocationRelativeTo(null);
 			frame.pack();
+			frame.setLocationRelativeTo(null);
 			frame.setVisible(true);
 			while(true) {
 				Socket socket;

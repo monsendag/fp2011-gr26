@@ -18,7 +18,7 @@ public class MessageRenderer extends DefaultListCellRenderer implements ListCell
 		URL path = getClass().getResource("graphics/"+(message.isRead() ? "read" : "unread")+"Message.png");
 		// set icon and text
 		label.setIcon(new ImageIcon(path));
-		label.setText(message.getDescription());
+		label.setText(message.getTitle());
 		return label;
 	}
 }

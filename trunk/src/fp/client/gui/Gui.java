@@ -1496,6 +1496,9 @@ public class Gui extends javax.swing.JFrame {
         loginPasswordField.setText("passord");
         loginUsernameTextField.setText("brukernavn");
         loginPasswordField.setEchoChar('\u0000');
+        // logg ut av serveren!
+        logout();
+        
         loginDialog.setVisible(true);
     }                                            
 
@@ -1850,6 +1853,10 @@ public class Gui extends javax.swing.JFrame {
     		errorDialog.setLocationRelativeTo(loginDialog);
     		errorDialog.setVisible(true);
     	}
+    }
+
+    private void logout(){
+    	Client.get().logoutAction();
     }
 
     private String dateToString(Date date){

@@ -11,13 +11,14 @@ import fp.common.models.Participant.Status;
 
 public class ParticipantRenderer extends DefaultListCellRenderer implements ListCellRenderer {
 
-	Participant participant;
+	
 	
 	public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
 		// get label from superclass
 		JLabel label = (JLabel) super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
 		// get image path
 		String iconName;
+		Participant participant = (Participant) value;
 		
 		if(participant.getStatus() == Status.ATTENDING){ iconName = "attending"; }
 		else if(participant.getStatus() == Status.NOT_ATTENDING){ iconName = "notAttending"; }

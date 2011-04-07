@@ -9,9 +9,9 @@ import fp.common.models.Message;
 
 public class MessageRenderer extends DefaultListCellRenderer implements ListCellRenderer {
 
-	Message message; 
 	
 	public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
+		Message message = (Message) value;
 		// get label from superclass
 		JLabel label = (JLabel) super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
 		// get image path

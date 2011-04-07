@@ -61,6 +61,10 @@ public class Gui extends javax.swing.JFrame {
 		loginDialog.pack();
 		loginDialog.setLocationRelativeTo(this);
 		loginDialog.setVisible(true);
+		
+		fixInvitationList();
+		fixMesssageList();
+		fixParticipantList();
 	}
 
 	/** This method is called from within the constructor to
@@ -1818,9 +1822,9 @@ public class Gui extends javax.swing.JFrame {
 
 	//copy here
 
-	DefaultListModel messageListModel;
-	DefaultListModel invitationListModel;
-	DefaultListModel participantListModel;
+	DefaultListModel messageListModel = new DefaultListModel();
+	DefaultListModel invitationListModel = new DefaultListModel();
+	DefaultListModel participantListModel = new DefaultListModel();
 
 	private void fixInvitationList(){
 		MessageRenderer mr = new MessageRenderer();
@@ -1851,6 +1855,7 @@ public class Gui extends javax.swing.JFrame {
 
 	private void buildInvitationList(){
 		messageListModel.removeAllElements();
+		
 		int i = 0;
 		for(Message message : Client.get().messages){
 			if(message.isInvitation()){

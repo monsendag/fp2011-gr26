@@ -33,6 +33,7 @@ import fp.common.models.Activity;
 import fp.common.models.Employee;
 import fp.common.models.Meeting;
 import fp.common.models.Message;
+import fp.common.models.Participant;
 import fp.common.models.Room;
 import fp.common.storage.ActivityStorage;
 
@@ -61,7 +62,7 @@ public class Gui extends javax.swing.JFrame {
 		loginDialog.pack();
 		loginDialog.setLocationRelativeTo(this);
 		loginDialog.setVisible(true);
-		
+
 		fixInvitationList();
 		fixMesssageList();
 		fixParticipantList();
@@ -1439,11 +1440,11 @@ public class Gui extends javax.swing.JFrame {
 		);
 
 		layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {logOutButton, messageViewButton, newAppointmentButton});
-        weekViewButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                weekViewButtonActionPerformed(evt);
-            }
-        });
+		weekViewButton.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				weekViewButtonActionPerformed(evt);
+			}
+		});
 		layout.setVerticalGroup(
 				layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 				.addGroup(layout.createSequentialGroup()
@@ -1822,6 +1823,9 @@ public class Gui extends javax.swing.JFrame {
 
 	//copy here
 
+	//ikke skriv kode over dette her!!!!!!!!!11111!!!!!!!!!
+
+
 	DefaultListModel messageListModel = new DefaultListModel();
 	DefaultListModel invitationListModel = new DefaultListModel();
 	DefaultListModel participantListModel = new DefaultListModel();
@@ -1855,7 +1859,7 @@ public class Gui extends javax.swing.JFrame {
 
 	private void buildInvitationList(){
 		messageListModel.removeAllElements();
-		
+
 		int i = 0;
 		for(Message message : Client.get().messages){
 			if(message.isInvitation()){
@@ -1865,10 +1869,15 @@ public class Gui extends javax.swing.JFrame {
 		}
 	}
 
-	private void buildParticipantList(){
+	private void buildParticipantList(Message message){
 		participantListModel.removeAllElements();
+		int i = 0;
+		for(Participant participant : message.getMeeting().getParticipants()){
+			participantListModel.add(i, participant);
+			i++;
 		}
-	
+	}
+
 
 	public void receiveMessages(){
 		buildMessageList();

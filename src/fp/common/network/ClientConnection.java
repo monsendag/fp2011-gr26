@@ -41,8 +41,8 @@ public class ClientConnection extends Connection implements Runnable {
 	// utestet
 	private void startTimer(){
 		timer = new Timer();
-		int delay = 30000; // begynner etter 30000ms = 30sec.
-		int period = 60000; // periode på 60000ms = 60sec.
+		int delay = 3000; // begynner etter 30000ms = 30sec.
+		int period = 10000; // periode på 60000ms = 60sec.
 		timer.scheduleAtFixedRate(new TimerTask() {
 			@Override
 			public void run() {

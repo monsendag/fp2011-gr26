@@ -5,4 +5,5 @@ public enum NetworkCommand {
 	returnActivities, returnEmployees, getEmployees, getCredentials, returnCredentials, getMessages, returnMessages,
 	getMeetings, returnMeetings, getRooms, getAllActivities, getAllRooms, getAllMeetings, getAllAlerts,
 	returnAllactivities, returnAllRooms, returnAllMeetings, returnAllAlerts
+	
 }

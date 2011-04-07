@@ -94,6 +94,7 @@ public class ServerConnection extends Connection implements Runnable {
 				DBRetrieve dbr = DBRetrieve.getInstance();
 				response.put("allMeetings", dbr.getAllMeetings());
 			}
+
 			
 		}
 		return response;

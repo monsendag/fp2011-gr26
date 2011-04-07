@@ -7,8 +7,6 @@ import java.util.List;
 
 import org.joda.time.DateTime;
 
-import fp.KTN.Connection;
-import fp.KTN.ReceiveMessageWorker;
 import fp.client.gui.Gui;
 import fp.client.gui.calendar.CalendarModel;
 import fp.common.models.Activity;
@@ -38,19 +36,18 @@ public class Client {
     public Gui gui;
 	public ClientConnection connection;
 	public CalendarModel calendarModel;
-	private List<Activity> activities;
-	public List<Message> messages;
+	
+	public ArrayList<Message> messages;
 	public Employee currentUser;
 	
 	
-	public Client() {
-		Thread thread = new Thread(new Runnable() {
+	public Client() {     
+		java.awt.EventQueue.invokeLater(new Runnable() {
 	        public void run() {
 	        	calendarModel = new CalendarModel();
 	        	gui = new Gui();
 	        }
 		});
-		thread.start();
     }
 	
 	public Employee getUser() {
@@ -87,59 +84,85 @@ public class Client {
 	
 	// usikker om det her fungerer, er for å håndtere beskjedene som skal requestes regelmessig i clientconnection -halvor
 	public void deliverMessages(ArrayList<Message> messages){		
-		this.messages = messages;
-		gui.receiveMessages();
-	}
-	
-	
-	public void setRead(Meeting meeting){
-		try {
-			connection.markMessageAsRead(meeting);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		if (this.messages == messages)
+			return;
+		else{// TODO: Si fra til GUI om at det har kommet nye meldinger?
+			this.messages = messages;
+			gui.receiveMessages();
 		}
 	}
+	/*		TODO: FIX clientconnection, serverconnection og DBStore - > messages burde bli markert as read med message og message ID som parameter, ikke meeting.
+	public void markMessageAsRead(Message m) throws IOException {
+		try {
+			// feil i db? loolol
+			connection.markMessageAsRead(m);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			
+			e.printStackTrace();
+			throw new IOException();
+		}
+		messages.remove(m);
+		m.isRead(true);
+		messages.add(m);
+		
+		deliverMessages(messages);
+	}
+	*/
+	
+	public void addActivity(Activity a) throws IOException {
+		connection.addActivity(a);
+		calendarModel.addActivity(a);
+	}
+	
+	/* TODO: lag en metode for å fjerne activity i calendarmodel.
+	public void remActivity(Activity a) throws IOException {
+		try {
+			connection.cancelActivity(a);
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+			throw new IOException();
+		}
+		calendarModel.remActivity(a);
+	}
+	*/
+	
+	
+	/* TODO: Lag en metode for å endre activity i calendarmodel.
+	public void chngActivity(Activity a) throws IOException {
+		try {
+			connection.changeActivity(a);
+		} catch (IOException e) {
+			e.printStacTrace();
+			throw new IOException();
+		}
+		calendarModel.chngActivity(a);
+	}
+	*/
+	
+	public ArrayList<Room> findRooms(DateTime start, DateTime end) throws IOException { // ikke kapasitet?
+		ArrayList<Room> rooms;
+		rooms = connection.getAvailableRooms(start, end);
+		return rooms;
+	}
+	
+	/* TODO: hmm...
+	public answerInvitation(Meeting m, Message msg, boolean answer) throws IOException {
+		try {
+			connection.changeInviteStatus(m, participant...)	
+			markMessageAsRead(msg);
+		}
+		catch (IOException e) {
+			e.printStackTrace();
+			throw new IOException;
+		}
+		
+	}
+	*/
+
 	
 	/*
-	public List<Room> getRooms(DateTime start, DateTime end){
-		// hent rom fra server ledige i gitt tidsrom, return liste med rom.
-		
-		// problemer, hvis ingen rom er ledige, hvordan skal dette håndteres i guien? være en mulighet for å se alle reservasjoner for en dag?
-		return null;
-	}
-	
-	
-	public Result remActivity(int activityID){
-		// send shit til server, vent på godkjennelse
-		// hvis OK:
-			activities.remove(activityID);
-			return Result.SUCCESS;
-		// else:
-			//return Result.TIMEOUT;
-	}
-	public Result addActivity(Activity a){
-		// send inn shit til server, vent på godkjennelse
-		// hvis godkjent:
-			activities.add(a);
-			return Result.SUCCESS;
-		// else:
-			//return Result.TIMEOUT;
-	}
-	
-	public Result chngActivity(Activity a, int activityID){
-		// send shit til server, vent på godkjennelse, fjern activity med ID og legg til ny activity
-		// hvis godkjent:
-			for (int i = 0; i < activities.size(); i++){
-				if (activities.get(i).getId() == activityID)
-					activities.remove(i);
-			}
-			activities.add(a);
-			return Result.SUCCESS;
-		// else
-			// return Result.TIMEOUT;
-	}
-	
 	
 	// true = ja, false = nei.
 	public Result answerInvitation(Message m, boolean answer){ // trengs det noe messageID? isf. legg til

@@ -181,7 +181,9 @@ public class DBRetrieve {
 			Message m;
 			while(rs.next()) {
 				m = new Message();
-				m.setRead(rs.getBoolean("isread"));
+				m.setMessageID(rs.getInt("meetingID"));
+				m.isInvitation(rs.getBoolean("isinvite"));
+				m.isRead(rs.getBoolean("isread"));
 				m.setCreatedOn(new DateTime(rs.getTimestamp("time").getTime()));
 				m.setDescription(rs.getString("message"));
 				m.setEmployee(getEmployee(rs.getString("username")));
@@ -677,7 +679,9 @@ public class DBRetrieve {
 				m.setDescription(rs.getString("message"));
 				m.setEmployee(getEmployee(username));
 				m.setMeeting(getMeeting(rs.getInt("activityID")));
-				m.setRead(rs.getBoolean("isread"));
+				m.setMessageID(rs.getInt("meetingID"));
+				m.isInvitation(rs.getBoolean("isinvite"));
+				m.isRead(rs.getBoolean("isread"));
 				messages.add(m);
 			}
 			s.close();
@@ -723,7 +727,9 @@ public class DBRetrieve {
 				m.setDescription(rs.getString("message"));
 				m.setEmployee(getEmployee(username));
 				m.setMeeting(getMeeting(rs.getInt("activityID")));
-				m.setRead(rs.getBoolean("isread"));
+				m.setMessageID(rs.getInt("meetingID"));
+				m.isInvitation(rs.getBoolean("isinvite"));
+				m.isRead(rs.getBoolean("isread"));
 				messages.add(m);
 			}
 			s.close();

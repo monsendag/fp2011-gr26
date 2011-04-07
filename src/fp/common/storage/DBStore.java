@@ -311,21 +311,21 @@ public class DBStore {
 	 * @param p The participant
 	 */
 	public void changeInviteStatus(Meeting m, Participant p) {
-		changeInviteStatusByIDs(m.getId(), p.getEmployee().getUsername(), p.getStatus().ordinal());
+		changeInviteStatusByIDs(m.getId(), p.getEmployee().getUsername(), p.getStatus());
 	}
 	
 	/**
 	 * Changes a participants status for a meeting, based on a meetings ID, username and status.
 	 * @param activityID The ID
 	 * @param username The username
-	 * @param status The status as an integer
+	 * @param status The status
 	 */
-	public void changeInviteStatusByIDs(int activityID, String username, int status) {
+	public void changeInviteStatusByIDs(int activityID, String username, Participant.Status status) {
 		try {
 			PreparedStatement ps = conn.prepareStatement("UPDATE participant SET status = ? " +
 					"WHERE activityID = " + activityID + " " +
 					"AND username = '" + username + "'");
-			ps.setInt(1,status);
+			ps.setInt(1,status.ordinal());
 			ps.executeUpdate();
 			ps.close();
 			
@@ -333,13 +333,13 @@ public class DBStore {
 			Meeting m = dbr.getMeeting(activityID);
 			for (Participant p : m.getParticipants()) {
 				if(p.getEmployee().getUsername() == username) {
-					p.setStatus(Participant.intToEnum(status));
+					p.setStatus(status);
 					System.out.println("#DB: Changed "+p.getEmployee().getUsername()+" participant status. In DB and cache");
 				}
 			}
 			
 			// Create messages
-			if(Participant.intToEnum(status) == Participant.Status.NOT_ATTENDING) {
+			if(status == Participant.Status.NOT_ATTENDING) {
 				ps = conn.prepareStatement("INSERT INTO message " +
 				"(isinvite,isread,time,message,username,activityID) VALUES (?,?,?,?,?,?)");
 				Employee decliner = dbr.getEmployee(username);

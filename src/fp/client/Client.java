@@ -94,7 +94,7 @@ public class Client {
 			this.messages = messages;
 	}
 
-		
+	/**
 	public List<Room> getRooms(DateTime start, DateTime end){
 		// hent rom fra server ledige i gitt tidsrom, return liste med rom.
 		
@@ -102,7 +102,7 @@ public class Client {
 		return null;
 	}
 	
-	/**
+	
 	public Result remActivity(int activityID){
 		// send shit til server, vent på godkjennelse
 		// hvis OK:

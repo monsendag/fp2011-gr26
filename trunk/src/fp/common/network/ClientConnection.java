@@ -6,12 +6,15 @@ import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import org.joda.time.DateTime;
+
 import fp.client.Client;
 import fp.common.models.Activity;
 import fp.common.models.Employee;
 import fp.common.models.Meeting;
 import fp.common.models.Message;
 import fp.common.models.Room;
+import fp.common.storage.DBStore;
 
 
 
@@ -150,6 +153,46 @@ public class ClientConnection extends Connection implements Runnable {
 		NetworkObject back = receive();
 		return (ArrayList<Meeting>) back.get("allMeetings");
 	}
-	
+	public ArrayList<Room> getAvailableRooms(DateTime startTime, DateTime endTime) throws IOException {
+		NetworkObject n = new NetworkObject();
+		n.setCommand(NetworkCommand.getAvailableRooms);
+		n.put("startTime", startTime);
+		n.put("endTime", endTime);
+		send(n);
+		NetworkObject back = receive();
+		return (ArrayList<Room>) back.get("availableRooms");
+	}
+	public Meeting getMeeting(int meetingID) throws IOException {
+		NetworkObject n = new NetworkObject();
+		n.setCommand(NetworkCommand.getMeeting);
+		n.put("meetingID", meetingID);
+		send(n);
+		NetworkObject back = receive();
+		return (Meeting) back.get("meeting");
+	}
+	public Room getRoom(int roomID) throws IOException {
+		NetworkObject n = new NetworkObject();
+		n.setCommand(NetworkCommand.getRoom);
+		n.put("roomID", roomID);
+		send(n);
+		NetworkObject back = receive();
+		return (Room) back.get("room");
+	}
+	public void addActivity(Activity activity) throws IOException{
+		NetworkObject n = new NetworkObject();
+		n.setCommand(NetworkCommand.addActivity);
+		n.put("activity", activity);
+		send(n);
+		NetworkObject back = receive();
+		activity.setId((Integer) back.get("activityId"));
+	}
+	public void addMeeting(Meeting meeting) throws IOException{
+		NetworkObject n = new NetworkObject();
+		n.setCommand(NetworkCommand.addMeeting);
+		n.put("meeting", meeting);
+		send(n);
+		NetworkObject back = receive();
+		meeting.setId((Integer) back.get("meetingId"));
+	}
 }
 	

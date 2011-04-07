@@ -3,6 +3,8 @@ package fp.common.network;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import fp.client.Client;
 import fp.common.models.Activity;
@@ -11,20 +13,48 @@ import fp.common.models.Meeting;
 import fp.common.models.Message;
 import fp.common.models.Room;
 
+
+
 public class ClientConnection extends Connection implements Runnable {
 	
-	public ClientConnection(InetAddress host) throws IOException {
+	
+	
+	private Timer timer;
+	private Client client;
+	
+	public ClientConnection(InetAddress host, Client client) throws IOException {
 		super(host);
+		this.client = client;
 	}
 	
-	public ClientConnection() throws IOException {
-		this(InetAddress.getLocalHost());
+	public ClientConnection(Client client) throws IOException {
+		this(InetAddress.getLocalHost(), client);
 	}
 	
 	@Override
 	public void run() { 
 		
 	}
+	
+	// utestet
+	private void startTimer(){
+		timer = new Timer();
+		int delay = 30000; // begynner etter 30000ms = 30sec.
+		int period = 60000; // periode på 60000ms = 60sec.
+		timer.scheduleAtFixedRate(new TimerTask() {
+			@Override
+			public void run() {
+				try {
+					// hent beskjeder, trenger en metode i modellen for å faktisk legge dem til. ha en referanse til client i denne klassen? må vel ha det.
+					client.deliverMessages(getEmpMessages());
+					
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}, delay, period);
+		}
 	
 	/**
 	 * Tries to login with the given credentials
@@ -40,7 +70,15 @@ public class ClientConnection extends Connection implements Runnable {
 		n.put("password", password);
 		send(n);
 		NetworkObject back = receive();
-		return back.get("employee") != null ? ((Employee) back.get("employee")) : null;
+		
+		// start timer for å spørre etter meldinger regelmessig
+		if (back.get("employee") != null){
+			startTimer();
+			return ((Employee) back.get("employee"));
+		}
+		else
+			return null;
+		//return back.get("employee") != null ? ((Employee) back.get("employee")) : null;
 	}
 	public ArrayList<Employee> getAllEmployees() throws IOException {
 		NetworkObject n = new NetworkObject();

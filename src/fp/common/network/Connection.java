@@ -9,6 +9,7 @@ import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.net.InetAddress;
 import java.net.Socket;
+import java.util.Queue;
 
 import fp.common.models.XmlSerializer;
 
@@ -19,6 +20,10 @@ public abstract class Connection {
 	protected Socket socket;
 	protected BufferedReader in;
 	protected Writer out;
+	
+	
+	private Queue<NetworkObject> queue;
+	private Boolean isSending = false;
 	
 	/**
 	 * Sets up a reader and a writer for the socket.
@@ -60,11 +65,25 @@ public abstract class Connection {
 	 * @throws IOException
 	 */
 	protected void send(NetworkObject o) throws IOException {
-		System.out.println("#NET: sending: "+o.getCommand());
-		String xml = XmlSerializer.getInstance().serialize(o);
-		out.write(xml+EOL);
-		writeLn(EOT);
-		out.flush();
+		
+		queue.add(o);
+		
+		if (isSending = false)
+			sendFromQueue();
+	}
+	
+	protected void sendFromQueue() throws IOException {
+		while (!queue.isEmpty()){
+			isSending = true;
+			NetworkObject o = queue.poll();
+			System.out.println("#NET: sending: "+o.getCommand());
+			String xml = XmlSerializer.getInstance().serialize(o);
+			out.write(xml+EOL);
+			writeLn(EOT);
+			out.flush();
+		}
+		isSending = false;
+		
 	}
 	
 	/**

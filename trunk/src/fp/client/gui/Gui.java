@@ -1805,25 +1805,6 @@ public class Gui extends javax.swing.JFrame {
 
     //copy here
     
-    private void createActivity(){
-    	Activity newActivity = new Activity();
-    	newActivity.setTitle(newAppointmentTitleLabel.getText()); // title
-    	newActivity.setDescription(newAppointmentDescriptionTextArea.getText()); // description
-    	/*
-    	DateTime fromDate = new DateTime();
-    	DateTime toDate = new DateTime();
-    	newAppointmentStartTimeCB.setSelectedItem(act.getStartTime().toString("HH:mm"));
-    	newAppointmentEndTimeCB.setSelectedItem(act.getEndTime().toString("HH:mm"));
-    	fromDateChooserPanel.setDate(act.getStartTime().toDate());
-    	toDateChooserPanel.setDate(act.getEndTime().toDate());
-	    
-	    newAppointmentDialog.pack();
-	    newAppointmentDialog.setLocationRelativeTo(this);
-	    newAppointmentDialog.setVisible(true);
-    	
-    	Client.get().addActivity(newActivity);
-    	*/
-    }
     
     private void cancelActivity() {
     	//if owner 
@@ -1914,23 +1895,33 @@ public class Gui extends javax.swing.JFrame {
 
     }
 
-//    private void createActivity() {
-//    	Employee owner = userLoggedIn;
-//    	Room room = newAppointmentRoomCB.getSelectedItem();
-//    	Date tempStartTime = toDateChooserPanel.getDate();
-//    	Date endTime = fromDateChooserPanel.getDate();
-//		DateTime startTime = new DateTime(tempStartTime.getYear(), tempStartTime.getMonth(), tempStartTime.getDay(), Integer.parseInt(((String) newAppointmentStartTimeCB.getSelectedItem()).substring(0,1)), Integer.parseInt(((String) newAppointmentStartTimeCB.getSelectedItem()).substring(2,3)), 0, 0);
-//		DateTime startTime2 = new DateTime(year, monthOfYear, dayOfMonth, hourOfDay, minuteOfHour, secondOfMinute, millisOfSecond)
-//		DateTime endTime = new DateTime(startTime.getDate() for dato, substring0-1 for time, substring 2-3 for minutter)
-//    	String description = newAppointmentDescriptionTextArea.getText();
-//    	String title = newAppointmentTitleLabel.getText();
-//    	
-//        ArrayList<Employee> participants = participantChooserTable.getSelectedRows();
-//    	
-//    	if(participantChooserTable.getSelectedRows().length > 0)
-//    		ActivityStorage.createActivity(new Meeting(owner, participants, room, startTime, endTime, description, location, title));
-//		ActivityStorage.createActivity(new Activity(owner, room, startTime, endTime, description, location, title));
-//    }
+    private void createActivity() {
+    	/*
+    	Activity newActivity = new Activity();
+    	newActivity.setTitle(newAppointmentTitleLabel.getText()); // title
+    	newActivity.setDescription(newAppointmentDescriptionTextArea.getText()); // description
+    	
+    	Date fromDate = toDateChooserPanel.getDate();
+    	Date toDate = fromDateChooserPanel.getDate();
+		
+    	//DateTime fromDate = new DateTime();
+    	//DateTime fromDate = new DateTime();
+    	
+    	DateTime startTime = new DateTime(tempStartTime.getYear(), tempStartTime.getMonth(), tempStartTime.getDay(), Integer.parseInt(((String) newAppointmentStartTimeCB.getSelectedItem()).substring(0,1)), Integer.parseInt(((String) newAppointmentStartTimeCB.getSelectedItem()).substring(2,3)), 0, 0);
+		DateTime endTime = new DateTime(tempStartTime.getYear(), tempStartTime.getMonth(), tempEndTime.getDay(), Integer.parseInt(((String) newAppointmentEndTimeCB.getSelectedItem()).substring(0,1)), Integer.parseInt(((String) newAppointmentEndTimeCB.getSelectedItem()).substring(2,3)), 0, 0);
+    	
+		String description = newAppointmentDescriptionTextArea.getText();
+    	String title = newAppointmentTitleLabel.getText();
+    	
+        //ArrayList<Employee> participants = participantChooserTable.getSelectedRows();
+    	
+    	if(participantChooserTable.getSelectedRows().length > 0)
+    		ActivityStorage.createActivity(new Meeting(owner, participants, room, startTime, endTime, description, location, title));
+		ActivityStorage.createActivity(new Activity(owner, room, startTime, endTime, description, location, title));
+		
+		Client.get().addActivity(newActivity);
+    */
+    }
 
     private void changeCalendarView(){
     }

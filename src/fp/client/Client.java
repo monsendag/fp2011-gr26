@@ -90,20 +90,7 @@ public class Client {
 			gui.receiveMessages();
 		}
 	}
-	/*		TODO: FIX clientconnection, serverconnection og DBStore - > messages burde bli markert as read med message og message ID som parameter, ikke meeting.
-	public void markMessageAsRead(Message m) throws IOException {
-			// feil i db? loolol
-		connection.markMessageAsRead(m);
-		
-		
-		
-		messages.remove(m);
-		m.isRead(true);
-		messages.add(m);
-		
-		deliverMessages(messages);
-	}
-	*/
+
 	
 	public void addActivity(Activity a) throws IOException {
 		connection.addActivity(a);
@@ -134,6 +121,14 @@ public class Client {
 
 	public void setRead(Message message) {
 		connection.markMessageAsRead(message);
+		
+		/*
+		messages.remove(message);
+		message.isread(true);
+		messages.add(message);
+		
+		deliverMessages(message);
+		*/
 	}
 	
 	/* TODO: hmm...

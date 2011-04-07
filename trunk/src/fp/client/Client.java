@@ -37,7 +37,7 @@ public class Client {
 	public ClientConnection connection;
 	public CalendarModel calendarModel;
 	private List<Activity> activities;
-	public List<Message> messages;
+	public ArrayList<Message> messages;
 	public Employee currentUser;
 	
 	
@@ -92,7 +92,22 @@ public class Client {
 		}
 	}
 
-	
+	public void markMessageAsRead(Message m)
+	{
+		try {
+			connection.markMessageAsRead(m);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			
+			e.printStackTrace();
+			return;
+		}
+		messages.remove(m);
+		m.isRead(true);
+		messages.add(m);
+		
+		deliverMessages(messages);
+	}
 	
 	
 	

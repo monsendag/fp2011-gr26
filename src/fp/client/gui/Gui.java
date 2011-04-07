@@ -1685,7 +1685,8 @@ public class Gui extends javax.swing.JFrame {
     private void iWontStandForThisButtonActionPerformed(java.awt.event.ActionEvent evt) {
         errorDialog.setVisible(false);
     }
-
+    
+    
     // Variables declaration - do not modify
     private javax.swing.JPanel appointmentButtonPanel;
     private javax.swing.JButton appointmentCloseButton;
@@ -1802,9 +1803,27 @@ public class Gui extends javax.swing.JFrame {
     private javax.swing.JScrollPane weekViewSP;
     private javax.swing.JTable weekViewTable;
     // End of variables declaration
-
-    //copy here
     
+    //copy here
+
+    private void setInvitationRenderer(){
+    	MessageRenderer mr = new MessageRenderer();
+    	invitationList.setCellRenderer(mr);
+    }
+    private void setMessageRenderer(){
+    	MessageRenderer mr = new MessageRenderer();
+    	messageList.setCellRenderer(mr);
+    }
+    private void setParticipantRenderer(){
+    	MessageRenderer mr = new MessageRenderer();
+    	participantOverviewList.setCellRenderer(mr);
+    }
+    
+    private void buildMessageLists(){
+    }
+    
+    private void buildParticipantList(){
+    }
     
     private void cancelActivity() {
     	//if owner 

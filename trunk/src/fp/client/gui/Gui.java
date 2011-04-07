@@ -825,14 +825,14 @@ public class Gui extends javax.swing.JFrame{
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        appointmentSayYoureNotCommingButton.setText("Meld Avbud");
+        appointmentSayYoureNotCommingButton.setText("Oppdater");
         appointmentSayYoureNotCommingButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 appointmentSayYoureNotCommingButtonActionPerformed(evt);
             }
         });
 
-        appointmentCloseButton.setText("Lukk");
+        appointmentCloseButton.setText("Avlys");
         appointmentCloseButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 appointmentCloseButtonActionPerformed(evt);
@@ -1554,16 +1554,19 @@ public class Gui extends javax.swing.JFrame{
 
     private void appointmentSayYoureNotCommingButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                                    
         appointmentDialog.setVisible(false);
+//        changeActivity(); //TODO
         cancelActivity();
     }                                                                   
 
     private void appointmentCloseButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                       
         appointmentDialog.setVisible(false);
+        cancelActivity();
     }                                                      
 
     private void appointmentShowParticipantsButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                                  
         buildParticipantList();
         participantOverviewDialog.pack();
+        participantOverviewDialog.setLocationRelativeTo(appointmentDialog);
         participantOverviewDialog.setVisible(true);
     }                                                                 
 
@@ -1939,12 +1942,10 @@ public class Gui extends javax.swing.JFrame{
 	
 	public void changeActivity(Activity act) {
 		
-		if(Client.get().currentUser != act.getOwner()){ disableEditing();}
-		
 		Date fromDate = fromDateChooserPanel.getDate();
     	Date toDate = toDateChooserPanel.getDate();
     	
-    	DateTime startTime = new DateTime(fromDate.getYear()+1900, fromDate.getMonth()+1, fromDate.getDate(), Integer.parseInt(((String) appointmentStartTimeCB.getSelectedItem()).substring(0,2)), Integer.parseInt(((String) newAppointmentStartTimeCB.getSelectedItem()).substring(3)), 00, 00);
+    	DateTime startTime = new DateTime(fromDate.getYear()+1900, fromDate.getMonth()+1, fromDate.getDate(), Integer.parseInt(((String) appointmentStartTimeCB.getSelectedItem()).substring(0,2)), Integer.parseInt(((String) newAppointmentStartTimeCB.getSelectedItem()).substring(0,2)), 00, 00);
 		DateTime endTime = new DateTime(toDate.getYear()+1900, toDate.getMonth()+1, toDate.getDate(), Integer.parseInt(((String) appointmentEndTimeCB.getSelectedItem()).substring(0,2)), Integer.parseInt(((String) newAppointmentEndTimeCB.getSelectedItem()).substring(3)), 00, 00);
 		String description = appointmentDescriptionTextArea.getText();
     	String title = appointmentTitleLabel.getText();
@@ -1970,16 +1971,6 @@ public class Gui extends javax.swing.JFrame{
 		}
 
 	}
-	
-	private void disableEditing(){
-		newAppointmentFromDateButton.setEnabled(false);
-		newAppointmentToDateButton.setEnabled(false);
-		newAppointmentEndTimeCB.setEnabled(false);
-		newAppointmentStartTimeCB.setEnabled(false);
-		newAppointmentTitleTextField.setEditable(false);
-		newAppointmentDescriptionTextArea.setEditable(false);
-	}
-
 	
 	public void buildMessage(){
 		Message message = (Message)messageList.getSelectedValue();
@@ -2034,9 +2025,25 @@ public class Gui extends javax.swing.JFrame{
 		Client.get().calendarModel.setPreviousWeek();
 		weekViewButton.setText("Uke " + Client.get().calendarModel.getWeekNumber() + " - " + Client.get().calendarModel.getYear());
 	}
-	Activity activity;
-	public void editActivity(Activity act){
-		activity = act;
+	
+	
+	private void disableEditing(){
+		appointmentFromDateButton.setEnabled(false);
+		appointmentToDateButton.setEnabled(false);
+		appointmentEndTimeCB.setEnabled(false);
+		appointmentStartTimeCB.setEnabled(false);
+		appointmentTitleTextField.setEditable(false);
+		appointmentDescriptionTextArea.setEditable(false);
+		appointmentRoomCB.setEnabled(false);
+		appointmentSayYoureNotCommingButton.setText("Meld Avbud");
+		appointmentCloseButton.setText("Lukk");
+		
+	}
+	
+	public void openActivity(Activity act){
+		
+		if(Client.get().currentUser != act.getOwner()){ disableEditing();}
+		
 		if(act instanceof Meeting){appointmentRoomCB.setSelectedItem(((Meeting) act).getRoom());}else{}
 		appointmentTitleLabel.setText(act.getTitle());
 		appointmentDescriptionTextArea.setText(act.getDescription());
@@ -2071,13 +2078,13 @@ public class Gui extends javax.swing.JFrame{
 		String day ="";
 		
 		switch(date.getDay()){
-		case 0: day = "SÃ¸ndag"; break;
+		case 0: day = "S�ndag"; break;
 		case 1: day = "Mandag"; break;
 		case 2: day = "Tirsdag"; break;
 		case 3: day = "Onsdag"; break;
 		case 4: day = "Torsdag"; break;
 		case 5: day = "Fredag"; break;
-		case 6: day = "LÃ¸rdag"; break;
+		case 6: day = "L�rdag"; break;
 		}
 		
 		switch(date.getMonth()){

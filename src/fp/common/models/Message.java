@@ -12,6 +12,10 @@ public class Message
 
     //
     private Boolean read;
+    
+    private Boolean invitation;
+    
+    private int messageID;
 
     //
     private DateTime createdOn;
@@ -38,11 +42,11 @@ public class Message
 		this.title = title;
 	}
 
-	public Boolean getRead() {
+	public Boolean isRead() {
 		return read;
 	}
 
-	public void setRead(Boolean read) {
+	public void isRead(Boolean read) {
 		this.read = read;
 	}
 
@@ -68,5 +72,21 @@ public class Message
 
 	public Employee getEmployee() {
 		return employee;
+	}
+
+	public void isInvitation(Boolean invitation) {
+		this.invitation = invitation;
+	}
+
+	public Boolean isInvitation() {
+		return invitation;
+	}
+
+	public void setMessageID(int messageID) {
+		this.messageID = messageID;
+	}
+
+	public int getMessageID() {
+		return messageID;
 	}
 }

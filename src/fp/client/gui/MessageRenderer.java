@@ -15,7 +15,7 @@ public class MessageRenderer extends DefaultListCellRenderer implements ListCell
 		// get label from superclass
 		JLabel label = (JLabel) super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
 		// get image path
-		URL path = getClass().getResource("graphics/"+(message.getRead() ? "read" : "unread")+"message.png");
+		URL path = getClass().getResource("graphics/"+(message.isRead() ? "read" : "unread")+"message.png");
 		// set icon and text
 		label.setIcon(new ImageIcon(path));
 		label.setText(message.getTitle());

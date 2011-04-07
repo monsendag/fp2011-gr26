@@ -1903,10 +1903,10 @@ public class Gui extends javax.swing.JFrame{
     	Date fromDate = fromDateChooserPanel.getDate();
     	Date toDate = toDateChooserPanel.getDate();
     	
-//    	DateTime startTime = new DateTime(fromDate.getYear()+1900, fromDate.getMonth()+1, fromDate.getDate(), fromDate.getHours(), fromDate.getMinutes(),00,00);
-    	DateTime startTime = new DateTime(fromDate.getYear(), fromDate.getMonth(), fromDate.getDay(), Integer.parseInt(((String) newAppointmentStartTimeCB.getSelectedItem()).substring(0,1)), Integer.parseInt(((String) newAppointmentStartTimeCB.getSelectedItem()).substring(2,3)), 00, 00);
-//		DateTime endTime = new DateTime(toDate.getYear()+1900, toDate.getMonth()+1, toDate.getDate(), toDate.getHours(), toDate.getMinutes(),00,00);
-		DateTime endTime = new DateTime(toDate.getYear(), toDate.getMonth(), toDate.getDay(), Integer.parseInt(((String) newAppointmentEndTimeCB.getSelectedItem()).substring(0,1)), Integer.parseInt(((String) newAppointmentEndTimeCB.getSelectedItem()).substring(2,3)), 00, 00);
+//    	DateTime startTime = new DateTime(fromDate.getYear()+1900, fromDate.getMonth()+1, fromDate.getDate(), Integer.parseInt(((String) newAppointmentStartTimeCB.getSelectedItem()).substring(0,1)), Integer.parseInt(((String) newAppointmentStartTimeCB.getSelectedItem()).substring(3,4)), 00, 00);
+//		DateTime endTime = new DateTime(toDate.getYear()+1900, toDate.getMonth()+1, toDate.getDate(), Integer.parseInt(((String) newAppointmentEndTimeCB.getSelectedItem()).substring(0,1)), Integer.parseInt(((String) newAppointmentEndTimeCB.getSelectedItem()).substring(3,4)), 00, 00);
+    	DateTime startTime = new DateTime(fromDate.getYear()+1900, fromDate.getMonth()+1, fromDate.getDate(), fromDate.getHours(), fromDate.getMinutes(),00,00);
+    	DateTime endTime = new DateTime(toDate.getYear()+1900, toDate.getMonth()+1, toDate.getDate(), toDate.getHours(), toDate.getMinutes(),00,00);
 		String description = newAppointmentDescriptionTextArea.getText();
     	String title = newAppointmentTitleLabel.getText();
 

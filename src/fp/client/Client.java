@@ -140,6 +140,10 @@ public class Client {
 		// shit 2
 	}
 	
+	public ArrayList getAllEmployees(){
+		return connection.getAllEmployees();
+	}
+	
 	/* TODO: hmm...
 	public answerInvitation(Meeting m, Message msg, boolean answer) throws IOException {
 		connection.changeInviteStatus(m, participant...)			

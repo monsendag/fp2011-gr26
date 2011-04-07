@@ -1847,7 +1847,7 @@ public class Gui extends javax.swing.JFrame {
 		int i = 0;
 		for(Message message : Client.get().messages){
 			if(message.isInvitation()){
-				messageListModel.add(i, message);
+				invitationListModel.add(i, message);
 				i++;
 			}
 		}

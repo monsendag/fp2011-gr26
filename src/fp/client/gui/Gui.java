@@ -1822,12 +1822,12 @@ public class Gui extends javax.swing.JFrame{
 	private javax.swing.JScrollPane weekViewSP;
 	private javax.swing.JTable weekViewTable;
 	// End of variables declaration
-
+	
+	
 	//copy here
 
 	//ikke skriv kode over dette her!!!!!!!!!11111!!!!!!!!!
-
-
+	
 	DefaultListModel messageListModel = new DefaultListModel();
 	DefaultListModel invitationListModel = new DefaultListModel();
 	DefaultListModel participantListModel = new DefaultListModel();
@@ -1964,7 +1964,7 @@ public class Gui extends javax.swing.JFrame{
 	//}});
 	}
 
-	public void buildMessage(){ //ta inn modell i stedet for Ã¥ ha en modell i gui?
+	public void buildMessage(){
 		// messagePanel.setBorder(javax.swing.BorderFactory.createTitledBorder(message.getTitle() + " - " + dateToString(message.getDate())));
 		// messagePanelTimeRoomAvailability.setText(message.getTime() + " - " message.getRoom() + ", " + availabilityAndStatus(message));
 		// messageDescription.setText(message.getDescription());

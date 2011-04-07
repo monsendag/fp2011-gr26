@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import fp.client.Client;
 import fp.common.models.Activity;
 import fp.common.models.Employee;
+import fp.common.models.Message;
 
 public class ClientConnection extends Connection implements Runnable {
 	
@@ -53,5 +54,15 @@ public class ClientConnection extends Connection implements Runnable {
 		NetworkObject back = receive();
 		return (ArrayList<Activity>) back.get("activities");
 	}
+	
+	public ArrayList<Message> getEmpMessages() throws IOException {
+		NetworkObject n = new NetworkObject();
+		n.setCommand(NetworkCommand.getActivities);
+		n.put("currentUser", Client.get().getUser());
+		send(n);
+		NetworkObject back = receive();
+		return (ArrayList<Message>) back.get("messages");
+	}
+	
 }
 	

@@ -102,7 +102,7 @@ public class Client {
 		return null;
 	}
 	
-	
+	/**
 	public Result remActivity(int activityID){
 		// send shit til server, vent på godkjennelse
 		// hvis OK:
@@ -148,5 +148,5 @@ public class Client {
 		// trenger ikke kontakte server vel?
 		return m.getParticipants();
 	}
-	
+  **/	
 }

@@ -7,6 +7,7 @@ import org.joda.time.DateTime;
 import fp.common.models.*;
 import fp.common.storage.DBRetrieve;
 import fp.common.storage.DBStore;
+import fp.server.Server;
 
 
 public class ServerConnection extends Connection implements Runnable {
@@ -20,6 +21,7 @@ public class ServerConnection extends Connection implements Runnable {
 			processRequest();
 		} catch (Exception e) {
 			System.err.println("Could not process request ("+e.getMessage()+")");
+			Server.get().removeClient(this);
 		}
 	}
 

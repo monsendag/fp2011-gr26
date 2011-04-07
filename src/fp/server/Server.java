@@ -11,17 +11,48 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 
+import fp.client.gui.Gui;
+import fp.client.gui.calendar.CalendarModel;
 import fp.common.network.ServerConnection;
 
 public class Server {
 	public static int port = 6789;
-	public static DefaultListModel clients;
+	private static Server server;
+	
 	/**
 	 * @param args
 	 * @throws Exception 
 	 */
 	public static void main(String[] args) {
-		
+		server = new Server();
+	}
+	
+	public static Server get() {
+		return server;
+	}
+	
+	public  DefaultListModel clients;
+	
+	
+	public void removeClient(ServerConnection client) {
+		clients.removeElement(client);
+	}
+	
+	public void addClient(ServerConnection client) {
+		clients.addElement(client);
+	}
+	public Server() {
+		// Create a new thread to process the request.
+		Thread thread = new Thread(new Runnable() {
+	        public void run() {
+	        	createServer();
+	        }
+		});
+		// Start the thread.
+		thread.start();
+	}
+	public void createServer() {
+
 		System.out.println("#NET: Starting server on port "+port);
 		ServerSocket srvr;
 		try {
@@ -60,5 +91,9 @@ public class Server {
 		catch (Exception e) {
 			
 		}
+		
 	}
+	
+
+	
 }

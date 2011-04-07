@@ -1854,7 +1854,9 @@ public class Gui extends javax.swing.JFrame {
 	}
 
 	private void buildParticipantList(){
-	}
+		participantListModel.removeAllElements();
+		}
+	
 
 	public void receiveMessages(){
 		buildMessageList();

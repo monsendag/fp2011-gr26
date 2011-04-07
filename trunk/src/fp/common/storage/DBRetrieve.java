@@ -688,4 +688,50 @@ public class DBRetrieve {
 		
 		return messages;
 	}
+	
+	/**
+	 * Returns an {@link ArrayList} with an employee's unread messages,
+	 * based on an {@link Employee} object.
+	 * @param emp The employee
+	 * @return The ArrayList with undread messages.
+	 */
+	public ArrayList<Message> getUnreadEmpMessages(Employee emp) {
+		return getEmpMessagesByUsername(emp.getUsername());
+	}
+	
+	/**
+	 * Returns an {@link ArrayList} with an employee's unread messages,
+	 * based on username.
+	 * @param username The username
+	 * @return The ArrayList with unread messages.
+	 */
+	public ArrayList<Message> getUnreadEmpMessagesByUsername(String username) {
+		ArrayList<Message> messages = new ArrayList<Message>();
+		try {
+			Statement s = conn.createStatement();
+			
+			/*
+			 * Personal activities can't reserve a room.
+			 */
+			ResultSet rs = s.executeQuery("SELECT * FROM message WHERE username ='"
+					+ username + "' AND (isread = false OR isread IS NULL)");
+			
+			Message m;
+			while(rs.next()) {
+				m = new Message();
+				m.setCreatedOn(new DateTime(rs.getTimestamp("time").getTime()));
+				m.setDescription(rs.getString("message"));
+				m.setEmployee(getEmployee(username));
+				m.setMeeting(getMeeting(rs.getInt("activityID")));
+				m.setRead(rs.getBoolean("isread"));
+				messages.add(m);
+			}
+			s.close();
+		} catch (SQLException e) {
+			System.err.println("Could not get employee's unread messages.");
+			e.printStackTrace();
+		}
+		
+		return messages;
+	}
 }

@@ -1486,6 +1486,7 @@ public class Gui extends javax.swing.JFrame{
 
     private void newAppointmentCreateButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                           
         newAppointmentDialog.setVisible(false);
+        createActivity();
     }                                                          
 
     private void newAppointmentCancelButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                           
@@ -1563,7 +1564,6 @@ public class Gui extends javax.swing.JFrame{
     }                                                                   
 
     private void appointmentCloseButtonActionPerformed(java.awt.event.ActionEvent evt) {
-    	changeActivity(activityModel);
         appointmentDialog.setVisible(false);
     }                                                      
 
@@ -2013,9 +2013,9 @@ public class Gui extends javax.swing.JFrame{
 		Client.get().calendarModel.setPreviousWeek();
 		weekViewButton.setText("Uke " + Client.get().calendarModel.getWeekNumber() + " - " + Client.get().calendarModel.getYear());
 	}
-	Activity activityModel;
+	Activity activity;
 	public void editActivity(Activity act){
-		activityModel = act;
+		activity = act;
 		if(act instanceof Meeting){appointmentRoomCB.setSelectedItem(((Meeting) act).getRoom());}else{}
 		appointmentTitleLabel.setText(act.getTitle());
 		appointmentDescriptionTextArea.setText(act.getDescription());

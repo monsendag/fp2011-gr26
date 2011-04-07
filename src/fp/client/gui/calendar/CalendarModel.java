@@ -80,6 +80,7 @@ public class CalendarModel {
 				activities.add(i, a);
 			}
 		}
+		changeSupport.firePropertyChange("changeActivity", null, a);
 	}
 
 	public void setNextWeek() {

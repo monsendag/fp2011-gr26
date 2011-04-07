@@ -15,6 +15,7 @@ import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Date;
 import javax.imageio.ImageIO;
+import javax.management.InstanceAlreadyExistsException;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -1562,7 +1563,7 @@ public class Gui extends javax.swing.JFrame{
         cancelActivity();
     }                                                                   
 
-    private void appointmentCloseButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                       
+    private void appointmentCloseButtonActionPerformed(java.awt.event.ActionEvent evt) { 
         appointmentDialog.setVisible(false);
     }                                                      
 
@@ -1899,29 +1900,63 @@ public class Gui extends javax.swing.JFrame{
 //		    	newActivity.setTitle(newAppointmentTitleLabel.getText()); // title
 //		    	newActivity.setDescription(newAppointmentDescriptionTextArea.getText()); // description
 	
-	    	Date fromDate = fromDateChooserPanel.getDate();
-	    	Date toDate = toDateChooserPanel.getDate();
-	    	DateTime startTime = new DateTime(fromDate.getYear()+1900, fromDate.getMonth()+1, fromDate.getDate(), fromDate.getHours(), fromDate.getMinutes(),00,00);
-			DateTime endTime = new DateTime(toDate.getYear()+1900, toDate.getMonth()+1, toDate.getDate(), toDate.getHours(), toDate.getMinutes(),00,00);
-			String description = newAppointmentDescriptionTextArea.getText();
-	    	String title = newAppointmentTitleLabel.getText();
-	
-	        ArrayList<Participant> participants = new ArrayList<Participant>();// = participantChooserTable.getSelectedRows();
-	        Room room = new Room();
-	
-	    	if(participantChooserTable.getSelectedRows().length > 0)
-				try {
-					Client.get().addActivity(new Meeting(Client.get().getUser(), participants, room, startTime, endTime, description, room.getName()));
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+    	Date fromDate = fromDateChooserPanel.getDate();
+    	Date toDate = toDateChooserPanel.getDate();
+    	
+    	DateTime startTime = new DateTime(fromDate.getYear()+1900, fromDate.getMonth()+1, fromDate.getDate(), fromDate.getHours(), fromDate.getMinutes(),00,00);
+		DateTime endTime = new DateTime(toDate.getYear()+1900, toDate.getMonth()+1, toDate.getDate(), toDate.getHours(), toDate.getMinutes(),00,00);
+		
+		String description = newAppointmentDescriptionTextArea.getText();
+    	String title = newAppointmentTitleLabel.getText();
+
+        ArrayList<Participant> participants = new ArrayList<Participant>();// = participantChooserTable.getSelectedRows();
+        Room room = new Room();
+
+    	if(participantChooserTable.getSelectedRows().length > 0)
 			try {
-				Client.get().addActivity(new Activity(Client.get().getUser(), startTime, endTime, newAppointmentDescriptionTextArea.getText(), (String)newAppointmentRoomCB.getSelectedItem()));
+				//både rom og location i meeting?
+				Client.get().addActivity(new Meeting(Client.get().getUser(), participants, room, startTime, endTime, description, room.getName()));
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+		try {
+			Client.get().addActivity(new Activity(Client.get().getUser(), startTime, endTime, newAppointmentDescriptionTextArea.getText(), (String)newAppointmentRoomCB.getSelectedItem()));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void changeActivity(Activity act) {
+		Date fromDate = fromDateChooserPanel.getDate();
+    	Date toDate = toDateChooserPanel.getDate();
+    	
+    	DateTime startTime = new DateTime(fromDate.getYear()+1900, fromDate.getMonth()+1, fromDate.getDate(), fromDate.getHours(), fromDate.getMinutes(),00,00);
+		DateTime endTime = new DateTime(toDate.getYear()+1900, toDate.getMonth()+1, toDate.getDate(), toDate.getHours(), toDate.getMinutes(),00,00);
+		String description = appointmentDescriptionTextArea.getText();
+    	String title = appointmentTitleLabel.getText();
+
+        ArrayList<Participant> participants = new ArrayList<Participant>();// = participantChooserTable.getSelectedRows();
+        Room room = new Room();
+        
+        if(act instanceof Meeting){
+        	((Meeting)act).setRoom(room);
+        	((Meeting)act).setParticipants(participants);
+        }
+
+        act.setDescription(description);
+        act.setEndTime(endTime);
+        act.setLocation(room.getName());
+        act.setStartTime(startTime);
+        act.setTitle(title);
+        try {
+			Client.get().chngActivity(act);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 	}
 
 	
@@ -1978,8 +2013,9 @@ public class Gui extends javax.swing.JFrame{
 		Client.get().calendarModel.setPreviousWeek();
 		weekViewButton.setText("Uke " + Client.get().calendarModel.getWeekNumber() + " - " + Client.get().calendarModel.getYear());
 	}
-
+	Activity activityModel;
 	public void editActivity(Activity act){
+		activityModel = act;
 		if(act instanceof Meeting){appointmentRoomCB.setSelectedItem(((Meeting) act).getRoom());}else{}
 		appointmentTitleLabel.setText(act.getTitle());
 		appointmentDescriptionTextArea.setText(act.getDescription());

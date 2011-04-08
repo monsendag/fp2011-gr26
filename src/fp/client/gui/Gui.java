@@ -1959,7 +1959,7 @@ public class Gui extends javax.swing.JFrame{
         for(int i = 0; i < calendarChooserTable.getRowCount();  i++) {
             e = (Employee)calendarChooserTable.getValueAt(i, 0);
             if((Boolean)calendarChooserTable.getValueAt(i, 1)){
-                Client.get().addActivities(Client.get().connection.getEmpActivities(e));                
+                Client.get().calendarModel.addActivities(Client.get().connection.getEmpActivities(e));                
             }
             else {
                 Client.get().calendarModel.removeActivitiesForEmp(e);

@@ -161,7 +161,7 @@ public class CalendarCanvas extends JPanel implements PropertyChangeListener {
 	
 		x += 5; // padding-top:5px;
 		y += 5; // padding-left: 5px;
-		float wrappingWidth = width - 5; // padding-right: 5px;
+		float wrappingWidth = width - 10; // padding-right: 5px;
 
 		AttributedString str;
 		AttributedCharacterIterator attribCharIterator;

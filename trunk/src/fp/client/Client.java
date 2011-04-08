@@ -145,7 +145,7 @@ public class Client {
 		return connection.getAllEmployees();
 	}
 	
-	// TODO: hmm...
+	/* TODO: hmm...
 	public void answerInvitation(Meeting m, Message msg, boolean answer) throws IOException {
 	
 		
@@ -168,6 +168,6 @@ public class Client {
 		setRead(msg);
 				
 	}
-
+*/
 
 }

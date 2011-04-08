@@ -1956,6 +1956,7 @@ public class Gui extends javax.swing.JFrame{
 	
     private void changeCalendarView(){
         Employee e;
+        int num = calendarChooserTable.getRowCount();
         for(int i = 0; i < calendarChooserTable.getRowCount();  i++) {
             e = (Employee)calendarChooserTable.getValueAt(i, 0);
             if((Boolean)calendarChooserTable.getValueAt(i, 1)){
@@ -1963,8 +1964,10 @@ public class Gui extends javax.swing.JFrame{
             }
             else {
                 Client.get().calendarModel.removeActivitiesForEmp(e);
+                num--;
             }
         }
+        shownCalendars.setText(num==1? "Viser en kalender" : "Viser flere kalendere");
     }
 
 	

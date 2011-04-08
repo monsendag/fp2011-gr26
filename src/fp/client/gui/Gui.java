@@ -2063,7 +2063,6 @@ public class Gui extends javax.swing.JFrame{
 
         act.setDescription(description);
         act.setEndTime(endTime);
-        act.setLocation(room.getName());
         act.setStartTime(startTime);
         act.setTitle(title);
         try {

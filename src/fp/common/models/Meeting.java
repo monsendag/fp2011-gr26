@@ -13,9 +13,9 @@ public class Meeting extends Activity {
 		super();
 	}
 	
-	public Meeting(Employee owner, ArrayList<Participant> participants, Room room, DateTime startTime, DateTime endTime, String description, String location)
+	public Meeting(Employee owner, ArrayList<Participant> participants, Room room, DateTime startTime, DateTime endTime, String description, String title)
 	{
-		super(owner, startTime, endTime, description, location);
+		super(owner, startTime, endTime, description, title);
 		this.room = room;
 		this.participants = participants;
 	}

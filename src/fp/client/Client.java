@@ -96,7 +96,9 @@ public class Client {
 	
 	public void deliverMessages(ArrayList<Message> messages){		
 		
-		this.messages = messages;
+		if (messages == null) // ingen nye beskjeder
+			return;
+		this.messages.addAll(messages);
 		gui.receiveMessages();
 	}
 	

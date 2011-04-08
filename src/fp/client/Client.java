@@ -50,7 +50,8 @@ public class Client {
 	public Employee currentUser;
 	
 	
-	public Client() {     
+	public Client() {
+		messages = new ArrayList<Message>();
 		java.awt.EventQueue.invokeLater(new Runnable() {
 	        public void run() {
 	        	calendarModel = new CalendarModel();
@@ -60,6 +61,7 @@ public class Client {
 	        	gui = new Gui();
 	        }
 		});
+
     }
 	
 	public Employee getUser() {
@@ -96,8 +98,10 @@ public class Client {
 	
 	public void deliverMessages(ArrayList<Message> messages){		
 		
-		if (messages == null) // ingen nye beskjeder
+		if (messages == null){ // ingen nye beskjeder
+			//System.out.println("LOLOLOL YEAH");
 			return;
+		}
 		this.messages.addAll(messages);
 		gui.receiveMessages();
 	}

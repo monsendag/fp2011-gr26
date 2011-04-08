@@ -48,7 +48,7 @@ public class ClientConnection extends Connection implements Runnable {
 			@Override
 			public void run() {
 				// hent beskjeder, trenger en metode i modellen for å faktisk legge dem til. ha en referanse til client i denne klassen? må vel ha det.
-				Client.get().deliverMessages(getEmpMessages());
+				Client.get().deliverMessages(getNewMessages());
 			}
 		};
 		timer.scheduleAtFixedRate(this.timer, delay, period);
@@ -153,6 +153,14 @@ public class ClientConnection extends Connection implements Runnable {
 		send(n);
 		NetworkObject back = receive();
 		return (ArrayList<Message>) back.get("allMessages");
+	}
+	public ArrayList<Message> getNewMessages() {
+		NetworkObject n = new NetworkObject();
+		n.setCommand(NetworkCommand.getNewMessages);
+		n.put("currentUser", Client.get().getUser());
+		send(n);
+		NetworkObject back = receive();
+		return (ArrayList<Message>) back.get("newMessages");
 	}
 	/**
 	 * 

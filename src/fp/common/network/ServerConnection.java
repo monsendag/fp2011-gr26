@@ -2,6 +2,7 @@ package fp.common.network;
 
 import java.io.IOException;
 import java.net.*;
+import java.util.ArrayList;
 
 import org.joda.time.DateTime;
 
@@ -13,8 +14,14 @@ import fp.server.Server;
 
 public class ServerConnection extends Connection implements Runnable {
 
+	ArrayList<Message> sentMessages;
+	Boolean first = true;
+	
+	
 	public ServerConnection(Socket socket) throws Exception {
 		super(socket);
+		
+		sentMessages = new ArrayList<Message>();
 	}
 
 	public void run() {
@@ -67,9 +74,52 @@ public class ServerConnection extends Connection implements Runnable {
 			case getMessages: {
 				response = new NetworkObject();
 				response.setCommand(NetworkCommand.returnMessages);
-				Employee user = (Employee) request.get("currentUser");
+				Employee user = (Employee) request.get("currentUser");		
 				response.put("messages", dbr.getEmpMessages(user));
 			} break;
+			case getNewMessages: {
+				response = new NetworkObject();
+				response.setCommand(NetworkCommand.returnNewMessages);
+				Employee user = (Employee) request.get("currentUser");
+				
+				System.out.println("Hallo??");
+				
+				ArrayList<Message> sendMsgs;
+				if (first) {
+					System.out.println("----------");
+					sendMsgs = dbr.getAllMessages();
+					sentMessages.addAll(sendMsgs);				
+				}
+				else {
+					sendMsgs = dbr.getEmpMessages(user);
+					System.out.println(sentMessages.size());
+					System.out.println(sendMsgs.size());
+					// skjekk 
+					// fjern alle messages fra sendmsgs hvis sendmsgs[i].getMessageId() == sentMessages[j].getMessageId(I)
+					//int lolsize =  sendMsgs.size();
+					for (int i = 0; i < sendMsgs.size(); i++){
+						for (int j = 0; j < sentMessages.size(); j++) {
+							if (sendMsgs.get(i).getMessageID() == sentMessages.get(j).getMessageID()) {
+								sendMsgs.remove(i);
+								i = i - 1;
+								//lolsize = lolsize - 1;
+								System.out.println(sendMsgs.size());
+								break;
+							}
+						}
+						
+					}
+					
+					if (sendMsgs.size() == 0)
+						response.put("newMessages", null);
+					else
+						response.put("newMessages", sendMsgs);
+				}
+				
+				response.put("newMessages", sendMsgs);
+				first = false;
+					
+			}break;
 			case getMeetings: {
 				response = new NetworkObject();
 				response.setCommand(NetworkCommand.returnMeetings);

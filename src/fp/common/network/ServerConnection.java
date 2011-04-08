@@ -83,13 +83,10 @@ public class ServerConnection extends Connection implements Runnable {
 				Employee user = (Employee) request.get("currentUser");
 				
 
-				ArrayList<Message> sendMsgs;
+				ArrayList<Message> sendMsgs = dbr.getEmpMessages(user);
 				
-				if (sentMessages.size() == 0){
-					sendMsgs = dbr.getEmpMessages(user);
-				}
-				else {
-					sendMsgs = dbr.getEmpMessages(user);
+				
+				if (sentMessages.size() != 0){	
 					// skjekk 
 					// fjern alle messages fra sendmsgs hvis sendmsgs[i].getMessageId() == sentMessages[j].getMessageId(I)
 					for (int i = 0; i < sendMsgs.size(); i++){

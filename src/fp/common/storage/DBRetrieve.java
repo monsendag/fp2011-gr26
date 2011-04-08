@@ -177,7 +177,7 @@ public class DBRetrieve {
 		try {
 			Statement s = conn.createStatement();
 			ResultSet rs = s.executeQuery("SELECT m.messageID, m.isinvite, " +
-					"m.isread, m.time, m.username, m.message, m.activityID, a.title, a.description " +
+					"m.isread, m.time, m.username, m.message, m.activityID, m.type, a.title, a.description " +
 					"FROM message m, activity a " +
 					"WHERE m.activityID = a.activityID");
 			
@@ -197,6 +197,7 @@ public class DBRetrieve {
 				m.isInvitation(isInvite);
 				m.isRead(rs.getBoolean("isread"));
 				m.setTitle(rs.getString("title"));
+				m.setType(rs.getInt("type"));
 				messages.add(m);
 			}
 			s.close();
@@ -671,7 +672,7 @@ public class DBRetrieve {
 			Statement s = conn.createStatement();
 			
 			ResultSet rs = s.executeQuery("SELECT m.messageID, m.isinvite, " +
-					"m.isread, m.time, m.username, m.message, m.activityID, a.title, a.description " +
+					"m.isread, m.time, m.username, m.message, m.activityID, m.type, a.title, a.description " +
 					"FROM message m, activity a " +
 					"WHERE m.activityID = a.activityID AND m.username ='"
 					+ username + "'");
@@ -692,6 +693,7 @@ public class DBRetrieve {
 				m.isInvitation(isInvite);
 				m.isRead(rs.getBoolean("isread"));
 				m.setTitle(rs.getString("title"));
+				m.setType(rs.getInt("type"));
 				messages.add(m);
 			}
 			s.close();
@@ -725,7 +727,7 @@ public class DBRetrieve {
 			Statement s = conn.createStatement();
 			
 			ResultSet rs = s.executeQuery("SELECT m.messageID, m.isinvite, " +
-					"m.isread, m.time, m.username, m.message, m.activityID, a.title, a.description " +
+					"m.isread, m.time, m.username, m.message, m.activityID, m.type, a.title, a.description " +
 					"FROM message m, activity a " +
 					"WHERE m.activityID = a.activityID AND m.username ='"
 					+ username + "' AND isread = false");
@@ -746,6 +748,7 @@ public class DBRetrieve {
 				m.isInvitation(isInvite);
 				m.isRead(rs.getBoolean("isread"));
 				m.setTitle(rs.getString("title"));
+				m.setType(rs.getInt("type"));
 				messages.add(m);
 			}
 			s.close();

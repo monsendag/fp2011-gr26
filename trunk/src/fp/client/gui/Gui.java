@@ -745,6 +745,7 @@ public class Gui extends javax.swing.JFrame{
             }
 
 			private void newAppoitnmentRoomCBClicked(MouseEvent evt) {
+				buildRoomlist();
 				// TODO Auto-generated method stub
 				
 			}
@@ -945,6 +946,7 @@ public class Gui extends javax.swing.JFrame{
 
 			private void newAppoitnmentRoomCBClicked(MouseEvent evt) {
 				// TODO Auto-generated method stub
+				buildRoomList();
 				
 			}
         });

@@ -117,9 +117,12 @@ public class Client {
 	}
 
 	public void remActivity(Activity a) throws IOException {
-	
-	connection.cancelActivity(a);
-	calendarModel.remActivity(a);
+		if(a instanceof Meeting){
+			connection.cancelMeeting((Meeting) a);
+		}else{
+			connection.cancelActivity(a);
+		}
+		calendarModel.remActivity(a);
 	}
 
 	

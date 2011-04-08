@@ -7,7 +7,7 @@
 package fp.client.gui;
 
 
-import java.awt.event.MouseEvent;
+import java.awt.Dialog.ModalityType;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.io.IOException;
@@ -20,7 +20,6 @@ import java.util.Vector;
 
 import javax.imageio.ImageIO;
 import javax.management.InstanceAlreadyExistsException;
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -66,6 +65,9 @@ public class Gui extends javax.swing.JFrame{
 		loginDialog.pack();
 		loginDialog.setLocationRelativeTo(this);
 		loginDialog.setVisible(true);
+		loginDialog.getFocusableWindowState();
+		loginDialog.requestFocus();
+		loginDialog.setAlwaysOnTop(true);
 
 		fixInvitationList();
 		fixMesssageList();
@@ -739,13 +741,6 @@ public class Gui extends javax.swing.JFrame{
 
         appointmentRoomCB.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        appointmentRoomCB.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-				buildRoomList();
-			}
-        });
-        
-        
         appointmentDescriptionTextArea.setColumns(20);
         appointmentDescriptionTextArea.setLineWrap(true);
         appointmentDescriptionTextArea.setRows(5);
@@ -933,12 +928,6 @@ public class Gui extends javax.swing.JFrame{
 
         newAppointmentRoomCB.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Kattelabben", "Hundelabben", "Fiskelabben" }));
 
-        newAppointmentRoomCB.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-				buildRoomList();
-			}
-        });
-        
         newAppointmentDescriptionTextArea.setColumns(20);
         newAppointmentDescriptionTextArea.setLineWrap(true);
         newAppointmentDescriptionTextArea.setRows(5);
@@ -1471,10 +1460,7 @@ public class Gui extends javax.swing.JFrame{
        errorDialog.setVisible(false);
     }                                                 
 
-    private void participantOverviewChangeButtonActionPerformed(java.awt.event.ActionEvent evt) {
-    	participantChooserDialog.pack();
-    	participantChooserDialog.setLocationRelativeTo(participantOverviewDialog);
-    	participantChooserDialog.setVisible(true);
+    private void participantOverviewChangeButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                                
         participantOverviewDialog.setVisible(false);
     }                                                               
 
@@ -1576,24 +1562,13 @@ public class Gui extends javax.swing.JFrame{
 
     private void appointmentSayYoureNotCommingButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                                    
         appointmentDialog.setVisible(false);
-        if(Client.get().currentUser.getUsername().equals(activity.getOwner().getUsername())){
-        	changeActivity(activity);        	
-        }
-        else{
-        	try {
-				Client.get().answerInvitation((Meeting)activity, Status.NOT_ATTENDING);
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-        }
+//        changeActivity(); //TODO
+        cancelActivity();
     }                                                                   
 
     private void appointmentCloseButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                       
         appointmentDialog.setVisible(false);
-        if(Client.get().currentUser.getUsername().equals(activity.getOwner().getUsername())){
-        	cancelActivity(activity);        	
-        }
+        cancelActivity();
     }                                                      
 
     private void appointmentShowParticipantsButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                                  
@@ -1837,7 +1812,6 @@ public class Gui extends javax.swing.JFrame{
 	DefaultListModel messageListModel = new DefaultListModel();
 	DefaultListModel invitationListModel = new DefaultListModel();
 	DefaultListModel participantListModel = new DefaultListModel();
-	DefaultComboBoxModel roomModel = new DefaultComboBoxModel();
 	
 	DefaultTableModel participantTableModel = new DefaultTableModel(
             new Object [][] {},
@@ -1912,27 +1886,26 @@ public class Gui extends javax.swing.JFrame{
 		participantOverviewList.setModel(participantListModel);
 	}
 
-	
-	private void buildRoomList(){
-		ArrayList<Room> rooms =  new ArrayList<Room>();
-		roomModel.removeAllElements();
-		Date fromDate = fromDateChooserPanel.getDate();
-    	Date toDate = toDateChooserPanel.getDate();
-    	
-    	DateTime startTime = new DateTime(fromDate.getYear()+1900, fromDate.getMonth()+1, fromDate.getDate(), Integer.parseInt(((String) newAppointmentStartTimeCB.getSelectedItem()).substring(0,2)), Integer.parseInt(((String) newAppointmentStartTimeCB.getSelectedItem()).substring(3)), 00, 00);
-		DateTime endTime = new DateTime(toDate.getYear()+1900, toDate.getMonth()+1, toDate.getDate(), Integer.parseInt(((String) newAppointmentEndTimeCB.getSelectedItem()).substring(0,2)), Integer.parseInt(((String) newAppointmentEndTimeCB.getSelectedItem()).substring(3)), 00, 00);
-		try {
-			rooms = Client.get().findRooms(startTime, endTime);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+	private void buildMessageList(){
+		messageListModel.removeAllElements();
+		int i = 0;
+		for(Message message : Client.get().messages){
+			if(!message.isInvitation()){
+				messageListModel.add(i, message);
+				i++;
+			}
 		}
-		for (Room r : rooms) {
-			roomModel.addElement(r);			
+	}
+
+	private void buildInvitationList(){
+		invitationListModel.removeAllElements();
+		int i = 0;
+		for(Message message : Client.get().messages){
+			if(message.isInvitation()){
+				invitationListModel.add(i, message);
+				i++;
+			}
 		}
-		appointmentRoomCB.setModel(roomModel);
-		newAppointmentRoomCB.setModel(roomModel);
-		
 	}
 
 	public void buildParticipantList(Meeting met){
@@ -1989,14 +1962,9 @@ public class Gui extends javax.swing.JFrame{
 		return "";
 	}
 	
-	private void cancelActivity(Activity act) {
-		try {
-			Client.get().remActivity(act);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
+	private void cancelActivity() {
+		//if owner 
+		// TODO Auto-generated method stub
 	}
 
 	private void createActivity()  {
@@ -2010,6 +1978,7 @@ public class Gui extends javax.swing.JFrame{
     	
     	DateTime startTime = new DateTime(fromDate.getYear()+1900, fromDate.getMonth()+1, fromDate.getDate(), Integer.parseInt(((String) newAppointmentStartTimeCB.getSelectedItem()).substring(0,2)), Integer.parseInt(((String) newAppointmentStartTimeCB.getSelectedItem()).substring(3)), 00, 00);
 		DateTime endTime = new DateTime(toDate.getYear()+1900, toDate.getMonth()+1, toDate.getDate(), Integer.parseInt(((String) newAppointmentEndTimeCB.getSelectedItem()).substring(0,2)), Integer.parseInt(((String) newAppointmentEndTimeCB.getSelectedItem()).substring(3)), 00, 00);
+    	System.out.println(startTime.getHourOfDay() + " - " + startTime.getMinuteOfHour());
 		String description = newAppointmentDescriptionTextArea.getText();
     	String title = newAppointmentTitleLabel.getText();
 
@@ -2032,7 +2001,7 @@ public class Gui extends javax.swing.JFrame{
 				e.printStackTrace();
 			}
 		try {
-			Client.get().addActivity(new Activity(Client.get().getUser(), startTime, endTime, newAppointmentDescriptionTextArea.getText(), newAppointmentRoomCB.getSelectedItem().toString()));
+			Client.get().addActivity(new Activity(Client.get().getUser(), startTime, endTime, newAppointmentDescriptionTextArea.getText(), (String)newAppointmentRoomCB.getSelectedItem()));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -2078,28 +2047,6 @@ public class Gui extends javax.swing.JFrame{
 
 	}
 	
-	
-	private void buildMessageList(){
-		int i = 0;
-		for(Message message : Client.get().messages){
-			if(!message.isInvitation()){
-				messageListModel.add(i, message);
-				i++;
-			}
-		}
-	}
-	
-	private void buildInvitationList(){
-		int i = 0;
-		for(Message message : Client.get().messages){
-			if(message.isInvitation()){
-				invitationListModel.add(i, message);
-				i++;
-			}
-		}
-	}
-	
-	
 	public void buildMessage(){
 		Message message = (Message)messageList.getSelectedValue();
 		if(!message.isRead()){
@@ -2133,7 +2080,6 @@ public class Gui extends javax.swing.JFrame{
 			setVisible(true);
 			buildParticipantChooserTable();
 			buildCalendarChooserTable();
-			buildRoomList();
 		}
 		else {
 			errorDialogTextArea.setText("Innlogging feilet!");
@@ -2171,17 +2117,16 @@ public class Gui extends javax.swing.JFrame{
 		appointmentCloseButton.setText("Lukk");
 		
 	}
-	Activity activity;
+	
 	public void openActivity(Activity act){
 		
-		activity = act;
 		if(!Client.get().currentUser.getUsername().equals(act.getOwner().getUsername())){disableEditing();}
 		
 		if(act instanceof Meeting){
 			appointmentRoomCB.setSelectedItem(((Meeting) act).getRoom());
 			buildParticipantList((Meeting)act);
 			}else{}
-		appointmentTitleTextField.setText(act.getTitle());
+		appointmentTitleLabel.setText(act.getTitle());
 		appointmentDescriptionTextArea.setText(act.getDescription());
 		appointmentStartTimeCB.setSelectedItem(act.getStartTime().toString("HH:mm"));
 		appointmentEndTimeCB.setSelectedItem(act.getEndTime().toString("HH:mm"));

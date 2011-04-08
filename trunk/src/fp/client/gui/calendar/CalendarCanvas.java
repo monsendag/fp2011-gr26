@@ -3,12 +3,19 @@ package fp.client.gui.calendar;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.awt.font.FontRenderContext;
+import java.awt.font.LineBreakMeasurer;
+import java.awt.font.TextAttribute;
+import java.awt.font.TextLayout;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.text.AttributedCharacterIterator;
+import java.text.AttributedString;
 
 import javax.swing.JPanel;
 
@@ -144,16 +151,45 @@ public class CalendarCanvas extends JPanel implements PropertyChangeListener {
 		g.drawRoundRect(x, y+1, width-1, height-1, arcRadius, arcRadius);
 		g.drawRoundRect(x, y+1, width-1, height, arcRadius, arcRadius); // looks like a shadow
 	
-		g.setColor(Color.BLACK);
-		x += 5;
-		y += 15;
+		x += 5; // padding-top:5px;
+		y += 5; // padding-left: 5px;
+		float wrappingWidth = width - 5; // padding-right: 5px;
+
+		AttributedString str;
+		AttributedCharacterIterator attribCharIterator;
+		LineBreakMeasurer lbm;
 		
-		g.setFont(new Font("TimesRoman", Font.BOLD,  13));
-		g.drawString(a.getDescription(), x, y);
-		y+=20;
-		//if(res.getRoom() != null)
-		//g.drawString(res.getRoom().getName(), x, y);
-		y += 20;
+		String title = a.getDescription();
+		if(title != null && title.length() > 0) {
+			str = new AttributedString(title);
+			str.addAttribute(TextAttribute.FOREGROUND, Color.BLACK, 0, title.length());
+		    str.addAttribute(TextAttribute.FONT, new Font("TimesRoman", Font.BOLD,  13), 0, title.length());
+			attribCharIterator = str.getIterator();
+		    lbm = new LineBreakMeasurer(attribCharIterator, new FontRenderContext(null, false, false));
+		    
+		    while(lbm.getPosition() < title.length()) {
+	    		TextLayout layout = lbm.nextLayout(wrappingWidth);
+	    		y += layout.getAscent();
+	    		layout.draw((Graphics2D) g, x, y);
+	    		y += layout.getDescent() + layout.getLeading();
+		    }
+		}
+			
+		String description = a.getDescription();
+		if(description != null && description.length() > 0) {
+			str = new AttributedString(description);
+			str.addAttribute(TextAttribute.FOREGROUND, Color.BLACK, 0, description.length());
+		    str.addAttribute(TextAttribute.FONT, new Font("TimesRoman", Font.PLAIN,  11), 0, description.length());
+			attribCharIterator = str.getIterator();
+		    lbm = new LineBreakMeasurer(attribCharIterator, new FontRenderContext(null, false, false));
+		    
+		    while(lbm.getPosition() < description.length()) {
+	    		TextLayout layout = lbm.nextLayout(wrappingWidth);
+	    		y += layout.getAscent();
+	    		layout.draw((Graphics2D) g, x, y);
+	    		y += layout.getDescent() + layout.getLeading();
+		    }
+		}
 	}
 
 	/**

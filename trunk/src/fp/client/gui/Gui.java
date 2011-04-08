@@ -2205,13 +2205,16 @@ public class Gui extends javax.swing.JFrame{
 		
 		activity = act;
 		if(!Client.get().currentUser.getUsername().equals(act.getOwner().getUsername())){disableEditing();}
+		else{
+			appointmentSayYoureNotCommingButton.setText("Oppdater");
+			appointmentCloseButton.setText("Slett");
+		}
 		
 		if(act instanceof Meeting){
 			appointmentRoomCB.setSelectedItem(((Meeting) act).getRoom());
 			buildParticipantList((Meeting)act);
 			}else{}
-		appointmentSayYoureNotCommingButton.setText("Oppdater");
-		appointmentCloseButton.setText("Slett");
+		
 		appointmentDialog.setTitle(act.getTitle());
 		appointmentTitleTextField.setText(act.getTitle());
 		appointmentDescriptionTextArea.setText(act.getDescription());

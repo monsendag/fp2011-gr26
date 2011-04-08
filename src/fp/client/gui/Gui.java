@@ -1991,7 +1991,7 @@ public class Gui extends javax.swing.JFrame{
     	if(participantChooserTable.getSelectedRows().length > 0)
 			try {
 				//både rom og location i meeting?
-				Client.get().addActivity(new Meeting(Client.get().getUser(), participants, room, startTime, endTime, description, room.getName()));
+				Client.get().addMeeting(new Meeting(Client.get().getUser(), participants, room, startTime, endTime, description, room.getName()));
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -2014,7 +2014,14 @@ public class Gui extends javax.swing.JFrame{
 		String description = appointmentDescriptionTextArea.getText();
     	String title = appointmentTitleLabel.getText();
 
-        ArrayList<Participant> participants = new ArrayList<Participant>();// = participantChooserTable.getSelectedRows();
+        ArrayList<Participant> participants = new ArrayList<Participant>();
+        Participant p;
+        for (int i = 0; i < participantChooserTable.getRowCount();  i++) {
+        	if((Boolean)participantChooserTable.getValueAt(i, 1)){
+        		p = new Participant((Employee)participantChooserTable.getValueAt(i, 0), Status.AWAITING_REPLY);
+        		participants.add(p);        		
+        	}
+		}
         Room room = new Room();
         
         if(act instanceof Meeting){

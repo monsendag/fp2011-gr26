@@ -1567,7 +1567,6 @@ public class Gui extends javax.swing.JFrame{
     }                                                      
 
     private void appointmentShowParticipantsButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                                  
-        buildParticipantList();
         participantOverviewDialog.pack();
         participantOverviewDialog.setLocationRelativeTo(appointmentDialog);
         participantOverviewDialog.setVisible(true);
@@ -1846,6 +1845,9 @@ public class Gui extends javax.swing.JFrame{
 
 	private void fixCalendarTable(){
 		calendarChooserTable.setModel(calendarTableModel);
+		calendarChooserTable.setRowSelectionAllowed(false);
+		calendarChooserTable.setColumnSelectionAllowed(false);
+		calendarChooserTable.setCellSelectionEnabled(false);
         calendarChooserTable.getColumnModel().getColumn(0).setResizable(false);
         calendarChooserTable.getColumnModel().getColumn(0).setPreferredWidth(200);
         calendarChooserTable.getColumnModel().getColumn(1).setResizable(false);
@@ -1854,6 +1856,9 @@ public class Gui extends javax.swing.JFrame{
 	
 	private void fixParticipantTable(){
 		participantChooserTable.setModel(participantTableModel);	
+		participantChooserTable.setRowSelectionAllowed(false);
+		participantChooserTable.setColumnSelectionAllowed(false);
+		participantChooserTable.setCellSelectionEnabled(false);
 	    participantChooserTable.getColumnModel().getColumn(0).setResizable(false);
 	    participantChooserTable.getColumnModel().getColumn(0).setPreferredWidth(200);
 	    participantChooserTable.getColumnModel().getColumn(1).setResizable(false);
@@ -1898,14 +1903,13 @@ public class Gui extends javax.swing.JFrame{
 		}
 	}
 
-	private void buildParticipantList(){
-		//		//ta fra currentActivity ?
-		//		participantListModel.removeAllElements();
-		//		int i = 0;
-		//		for(Participant participant : message.getMeeting().getParticipants()){
-		//			participantListModel.add(i, participant);
-		//			i++;
-		//		}
+	public void buildParticipantList(Meeting met){
+		participantListModel.removeAllElements();
+		int i = 0;
+		for(Participant participant : met.getParticipants()){
+			participantListModel.add(i, participant);
+			i++;
+		}
 	}
 	
 	private void buildCalendarChooserTable(){
@@ -2101,7 +2105,7 @@ public class Gui extends javax.swing.JFrame{
 	
 	public void openActivity(Activity act){
 		
-		if(Client.get().currentUser != act.getOwner()){ disableEditing();}
+		if(!Client.get().currentUser.getUsername().equals(act.getOwner().getUsername())){ disableEditing();}
 		
 		if(act instanceof Meeting){appointmentRoomCB.setSelectedItem(((Meeting) act).getRoom());}else{}
 		appointmentTitleLabel.setText(act.getTitle());

@@ -146,11 +146,11 @@ public class Client {
 	}
 	
 	 //TODO: hmm...
-	public void answerInvitation(Meeting m, Status status) throws IOException {
-	
-		
-	
+	public void answerInvitation(Meeting m, Participant.Status status) throws IOException {
 		connection.changeInviteStatus(m, status);
+		if(status == Participant.Status.ATTENDING){
+			calendarModel.addActivity(connection.getMeeting(m.getId()));
+		}
 				
 		// endre i gui.. fjern valgene og sett inn en boks som sier HELLO DU HAR SVART: status.toString();
 	}

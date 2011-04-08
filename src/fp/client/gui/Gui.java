@@ -2132,6 +2132,8 @@ public class Gui extends javax.swing.JFrame{
 			buildParticipantChooserTable();
 			buildCalendarChooserTable();
 			buildRoomList();
+			shownCalendars.setText(username + "s kalender");
+			
 		}
 		else {
 			errorDialogTextArea.setText("Innlogging feilet!");

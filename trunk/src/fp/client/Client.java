@@ -97,13 +97,49 @@ public class Client {
 	}
 	
 	
-	public void deliverMessages(ArrayList<Message> messages){		
+public void deliverMessages(ArrayList<Message> messages){		
 		
 		if (messages == null){ // ingen nye beskjeder
 			//System.out.println("LOLOLOL YEAH");
 			return;
 		}
 		this.messages.addAll(messages);
+		for (Message message : messages)
+		{
+			 switch (message.getType()){
+			 case 1: {// decline
+				 
+				 
+				 // slett møtet
+				 calendarModel.remActivity(message.getMeeting().getId());
+				 // legg til møtet igjen
+				 calendarModel.addActivity(connection.getMeeting(message.getMeeting().getId()));
+				 
+				 break;
+			 }
+			 case 2: { // accept
+				 
+				// slett møtet
+				 calendarModel.remActivity(message.getMeeting().getId());
+				 // legg til møtet igjen
+				 calendarModel.addActivity(connection.getMeeting(message.getMeeting().getId()));
+				 break;
+			 }
+			 case 3: { // canceled
+				// slett møtet
+				 calendarModel.remActivity(message.getMeeting().getId());
+				 break;
+			 }
+			 case 4:{ // changed
+				// slett møtet
+				 calendarModel.remActivity(message.getMeeting().getId());
+				 // legg til møtet igjen
+				 calendarModel.addActivity(connection.getMeeting(message.getMeeting().getId()));
+			 }
+			 default:
+				 break;
+			 }
+		}
 		gui.receiveMessages(messages);
 	}
 	

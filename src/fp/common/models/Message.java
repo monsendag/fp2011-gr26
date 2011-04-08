@@ -4,6 +4,15 @@ import org.joda.time.DateTime;
 
 public class Message
 {
+	/*
+	 * 5 = Vanlig invite message
+	 * 1 = change not attending
+	 * 2 = change attending
+	 * 3 = avlyst
+	 * 4 = møte changed
+	 */
+	
+	
     //
     private String description;
    

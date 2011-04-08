@@ -1975,7 +1975,12 @@ public class Gui extends javax.swing.JFrame{
 		String description = newAppointmentDescriptionTextArea.getText();
     	String title = newAppointmentTitleLabel.getText();
 
-        ArrayList<Participant> participants = new ArrayList<Participant>();// = participantChooserTable.getSelectedRows();
+        ArrayList<Participant> participants = new ArrayList<Participant>();
+        Participant p;
+        for (int i = 0; i < participantChooserTable.getSelectedRows().length;  i++) {
+        	p = new Participant((Employee)participantChooserTable.getValueAt(i, 0), Status.AWAITING_REPLY);
+			participants.add(p);
+		}
         Room room = new Room();
 
     	if(participantChooserTable.getSelectedRows().length > 0)

@@ -265,9 +265,8 @@ public class CalendarCanvas extends JPanel implements PropertyChangeListener {
 	*/
 	public int getActivityHeight(Activity activity) {
 		int duration = (int) new Duration(activity.getStartTime(), activity.getEndTime()).getMillis() / 1000;
-		duration = Math.max(duration, 10 * 60 * 15); // minimum 15 minutes
 		int height = (int) (1.0 * duration / secondsPerRow * rowHeight);
-		return height;
+		return Math.max(height, 9);
 	}
 
 	/**

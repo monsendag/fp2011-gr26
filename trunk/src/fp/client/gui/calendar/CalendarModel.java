@@ -84,6 +84,10 @@ public class CalendarModel {
 		
 	}
 	
+	public void removeActivitiesForEmp(Employee e) {
+		//
+	}
+	
 	public void chngActivity(Activity a) {
 		
 		for (int i = 0; i < activities.size(); i++) {

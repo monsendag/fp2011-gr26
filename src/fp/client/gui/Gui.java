@@ -2107,9 +2107,12 @@ public class Gui extends javax.swing.JFrame{
 	
 	public void openActivity(Activity act){
 		
-		if(!Client.get().currentUser.getUsername().equals(act.getOwner().getUsername())){ disableEditing();}
+		if(!Client.get().currentUser.getUsername().equals(act.getOwner().getUsername())){disableEditing();}
 		
-		if(act instanceof Meeting){appointmentRoomCB.setSelectedItem(((Meeting) act).getRoom());}else{}
+		if(act instanceof Meeting){
+			appointmentRoomCB.setSelectedItem(((Meeting) act).getRoom());
+			buildParticipantList((Meeting)act);
+			}else{}
 		appointmentTitleLabel.setText(act.getTitle());
 		appointmentDescriptionTextArea.setText(act.getDescription());
 		appointmentStartTimeCB.setSelectedItem(act.getStartTime().toString("HH:mm"));

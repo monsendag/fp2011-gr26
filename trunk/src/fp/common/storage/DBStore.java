@@ -21,7 +21,9 @@ import fp.common.models.Room;
 
 
 /**
- * <p>Stores and alters data in the database through {@link DBConnection}.</p>
+ * <p>Stores and alters data in the database through {@link Storage}.</p>
+ * <p>Uses the HashMaps in Storage as cache to avoid duplicate objects
+ * in memory</p>
  * @author fp2011-gr26
  */
 public class DBStore {
@@ -34,6 +36,10 @@ public class DBStore {
 	private HashMap<Integer,Meeting> mtngCache;
 	private DBRetrieve dbr;
 	
+	/**
+	 * <p>Default constructor</p>
+	 * <p>Retrieves the connection and all cache objects through {@link Store}</p>
+	 */
 	public DBStore() {
 		Storage s = Storage.getInstance();
 		conn = s.getConn();
@@ -43,13 +49,17 @@ public class DBStore {
 		mtngCache = s.mtngCache;
 	}
 	
+	/**
+	 * <p>Used to get the correct instance of this object.</p>
+	 * @return this
+	 */
 	public static DBStore getInstance() {
 		if(instance == null) instance = new DBStore();
 		return instance;
 	}
 
 	/**
-	 * Adds an employee to the database from an employee object.
+	 * <p>Adds an employee to the database from an employee object.</p>
 	 * @param emp The employee to be added.
 	 */
 	public void addEmployee(Employee emp) {
@@ -71,7 +81,7 @@ public class DBStore {
 	}
 	
 	/**
-	 * Adds a room to the database from a room object.
+	 * <p>Adds a room to the database from a room object.</p>
 	 * @param emp The room to be added.
 	 */
 	public void addRoom(Room room) {
@@ -93,7 +103,7 @@ public class DBStore {
 	}
 	
 	/**
-	 * Adds one or multiple messages to the database from a {@link Message} object.
+	 * <p>Adds one or multiple messages to the database from a {@link Message} object.</p>
 	 * @param message The message to be added.
 	 */
 	public void addMessage(Message message) {
@@ -118,7 +128,7 @@ public class DBStore {
 	}
 	
 	/**
-	 * Adds an activity to the database from an {@link Activity} object.
+	 * <p>Adds an activity to the database from an {@link Activity} object.</p>
 	 * @param act The activity to be added.
 	 * @return Returns the activity id or -1 if the operation failed.
 	 */
@@ -126,14 +136,14 @@ public class DBStore {
 		int activityID = -1;
 		try {
 			PreparedStatement ps = conn.prepareStatement("INSERT INTO activity " +
-					"(starttime,endtime,description,username,location,ismeeting) " +
+					"(starttime,endtime,title,description,username,ismeeting) " +
 					"VALUES(?,?,?,?,?,?)",Statement.RETURN_GENERATED_KEYS);
 			
 			ps.setTimestamp(1, new Timestamp(act.getStartTime().getMillis()));
 			ps.setTimestamp(2, new Timestamp(act.getEndTime().getMillis()));
-			ps.setString(3, act.getDescription());
-			ps.setString(4, act.getOwner().getUsername());
-			ps.setString(5, act.getLocation());
+			ps.setString(3, act.getTitle());
+			ps.setString(4, act.getDescription());
+			ps.setString(5, act.getOwner().getUsername());
 			ps.setBoolean(6, false);
 			ps.executeUpdate();
 			
@@ -163,7 +173,8 @@ public class DBStore {
 	/**
 	 * <p>Adds a meeting to the database from a {@link Meeting} object.</p>
 	 * <p>Also adds participants to the participant table through the participant
-	 * list in the {@link Meeting} object.</p>
+	 * list in the {@link Meeting} object and a message for each participant in the
+	 * message table.</p>
 	 * <p>An invited employee's status is set to {@link Participant.Status#AWAITING_REPLY}
 	 * by default.</p>
 	 * @param m The meeting to be added.
@@ -177,15 +188,19 @@ public class DBStore {
 		PreparedStatement ps;
 		try {
 			ps = conn.prepareStatement("INSERT INTO activity " +
-					"(starttime,endtime,description,username,roomID,ismeeting) " +
-					"VALUES(?,?,?,?,?,?)",Statement.RETURN_GENERATED_KEYS);
+					"(starttime,endtime,title,description,username,roomID,ismeeting) " +
+					"VALUES(?,?,?,?,?,?,?)",Statement.RETURN_GENERATED_KEYS);
+			
+			System.out.println("######################### "+m.getOwner().getUsername());
+			System.out.println("######################### "+m.getRoom().getRoomID());
 			
 			ps.setTimestamp(1, new Timestamp(m.getStartTime().getMillis()));
 			ps.setTimestamp(2, new Timestamp(m.getEndTime().getMillis()));
-			ps.setString(3, m.getDescription());
-			ps.setString(4, m.getOwner().getUsername());
-			ps.setInt(5, m.getRoom().getRoomID());
-			ps.setBoolean(6, true);
+			ps.setString(3, m.getTitle());
+			ps.setString(4, m.getDescription());
+			ps.setString(5, m.getOwner().getUsername());
+			ps.setInt(6, m.getRoom().getRoomID());
+			ps.setBoolean(7, true);
 			ps.executeUpdate();
 			
 			/*
@@ -214,7 +229,10 @@ public class DBStore {
 			ps = conn.prepareStatement("INSERT INTO participant VALUES(?,?,?)");
 			
 			for (Participant p : m.getParticipants()) {
-				ps.setInt(1, p.getStatus().ordinal());
+				System.out.println("######################### "+p.getEmployee().getUsername());
+				System.out.println("######################### "+m.getId());
+				
+				ps.setInt(1, Participant.Status.AWAITING_REPLY.ordinal());
 				ps.setString(2, p.getEmployee().getUsername());
 				ps.setInt(3, m.getId());
 				ps.addBatch();
@@ -251,62 +269,126 @@ public class DBStore {
 	}
 	
 	/**
-	 * Adds a participant to a meeting, by a {@link Meeting} and an {@link Employee} object.
-	 * An invited employee's status is set to {@link Participant.Status#AWAITING_REPLY}
-	 * by default.
-	 * @param meeting The meeting
-	 * @param emp The employee
-	 */
-	public void addPartcipant(Meeting meeting, Employee emp) {
-		addPartcipantByIDs(meeting.getId(), emp.getUsername());
-	}
-	
-	/**
-	 * Adds a participant to a meeting, by a meeting's ID and an employee's username.
-	 * An invited employee's status is set to {@link Participant.Status#AWAITING_REPLY}
-	 * by default.
+	 * <p>Updates the participant list of a meeting to match that of another
+	 * {@link ArrayList} with {@link Participant}s.</p>
+	 * <p>Also adds an invite message for all new participants, and removes
+	 * messages for removed participants.</p>
 	 * @param meetingID The meeting's id
-	 * @param username The participants username
+	 * @param emps The employees
 	 */
-	public void addPartcipantByIDs(int meetingID, String username) {
+	private void updatePartcipantsForMeeting(int meetingID, ArrayList<Participant> newParts) {
 		try {
-			PreparedStatement ps = conn.prepareStatement("INSERT INTO participant VALUES (?,?,?)");
-			ps.setInt(1,Participant.Status.AWAITING_REPLY.ordinal());
-			ps.setString(2,username);
-			ps.setInt(3,meetingID);
-			ps.executeUpdate();
-			ps.close();
-			
-			// Updating cache
+			// The current meeting in cache and its participant list
 			Meeting m = dbr.getMeeting(meetingID);
-			Employee e = dbr.getEmployee(username);
-			Participant p = new Participant(e, Participant.Status.AWAITING_REPLY);
-			m.addParticipant(p);
-			System.out.println("#DB: Adding "+e.getUsername()+" as a meeting "+m.getId()+" participant. In DB and cache");
+			ArrayList<Participant> oldParts = m.getParticipants();
 			
-			// Create message
+			/*
+			 * Removes messages for removed participants
+			 */
+			/*
+			PreparedStatement ps = conn.prepareStatement("DELETE FROM message " +
+			"WHERE activityID = ? AND username = ?");
+			
+			
+			for (Participant oldPart : oldParts) {
+				boolean match = false;
+				String oldEmp = oldPart.getEmployee().getUsername();
+				for (Participant newPart : newParts) {
+					String newEmp = newPart.getEmployee().getUsername();
+					
+					// Employee from the old list still in the new
+					if(oldEmp.equals(newEmp)) {
+						match = true;
+					}
+				}
+				
+				// If no match was found, remove old employee's message
+				if(!match) {
+					ps.setInt(1, meetingID);
+					ps.setString(2, oldEmp);
+					ps.addBatch();
+				}
+			}
+			ps.executeBatch();
+			ps.close();
+			*/
+			/*
+			 * Creates messages for new participants
+			 */
+			/*
 			ps = conn.prepareStatement("INSERT INTO message " +
 			"(isinvite,isread,time,message,username,activity) VALUES (?,?,?,?,?,?)");
 			
-			ps.setBoolean(1,true); // isInvite = true
-			ps.setBoolean(2,false); // isRead = false
-			ps.setTimestamp(3,new Timestamp(new Date().getTime()));
-			ps.setString(4,"Du er invitert til møtet den " +m.getStartTime()+
-						" satt opp av "+m.getOwner().getName()+".");
-			ps.setString(5, username);
-			ps.setInt(6, meetingID);
-			ps.executeUpdate();
+			for (Participant newPart : newParts) {
+				boolean match = false;
+				String newEmp = newPart.getEmployee().getUsername();
+				for (Participant oldPart : oldParts) {
+					String oldEmp = oldPart.getEmployee().getUsername();
+					
+					// New employee is part of the old list
+					if(newEmp.equals(oldEmp)) {
+						match = true;
+					}
+				}
+				
+				// If no match was found, add message for new employee
+				if(!match) {
+					ps.setBoolean(1,true); // isInvite = true
+					ps.setBoolean(2,false); // isRead = false
+					ps.setTimestamp(3,new Timestamp(new Date().getTime()));
+					ps.setString(4,"Du er invitert til møtet den " +m.getStartTime()+
+								" satt opp av "+m.getOwner().getName()+".");
+					ps.setString(5, newEmp);
+					ps.setInt(6, meetingID);
+					ps.addBatch();
+				}
+			}
+			ps.executeBatch();
 			ps.close();
+			*/
+			/*
+			 * Removes all old participants
+			 */
+			PreparedStatement ps = conn.prepareStatement("DELETE FROM participant " +
+					"WHERE activityID = ? AND username = ?");
+			
+			for (Participant p : oldParts) {
+				ps.setInt(1, meetingID);
+				ps.setString(2, p.getEmployee().getUsername());
+				ps.addBatch();
+			}
+			ps.executeBatch();
+			
+			/*
+			 * Adds all new participants
+			 */
+			ps = conn.prepareStatement("INSERT INTO participant VALUES(?,?,?)");
+			
+			for (Participant p : newParts) {
+				ps.setInt(1, Participant.Status.AWAITING_REPLY.ordinal());
+				ps.setString(2, p.getEmployee().getUsername());
+				ps.setInt(3, meetingID);
+				ps.addBatch();
+			}
+			ps.executeBatch();
+			
+			/*
+			 *  Updating current meeting in cache with new participants
+			 */
+			m.setParticipants(newParts);
 			
 		} catch (SQLException e) {
-			System.err.println("Could not add participant.");
+			System.err.println("Could not add participant(s).");
 			e.printStackTrace();
 		}
 	}
 	
 	/**
-	 * Changes a participants status for a meeting, based on a {@link Meeting} and
-	 * a {@link Participant} object.
+	 * <p>Changes a participants status for a meeting, based on a {@link Meeting} and
+	 * a {@link Participant} object.</p>
+	 * <p>If the participants status is changed to
+	 * {@link Participant.Status#NOT_ATTENDING} a message will also be created
+	 * for each participant invited to the specific meeting.</p>
 	 * @param m The meeting
 	 * @param p The participant
 	 */
@@ -315,7 +397,10 @@ public class DBStore {
 	}
 	
 	/**
-	 * Changes a participants status for a meeting, based on a meetings ID, username and status.
+	 * <p>Changes a participants status for a meeting, based on a meetings ID, username and status.</p>
+	 * <p>If the participants status is changed to
+	 * {@link Participant.Status#NOT_ATTENDING} a message will also be created
+	 * for each participant invited to the specific meeting.</p>
 	 * @param activityID The ID
 	 * @param username The username
 	 * @param status The status
@@ -364,8 +449,9 @@ public class DBStore {
 	}
 	
 	/**
-	 * Marks a meeting, by a {@link Meeting} object,
-	 * in the database as canceled (meetings should not be deleted).
+	 * <p>Marks a meeting, by a {@link Meeting} object,
+	 * in the database as canceled (meetings should not be deleted).</p>
+	 * <p>Also creates a message for each participant of the meeting</p>
 	 * @param meeting The meeting to be canceled
 	 */
 	public void cancelMeeting(Meeting meeting) {
@@ -373,8 +459,9 @@ public class DBStore {
 	}
 	
 	/**
-	 * Marks a meeting, by the meeting's ID,
-	 * in the database as canceled (meetings should not be deleted).
+	 * <p>Marks a meeting, by the meeting's ID,
+	 * in the database as canceled (meetings should not be deleted).</p>
+	 * <p>Also creates a message for each participant of the meeting</p>
 	 * @param meetingID The meeting's ID
 	 */
 	public void cancelMeetingByID(int meetingID) {
@@ -411,7 +498,8 @@ public class DBStore {
 	}
 	
 	/**
-	 * Change a specified meeting.
+	 * <p>Change a specified meeting.</p>
+	 * <p>Also creates a message for each participant of the meeting</p>
 	 * @param meeting The meeting
 	 */
 	public void changeMeeting(Meeting meeting) {
@@ -420,15 +508,17 @@ public class DBStore {
 			Meeting m = dbr.getMeeting(meeting.getId());
 			
 			PreparedStatement ps = conn.prepareStatement("UPDATE activity " +
-					"SET starttime = ?, endtime = ?, description = ?, location = ?, " +
+					"SET starttime = ?, endtime = ?, title = ?, description = ?, " +
 					"roomID = ? WHERE activityID = " + meeting.getId());
 			ps.setTimestamp(1, new Timestamp(meeting.getStartTime().getMillis()));
 			ps.setTimestamp(2, new Timestamp(meeting.getEndTime().getMillis()));
-			ps.setString(3, meeting.getDescription());
-			ps.setString(4, meeting.getLocation());
+			ps.setString(3, meeting.getTitle());
+			ps.setString(4, meeting.getDescription());
 			ps.setInt(5, meeting.getRoom().getRoomID());
 			ps.executeUpdate();
 			ps.close();
+			
+			updatePartcipantsForMeeting(meeting.getId(), meeting.getParticipants());
 			
 			// Create messages
 			ps = conn.prepareStatement("INSERT INTO message " +
@@ -450,7 +540,7 @@ public class DBStore {
 			m.setStartTime(meeting.getStartTime());
 			m.setEndTime(meeting.getEndTime());
 			m.setDescription(meeting.getDescription());
-			m.setLocation(meeting.getLocation());
+			m.setTitle(meeting.getTitle());
 			m.setRoom(meeting.getRoom());
 			System.out.println("#DB: Updating meeting "+m.getId()+" in DB and cache");
 		} catch (SQLException e) {
@@ -459,8 +549,9 @@ public class DBStore {
 	}
 	
 	/**
-	 * Marks an activity, by a {@link Activity} object,
-	 * in the database as canceled (activities should not be deleted).
+	 * <p>Marks an activity, by a {@link Activity} object,
+	 * in the database as canceled (activities should not be deleted).</p>
+	 * <p>Also creates a message for each participant of the meeting</p>
 	 * @param act The activity to be canceled
 	 */
 	public void cancelActivity(Activity act) {
@@ -468,8 +559,9 @@ public class DBStore {
 	}
 	
 	/**
-	 * Marks an activity, by the ID,
-	 * in the database as canceled (activities should not be deleted).
+	 * <p>Marks an activity, by the ID,
+	 * in the database as canceled (activities should not be deleted).</p>
+	 * <p>Also creates a message for each participant of the meeting</p>
 	 * @param actID The ID
 	 */
 	public void cancelActivityByID(int actID) {
@@ -490,18 +582,18 @@ public class DBStore {
 	}
 	
 	/**
-	 * Change a specified activity.
+	 * <p>Change a specified activity.</p>
 	 * @param act The activity.
 	 */
 	public void changeActivity(Activity act) {
 		try {
 			PreparedStatement ps = conn.prepareStatement("UPDATE activity " +
-					"SET starttime = ?, endtime = ?, description = ?, location = ? " +
+					"SET starttime = ?, endtime = ?, title = ?, description = ?" +
 					"WHERE activityID = " + act.getId());
 			ps.setTimestamp(1, new Timestamp(act.getStartTime().getMillis()));
 			ps.setTimestamp(2, new Timestamp(act.getEndTime().getMillis()));
-			ps.setString(3, act.getDescription());
-			ps.setString(4, act.getLocation());
+			ps.setString(3, act.getTitle());
+			ps.setString(4, act.getDescription());
 			ps.executeUpdate();
 			ps.close();
 			
@@ -510,7 +602,7 @@ public class DBStore {
 			a.setStartTime(act.getStartTime());
 			a.setEndTime(act.getEndTime());
 			a.setDescription(act.getDescription());
-			a.setLocation(act.getLocation());
+			a.setTitle(act.getTitle());
 			System.out.println("#DB: Updated activity "+a.getId()+" in DB and cache");
 		} catch (SQLException e) {
 			System.err.println("Could not change activity.");
@@ -519,8 +611,8 @@ public class DBStore {
 	}
 	
 	/**
-	 * Marks a message, by a {@link Message} object,
-	 * in the database as read.
+	 * <p>Marks a message, by a {@link Message} object,
+	 * in the database as read.</p>
 	 * @param message The message
 	 */
 	public void markMessageAsRead(Message message) {
@@ -528,8 +620,8 @@ public class DBStore {
 	}
 	
 	/**
-	 * Marks a message, by the message's ID,
-	 * in the database as read.
+	 * <p>Marks a message, by the message's ID,
+	 * in the database as read.</p>
 	 * @param messageID The message's ID
 	 */
 	public void markMessageAsReadByIDs(int messageID) {
@@ -547,7 +639,7 @@ public class DBStore {
 	}
 	
 	/**
-	 * Sets the database retrieval object for this store object.
+	 * </p>Sets the database retrieval object for this store object.</p>
 	 * @param dbr
 	 */
 	public void setDBR(DBRetrieve dbr) {
@@ -555,7 +647,8 @@ public class DBStore {
 	}
 	
 	/**
-	 * Strictly for testing. Restart program after.
+	 * <p>Cancels all activities and meeting for a specific employee</p>
+	 * <p>Strictly for testing. Restart program after.</p>
 	 * @param emp
 	 */
 	public void cancelEmpActivities(Employee emp) {
@@ -563,7 +656,8 @@ public class DBStore {
 	}
 	
 	/**
-	 * Strictly for testing. Restart program after.
+	 * <p>Cancels all activities and meeting for a specific employee, by username</p>
+	 * <p>Strictly for testing. Restart program after.</p>
 	 * @param username
 	 */
 	public void cancelEmpActivitiesByUsername(String username) {

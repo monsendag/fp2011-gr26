@@ -136,10 +136,18 @@ public class CalendarCanvas extends JPanel implements PropertyChangeListener {
 		int x = getCoordX(a);
 		int y = getCoordY(a);
 		
+		int ownerHash = 0;
+		for(char n : a.getOwner().getUsername().toCharArray()) {
+			ownerHash += n; 
+		}
+		
+		ownerHash = ownerHash*10;
+		
+		
 		Color fill, outline = Color.BLACK;
 		String meeting = "81B674"; /// green
-		String activity = "7489b6"; // blueish
-		fill = new Color(Integer.parseInt(a instanceof Meeting ? meeting : activity, 16));
+		String activity = "7489b6";//"7489b6"; // blueish
+		fill = new Color(Integer.parseInt(a instanceof Meeting ? meeting : activity, 16)-ownerHash);
 		
 		int arcRadius = 5;
 		// fill activity 

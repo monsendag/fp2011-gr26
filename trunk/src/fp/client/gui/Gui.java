@@ -1937,6 +1937,7 @@ public class Gui extends javax.swing.JFrame{
 	}
 
 	public void buildParticipantList(Meeting met){
+		
 		participantListModel.removeAllElements();
 		int i = 0;
 		for(Participant participant : met.getParticipants()){
@@ -1945,7 +1946,8 @@ public class Gui extends javax.swing.JFrame{
 		}
 	}
 	
-	private void buildCalendarChooserTable(){
+	private void buildCalendarChooserTable() {
+		calendarTableModel.setRowCount(0);
 		ArrayList<Employee> allEmployees = Client.get().getAllEmployees();
 		for (Employee employee : allEmployees) {
 			Vector v = new Vector();
@@ -1974,6 +1976,7 @@ public class Gui extends javax.swing.JFrame{
 
 	
 	private void buildParticipantChooserTable(){
+		participantTableModel.setRowCount(0);
 		ArrayList<Employee> allEmployees = Client.get().getAllEmployees();
 		for (Employee employee : allEmployees) {
 			Vector v = new Vector();

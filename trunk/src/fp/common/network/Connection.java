@@ -69,10 +69,10 @@ public abstract class Connection {
 	 * @throws IOException
 	 */
 	protected void send(NetworkObject o) {
-		queue.add(o);
-		
-		if (isSending == false)
-			sendFromQueue();
+		if(o != null) {
+			queue.add(o);
+			if(!isSending) sendFromQueue();
+		}
 	}
 	
 	protected void sendFromQueue() {

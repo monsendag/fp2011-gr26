@@ -10,7 +10,7 @@ public class Message
     //
     private String title;
     
-    private int type;
+    private int type = 0;
     //
     private Boolean read;
     

@@ -78,21 +78,21 @@ public class Client {
 		} catch (IOException e) {
 
 		}
-		
 		currentUser = null;
-		calendarModel = new CalendarModel();
+		calendarModel.removeAllActivities();
 	}
 	
 	
 	public void deliverMessages(ArrayList<Message> messages){		
-		if (this.messages == messages)
-			return;
-		else{
-			this.messages = messages;
-			gui.receiveMessages();
+		for(Message msg1 : messages) {
+			for(Message msg2 : this.messages) {
+				// if(msg1.getMessageID() != msg2.getMessageID() || msg1.isRead() == msg2.isRead())
+			}
 		}
+		
+		this.messages = messages;
+		gui.receiveMessages();
 	}
-
 	
 	public void addActivity(Activity a) throws IOException {
 		connection.addActivity(a);

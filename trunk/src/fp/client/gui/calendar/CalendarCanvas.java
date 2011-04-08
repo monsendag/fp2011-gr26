@@ -18,6 +18,7 @@ import org.joda.time.Duration;
 import fp.client.Client;
 import fp.client.gui.Gui;
 import fp.common.models.Activity;
+import fp.common.models.Meeting;
 
 
 /**
@@ -62,10 +63,10 @@ public class CalendarCanvas extends JPanel implements PropertyChangeListener {
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
-	
 		//highlight today's column
 		DateTime today = new DateTime();
 		
+		// highlight current day
 		if(model.inWeek(today)) {
 			int x = (today.getDayOfWeek()-1) * columnWidth;
 			int y = 0;
@@ -73,6 +74,7 @@ public class CalendarCanvas extends JPanel implements PropertyChangeListener {
 			g.fillRect(x, y, columnWidth, getHeight());
 		}
 		
+		// draw lines
 		g.setColor(Color.GRAY);
 		
 		// horizontal lines
@@ -80,7 +82,7 @@ public class CalendarCanvas extends JPanel implements PropertyChangeListener {
 		for (int i = 0; i < 24 - beginHour; i++) {
 			g.drawLine(0, i * rowHeight, getWidth(), i * rowHeight);
 		}
-	
+
 		// vertical lines
 		for(int i = 0; i < 7; i++) {
 			g.drawLine(i * columnWidth, 0, i * columnWidth, getHeight());
@@ -118,21 +120,21 @@ public class CalendarCanvas extends JPanel implements PropertyChangeListener {
 	/**
 	* Draws the supplied Activity on the graphics object
 	* @param g The graphics object to draw on
-	* @param activity The activity to draw
+	* @param a The activity to draw
 	*/
-	public void drawActivity(Graphics g, Activity activity) {
-		int height = getActivityHeight(activity);
-		int width = getActivityWidth(activity);
+	public void drawActivity(Graphics g, Activity a) {
+		int height = getActivityHeight(a);
+		int width = getActivityWidth(a);
 		
-		int x = getCoordX(activity);
-		int y = getCoordY(activity);
+		int x = getCoordX(a);
+		int y = getCoordY(a);
 		
-		Color outline, fill;
+		Color fill, outline = Color.BLACK;
+		String meeting = "81B674"; /// green
+		String activity = "7489b6"; // blueish
+		fill = new Color(Integer.parseInt(a instanceof Meeting ? meeting : activity, 16));
 		
-		outline = Color.BLACK;
-		fill = new Color(Integer.parseInt("7489b6", 16));
 		int arcRadius = 5;
-		
 		// fill activity 
 		g.setColor(fill);
 		g.fillRoundRect(x, y+1, width, height-1, arcRadius, arcRadius);
@@ -147,7 +149,7 @@ public class CalendarCanvas extends JPanel implements PropertyChangeListener {
 		y += 15;
 		
 		g.setFont(new Font("TimesRoman", Font.BOLD,  13));
-		g.drawString(activity.getDescription(), x, y);
+		g.drawString(a.getDescription(), x, y);
 		y+=20;
 		//if(res.getRoom() != null)
 		//g.drawString(res.getRoom().getName(), x, y);

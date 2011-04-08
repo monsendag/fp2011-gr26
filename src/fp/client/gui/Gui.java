@@ -1979,9 +1979,11 @@ public class Gui extends javax.swing.JFrame{
 
         ArrayList<Participant> participants = new ArrayList<Participant>();
         Participant p;
-        for (int i = 0; i < participantChooserTable.getSelectedRows().length;  i++) {
-        	p = new Participant((Employee)participantChooserTable.getValueAt(i, 0), Status.AWAITING_REPLY);
-			participants.add(p);
+        for (int i = 0; i < participantChooserTable.getRowCount();  i++) {
+        	if((Boolean)participantChooserTable.getValueAt(i, 1)){
+        		p = new Participant((Employee)participantChooserTable.getValueAt(i, 0), Status.AWAITING_REPLY);
+        		participants.add(p);        		
+        	}
 		}
         Room room = new Room();
 

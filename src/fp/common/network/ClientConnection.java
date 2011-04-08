@@ -129,13 +129,13 @@ public class ClientConnection extends Connection implements Runnable {
 	 * 
 	 * @return a list of meetings for currentUser
 	 */
-	public ArrayList<Meeting> getEmpMeetings() {
+	public ArrayList<Activity> getEmpMeetings() {
 		NetworkObject n = new NetworkObject();
 		n.setCommand(NetworkCommand.getMeetings);
 		n.put("currentUser", Client.get().getUser());
 		send(n);
 		NetworkObject back = receive();
-		return (ArrayList<Meeting>) back.get("meetings");
+		return (ArrayList<Activity>) back.get("meetings");
 	}
 	/**
 	 * 

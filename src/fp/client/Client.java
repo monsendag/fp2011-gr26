@@ -76,6 +76,7 @@ public class Client {
 
 			if((currentUser = connection.login(username, password)) != null) { // login successful
 				calendarModel.addActivities(connection.getEmpActivities());
+				calendarModel.addActivities(connection.getEmpMeetings());
 				return true;
 			}
 		} catch (IOException e) { // could not connect to server

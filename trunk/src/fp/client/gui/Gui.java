@@ -1925,6 +1925,7 @@ public class Gui extends javax.swing.JFrame{
 	
 	private void buildRoomList(){
 		ArrayList<Room> rooms =  new ArrayList<Room>();
+		roomModel.removeAllElements();
 		Date fromDate = fromDateChooserPanel.getDate();
     	Date toDate = toDateChooserPanel.getDate();
     	

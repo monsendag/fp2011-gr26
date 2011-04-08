@@ -1483,7 +1483,6 @@ public class Gui extends javax.swing.JFrame{
     }                                                           
 
     private void newAppointmentChooseParticipantsButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                                       
-        buildParticipantChooserTable();
     	participantChooserDialog.pack();
         participantChooserDialog.setLocationRelativeTo(newAppointmentDialog);
         participantChooserDialog.setVisible(true);
@@ -1542,7 +1541,6 @@ public class Gui extends javax.swing.JFrame{
     }                                                           
 
     private void shownCalendarsActionPerformed(java.awt.event.ActionEvent evt) {
-    	buildCalendarChooserTable();
         calendarChooserDialog.pack();
         java.awt.Point buttonLocation = ((javax.swing.JButton) evt.getSource()).getLocationOnScreen();
         calendarChooserDialog.setLocation(buttonLocation);
@@ -2062,6 +2060,8 @@ public class Gui extends javax.swing.JFrame{
 		if(Client.get().loginAction(hostIPField.getText(), username, password)) {
 			loginDialog.setVisible(false);
 			setVisible(true);
+			buildParticipantChooserTable();
+			buildCalendarChooserTable();
 		}
 		else {
 			errorDialogTextArea.setText("Innlogging feilet!");

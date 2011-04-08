@@ -1935,10 +1935,15 @@ public class Gui extends javax.swing.JFrame{
 		}
 	}
 	
-	private void buildRoomList(DateTime start, DateTime end){
+	private void buildRoomList(){
 		ArrayList<Room> rooms =  new ArrayList<Room>();
+		Date fromDate = fromDateChooserPanel.getDate();
+    	Date toDate = toDateChooserPanel.getDate();
+    	
+    	DateTime startTime = new DateTime(fromDate.getYear()+1900, fromDate.getMonth()+1, fromDate.getDate(), Integer.parseInt(((String) newAppointmentStartTimeCB.getSelectedItem()).substring(0,2)), Integer.parseInt(((String) newAppointmentStartTimeCB.getSelectedItem()).substring(3)), 00, 00);
+		DateTime endTime = new DateTime(toDate.getYear()+1900, toDate.getMonth()+1, toDate.getDate(), Integer.parseInt(((String) newAppointmentEndTimeCB.getSelectedItem()).substring(0,2)), Integer.parseInt(((String) newAppointmentEndTimeCB.getSelectedItem()).substring(3)), 00, 00);
 		try {
-			rooms = Client.get().findRooms(start, end);
+			rooms = Client.get().findRooms(startTime, endTime);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -2036,7 +2041,6 @@ public class Gui extends javax.swing.JFrame{
     	
     	DateTime startTime = new DateTime(fromDate.getYear()+1900, fromDate.getMonth()+1, fromDate.getDate(), Integer.parseInt(((String) newAppointmentStartTimeCB.getSelectedItem()).substring(0,2)), Integer.parseInt(((String) newAppointmentStartTimeCB.getSelectedItem()).substring(3)), 00, 00);
 		DateTime endTime = new DateTime(toDate.getYear()+1900, toDate.getMonth()+1, toDate.getDate(), Integer.parseInt(((String) newAppointmentEndTimeCB.getSelectedItem()).substring(0,2)), Integer.parseInt(((String) newAppointmentEndTimeCB.getSelectedItem()).substring(3)), 00, 00);
-    	System.out.println(startTime.getHourOfDay() + " - " + startTime.getMinuteOfHour());
 		String description = newAppointmentDescriptionTextArea.getText();
     	String title = newAppointmentTitleLabel.getText();
 

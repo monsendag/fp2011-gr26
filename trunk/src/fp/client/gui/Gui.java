@@ -1967,11 +1967,6 @@ public class Gui extends javax.swing.JFrame{
 		}
 	}
 	
-	public void receiveMessages(){
-		buildMessageList();
-		buildInvitationList();
-	}
-
 
     private void setAttending() {
     	Message invitation = (Message)invitationList.getSelectedValue();
@@ -2074,10 +2069,15 @@ public class Gui extends javax.swing.JFrame{
 
 	}
 	
+	public void receiveMessages(ArrayList<Message> messages){
+		buildMessageList(messages);
+		buildInvitationList(messages);
+	}
 	
-	private void buildMessageList(){
+	
+	private void buildMessageList(ArrayList<Message> messages){
 		int i = 0;
-		for(Message message : Client.get().messages){
+		for(Message message : messages){
 			if(!message.isInvitation()){
 				messageListModel.add(i, message);
 				i++;
@@ -2085,9 +2085,9 @@ public class Gui extends javax.swing.JFrame{
 		}
 	}
 	
-	private void buildInvitationList(){
+	private void buildInvitationList(ArrayList<Message> messages){
 		int i = 0;
-		for(Message message : Client.get().messages){
+		for(Message message : messages){
 			if(message.isInvitation()){
 				invitationListModel.add(i, message);
 				i++;

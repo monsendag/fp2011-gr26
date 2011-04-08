@@ -159,7 +159,7 @@ public class CalendarCanvas extends JPanel implements PropertyChangeListener {
 		AttributedCharacterIterator attribCharIterator;
 		LineBreakMeasurer lbm;
 		
-		String title = a.getDescription();
+		String title = a.getTitle();
 		if(title != null && title.length() > 0) {
 			str = new AttributedString(title);
 			str.addAttribute(TextAttribute.FOREGROUND, Color.BLACK, 0, title.length());

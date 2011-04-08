@@ -13,6 +13,7 @@ import fp.common.models.Activity;
 import fp.common.models.Employee;
 import fp.common.models.Meeting;
 import fp.common.models.Message;
+import fp.common.models.Participant;
 import fp.common.models.Room;
 import fp.common.models.Participant.Status;
 import fp.common.network.ClientConnection;
@@ -144,10 +145,29 @@ public class Client {
 		return connection.getAllEmployees();
 	}
 	
-	/* TODO: hmm...
-	public answerInvitation(Meeting m, Message msg, boolean answer) throws IOException {
-		connection.changeInviteStatus(m, participant...)			
+	// TODO: hmm...
+	public void answerInvitation(Meeting m, Message msg, boolean answer) throws IOException {
+	
+		
+		Participant p = null;
+		ArrayList<Participant> mParticipants = m.getParticipants();
+		for (int i = 0; i < mParticipants.size(); i++){
+			if (currentUser.getUsername() == mParticipants.get(i).getEmployee().getUsername()){
+				p = mParticipants.get(i);
+			}
+			
+		}
+		
+		// problemer: Hvis IOException så endres det lokalt...
+		if (answer)
+			p.setStatus(Participant.Status.ATTENDING);
+		else
+			p.setStatus(Participant.Status.NOT_ATTENDING);
+		
+		connection.changeInviteStatus(m, p);
+		setRead(msg);
+				
 	}
-	*/
+
 
 }

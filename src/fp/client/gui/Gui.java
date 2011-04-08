@@ -1465,7 +1465,8 @@ public class Gui extends javax.swing.JFrame{
     }                                                              
 
     private void logOutButtonActionPerformed(java.awt.event.ActionEvent evt) {                                             
-        loginPasswordField.setText("passord");
+        logout();
+    	loginPasswordField.setText("passord");
         loginUsernameTextField.setText("brukernavn");
         loginPasswordField.setEchoChar('\u0000');
         loginDialog.setVisible(true);
@@ -2079,6 +2080,7 @@ public class Gui extends javax.swing.JFrame{
 
 	private void logout(){
 		Client.get().logoutAction();
+		setVisible(false);
 	}
 
 	private void setNextWeek() {

@@ -140,14 +140,6 @@ public class Client {
 	public void setRead(Message message) {
 		connection.markMessageAsRead(message);
 	}
-
-	public void setAttending(Message invitation, Status attending) {
-		// shit.
-	}
-
-	public void setNotAttending(Message invitation, Status notAttending) {
-		// shit 2
-	}
 	
 	public ArrayList getAllEmployees(){
 		return connection.getAllEmployees();

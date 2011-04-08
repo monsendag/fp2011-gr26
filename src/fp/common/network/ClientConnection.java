@@ -23,7 +23,7 @@ public class ClientConnection extends Connection implements Runnable {
 	
 	
 	
-	private Timer timer;
+	private TimerTask timer;
 	
 	public ClientConnection(InetAddress host) throws IOException {
 		super(host);
@@ -40,18 +40,23 @@ public class ClientConnection extends Connection implements Runnable {
 	
 	// utestet
 	private void startTimer(){
-		timer = new Timer();
+		Timer timer = new Timer();
 		int delay = 2000; // begynner etter 30000ms = 30sec.
 		int period = 10000; // periode på 60000ms = 60sec.
-		timer.scheduleAtFixedRate(new TimerTask() {
+		
+		this.timer = new TimerTask() {
 			@Override
 			public void run() {
 				// hent beskjeder, trenger en metode i modellen for å faktisk legge dem til. ha en referanse til client i denne klassen? må vel ha det.
 				Client.get().deliverMessages(getEmpMessages());
-					
 			}
-		}, delay, period);
-		}
+		};
+		timer.scheduleAtFixedRate(this.timer, delay, period);
+	}
+	
+	public void stopTimer() {
+		timer.cancel();
+	}
 	
 	/**
 	 * Tries to login with the given credentials

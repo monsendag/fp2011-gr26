@@ -74,6 +74,7 @@ public class Client {
 	
 	public void logoutAction() {
 		try {
+			connection.stopTimer();
 			connection.close();
 		} catch (IOException e) {
 
@@ -84,11 +85,6 @@ public class Client {
 	
 	
 	public void deliverMessages(ArrayList<Message> messages){		
-		for(Message msg1 : messages) {
-			for(Message msg2 : this.messages) {
-				// if(msg1.getMessageID() != msg2.getMessageID() || msg1.isRead() == msg2.isRead())
-			}
-		}
 		
 		this.messages = messages;
 		gui.receiveMessages();

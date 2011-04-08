@@ -19,6 +19,7 @@ import java.util.Vector;
 
 import javax.imageio.ImageIO;
 import javax.management.InstanceAlreadyExistsException;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -1822,6 +1823,7 @@ public class Gui extends javax.swing.JFrame{
 	DefaultListModel messageListModel = new DefaultListModel();
 	DefaultListModel invitationListModel = new DefaultListModel();
 	DefaultListModel participantListModel = new DefaultListModel();
+	DefaultComboBoxModel roomModel = new DefaultComboBoxModel();
 	
 	DefaultTableModel participantTableModel = new DefaultTableModel(
             new Object [][] {},
@@ -1906,7 +1908,22 @@ public class Gui extends javax.swing.JFrame{
 			}
 		}
 	}
-
+	
+	private void buildRoomList(DateTime start, DateTime end){
+		ArrayList<Room> rooms =  new ArrayList<Room>();
+		try {
+			rooms = Client.get().findRooms(start, end);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		for (Room r : rooms) {
+			roomModel.addElement(r);			
+		}
+		appointmentRoomCB.setModel(roomModel);
+		newAppointmentRoomCB.setModel(roomModel);
+		
+	}
 	private void buildInvitationList(){
 		invitationListModel.removeAllElements();
 		int i = 0;

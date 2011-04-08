@@ -6,22 +6,21 @@ public class Activity
 {
 	private int id;
 	private DateTime startTime, endTime;
-	private String description,location, title;
+	private String description, title;
 	private Employee owner;
 	
 	public Activity() {
 		startTime = null;
 		endTime = null;
 		description = "";
-		location = "";
 		setOwner(null);
 	}
 	
-	public Activity(Employee owner, DateTime startTime, DateTime endTime, String description, String location) {
+	public Activity(Employee owner, DateTime startTime, DateTime endTime, String description, String title) {
 		this.startTime = startTime;
 		this.endTime = endTime;
 		this.description = description;
-		this.location = location;
+		this.title = title;
 		this.setOwner(owner);
 	}
 	
@@ -44,13 +43,6 @@ public class Activity
 	}
 	public void setDescription(String description) {
 		this.description = description;
-	}
-	
-	public String getLocation() {
-		return location;
-	}
-	public void setLocation(String location) {
-		this.location = location;
 	}
 	
 	public String getTitle() {

@@ -2004,12 +2004,6 @@ public class Gui extends javax.swing.JFrame{
 			e.printStackTrace();
 		}
     }
-
-	public String availabilityAndStatus(Message message){
-		String temp = ", ";
-		//returnerer om du er opptatt om du ikke har svart, eller hva statusen din er dersom du har svart
-		return "";
-	}
 	
 	private void cancelActivity(Activity act) {
 		try {
@@ -2145,7 +2139,7 @@ public class Gui extends javax.swing.JFrame{
 			invitationList.repaint();
 		}
 		invitationPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(invitation.getTitle() + " - " + dateToString(invitation.getMeeting().getStartTime().toDate())));
-		invitationPanelTimeRoomAvailability.setText(invitation.getMeeting().getStartTime().toString("HH:mm")+" - "+invitation.getMeeting().getEndTime().toString("HH:mm") + " - " + invitation.getMeeting().getRoom().getName() + availabilityAndStatus(invitation));
+		invitationPanelTimeRoomAvailability.setText(invitation.getMeeting().getStartTime().toString("HH:mm")+" - "+invitation.getMeeting().getEndTime().toString("HH:mm") + " - " + invitation.getMeeting().getRoom().getName());
 		invitationDescription.setText(invitation.getDescription());
 	}
 	

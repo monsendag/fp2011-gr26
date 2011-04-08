@@ -9,7 +9,8 @@ public class Message
    
     //
     private String title;
-
+    
+    private int type;
     //
     private Boolean read;
     
@@ -88,5 +89,14 @@ public class Message
 
 	public int getMessageID() {
 		return messageID;
+	}
+	
+	public int getType()
+	{
+		return type;
+		
+	}
+	public void setType(int type){
+		this.type = type;
 	}
 }

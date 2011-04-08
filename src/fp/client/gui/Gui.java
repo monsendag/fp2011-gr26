@@ -2001,10 +2001,6 @@ public class Gui extends javax.swing.JFrame{
 
 	private void createActivity()  {
 
-//		    	Activity newActivity = new Activity();
-//		    	newActivity.setTitle(newAppointmentTitleLabel.getText()); // title
-//		    	newActivity.setDescription(newAppointmentDescriptionTextArea.getText()); // description
-	
     	Date fromDate = fromDateChooserPanel.getDate();
     	Date toDate = toDateChooserPanel.getDate();
     	
@@ -2023,7 +2019,7 @@ public class Gui extends javax.swing.JFrame{
 		}
         Room room = (Room) newAppointmentRoomCB.getSelectedItem();
 
-    	if(participantChooserTable.getSelectedRows().length > 0)
+    	if(participantChooserTable.getSelectedRows().length > 0){
 			try {
 				//både rom og location i meeting?
 				Client.get().addMeeting(new Meeting(Client.get().getUser(), participants, room, startTime, endTime, description, room.getName()));
@@ -2031,6 +2027,7 @@ public class Gui extends javax.swing.JFrame{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+    	}else
 		try {
 			Client.get().addActivity(new Activity(Client.get().getUser(), startTime, endTime, newAppointmentDescriptionTextArea.getText(), newAppointmentRoomCB.getSelectedItem().toString()));
 		} catch (IOException e) {
@@ -2054,7 +2051,7 @@ public class Gui extends javax.swing.JFrame{
         for (int i = 0; i < participantChooserTable.getRowCount();  i++) {
         	if((Boolean)participantChooserTable.getValueAt(i, 1)){
         		p = new Participant((Employee)participantChooserTable.getValueAt(i, 0), Status.AWAITING_REPLY);
-        		participants.add(p);        		
+        		participants.add(p);
         	}
 		}
         Room room = (Room) appointmentRoomCB.getSelectedItem();

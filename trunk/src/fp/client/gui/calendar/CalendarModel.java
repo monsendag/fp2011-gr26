@@ -45,6 +45,7 @@ public class CalendarModel {
 
 	public void setMonday(DateTime monday) {
 		this.monday = monday;
+		changeSupport.firePropertyChange("setMonday", null, monday);
 	}
 
 
@@ -55,6 +56,8 @@ public class CalendarModel {
 
 	public void setActivities(List<Activity> activities) {
 		this.activities = activities;
+		changeSupport.firePropertyChange("setActivities", null, activities);
+		
 	}
 	
 	public void addActivity(Activity activity) {
@@ -66,10 +69,19 @@ public class CalendarModel {
 		for(Activity act : a) {
 			activities.add(act);
 		}
+		changeSupport.firePropertyChange("addActivities", null, a);
+		
 	}
 	
 	public void remActivity(Activity a){
-		activities.remove(a);		
+		activities.remove(a);
+		changeSupport.firePropertyChange("remActivity", null, a);
+	}
+	
+	public void removeAllActivities() {
+		activities.removeAll(null);
+		changeSupport.firePropertyChange("removeAll", null, true);
+		
 	}
 	
 	public void chngActivity(Activity a) {

@@ -7,6 +7,7 @@
 package fp.client.gui;
 
 
+import java.awt.event.MouseEvent;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.io.IOException;
@@ -738,6 +739,18 @@ public class Gui extends javax.swing.JFrame{
 
         appointmentRoomCB.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
+        appointmentRoomCB.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                newAppoitnmentRoomCBClicked(evt);
+            }
+
+			private void newAppoitnmentRoomCBClicked(MouseEvent evt) {
+				// TODO Auto-generated method stub
+				
+			}
+        });
+        
+        
         appointmentDescriptionTextArea.setColumns(20);
         appointmentDescriptionTextArea.setLineWrap(true);
         appointmentDescriptionTextArea.setRows(5);
@@ -925,6 +938,17 @@ public class Gui extends javax.swing.JFrame{
 
         newAppointmentRoomCB.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Kattelabben", "Hundelabben", "Fiskelabben" }));
 
+        newAppointmentRoomCB.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                newAppoitnmentRoomCBClicked(evt);
+            }
+
+			private void newAppoitnmentRoomCBClicked(MouseEvent evt) {
+				// TODO Auto-generated method stub
+				
+			}
+        });
+        
         newAppointmentDescriptionTextArea.setColumns(20);
         newAppointmentDescriptionTextArea.setLineWrap(true);
         newAppointmentDescriptionTextArea.setRows(5);

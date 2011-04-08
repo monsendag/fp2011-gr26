@@ -44,71 +44,85 @@ public class ServerConnection extends Connection implements Runnable {
 	 * @return
 	 */
 	private NetworkObject getResponse(NetworkObject request) {
-		NetworkObject response = new NetworkObject();
+		NetworkObject response = null;
 		DBRetrieve dbr = DBRetrieve.getInstance();
 		DBStore dbs = DBStore.getInstance();
 		switch(request.getCommand()) {
 			case getEmployees: {
+				response = new NetworkObject();
 				response.setCommand(NetworkCommand.returnEmployees);
 				response.put("employees", dbr.getAllEmployees());
 			} break;
 			case getCredentials: {
+				response = new NetworkObject();
 				response.setCommand(NetworkCommand.returnCredentials);
 				response.put("employee", dbr.login((String) request.get("username"),(String) request.get("password")));
 			} break;
 			case getActivities: {
+				response = new NetworkObject();
 				response.setCommand(NetworkCommand.returnActivities);
 				Employee user = (Employee) request.get("currentUser");
 				response.put("activities", dbr.getEmpActivities(user));
 			} break;
 			case getMessages: {
+				response = new NetworkObject();
 				response.setCommand(NetworkCommand.returnMessages);
 				Employee user = (Employee) request.get("currentUser");
 				response.put("messages", dbr.getEmpMessages(user));
 			} break;
 			case getMeetings: {
+				response = new NetworkObject();
 				response.setCommand(NetworkCommand.returnMeetings);
 				Employee user = (Employee) request.get("currentUser");
 				response.put("meetings", dbr.getEmpMeetings(user));
 			} break;
 			case getAllActivities:{
+				response = new NetworkObject();
 				response.setCommand(NetworkCommand.returnAllactivities);
 				response.put("allActivities", dbr.getAllActivities());
 			} break;
 			case getAllMessages: {
+				response = new NetworkObject();
 				response.setCommand(NetworkCommand.returnAllMessages);
 				response.put("allAlerts", dbr.getAllMessages());
 			} break;
 			case getAllRooms:{
+				response = new NetworkObject();
 				response.setCommand(NetworkCommand.returnAllRooms);
 				response.put("allRooms", dbr.getAllRooms());
 			} break;
 			case getAllMeetings:{
+				response = new NetworkObject();
 				response.setCommand(NetworkCommand.returnAllMeetings);
 				response.put("allMeetings", dbr.getAllMeetings());
 			} break;
 			case getAvailableRooms: {
+				response = new NetworkObject();
 				response.setCommand(NetworkCommand.returnAvailableRooms);
 				DateTime startTime = (DateTime) request.get("startTime");
 				DateTime endTime = (DateTime) request.get("endTime");
 				response.put("availableRooms", dbr.getAvailableRooms(startTime, endTime));
 			} break;
 			case getMeeting: {
+				response = new NetworkObject();
 				response.setCommand(NetworkCommand.returnMeeting);
 				int meetingID = (Integer)request.get("meetingID");
 				response.put("meeting", dbr.getMeeting(meetingID));
 			} break;
 			case getRoom: {
+				response = new NetworkObject();
 				response.setCommand(NetworkCommand.returnRoom);
 				int roomID = (Integer)request.get("roomID");
 				response.put("room", dbr.getRoom(roomID));
 			} break;
 			case addActivity: {
+				response = new NetworkObject();
 				response.setCommand(NetworkCommand.returnActivityID);
 				Activity activity = (Activity)request.get("activity");
 				response.put("activityID", dbs.addActivity(activity));
 			} break;
 			case addMeeting: {
+				response = new NetworkObject();
 				response.setCommand(NetworkCommand.returnMeetingID);
 				Meeting meeting = (Meeting)request.get("meeting");
 				response.put("meetingID", dbs.addMeeting(meeting));

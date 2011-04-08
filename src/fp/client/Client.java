@@ -145,29 +145,20 @@ public class Client {
 		return connection.getAllEmployees();
 	}
 	
-	/* TODO: hmm...
-	public void answerInvitation(Meeting m, Message msg, boolean answer) throws IOException {
+	 //TODO: hmm...
+	public void answerInvitation(Meeting m, boolean answer) throws IOException {
 	
 		
-		Participant p = null;
-		ArrayList<Participant> mParticipants = m.getParticipants();
-		for (int i = 0; i < mParticipants.size(); i++){
-			if (currentUser.getUsername() == mParticipants.get(i).getEmployee().getUsername()){
-				p = mParticipants.get(i);
-			}
-			
-		}
-		
-		// problemer: Hvis IOException så endres det lokalt...
+		Participant.Status status;
 		if (answer)
-			p.setStatus(Participant.Status.ATTENDING);
+			status = Participant.Status.ATTENDING;
 		else
-			p.setStatus(Participant.Status.NOT_ATTENDING);
+			status = Participant.Status.NOT_ATTENDING;
 		
-		connection.changeInviteStatus(m, p);
-		setRead(msg);
+		connection.changeInviteStatus(m, status);
 				
+		// endre i gui..
 	}
-*/
+
 
 }

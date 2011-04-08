@@ -260,11 +260,12 @@ public class ClientConnection extends Connection implements Runnable {
 		n.put("meeting", meeting);
 		send(n);
 	}
-	public void changeInviteStatus(Meeting meeting, Participant participant) {
+	public void changeInviteStatus(Meeting meeting, Participant.Status status) {
 		NetworkObject n = new NetworkObject();
 		n.setCommand(NetworkCommand.changeInviteStatus);
 		n.put("meeting", meeting);
-		n.put("participant", participant);
+		n.put("currentUser", Client.get().getUser());
+		n.put("status", status);
 		send(n);
 	}
 	public void markMessageAsRead(Message message) {

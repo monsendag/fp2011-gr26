@@ -404,7 +404,6 @@ public class DBRetrieve {
 					a = new Activity();
 					a.setOwner(getEmployee(rs.getString("username")));
 					a.setDescription(rs.getString("description"));
-					a.setLocation(rs.getString("location"));
 					a.setId(id);
 					a.setStartTime(new DateTime(rs.getTimestamp("starttime").getTime()));
 					a.setEndTime(new DateTime(rs.getTimestamp("endtime").getTime()));
@@ -443,7 +442,6 @@ public class DBRetrieve {
 				m = new Meeting();
 				m.setOwner(getEmployee(rs.getString("username")));
 				m.setDescription(rs.getString("description"));
-				m.setLocation(rs.getString("location"));
 				m.setRoom(getRoom(rs.getInt("roomID")));
 				m.setId(rs.getInt("activityID"));
 				m.setStartTime(new DateTime(rs.getTimestamp("starttime").getTime()));
@@ -485,7 +483,6 @@ public class DBRetrieve {
 					m = new Meeting();
 					m.setOwner(getEmployee(rs.getString("username")));
 					m.setDescription(rs.getString("description"));
-					m.setLocation(rs.getString("location"));
 					m.setRoom(getRoom(rs.getInt("roomID")));
 					m.setId(id);
 					m.setStartTime(new DateTime(rs.getTimestamp("starttime").getTime()));
@@ -545,7 +542,6 @@ public class DBRetrieve {
 					a = new Activity();
 					a.setOwner(getEmployee(username));
 					a.setDescription(rs.getString("description"));
-					a.setLocation(rs.getString("location"));
 					a.setId(id);
 					a.setStartTime(new DateTime(rs.getTimestamp("starttime").getTime()));
 					a.setEndTime(new DateTime(rs.getTimestamp("endtime").getTime()));
@@ -604,7 +600,6 @@ public class DBRetrieve {
 					m = new Meeting();
 					m.setOwner(getEmployee(rs.getString("username")));
 					m.setDescription(rs.getString("description"));
-					m.setLocation(rs.getString("location"));
 					m.setRoom(getRoom(rs.getInt("roomID")));
 					m.setId(id);
 					m.setStartTime(new DateTime(rs.getTimestamp("starttime").getTime()));
@@ -634,7 +629,6 @@ public class DBRetrieve {
 					m = new Meeting();
 					m.setOwner(getEmployee(rs.getString("username")));
 					m.setDescription(rs.getString("description"));
-					m.setLocation(rs.getString("location"));
 					m.setId(id);
 					m.setStartTime(new DateTime(rs.getTimestamp("starttime").getTime()));
 					m.setEndTime(new DateTime(rs.getTimestamp("endtime").getTime()));

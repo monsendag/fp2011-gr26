@@ -496,7 +496,7 @@ public class Gui extends javax.swing.JFrame{
         messageDescription.setEditable(false);
         messageDescription.setLineWrap(true);
         messageDescription.setRows(5);
-        messageDescription.setText("Velg en melding til venstre i listen, dersom du skulle vÃ¦re sÃ¥ heldig Ã¥ ha noen :p");
+        messageDescription.setText("Velg en melding til venstre i listen, dersom du skulle være så heldig å ha noen :p");
         messageDescription.setWrapStyleWord(true);
         messagePanelTextSP.setViewportView(messageDescription);
 
@@ -586,7 +586,7 @@ public class Gui extends javax.swing.JFrame{
         invitationDescription.setEditable(false);
         invitationDescription.setLineWrap(true);
         invitationDescription.setRows(5);
-        invitationDescription.setText("Velg en innkalling i til venstre i listen, dersom du skulle vÃ¦re sÃ¥ heldig Ã¥ ha noen :p");
+        invitationDescription.setText("Velg en innkalling i til venstre i listen, dersom du skulle være så heldig å ha noen :p");
         invitationDescription.setWrapStyleWord(true);
         invitationPanelTextSP.setViewportView(invitationDescription);
 
@@ -2096,6 +2096,9 @@ public class Gui extends javax.swing.JFrame{
 	public void receiveMessages(ArrayList<Message> messages){
 		buildMessageList(messages);
 		buildInvitationList(messages);
+		
+		messageViewButton.setSelected(true);
+		
 	}
 	
 	

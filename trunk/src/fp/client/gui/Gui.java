@@ -2126,7 +2126,7 @@ public class Gui extends javax.swing.JFrame{
 			appointmentRoomCB.setSelectedItem(((Meeting) act).getRoom());
 			buildParticipantList((Meeting)act);
 			}else{}
-		appointmentTitleLabel.setText(act.getTitle());
+		appointmentTitleTextField.setText(act.getTitle());
 		appointmentDescriptionTextArea.setText(act.getDescription());
 		appointmentStartTimeCB.setSelectedItem(act.getStartTime().toString("HH:mm"));
 		appointmentEndTimeCB.setSelectedItem(act.getEndTime().toString("HH:mm"));

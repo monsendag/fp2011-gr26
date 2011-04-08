@@ -82,38 +82,31 @@ public class ServerConnection extends Connection implements Runnable {
 				response.setCommand(NetworkCommand.returnNewMessages);
 				Employee user = (Employee) request.get("currentUser");
 				
-				
+
 				ArrayList<Message> sendMsgs;
-				if (first) {
-					sendMsgs = dbr.getAllMessages();
-					sentMessages.addAll(sendMsgs);				
+				
+				if (sentMessages.size() == 0){
+					sendMsgs = dbr.getEmpMessages(user);
 				}
 				else {
 					sendMsgs = dbr.getEmpMessages(user);
 					// skjekk 
 					// fjern alle messages fra sendmsgs hvis sendmsgs[i].getMessageId() == sentMessages[j].getMessageId(I)
-					//int lolsize =  sendMsgs.size();
 					for (int i = 0; i < sendMsgs.size(); i++){
 						for (int j = 0; j < sentMessages.size(); j++) {
 							if (sendMsgs.get(i).getMessageID() == sentMessages.get(j).getMessageID()) {
 								sendMsgs.remove(i);
 								i = i - 1;
-								//lolsize = lolsize - 1;
 								break;
 							}
 						}
-						
 					}
-					
-					if (sendMsgs.size() == 0)
-						response.put("newMessages", null);
-					else
-						response.put("newMessages", sendMsgs);
 				}
-				
-				response.put("newMessages", sendMsgs);
-				first = false;
-					
+				sentMessages.addAll(sendMsgs);
+				if (sendMsgs.size() == 0)
+					response.put("newMessages", null);
+				else
+					response.put("newMessages", sendMsgs);
 			}break;
 			case getMeetings: {
 				response = new NetworkObject();

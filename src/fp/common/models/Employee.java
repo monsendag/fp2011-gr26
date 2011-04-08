@@ -43,4 +43,9 @@ public class Employee
 		this.password = password;
 	}
 	
+	public String toString(){
+		return name;
+		
+	}
+	
 }

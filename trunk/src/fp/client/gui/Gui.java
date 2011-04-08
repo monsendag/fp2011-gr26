@@ -1541,7 +1541,8 @@ public class Gui extends javax.swing.JFrame{
         calendarChooserDialog.setVisible(false);
     }                                                           
 
-    private void shownCalendarsActionPerformed(java.awt.event.ActionEvent evt) {                                               
+    private void shownCalendarsActionPerformed(java.awt.event.ActionEvent evt) {
+    	buildCalendarChooserTable();
         calendarChooserDialog.pack();
         java.awt.Point buttonLocation = ((javax.swing.JButton) evt.getSource()).getLocationOnScreen();
         calendarChooserDialog.setLocation(buttonLocation);
@@ -1826,10 +1827,31 @@ public class Gui extends javax.swing.JFrame{
             }
         };
 	
-	DefaultTableModel calendarTableModel = new DefaultTableModel();
+	DefaultTableModel calendarTableModel = new DefaultTableModel(
+            new Object [][] {},
+            new String [] {"Ansatt", ""}) 
+		{
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.Boolean.class
+            };
+            boolean[] canEdit = new boolean [] {false, true};
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        };
+      
 
 	private void fixCalendarTable(){
 		calendarChooserTable.setModel(calendarTableModel);
+        calendarChooserTable.getColumnModel().getColumn(0).setResizable(false);
+        calendarChooserTable.getColumnModel().getColumn(0).setPreferredWidth(200);
+        calendarChooserTable.getColumnModel().getColumn(1).setResizable(false);
+        calendarChooserTable.getColumnModel().getColumn(1).setPreferredWidth(16);
 	}
 	
 	private void fixParticipantTable(){
@@ -1889,19 +1911,19 @@ public class Gui extends javax.swing.JFrame{
 	}
 	
 	private void buildCalendarChooserTable(){
-		
+		ArrayList<Employee> allEmployees = Client.get().getAllEmployees();
+		for (Employee employee : allEmployees) {
+			Vector v = new Vector();
+			v.add(employee);
+			v.add(false);
+			calendarTableModel.addRow(v);
+		}
 	}
 	
 	private void changeCalendarView(){
 	}
 	
 	private void buildParticipantChooserTable(){
-//		participantTableModel //remove everything
-//		ArrayList<Employee> allEmployees = Client.get().getAllEmployees();
-//		for(Employee employee : allEmployees){
-//			participantTableModel.addRow(employee, false);
-//		}
-		
 		ArrayList<Employee> allEmployees = Client.get().getAllEmployees();
 		for (Employee employee : allEmployees) {
 			Vector v = new Vector();
@@ -1909,8 +1931,6 @@ public class Gui extends javax.swing.JFrame{
 			v.add(false);
 			participantTableModel.addRow(v);
 		}
-		System.out.println(participantChooserTable.getRowCount());
-		participantChooserTable.repaint();
 	}
 	
 	public void receiveMessages(){

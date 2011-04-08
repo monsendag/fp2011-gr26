@@ -1561,13 +1561,24 @@ public class Gui extends javax.swing.JFrame{
 
     private void appointmentSayYoureNotCommingButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                                    
         appointmentDialog.setVisible(false);
-        changeActivity(activity);
-        cancelActivity();
+        if(Client.get().currentUser.getUsername().equals(activity.getOwner().getUsername())){
+        	changeActivity(activity);        	
+        }
+        else{
+        	try {
+				Client.get().answerInvitation((Meeting)activity, Status.NOT_ATTENDING);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+        }
     }                                                                   
 
     private void appointmentCloseButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                       
         appointmentDialog.setVisible(false);
-        cancelActivity();
+        if(Client.get().currentUser.getUsername().equals(activity.getOwner().getUsername())){
+        	cancelActivity(activity);        	
+        }
     }                                                      
 
     private void appointmentShowParticipantsButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                                  
@@ -1961,9 +1972,14 @@ public class Gui extends javax.swing.JFrame{
 		return "";
 	}
 	
-	private void cancelActivity() {
-		//if owner 
-		// TODO Auto-generated method stub
+	private void cancelActivity(Activity act) {
+		try {
+			Client.get().remActivity(act);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 
 	private void createActivity()  {

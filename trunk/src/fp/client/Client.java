@@ -137,15 +137,10 @@ public class Client {
 	}
 	
 	 //TODO: hmm...
-	public void answerInvitation(Meeting m, boolean answer) throws IOException {
+	public void answerInvitation(Meeting m, Status status) throws IOException {
 	
 		
-		Participant.Status status;
-		if (answer)
-			status = Participant.Status.ATTENDING;
-		else
-			status = Participant.Status.NOT_ATTENDING;
-		
+	
 		connection.changeInviteStatus(m, status);
 				
 		// endre i gui.. fjern valgene og sett inn en boks som sier HELLO DU HAR SVART: status.toString();

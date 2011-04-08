@@ -2099,10 +2099,6 @@ public class Gui extends javax.swing.JFrame{
 	public void receiveMessages(ArrayList<Message> messages){
 		buildMessageList(messages);
 		buildInvitationList(messages);
-		
-		messageViewButton.setSelected(true);
-		
-
 	}
 	
 	

@@ -1483,7 +1483,8 @@ public class Gui extends javax.swing.JFrame{
     }                                                           
 
     private void newAppointmentChooseParticipantsButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                                       
-        participantChooserDialog.pack();
+        buildParticipantChooserTable();
+    	participantChooserDialog.pack();
         participantChooserDialog.setLocationRelativeTo(newAppointmentDialog);
         participantChooserDialog.setVisible(true);
     }                                                                      
@@ -1808,7 +1809,23 @@ public class Gui extends javax.swing.JFrame{
 	DefaultListModel messageListModel = new DefaultListModel();
 	DefaultListModel invitationListModel = new DefaultListModel();
 	DefaultListModel participantListModel = new DefaultListModel();
-	DefaultTableModel participantTableModel = new DefaultTableModel();
+	
+	DefaultTableModel participantTableModel = new DefaultTableModel(
+            new Object [][] {},
+            new String [] {"Ansatt", ""}) 
+		{
+            Class[] types = new Class [] { java.lang.Object.class, java.lang.Boolean.class };
+            boolean[] canEdit = new boolean [] { false, true };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        };
+	
 	DefaultTableModel calendarTableModel = new DefaultTableModel();
 
 	private void fixCalendarTable(){
@@ -1817,6 +1834,10 @@ public class Gui extends javax.swing.JFrame{
 	
 	private void fixParticipantTable(){
 		participantChooserTable.setModel(participantTableModel);	
+	    participantChooserTable.getColumnModel().getColumn(0).setResizable(false);
+	    participantChooserTable.getColumnModel().getColumn(0).setPreferredWidth(200);
+	    participantChooserTable.getColumnModel().getColumn(1).setResizable(false);
+	    participantChooserTable.getColumnModel().getColumn(1).setPreferredWidth(16);
 	}
 	
 	
@@ -1888,6 +1909,8 @@ public class Gui extends javax.swing.JFrame{
 			v.add(false);
 			participantTableModel.addRow(v);
 		}
+		System.out.println(participantChooserTable.getRowCount());
+		participantChooserTable.repaint();
 	}
 	
 	public void receiveMessages(){

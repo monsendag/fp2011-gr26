@@ -741,13 +741,7 @@ public class Gui extends javax.swing.JFrame{
 
         appointmentRoomCB.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                newAppoitnmentRoomCBClicked(evt);
-            }
-
-			private void newAppoitnmentRoomCBClicked(MouseEvent evt) {
-				buildRoomlist();
-				// TODO Auto-generated method stub
-				
+				buildRoomList();
 			}
         });
         
@@ -941,13 +935,7 @@ public class Gui extends javax.swing.JFrame{
 
         newAppointmentRoomCB.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                newAppoitnmentRoomCBClicked(evt);
-            }
-
-			private void newAppoitnmentRoomCBClicked(MouseEvent evt) {
-				// TODO Auto-generated method stub
 				buildRoomList();
-				
 			}
         });
         

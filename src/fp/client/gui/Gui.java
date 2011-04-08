@@ -14,6 +14,9 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
+import java.util.Vector;
+
 import javax.imageio.ImageIO;
 import javax.management.InstanceAlreadyExistsException;
 import javax.swing.DefaultListModel;
@@ -1877,6 +1880,14 @@ public class Gui extends javax.swing.JFrame{
 //		for(Employee employee : allEmployees){
 //			participantTableModel.addRow(employee, false);
 //		}
+		
+		ArrayList<Employee> allEmployees = Client.get().getAllEmployees();
+		for (Employee employee : allEmployees) {
+			Vector v = new Vector();
+			v.add(employee);
+			v.add(false);
+			participantTableModel.addRow(v);
+		}
 	}
 	
 	public void receiveMessages(){

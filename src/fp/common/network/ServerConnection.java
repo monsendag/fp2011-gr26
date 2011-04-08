@@ -82,18 +82,14 @@ public class ServerConnection extends Connection implements Runnable {
 				response.setCommand(NetworkCommand.returnNewMessages);
 				Employee user = (Employee) request.get("currentUser");
 				
-				System.out.println("Hallo??");
 				
 				ArrayList<Message> sendMsgs;
 				if (first) {
-					System.out.println("----------");
 					sendMsgs = dbr.getAllMessages();
 					sentMessages.addAll(sendMsgs);				
 				}
 				else {
 					sendMsgs = dbr.getEmpMessages(user);
-					System.out.println(sentMessages.size());
-					System.out.println(sendMsgs.size());
 					// skjekk 
 					// fjern alle messages fra sendmsgs hvis sendmsgs[i].getMessageId() == sentMessages[j].getMessageId(I)
 					//int lolsize =  sendMsgs.size();
@@ -103,7 +99,6 @@ public class ServerConnection extends Connection implements Runnable {
 								sendMsgs.remove(i);
 								i = i - 1;
 								//lolsize = lolsize - 1;
-								System.out.println(sendMsgs.size());
 								break;
 							}
 						}

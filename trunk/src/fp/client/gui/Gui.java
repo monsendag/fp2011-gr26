@@ -1593,8 +1593,8 @@ public class Gui extends javax.swing.JFrame{
     private void appointmentCloseButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                       
         appointmentDialog.setVisible(false);
         if(Client.get().currentUser.getUsername().equals(activity.getOwner().getUsername())){
-        	cancelActivity(activity);        	
-        }
+        	cancelActivity(activity);
+        	}
     }                                                      
 
     private void appointmentShowParticipantsButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                                  
@@ -2200,6 +2200,7 @@ public class Gui extends javax.swing.JFrame{
 		
 	}
 	Activity activity;
+	
 	public void openActivity(Activity act){
 		
 		activity = act;
@@ -2209,6 +2210,9 @@ public class Gui extends javax.swing.JFrame{
 			appointmentRoomCB.setSelectedItem(((Meeting) act).getRoom());
 			buildParticipantList((Meeting)act);
 			}else{}
+		appointmentSayYoureNotCommingButton.setText("Oppdater");
+		appointmentCloseButton.setText("Slett");
+		appointmentDialog.setTitle(act.getTitle());
 		appointmentTitleTextField.setText(act.getTitle());
 		appointmentDescriptionTextArea.setText(act.getDescription());
 		appointmentStartTimeCB.setSelectedItem(act.getStartTime().toString("HH:mm"));

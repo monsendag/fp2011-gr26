@@ -20,8 +20,8 @@ public class ParticipantRenderer extends DefaultListCellRenderer implements List
 		String iconName;
 		Participant participant = (Participant) value;
 		
-		if(participant.getStatus() == Status.ATTENDING){ iconName = "attending"; }
-		else if(participant.getStatus() == Status.NOT_ATTENDING){ iconName = "notAttending"; }
+		if(participant.getStatus() == Participant.Status.ATTENDING){ iconName = "attending"; }
+		else if(participant.getStatus() == Participant.Status.NOT_ATTENDING){ iconName = "notAttending"; }
 		else iconName = "awatingReply";
 		
 		URL path = getClass().getResource("graphics/"+iconName+".png");

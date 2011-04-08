@@ -2021,7 +2021,7 @@ public class Gui extends javax.swing.JFrame{
         		participants.add(p);        		
         	}
 		}
-        Room room = new Room();
+        Room room = (Room) newAppointmentRoomCB.getSelectedItem();
 
     	if(participantChooserTable.getSelectedRows().length > 0)
 			try {
@@ -2057,7 +2057,7 @@ public class Gui extends javax.swing.JFrame{
         		participants.add(p);        		
         	}
 		}
-        Room room = new Room();
+        Room room = (Room) appointmentRoomCB.getSelectedItem();
         
         if(act instanceof Meeting){
         	((Meeting)act).setRoom(room);

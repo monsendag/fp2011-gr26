@@ -51,4 +51,8 @@ public class Room
 	public int getRoomID() {
 		return roomID;
 	}
+	
+	public String toString(){
+		return name;
+	}
 }

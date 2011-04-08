@@ -586,7 +586,8 @@ public class DBRetrieve {
 			ResultSet rs = s.executeQuery("SELECT a.username, a.description, a.location, " +
 					"a.activityID, a.starttime, a.endtime, a.roomID " +
 					"FROM activity a, participant p " +
-					"WHERE a.activityID = p.activityID AND p.username ='" + username + "' " +
+					"WHERE a.activityID = p.activityID AND p.status = "+ Participant.Status.ATTENDING +
+					" AND p.username ='" + username + "' " +
 					"AND ismeeting = true AND (canceled = false OR canceled IS NULL)");
 			
 			Meeting m;

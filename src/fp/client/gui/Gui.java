@@ -2052,7 +2052,7 @@ public class Gui extends javax.swing.JFrame{
 				e.printStackTrace();
 			}
 		try {
-			Client.get().addActivity(new Activity(Client.get().getUser(), startTime, endTime, newAppointmentDescriptionTextArea.getText(), (String)newAppointmentRoomCB.getSelectedItem()));
+			Client.get().addActivity(new Activity(Client.get().getUser(), startTime, endTime, newAppointmentDescriptionTextArea.getText(), newAppointmentRoomCB.getSelectedItem().toString()));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

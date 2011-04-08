@@ -1912,16 +1912,6 @@ public class Gui extends javax.swing.JFrame{
 		participantOverviewList.setModel(participantListModel);
 	}
 
-	private void buildMessageList(){
-		messageListModel.removeAllElements();
-		int i = 0;
-		for(Message message : Client.get().messages){
-			if(!message.isInvitation()){
-				messageListModel.add(i, message);
-				i++;
-			}
-		}
-	}
 	
 	private void buildRoomList(){
 		ArrayList<Room> rooms =  new ArrayList<Room>();
@@ -1943,16 +1933,6 @@ public class Gui extends javax.swing.JFrame{
 		appointmentRoomCB.setModel(roomModel);
 		newAppointmentRoomCB.setModel(roomModel);
 		
-	}
-	private void buildInvitationList(){
-		invitationListModel.removeAllElements();
-		int i = 0;
-		for(Message message : Client.get().messages){
-			if(message.isInvitation()){
-				invitationListModel.add(i, message);
-				i++;
-			}
-		}
 	}
 
 	public void buildParticipantList(Meeting met){
@@ -2097,6 +2077,28 @@ public class Gui extends javax.swing.JFrame{
 		}
 
 	}
+	
+	
+	private void buildMessageList(){
+		int i = 0;
+		for(Message message : Client.get().messages){
+			if(!message.isInvitation()){
+				messageListModel.add(i, message);
+				i++;
+			}
+		}
+	}
+	
+	private void buildInvitationList(){
+		int i = 0;
+		for(Message message : Client.get().messages){
+			if(message.isInvitation()){
+				invitationListModel.add(i, message);
+				i++;
+			}
+		}
+	}
+	
 	
 	public void buildMessage(){
 		Message message = (Message)messageList.getSelectedValue();

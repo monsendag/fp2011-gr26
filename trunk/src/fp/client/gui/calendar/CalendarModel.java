@@ -79,7 +79,7 @@ public class CalendarModel {
 	}
 	
 	public void removeAllActivities() {
-		activities.removeAll(null);
+		activities.clear();
 		changeSupport.firePropertyChange("removeAll", null, true);
 		
 	}

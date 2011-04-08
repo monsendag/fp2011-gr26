@@ -4,22 +4,12 @@ import org.joda.time.DateTime;
 
 public class Message
 {
-	/*
-	 * 5 = Vanlig invite message
-	 * 1 = change not attending
-	 * 2 = change attending
-	 * 3 = avlyst
-	 * 4 = møte changed
-	 */
-	
-	
     //
     private String description;
    
     //
     private String title;
     
-    private int type = 0;
     //
     private Boolean read;
     
@@ -98,14 +88,5 @@ public class Message
 
 	public int getMessageID() {
 		return messageID;
-	}
-	
-	public int getType()
-	{
-		return type;
-		
-	}
-	public void setType(int type){
-		this.type = type;
 	}
 }

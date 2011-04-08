@@ -19,6 +19,7 @@ import java.util.Iterator;
 import java.util.Vector;
 
 import javax.imageio.ImageIO;
+import javax.jws.soap.SOAPBinding.ParameterStyle;
 import javax.management.InstanceAlreadyExistsException;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
@@ -1984,26 +1985,19 @@ public class Gui extends javax.swing.JFrame{
 
     private void setAttending() {
     	Message invitation = (Message)invitationList.getSelectedValue();
-    	
-    	//Client.get().setAttending(invitation, Status.ATTENDING);
     	try {
-			Client.get().answerInvitation(invitation.getMeeting(), Status.NOT_ATTENDING);
+			Client.get().answerInvitation(invitation.getMeeting(), Participant.Status.ATTENDING);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
-			// ERROR LLOOL
 		}
 	}
     
     private void setNotAttending() {
     	Message invitation = (Message)invitationList.getSelectedValue();
-    	//Client.get().setNotAttending(invitation, Status.NOT_ATTENDING);
     	try {
-			Client.get().answerInvitation(invitation.getMeeting(), Status.NOT_ATTENDING);
+			Client.get().answerInvitation(invitation.getMeeting(), Participant.Status.NOT_ATTENDING);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
-			//ERROR
 		}
     }
 

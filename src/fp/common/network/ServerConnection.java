@@ -15,7 +15,6 @@ import fp.server.Server;
 public class ServerConnection extends Connection implements Runnable {
 
 	ArrayList<Message> sentMessages;
-	Boolean first = true;
 	
 	
 	public ServerConnection(Socket socket) throws Exception {

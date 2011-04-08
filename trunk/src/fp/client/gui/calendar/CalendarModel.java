@@ -78,14 +78,6 @@ public class CalendarModel {
 		changeSupport.firePropertyChange("remActivity", null, a);
 	}
 	
-	public void remActivity(int id) {
-		for (Activity a : activities){
-			if (a.getId() == id) {
-				activities.remove(a);
-				changeSupport.firePropertyChange("remActivity", null, a);
-			}
-		}
-	}
 	
 	public void removeAllActivities() {
 		activities.clear();

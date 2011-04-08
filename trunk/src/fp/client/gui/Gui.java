@@ -1456,7 +1456,10 @@ public class Gui extends javax.swing.JFrame{
        errorDialog.setVisible(false);
     }                                                 
 
-    private void participantOverviewChangeButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                                
+    private void participantOverviewChangeButtonActionPerformed(java.awt.event.ActionEvent evt) {
+    	participantChooserDialog.pack();
+    	participantChooserDialog.setLocationRelativeTo(participantOverviewDialog);
+    	participantChooserDialog.setVisible(true);
         participantOverviewDialog.setVisible(false);
     }                                                               
 
@@ -1558,7 +1561,7 @@ public class Gui extends javax.swing.JFrame{
 
     private void appointmentSayYoureNotCommingButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                                    
         appointmentDialog.setVisible(false);
-//        changeActivity(); //TODO
+        changeActivity(activity);
         cancelActivity();
     }                                                                   
 
@@ -2113,9 +2116,10 @@ public class Gui extends javax.swing.JFrame{
 		appointmentCloseButton.setText("Lukk");
 		
 	}
-	
+	Activity activity;
 	public void openActivity(Activity act){
 		
+		activity = act;
 		if(!Client.get().currentUser.getUsername().equals(act.getOwner().getUsername())){disableEditing();}
 		
 		if(act instanceof Meeting){

@@ -97,15 +97,22 @@ public class ClientConnection extends Connection implements Runnable {
 	/**
 	 * @return a list of activities for currentUser (stored in Client)
 	 */
-	@SuppressWarnings("unchecked")
 	public ArrayList<Activity> getEmpActivities() {
+		return getEmpActivities(Client.get().getUser());
+	}
+	/**
+	 * @return a list of activities for currentUser (stored in Client)
+	 */
+	@SuppressWarnings("unchecked")
+	public ArrayList<Activity> getEmpActivities(Employee e) {
 		NetworkObject n = new NetworkObject();
 		n.setCommand(NetworkCommand.getActivities);
-		n.put("currentUser", Client.get().getUser());
+		n.put("currentUser", e);
 		send(n);
 		NetworkObject back = receive();
 		return (ArrayList<Activity>) back.get("activities");
 	}
+	
 	/**
 	 * 
 	 * @return a list of messages for currentUser

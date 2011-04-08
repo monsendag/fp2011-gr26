@@ -2022,14 +2022,14 @@ public class Gui extends javax.swing.JFrame{
     	if(participantChooserTable.getSelectedRows().length > 0){
 			try {
 				//både rom og location i meeting?
-				Client.get().addMeeting(new Meeting(Client.get().getUser(), participants, room, startTime, endTime, description, room.getName()));
+				Client.get().addMeeting(new Meeting(Client.get().getUser(), participants, room, startTime, endTime, description, newAppointmentTitleTextField.getText()));
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
     	}else
 		try {
-			Client.get().addActivity(new Activity(Client.get().getUser(), startTime, endTime, newAppointmentDescriptionTextArea.getText(), newAppointmentRoomCB.getSelectedItem().toString()));
+			Client.get().addActivity(new Activity(Client.get().getUser(), startTime, endTime, newAppointmentDescriptionTextArea.getText(), newAppointmentTitleTextField.getText()));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -2044,7 +2044,7 @@ public class Gui extends javax.swing.JFrame{
     	DateTime startTime = new DateTime(fromDate.getYear()+1900, fromDate.getMonth()+1, fromDate.getDate(), Integer.parseInt(((String) appointmentStartTimeCB.getSelectedItem()).substring(0,2)), Integer.parseInt(((String) newAppointmentStartTimeCB.getSelectedItem()).substring(0,2)), 00, 00);
 		DateTime endTime = new DateTime(toDate.getYear()+1900, toDate.getMonth()+1, toDate.getDate(), Integer.parseInt(((String) appointmentEndTimeCB.getSelectedItem()).substring(0,2)), Integer.parseInt(((String) newAppointmentEndTimeCB.getSelectedItem()).substring(3)), 00, 00);
 		String description = appointmentDescriptionTextArea.getText();
-    	String title = appointmentTitleLabel.getText();
+    	String title = appointmentTitleTextField.getText();
 
         ArrayList<Participant> participants = new ArrayList<Participant>();
         Participant p;

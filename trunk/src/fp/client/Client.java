@@ -3,7 +3,10 @@ package fp.client;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+
+import javax.swing.ImageIcon;
 
 import org.joda.time.DateTime;
 
@@ -22,6 +25,8 @@ import fp.common.network.ClientConnection;
 public class Client {
 	private static Client client;
 	
+	public HashMap<String, ImageIcon> graphics;
+	
 	/**
 	 * CLIENT main entry point
 	 * 
@@ -29,6 +34,8 @@ public class Client {
     */
     public static void main(String args[]) {
 		client = new Client();
+		
+	
     }
     
     public static Client get() {
@@ -47,6 +54,9 @@ public class Client {
 		java.awt.EventQueue.invokeLater(new Runnable() {
 	        public void run() {
 	        	calendarModel = new CalendarModel();
+	        	graphics = new HashMap<String, ImageIcon>();
+	        	graphics.put("readMessage", new ImageIcon(getClass().getResource("gui/graphics/readMessage.png")));
+	    		graphics.put("unreadMessage", new ImageIcon(getClass().getResource("gui/graphics/unreadMessage.png")));
 	        	gui = new Gui();
 	        }
 		});

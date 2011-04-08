@@ -5,6 +5,7 @@ import java.net.URL;
 
 import javax.swing.*;
 
+import fp.client.Client;
 import fp.common.models.Message;
 
 public class MessageRenderer extends DefaultListCellRenderer implements ListCellRenderer {
@@ -14,10 +15,8 @@ public class MessageRenderer extends DefaultListCellRenderer implements ListCell
 		Message message = (Message) value;
 		// get label from superclass
 		JLabel label = (JLabel) super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
-		// get image path
-		URL path = getClass().getResource("graphics/"+(message.isRead() ? "read" : "unread")+"Message.png");
 		// set icon and text
-		label.setIcon(new ImageIcon(path));
+		label.setIcon(Client.get().graphics.get(message.isRead() ? "readMessage" : "unreadMessage"));
 		label.setText(message.getTitle());
 		return label;
 	}

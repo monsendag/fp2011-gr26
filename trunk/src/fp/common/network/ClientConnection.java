@@ -239,7 +239,7 @@ public class ClientConnection extends Connection implements Runnable {
 		n.put("meeting", meeting);
 		send(n);
 		NetworkObject back = receive();
-		meeting.setId((Integer) back.get("meetingId"));
+		meeting.setId((Integer) back.get("meetingID"));
 	}
 	public void cancelActivity(Activity activity) {
 		NetworkObject n = new NetworkObject();

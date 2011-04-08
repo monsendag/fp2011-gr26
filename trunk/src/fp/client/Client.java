@@ -98,7 +98,10 @@ public class Client {
 		connection.addActivity(a);
 		calendarModel.addActivity(a);
 	}
-	
+	public void addMeeting(Meeting m) throws IOException {
+		connection.addMeeting(m);
+		calendarModel.addMeeting
+	}
 
 	public void remActivity(Activity a) throws IOException {
 	

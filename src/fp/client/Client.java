@@ -123,14 +123,6 @@ public class Client {
 
 	public void setRead(Message message) {
 		connection.markMessageAsRead(message);
-		
-		/*
-		messages.remove(message);
-		message.isread(true);
-		messages.add(message);
-		
-		deliverMessages(messages);
-		*/
 	}
 
 	public void setAttending(Message invitation, Status attending) {
@@ -157,7 +149,7 @@ public class Client {
 		
 		connection.changeInviteStatus(m, status);
 				
-		// endre i gui..
+		// endre i gui.. fjern valgene og sett inn en boks som sier HELLO DU HAR SVART: status.toString();
 	}
 
 

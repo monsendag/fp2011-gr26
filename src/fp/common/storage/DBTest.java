@@ -131,13 +131,13 @@ public class DBTest {
 		
 		System.out.println();
 		
-		
+	/*	
 		//dbs.addMeeting(new Meeting(dbr.getEmployee("Emo"), dbr.getMeeting(3).getParticipants(), dbr.getRoom(2), new DateTime(2001, 1, 1, 12, 0, 0, 0), new DateTime(2001, 1, 1, 14, 0, 0, 0), "Random", "Hjemme"));
 		for (Message m : dbr.getAllAlerts()) {
 			System.out.println(m.getRead() + " " + m.getCreatedOn() + " " + m.getDescription()
 					+ " " + m.getEmployee().getUsername() + " " + m.getMeeting().getId());
 		}
-		
+		*/
 		//dbs.addEmployee(new Employee("Test Hansen", "test", "1234"));
 	}
 	

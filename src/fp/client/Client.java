@@ -103,7 +103,7 @@ public class Client {
 			return;
 		}
 		this.messages.addAll(messages);
-		gui.receiveMessages();
+		gui.receiveMessages(messages);
 	}
 	
 	public void addActivity(Activity a) throws IOException {

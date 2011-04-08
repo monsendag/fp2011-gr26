@@ -1958,6 +1958,7 @@ public class Gui extends javax.swing.JFrame{
     private void changeCalendarView(){
         Employee e;
         int num = calendarChooserTable.getRowCount();
+        Client.get().calendarModel.removeAllActivities();
         for(int i = 0; i < calendarChooserTable.getRowCount();  i++) {
             e = (Employee)calendarChooserTable.getValueAt(i, 0);
             if((Boolean)calendarChooserTable.getValueAt(i, 1)){
